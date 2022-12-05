@@ -13,6 +13,7 @@ public class GreetingResource {
     public String hello() {
         String dirk;
         String rene;
+        String ardit;
         return "Hello RESTEasy";
     }
 }
