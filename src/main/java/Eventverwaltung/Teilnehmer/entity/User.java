@@ -6,21 +6,21 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "wichtel_user")
-@NamedQuery(name="User.findUserByName", query="select u From User u Where u.username= :username")
+@NamedQuery(name= "User.findUserByEmail", query = "select u From User u Where u.email= :email")
 
 
 
 public class User {
 
-    public static final String FIND_BY_NAME = "User.findUserByName";
+    public static final String FIND_BY_EMAIL = "User.findUserByEmail";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(unique = true)
-    private String username;
     private String password;
+    private String email;
 
     public User() {}
 
@@ -32,14 +32,6 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -47,6 +39,10 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    private String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
 
     @Override
     public int hashCode() {
@@ -57,7 +53,7 @@ public class User {
     public boolean equals(Object obj) {
         if(obj instanceof User) {
             User user = (User) obj;
-            return user.username.equals(getUsername());
+            return user.email.equals(getEmail());
         }
         return false;
     }

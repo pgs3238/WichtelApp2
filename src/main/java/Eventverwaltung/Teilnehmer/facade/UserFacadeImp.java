@@ -15,8 +15,8 @@ public class UserFacadeImp implements IUserFacade {
     @Inject
     private UserDAO userDAO;
 
-
-    public User findUserByName(String name) {
-        return userDAO.findUserByName(name);
+    @Override
+    public User findUserByEmail(String email) {
+        return userDAO.findUserByEmail(email);
     }
 }

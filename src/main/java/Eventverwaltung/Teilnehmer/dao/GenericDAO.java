@@ -93,9 +93,4 @@ public abstract class GenericDAO<T> {
             query.setParameter(entry.getKey(), entry.getValue());
         }
     }
-
-
-
-
-
 }
