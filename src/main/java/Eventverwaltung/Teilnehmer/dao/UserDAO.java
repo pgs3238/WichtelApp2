@@ -5,6 +5,7 @@ import Eventverwaltung.Teilnehmer.entity.User;
 import javax.enterprise.context.RequestScoped;
 import javax.transaction.Transactional;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -23,5 +24,6 @@ public class UserDAO extends GenericDAO<User> {
 
         return super.findOneResult(User.FIND_BY_EMAIL, parameters);
     }
+
 
 }

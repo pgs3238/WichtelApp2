@@ -1,9 +1,11 @@
 package Eventverwaltung.Event.entity;
 
 import Eventverwaltung.Event.entity.internal.Event;
+import Eventverwaltung.Teilnehmer.entity.User;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 public class EventTO implements Serializable {
     private int EventId;
@@ -11,9 +13,10 @@ public class EventTO implements Serializable {
     private String regeln;
     private LocalDateTime deadline;
     private LocalDateTime eventDate;
+    private Collection<User> mitglieder;
 
     public Event toEvent(){
-        Event event = new Event(this.EventId, this.name,this.regeln,this.deadline,this.eventDate);
+        Event event = new Event(this.EventId, this.name,this.regeln,this.deadline,this.eventDate, this.mitglieder);
         return event;
     }
 
@@ -57,5 +60,13 @@ public class EventTO implements Serializable {
 
     public void setEventDate(LocalDateTime eventDate) {
         this.eventDate = eventDate;
+    }
+
+    public Collection<User> getMitglieder() {
+        return mitglieder;
+    }
+
+    public void setMitglieder(Collection<User> mitglieder) {
+        this.mitglieder = mitglieder;
     }
 }

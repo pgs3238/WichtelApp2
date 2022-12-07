@@ -9,8 +9,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
-@Transactional
-@RequestScoped
+//@Transactional
+//@RequestScoped
 public class EventPflegen implements IEventPflegen {
 
     @Inject

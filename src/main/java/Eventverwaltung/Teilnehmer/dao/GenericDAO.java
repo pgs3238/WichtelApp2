@@ -74,10 +74,10 @@ public abstract class GenericDAO<T> {
     }
 
     @SuppressWarnings("unchecked")
-    protected List<T> findListResult(String namedQuary, Map<String, Object> parameters) {
+    protected List<T> findListResult(String namedQuery, Map<String, Object> parameters) {
         List<T> result = null;
         try{
-            Query query = em.createNamedQuery(namedQuary);
+            Query query = em.createNamedQuery(namedQuery);
             if (parameters != null && !parameters.isEmpty()) {
                 populateQueryParameters(query, parameters);
             }
