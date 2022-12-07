@@ -5,8 +5,12 @@ import Eventverwaltung.Event.entity.EventTO;
 import Eventverwaltung.Event.entity.internal.Event;
 import Eventverwaltung.Event.usecase.IEventPflegen;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
+@Transactional
+@RequestScoped
 public class EventPflegen implements IEventPflegen {
 
     @Inject
