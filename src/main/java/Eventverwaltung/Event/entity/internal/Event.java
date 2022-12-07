@@ -1,13 +1,13 @@
 package Eventverwaltung.Event.entity.internal;
 
+import Eventverwaltung.Event.entity.EventTO;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "wichtel_event")
-
-
 public class Event implements Serializable {
 
     @Id
@@ -28,6 +28,17 @@ public class Event implements Serializable {
 
     public Event(){
 
+    }
+
+    public EventTO toEventTO(){
+        EventTO eventTO = new EventTO();
+
+        eventTO.setEventId(this.EventId);
+        eventTO.setName(this.name);
+        eventTO.setRegeln(this.regeln);
+        eventTO.setEventDate(this.eventDate);
+        eventTO.setDeadline(this.deadline);
+        return eventTO;
     }
 
     public int getEventId() {
