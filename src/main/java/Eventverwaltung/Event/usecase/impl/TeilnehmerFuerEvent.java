@@ -16,8 +16,6 @@ public class TeilnehmerFuerEvent implements ITeilnehmerFuerEvent {
 
     @Override
     public Collection<User> teilnehmerFuerEventId(EventTO event){
-        Collection<User> teilnehmer = new ArrayList<>();
-        teilnehmer = event.getMitglieder();
-        return teilnehmer;
+    return null;
     }
 }
