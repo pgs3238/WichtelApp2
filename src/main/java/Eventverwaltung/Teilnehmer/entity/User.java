@@ -7,9 +7,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "wichtel_user")
 @NamedQuery(name= "User.findUserByEmail", query = "select u From User u Where u.email= :email")
-
-
-
 public class User {
 
     public static final String FIND_BY_EMAIL = "User.findUserByEmail";

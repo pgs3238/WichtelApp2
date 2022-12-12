@@ -9,22 +9,26 @@ die Subgruppe zuteilen
 import Eventverwaltung.Teilnehmer.entity.User;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
 @Table(name = "wichtel_user_event")
-public class User_Event {
+@NamedQuery(name= "User_Event.teilnehmerFuerEventId", query = "select ue.user From User_Event ue Where ue.event= :event")
+public class User_Event implements Serializable {
+
+    public static final String GET_TEILNEHMER = "User_Event.teilnehmerFuerEventId";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int user_event_id;
 
     @ManyToOne
-    @JoinColumn(name = "user_idFK")
+    @JoinColumn(name = "user_FK")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "event_idFK")
+    @JoinColumn(name = "event_FK")
     private Event event;
 
     @ManyToOne
