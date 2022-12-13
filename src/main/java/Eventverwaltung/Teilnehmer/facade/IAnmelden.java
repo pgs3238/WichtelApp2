@@ -1,7 +1,8 @@
 package Eventverwaltung.Teilnehmer.facade;
 
-import Eventverwaltung.Teilnehmer.entity.User;
+import Eventverwaltung.Teilnehmer.entity.internal.User;
 
-public interface IUserFacade {
+//@Local
+public interface IAnmelden {
     public User findUserByEmail(String email);
 }

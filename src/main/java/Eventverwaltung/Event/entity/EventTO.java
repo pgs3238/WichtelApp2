@@ -1,7 +1,7 @@
 package Eventverwaltung.Event.entity;
 
 import Eventverwaltung.Event.entity.internal.Event;
-import Eventverwaltung.Teilnehmer.entity.User;
+import Eventverwaltung.Teilnehmer.entity.internal.User;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
