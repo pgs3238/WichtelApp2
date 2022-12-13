@@ -1,4 +1,4 @@
-package Eventverwaltung.Teilnehmer.entity;
+package Eventverwaltung.Teilnehmer.entity.internal;
 
 import org.hibernate.annotations.NamedQuery;
 
@@ -21,6 +21,9 @@ public class User {
     @Column(unique = true)
     private String password;
     private String email;
+    private String name;
+    private String vorname;
+
 
     public User() {}
 
@@ -43,6 +46,15 @@ public class User {
     private String getEmail() { return email; }
 
     public void setEmail(String email) { this.email = email; }
+
+    private String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
+
+    private String getVorname() { return vorname; }
+
+    public void setVorname(String vorname) { this.vorname = vorname; }
+
 
     @Override
     public int hashCode() {

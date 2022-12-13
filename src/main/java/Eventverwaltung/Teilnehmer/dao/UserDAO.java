@@ -1,11 +1,10 @@
 package Eventverwaltung.Teilnehmer.dao;
 
-import Eventverwaltung.Teilnehmer.entity.User;
+import Eventverwaltung.Teilnehmer.entity.internal.User;
 
 import javax.enterprise.context.RequestScoped;
 import javax.transaction.Transactional;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -15,6 +14,10 @@ public class UserDAO extends GenericDAO<User> {
 
     public UserDAO() {
         super(User.class);
+    }
+
+    public void delete(User aUser) {
+        super.delete(aUser.getId(), User.class);
     }
 
     public User findUserByEmail(String email) {

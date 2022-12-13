@@ -1,7 +1,7 @@
 package Eventverwaltung.Event.usecase;
 
 import Eventverwaltung.Event.entity.EventTO;
-import Eventverwaltung.Teilnehmer.entity.User;
+import Eventverwaltung.Teilnehmer.entity.internal.User;
 
 import java.util.Collection;
 

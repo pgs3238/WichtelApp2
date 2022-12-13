@@ -3,7 +3,7 @@ package Eventverwaltung.Event.usecase.impl;
 import Eventverwaltung.Event.entity.EventTO;
 import Eventverwaltung.Event.usecase.ITeilnehmerFuerEvent;
 import Eventverwaltung.Teilnehmer.dao.UserDAO;
-import Eventverwaltung.Teilnehmer.entity.User;
+import Eventverwaltung.Teilnehmer.entity.internal.User;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
