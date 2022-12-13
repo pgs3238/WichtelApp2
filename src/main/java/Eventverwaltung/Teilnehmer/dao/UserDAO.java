@@ -2,7 +2,7 @@ package Eventverwaltung.Teilnehmer.dao;
 
 import Eventverwaltung.Event.entity.EventTO;
 import Eventverwaltung.Event.entity.internal.User_Event;
-import Eventverwaltung.Teilnehmer.entity.User;
+import Eventverwaltung.Teilnehmer.entity.internal.User;
 
 import javax.enterprise.context.RequestScoped;
 import javax.transaction.Transactional;
@@ -35,4 +35,7 @@ public class UserDAO extends GenericDAO<User> {
     }
 
 
+    public void delete(User aUser) {
+        super.delete(aUser.getId(),User.class);
+    }
 }
