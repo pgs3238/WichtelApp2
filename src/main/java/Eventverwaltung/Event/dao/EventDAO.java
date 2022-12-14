@@ -16,4 +16,8 @@ public class EventDAO extends GenericDAO<Event> {
     public void save(Event event){
         super.save(event);
     }
+
+    public Event find(int eventid){
+        return super.find(eventid);
+    }
 }

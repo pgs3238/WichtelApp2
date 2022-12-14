@@ -1,4 +1,4 @@
-package Eventverwaltung.Event.usecase;
+package Eventverwaltung.Teilnehmer.usecase;
 
 import Eventverwaltung.Event.entity.EventTO;
 import Eventverwaltung.Teilnehmer.entity.internal.User;

@@ -13,10 +13,9 @@ public class EventTO implements Serializable {
     private String regeln;
     private LocalDateTime deadline;
     private LocalDateTime eventDate;
-    private Collection<User> mitglieder;
 
     public Event toEvent(){
-        Event event = new Event(this.EventId, this.name,this.regeln,this.deadline,this.eventDate, this.mitglieder);
+        Event event = new Event(this.EventId, this.name,this.regeln,this.deadline,this.eventDate);
         return event;
     }
 
@@ -62,11 +61,4 @@ public class EventTO implements Serializable {
         this.eventDate = eventDate;
     }
 
-    public Collection<User> getMitglieder() {
-        return mitglieder;
-    }
-
-    public void setMitglieder(Collection<User> mitglieder) {
-        this.mitglieder = mitglieder;
-    }
 }
