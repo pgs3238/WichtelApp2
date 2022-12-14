@@ -15,8 +15,8 @@ public class Registrieren implements IRegistrieren {
 
     @SuppressWarnings("unused")
     @Override
-    public boolean userLoeschen(String email) {
-        User aUser = userDAO.findUserByEmail(email);
+    public boolean userLoeschen(int nummer) {
+        User aUser = userDAO.find(nummer);
         /* TODO System.out.println("User "+aUser.getEmail()+" gefunden zum Loeschen"); */
         if (aUser == null) {
             return Boolean.FALSE;
