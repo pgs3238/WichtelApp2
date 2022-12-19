@@ -9,6 +9,58 @@ repositories {
     mavenLocal()
 }
 
+node {
+    // Version of node to use.
+    version = '18.12.1'
+
+    // Base URL for fetching node distributions (change if you have a mirror).
+//    distBaseUrl = 'https://nodejs.org/dist'
+
+    // If true, it will download node using above parameters.
+    // If false, it will try to use globally installed node.
+    download = true
+
+    // Set the work directory for unpacking node
+    workDir = file("${project.projectDir}/src/main/frontend/nodejs")
+
+    // Set the work directory for NPM
+    npmWorkDir = file("${project.projectDir}/src/main/frontend/npm")
+
+    // Set the work directory where node_modules should be located
+    nodeModulesDir = file("${project.projectDir}/src/main/frontend")
+}
+
+task npmInstallDependencies(type: NpmTask) {
+    dependsOn 'npmSetup'
+    execOverrides {
+        it.ignoreExitValue = true
+        it.workingDir = 'src/main/frontend'
+    }
+    args = ['install']
+}
+
+task npmBuild(type: NpmTask) {
+    dependsOn 'npmInstallDependencies'
+    execOverrides {
+//        it.ignoreExitValue = true
+        it.workingDir = 'src/main/frontend'
+    }
+    args = ['run', 'build']
+}
+
+task copyFrontendToBuild(type: Copy) {
+    dependsOn 'npmBuild'
+    from "$projectDir/src/main/frontend/build/"
+//    include "*"
+    into "$buildDir/resources/main/static"
+}
+
+processResources {
+    dependsOn 'copyFrontendToBuild'
+}
+
+
+
 dependencies {
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation 'io.quarkus:quarkus-hibernate-orm'
