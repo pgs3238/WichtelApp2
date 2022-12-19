@@ -7,9 +7,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "wichtel_user")
 @NamedQuery(name= "User.findUserByEmail", query = "select u From User u Where u.email= :email")
+@NamedQuery(name = "User.findTeilnehmerVonEvent", query = "select ue.user from User_Event ue WHERE ue.event = :event")
 public class User {
 
     public static final String FIND_BY_EMAIL = "User.findUserByEmail";
+    public static final String GET_TEILNEHMER_VON_EVENT = "User.findTeilnehmerVonEvent";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
