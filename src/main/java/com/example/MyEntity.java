@@ -26,6 +26,7 @@ import javax.persistence.Id;
 public class MyEntity {
     private Long id;
     private String field;
+    private String drink;
 
     @Id
     @GeneratedValue
@@ -44,4 +45,8 @@ public class MyEntity {
     public void setField(String field) {
         this.field = field;
     }
+
+    public String getDrink() { return drink; }
+
+    public void setDrink(String drink) { this.drink = drink; }
 }
