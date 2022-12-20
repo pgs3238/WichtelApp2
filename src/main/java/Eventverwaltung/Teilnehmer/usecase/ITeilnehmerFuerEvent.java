@@ -6,5 +6,6 @@ import Eventverwaltung.Teilnehmer.entity.internal.User;
 import java.util.Collection;
 
 public interface ITeilnehmerFuerEvent {
-    Collection<User> teilnehmerFuerEventId(EventTO event);
+
+    Collection<User> teilnehmerFuerEvent(EventTO event);
 }

@@ -7,6 +7,7 @@ import Eventverwaltung.Teilnehmer.dao.GenericDAO;
 import Eventverwaltung.Teilnehmer.entity.UserTO;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,5 +27,12 @@ public class User_EventDAO extends GenericDAO<User_Event> {
         parameters.put("event", event.toEvent());
 
         return super.findOneResult(User_Event.GET_USEREVENT,parameters);
+    }
+
+    public Collection<User_Event> findUserEventByEvent(EventTO eventTO){
+        Map<String, Object> eventParameter = new HashMap<>();
+        eventParameter.put("event",eventTO.toEvent());
+
+        return super.findListResult(User_Event.GET_TEILNEHMERINFO,eventParameter);
     }
 }

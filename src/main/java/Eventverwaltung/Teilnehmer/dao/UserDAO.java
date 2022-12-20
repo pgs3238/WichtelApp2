@@ -27,15 +27,15 @@ public class UserDAO extends GenericDAO<User> {
         return super.findOneResult(User.FIND_BY_EMAIL, parameters);
     }
 
+
+    public void delete(User aUser) {
+        super.delete(aUser.getId(),User.class);
+    }
+
     public Collection<User> findTeilnehmerByEvent(EventTO eventTO){
         Map<String, Object> eventParameter = new HashMap<>();
         eventParameter.put("event",eventTO.toEvent());
 
-        return super.findListResult(User_Event.GET_TEILNEHMER,eventParameter);
-    }
-
-
-    public void delete(User aUser) {
-        super.delete(aUser.getId(),User.class);
+        return super.findListResult(User.GET_TEILNEHMER_VON_EVENT,eventParameter);
     }
 }
