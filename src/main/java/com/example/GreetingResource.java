@@ -14,7 +14,7 @@ public class GreetingResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
-        String dirk;
+        String dirkIstUncool;
         String rene;
         String ardit;
         //return "Hello RESTEasy";
