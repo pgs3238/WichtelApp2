@@ -35,4 +35,8 @@ public class User_EventDAO extends GenericDAO<User_Event> {
 
         return super.findListResult(User_Event.GET_TEILNEHMERINFO,eventParameter);
     }
+
+    public int getGroesseSubgruppe(EventTO event){
+        return 0;
+    }
 }
