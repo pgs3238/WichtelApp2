@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 //alter code, darueber neuer code
 //import ReactDOM from 'react-dom';
+//folgende 3 Zeilen machen das drehende Bild. In Zeile 44 muss dazu Apps zu App
 /*import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';*/
@@ -47,6 +48,7 @@ root.render(
  /* If you want to start measuring performance in your app, pass a function
  to log results (for example: reportWebVitals(console.log))
  or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals */
+//TODO not implemented yet (???) so deaktivated currently 31.12.2022
 // reportWebVitals();
 
 //Create Routes (Seiten verknüpfen aus pages)
