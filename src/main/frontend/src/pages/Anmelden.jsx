@@ -26,6 +26,7 @@ function Layout() {
             <label>Enter Email-Address:
                 <input
                     type="text"
+                    id="email"
                     name="email"
                     value={inputs.email || ""}
                     onChange={handleChange}
@@ -35,14 +36,15 @@ function Layout() {
             <label>Enter Password:
                 <input
                     type="password"
-                    name="password"
+                    id="passwort"
+                    name="passwort"
                     value={inputs.password || ""}
                     onChange={handleChange}
                 />
             </label>
             <br/>
             <input type="submit" id="anmelden" value="Login"/>
-            <input type="submit" id="adduser" value="Register"/>
+            <input type="submit" id="chgpgadduser" value="Register"/>
         </form>
 
     )
