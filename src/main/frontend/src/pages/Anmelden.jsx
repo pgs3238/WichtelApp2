@@ -1,5 +1,6 @@
 
 import React, {useState} from 'react';
+import * as PropTypes from "prop-types";
 /*import ReactDOM from "react-dom/client";*/
 
 
@@ -17,16 +18,12 @@ function Layout() {
         alert(inputs);
     }
 
-
-
-
-
-    /*return (
-        <h1>Anmeldeseite</h1>
-    );*/
     return (
+
         <form onSubmit={handleSubmit}>
-            <label>Enter Email Adress:
+            <h1>Secret Santa</h1>
+            <h2>Login</h2>
+            <label>Enter Email-Address:
                 <input
                     type="text"
                     name="email"
@@ -44,8 +41,10 @@ function Layout() {
                 />
             </label>
             <br/>
-            <input type="submit" />
+            <input type="submit" id="anmelden" value="Login"/>
+            <input type="submit" id="adduser" value="Register"/>
         </form>
+
     )
 
 

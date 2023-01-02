@@ -26,6 +26,7 @@ import TeilnehmerListeEinsehen from "./pages/TeilnehmerListeEinsehen";
 import UserZuSubgruppeHinzufuegen from "./pages/UserZuSubgruppeHinzufuegen";
 import WichtelzuordnungPopup from "./pages/WichtelzuordnungPopup";
 import Anmelden from "./pages/Anmelden";
+import * as PropTypes from "prop-types";
 
 //alter code - darunter neuer code
 /*function Welcome(props) {
@@ -44,7 +45,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <Apps />
+      <Apps />
   </React.StrictMode>
 );
 
@@ -80,6 +81,7 @@ export default function Apps() {
         </BrowserRouter>
     );
 }
+
 
 
 // Problem - ähnliche (alte Anweisung) wie Zeile 40-45. Zeile muss abgeändert werden zum Format von 40-45 um fehler zu beheben.
