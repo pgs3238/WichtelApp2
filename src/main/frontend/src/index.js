@@ -39,6 +39,9 @@ ReactDOM.render(
 ReactDOM.render(<App />, document.getElementById('root'));*/
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
+
 root.render(
   <React.StrictMode>
     <Apps />
@@ -81,3 +84,5 @@ export default function Apps() {
 
 // Problem - ähnliche (alte Anweisung) wie Zeile 40-45. Zeile muss abgeändert werden zum Format von 40-45 um fehler zu beheben.
 // ReactDOM.render(<Apps />, document.getElementById("root"));
+
+// TODO FUTURE: https://reactrouter.com/en/main/routers/router-provider
