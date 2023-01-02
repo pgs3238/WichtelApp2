@@ -24,6 +24,7 @@ function Layout() {
             <h1>Secret Santa</h1>
             <h2>Login</h2>
             <label>Enter Email-Address:
+                &emsp;
                 <input
                     type="text"
                     id="email"
@@ -34,6 +35,7 @@ function Layout() {
             </label>
             <br/>
             <label>Enter Password:
+                &emsp;&emsp;&emsp;&nbsp;
                 <input
                     type="password"
                     id="passwort"
@@ -43,8 +45,13 @@ function Layout() {
                 />
             </label>
             <br/>
+            <br/>
             <input type="submit" id="anmelden" value="Login"/>
-            <input type="submit" id="chgpgadduser" value="Register"/>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+            &nbsp;&nbsp;
+            <input type="submit" id="pwvergessen" value="Forgot Password"/>
+            <br/><br/>
+            <input type="submit" id="chgpgadduser" value="Create new Account"/>
         </form>
 
     )

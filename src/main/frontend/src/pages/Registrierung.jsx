@@ -18,7 +18,8 @@ function Layout() {
         <form onSubmit={handleSubmit}>
             <h1>Secret Santa</h1>
             <h2>Register</h2>
-            <label>Enter given name:
+            <label>Enter Given-name:
+                &emsp;&emsp;&nbsp;
                 <input
                     type="text"
                     id="vname"
@@ -28,7 +29,8 @@ function Layout() {
                 />
             </label>
             <br/>
-            <label>Enter family name:
+            <label>Enter Family-name:
+                &emsp;&nbsp;&nbsp;&nbsp;
                 <input
                     type="text"
                     id="nname"
@@ -38,7 +40,8 @@ function Layout() {
                 />
             </label>
             <br/>
-            <label>Enter Email-Address:
+            <label>Enter Email-address:
+                &emsp;
                 <input
                     type="text"
                     id="email"
@@ -49,6 +52,7 @@ function Layout() {
             </label>
             <br/>
             <label>Enter Password:
+                &emsp;&emsp;&emsp;
                 <input
                     type="password"
                     id="passwort"
@@ -57,7 +61,7 @@ function Layout() {
                     onChange={handleChange}
                 />
             </label>
-            <br/>
+            <br/><br/>
             <input type="submit" id="adduser" value="Register"/>
         </form>
     );
