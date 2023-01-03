@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 //alter code, darueber neuer code
 //import ReactDOM from 'react-dom';
-import './index.css';
+//folgende 3 Zeilen machen das drehende Bild. In Zeile 44 muss dazu Apps zu App
+/*import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from './reportWebVitals';*/
 
 //Routes Import - 27.12.22 Schnieders
 //import ReactDOM from "react-dom";
@@ -25,6 +26,7 @@ import TeilnehmerListeEinsehen from "./pages/TeilnehmerListeEinsehen";
 import UserZuSubgruppeHinzufuegen from "./pages/UserZuSubgruppeHinzufuegen";
 import WichtelzuordnungPopup from "./pages/WichtelzuordnungPopup";
 import Anmelden from "./pages/Anmelden";
+import * as PropTypes from "prop-types";
 
 //alter code - darunter neuer code
 /*function Welcome(props) {
@@ -38,16 +40,20 @@ ReactDOM.render(
 ReactDOM.render(<App />, document.getElementById('root'));*/
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
+
 root.render(
   <React.StrictMode>
-    <App />
+      <Apps />
   </React.StrictMode>
 );
 
  /* If you want to start measuring performance in your app, pass a function
  to log results (for example: reportWebVitals(console.log))
  or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals */
-reportWebVitals();
+//TODO not implemented yet (???) so deaktivated currently 31.12.2022
+// reportWebVitals();
 
 //Create Routes (Seiten verknüpfen aus pages)
 export default function Apps() {
@@ -76,4 +82,9 @@ export default function Apps() {
     );
 }
 
-ReactDOM.render(<Apps />, document.getElementById("root"));
+
+
+// Problem - ähnliche (alte Anweisung) wie Zeile 40-45. Zeile muss abgeändert werden zum Format von 40-45 um fehler zu beheben.
+// ReactDOM.render(<Apps />, document.getElementById("root"));
+
+// TODO FUTURE: https://reactrouter.com/en/main/routers/router-provider
