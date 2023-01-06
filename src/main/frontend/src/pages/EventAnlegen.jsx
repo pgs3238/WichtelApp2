@@ -20,8 +20,8 @@ function Layout() {
     return (
         <form onSubmit={handleSubmit}>
             <h1>Secret Santa</h1>
-            <h2>create a new event:</h2>
-            <label>Event name:
+            <h2>Erstellen Sie ein neues Event:</h2>
+            <label>Eventname:
                 &emsp;&emsp;&nbsp;
                 <input
                     type = "text"
@@ -33,7 +33,7 @@ function Layout() {
             </label>
             <br/>
 
-            <label>Event date:
+            <label>Wann soll das Event:
                 <input
                     type = "date"
                     onChange = {e=>setDate(e.target.value)}
