@@ -23,32 +23,31 @@ function Layout() {
         <form onSubmit={handleSubmit}>
             <h1>Secret Santa</h1>
             <h2>Login</h2>
-            <label>Enter Email-Address:
-                &emsp;
-                <input
+
+            <input
                     type="text"
+                    placeholder="E-Mail-Adresse"
                     id="email"
                     name="email"
                     value={inputs.email || ""}
                     onChange={handleChange}
-                />
-            </label>
+            />
+
             <br/>
-            <label>Enter Password:
-                &emsp;&emsp;&emsp;&nbsp;
                 <input
                     type="password"
+                    placeholder="Passwort"
                     id="passwort"
                     name="passwort"
                     value={inputs.password || ""}
                     onChange={handleChange}
                 />
-            </label>
+
             <br/>
             <br/>
             <input type="submit" id="anmelden" value="Login"/>
-            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-            &nbsp;&nbsp;
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+
             <input type="submit" id="pwvergessen" value="Forgot Password"/>
             <br/><br/>
             <input type="submit" id="chgpgadduser" value="Create new Account"/>

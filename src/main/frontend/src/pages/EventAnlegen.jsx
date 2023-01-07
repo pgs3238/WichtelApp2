@@ -33,7 +33,7 @@ function Layout() {
             </label>
             <br/>
 
-            <label>Wann soll das Event:
+            <label>Wann soll das Event stattfinden?:
                 <input
                     type = "date"
                     onChange = {e=>setDate(e.target.value)}

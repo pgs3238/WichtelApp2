@@ -22,6 +22,7 @@ function Layout() {
                 &emsp;&emsp;&nbsp;
                 <input
                     type="text"
+                    placeholder="Vorname"
                     id="vname"
                     name="vorname"
                     value={inputs.name || ""}
@@ -33,6 +34,7 @@ function Layout() {
                 &emsp;&nbsp;&nbsp;&nbsp;
                 <input
                     type="text"
+                    placeholder="Nachname"
                     id="nname"
                     name="nachname"
                     value={inputs.name || ""}
@@ -44,6 +46,7 @@ function Layout() {
                 &emsp;
                 <input
                     type="text"
+                    placeholder="E-Mail Adresse"
                     id="email"
                     name="email"
                     value={inputs.email || ""}
@@ -55,6 +58,7 @@ function Layout() {
                 &emsp;&emsp;&emsp;
                 <input
                     type="password"
+                    placeholder="Passwort"
                     id="passwort"
                     name="passwort"
                     value={inputs.password || ""}
@@ -62,7 +66,7 @@ function Layout() {
                 />
             </label>
             <br/><br/>
-            <input type="submit" id="adduser" value="Register"/>
+            <input type="submit" id="adduser" value="Registrieren"/>
         </form>
     );
 }
