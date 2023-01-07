@@ -1,10 +1,18 @@
+
 import React from 'react';
 
-function Home() {
+function Layout() {
     return (
-        <h1>Secret Santa </h1>
+        <div>
 
-    );
+        <h1>Willkommen beim Wichtelspass mit Secret Santa.</h1>
+        <ul>Haben Sie bereits ein Konto bei uns?</ul>
+            <button>Anmelden</button>
+            <br/>
+            <button>Registrieren</button>
+
+        </div>
+            );
 }
 
-export default Home;
+export default Layout;
