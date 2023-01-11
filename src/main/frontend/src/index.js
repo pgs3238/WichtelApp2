@@ -28,6 +28,7 @@ import WichtelzuordnungPopup from "./pages/WichtelzuordnungPopup";
 import Anmelden from "./pages/Anmelden";
 import * as PropTypes from "prop-types";
 
+
 //alter code - darunter neuer code
 /*function Welcome(props) {
     return <h1> Hello, {props.name}, {props.nachname}</h1>
