@@ -19,7 +19,7 @@ function Layout() {
             <h1>Secret Santa</h1>
             <h2>Register</h2>
             <label>Enter Given-name:
-                &emsp;&emsp;&nbsp;
+                &emsp;&nbsp;&nbsp;&nbsp;
                 <input
                     type="text"
                     placeholder="Vorname"
@@ -31,7 +31,7 @@ function Layout() {
             </label>
             <br/>
             <label>Enter Family-name:
-                &emsp;&nbsp;&nbsp;&nbsp;
+                &emsp;&nbsp;&nbsp;
                 <input
                     type="text"
                     placeholder="Nachname"
