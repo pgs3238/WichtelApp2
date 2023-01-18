@@ -1,15 +1,20 @@
 
 import React from 'react';
+import './Home.css'
 
 function Layout() {
+
     return (
         <div>
+        <h1>Secret Santa</h1>
+        <br/>
+        <h2>Was ist Secret Santa?</h2>
 
-        <h1>Willkommen beim Wichtelspass mit Secret Santa.</h1>
-        <ul>Haben Sie bereits ein Konto bei uns?</ul>
-            <button>Anmelden</button>
-            <br/>
-            <button>Registrieren</button>
+            <h3>Hier hast du die Möglichkeit dich zusammen mit Familie, Freunden oder
+                Kollegen für eine unterhaltsame Wichtelrunde anzumelden. Sobald die Wichtelrunde durch den Organisator
+                gestartet wird, wirst du per Zufall eine Person zugewiesen bekommen, für die du ein Geschenk kaufen kannst.
+                Lass die Vorfreude beginnen und melde dich jetzt an.
+            </h3>
 
         </div>
             );
