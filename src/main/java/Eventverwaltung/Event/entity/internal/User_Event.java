@@ -16,12 +16,12 @@ import java.util.Collection;
 @Table(name = "wichtel_user_event")
 @NamedQuery(name = "User_Event.UserEventFuerUserUndEvent", query = "select ue FROM User_Event ue where ue.event = :event and ue.user = :user")
 @NamedQuery(name = "User_Event.teilnehmerUndInfoFuerEventId", query = "select ue From User_Event ue Where ue.event= :event")
-@NamedQuery(name = "User_Event.groessteSubgruppe", query = "select max(count(ue.subgruppe)) from User_Event ue where ue.event = :event group by ue.subgruppe")
+@NamedQuery(name = "User_Event.groesseSubgruppe", query = "select ue.subgruppe, count(ue.subgruppe) from User_Event ue where ue.event = :event group by ue.subgruppe")
 public class User_Event implements Serializable {
 
     public static final String GET_USEREVENT = "User_Event.UserEventFuerUserUndEvent";
     public static final String GET_TEILNEHMERINFO = "User_Event.teilnehmerUndInfoFuerEventId";
-    public static final String GET_SUBGROESSE = "User_Event.groessteSubgruppe";
+    public static final String GET_SubgrNachGroesse = "User_Event.groesseSubgruppe";
     public User_Event() {
     }
 

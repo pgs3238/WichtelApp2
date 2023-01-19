@@ -1,14 +1,13 @@
 package Eventverwaltung.Event.dao;
 
 import Eventverwaltung.Event.entity.EventTO;
-import Eventverwaltung.Event.entity.internal.Event;
 import Eventverwaltung.Event.entity.internal.User_Event;
 import Eventverwaltung.Teilnehmer.dao.GenericDAO;
 import Eventverwaltung.Teilnehmer.entity.UserTO;
-import Eventverwaltung.Teilnehmer.entity.internal.User;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class User_EventDAO extends GenericDAO<User_Event> {
@@ -36,7 +35,10 @@ public class User_EventDAO extends GenericDAO<User_Event> {
         return super.findListResult(User_Event.GET_TEILNEHMERINFO,eventParameter);
     }
 
-    public int getGroesseSubgruppe(EventTO event){
-        return 0;
+    public List<User_Event> getSubgruppeNachGroesse(EventTO eventTO){
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("event",eventTO.toEvent());
+
+        return super.findListResult(User_Event.GET_SubgrNachGroesse, parameters);
     }
 }
