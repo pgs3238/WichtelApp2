@@ -2,6 +2,7 @@
 import React, {useState} from 'react';
 import * as PropTypes from "prop-types";
 /*import ReactDOM from "react-dom/client";*/
+import './Anmelden.css'
 
 
 function Layout() {
@@ -24,6 +25,7 @@ function Layout() {
             <h1>Secret Santa</h1>
             <h2>Login</h2>
 
+            <div className="email">
             <input
                     type="text"
                     placeholder="E-Mail-Adresse"
@@ -31,26 +33,41 @@ function Layout() {
                     name="email"
                     value={inputs.email || ""}
                     onChange={handleChange}
+
             />
+            </div>
 
             <br/>
+            <div className="passwort">
                 <input
-                    type="password"
+                    type="text"
                     placeholder="Passwort"
                     id="passwort"
                     name="passwort"
-                    value={inputs.password || ""}
+                    value={inputs.passwort || ""}
                     onChange={handleChange}
                 />
+            </div>
+            <br/>
+            <br/>
 
-            <br/>
-            <br/>
-            <input type="submit" id="anmelden" value="Login"/>
+            <div className="anmeldenBT">
+            <input
+                type="submit"
+                id="anmelden"
+                value="Login"/>
             &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+            </div>
 
-            <input type="submit" id="pwvergessen" value="Forgot Password"/>
-            <br/><br/>
-            <input type="submit" id="chgpgadduser" value="Create new Account"/>
+            <br/>
+
+            <div className="pwvergessenBT">
+            <input
+                type="submit"
+                id="pwvergessen"
+                value="Passwort vergessen?"/>
+                &emsp;
+            </div>
         </form>
 
     )
