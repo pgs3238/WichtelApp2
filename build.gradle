@@ -52,7 +52,7 @@ task copyFrontendToBuild(type: Copy) {
     dependsOn 'npmBuild'
     from "$projectDir/src/main/frontend/build/"
 //    include "*"
-    into "$buildDir/resources/main/static"
+    into "$buildDir/resources/main/META-INF/resources"
 }
 
 processResources {
@@ -67,7 +67,6 @@ dependencies {
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation 'io.quarkus:quarkus-hibernate-orm'
     implementation 'io.quarkus:quarkus-resteasy-jsonb'
-    implementation 'io.quarkus:quarkus-resteasy-qute'
     implementation 'io.quarkus:quarkus-smallrye-openapi'
     implementation 'io.quarkus:quarkus-resteasy'
     implementation 'io.quarkus:quarkus-security-jpa'

@@ -6,13 +6,17 @@ import Eventverwaltung.Teilnehmer.entity.internal.User;
 import Eventverwaltung.Teilnehmer.facade.IRegistrieren;
 
 import javax.inject.Inject;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.Path;
 
+
+@Path("/registrierung")
 public class Registrieren implements IRegistrieren {
 
     @Inject
     UserDAO userDAO;
 
-
+    @DELETE
     @SuppressWarnings("unused")
     @Override
     public boolean userLoeschen(int nummer) {
@@ -25,6 +29,7 @@ public class Registrieren implements IRegistrieren {
             return Boolean.TRUE;
         }
     }
+
 
     @Override
     public void userAnlegen(UserTO userTO) {
