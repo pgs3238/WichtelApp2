@@ -25,6 +25,7 @@ function Layout() {
             <h2>Erstellen Sie ein neues Event:</h2>
             <div className="eventname">
                 <label> Wie soll das Event heißen? </label>
+                &nbsp;
                 <input
                     type = "text"
                     placeholder="Eventname"
@@ -37,6 +38,7 @@ function Layout() {
             <br/>
             <div className="eventdatum">
                 <label>Wann soll das Event starten? </label>
+                &emsp;&nbsp;&nbsp;&nbsp;
                 <input
 
                     type = "date"
@@ -46,6 +48,7 @@ function Layout() {
             </div>
             <div className="eventlocation">
                 <label> Wo findet das Event statt? </label>
+                &nbsp;&nbsp;
                 <input
                     type="text"
                     placeholder="Eventlocation"
@@ -57,6 +60,7 @@ function Layout() {
             <br/>
             <div className="sstermin">
                 <label> Secret Santa Termin: </label>
+                &emsp;&emsp;&emsp;&emsp;&emsp;
                 <input
                     type = "date"
                     onChange = {e=>setDate(e.target.value)}

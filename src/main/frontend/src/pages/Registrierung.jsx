@@ -1,5 +1,6 @@
 
 import React, {useState} from 'react';
+import './Registrierung.css'
 
 function Layout() {
     const [inputs, setInputs] = useState({});
@@ -18,8 +19,9 @@ function Layout() {
         <form onSubmit={handleSubmit}>
             <h1>Secret Santa</h1>
             <h2>Register</h2>
-            <label>Enter Given-name:
-                &emsp;&nbsp;&nbsp;&nbsp;
+            <div className="name">
+                <label>Vorname: </label>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
                 <input
                     type="text"
                     placeholder="Vorname"
@@ -28,10 +30,11 @@ function Layout() {
                     value={inputs.name || ""}
                     onChange={handleChange}
                 />
-            </label>
+            </div>
             <br/>
-            <label>Enter Family-name:
-                &emsp;&nbsp;&nbsp;
+            <div className="nname">
+                <label>Nachname: </label>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
                 <input
                     type="text"
                     placeholder="Nachname"
@@ -40,10 +43,11 @@ function Layout() {
                     value={inputs.name || ""}
                     onChange={handleChange}
                 />
-            </label>
+            </div>
             <br/>
-            <label>Enter Email-address:
-                &emsp;
+            <div className="email">
+                <label>Email-Addresse: </label>
+                &emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
                 <input
                     type="text"
                     placeholder="E-Mail Adresse"
@@ -52,10 +56,11 @@ function Layout() {
                     value={inputs.email || ""}
                     onChange={handleChange}
                 />
-            </label>
+            </div>
             <br/>
-            <label>Enter Password:
-                &emsp;&emsp;&emsp;
+            <div className="passwort">
+                <label>Passwort eingeben: </label>
+                &emsp;&emsp;&nbsp;&nbsp;&nbsp;
                 <input
                     type="password"
                     placeholder="Passwort"
@@ -64,10 +69,11 @@ function Layout() {
                     value={inputs.password || ""}
                     onChange={handleChange}
                 />
-            </label>
+            </div>
             <br/>
-            <label>Reenter Password:
-                &emsp;&emsp;
+            <div className="repasswort">
+                <label>Passwort erneut eingeben: </label>
+                &nbsp;
                 <input
                     type="password"
                     placeholder="Passwort"
@@ -76,9 +82,11 @@ function Layout() {
                     value={inputs.password || ""}
                     onChange={handleChange}
                 />
-            </label>
-            <br/><br/>
-            <input type="submit" id="adduser" value="Registrieren"/>
+            </div>
+            <br/>
+            <div className="register">
+                <input type="submit" id="adduser" value="Registrieren"/>
+            </div>
         </form>
     );
 }
