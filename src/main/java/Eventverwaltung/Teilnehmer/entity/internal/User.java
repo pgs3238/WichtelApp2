@@ -1,10 +1,16 @@
 package Eventverwaltung.Teilnehmer.entity.internal;
 
+import io.quarkus.elytron.security.common.BcryptUtil;
+import io.quarkus.security.jpa.Password;
+import io.quarkus.security.jpa.Roles;
+import io.quarkus.security.jpa.UserDefinition;
+import io.quarkus.security.jpa.Username;
 import org.hibernate.annotations.NamedQuery;
 
 import javax.persistence.*;
 
 @Entity
+@UserDefinition
 @Table(name = "wichtel_user")
 @NamedQuery(name= "User.findUserByEmail", query = "select u From User u Where u.email= :email")
 @NamedQuery(name = "User.findTeilnehmerVonEvent", query = "select ue.user from User_Event ue WHERE ue.event = :event")
@@ -14,14 +20,18 @@ public class User {
     public static final String GET_TEILNEHMER_VON_EVENT = "User.findTeilnehmerVonEvent";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "userseq")
+    private Integer id;
 
+    @Password
     @Column(unique = true)
     private String password;
+    @Username
     private String email;
     private String name;
     private String vorname;
+    @Roles
+    private String role = "user";
 
 
     public User() {}
@@ -30,7 +40,7 @@ public class User {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -39,7 +49,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = BcryptUtil.bcryptHash(password);
     }
 
     private String getEmail() { return email; }

@@ -4,22 +4,26 @@ import Eventverwaltung.Teilnehmer.dao.UserDAO;
 import Eventverwaltung.Teilnehmer.entity.UserTO;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
 import Eventverwaltung.Teilnehmer.facade.IRegistrieren;
+import org.jboss.resteasy.annotations.Form;
 
 import javax.inject.Inject;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 
-@Path("/registrierung")
+@Path("/users")
+@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+@Produces(MediaType.APPLICATION_JSON)
 public class Registrieren implements IRegistrieren {
 
     @Inject
     UserDAO userDAO;
 
-    @DELETE
+    @POST
+    @Path("/delete")
     @SuppressWarnings("unused")
     @Override
-    public boolean userLoeschen(int nummer) {
+    public boolean userLoeschen(@FormParam("nummer") int nummer) {
         User aUser = userDAO.find(nummer);
         /* TODO System.out.println("User "+aUser.getEmail()+" gefunden zum Loeschen"); */
         if (aUser == null) {
@@ -30,17 +34,20 @@ public class Registrieren implements IRegistrieren {
         }
     }
 
-
+    @POST
+    @Path("/register")
     @Override
-    public void userAnlegen(UserTO userTO) {
+    public boolean userAnlegen(@Form UserTO userTO) {
         User aUser = new User();
         aUser = userTO.toUser();
-        userDAO.save(aUser);
-
+        System.out.println("Hier");
+        return userDAO.save(aUser);
     }
 
+    @POST
+    // @PermitAll
     @Override
-    public void userSpeichern(UserTO userTO) {
+    public boolean userSpeichern(@Form UserTO userTO) {
         System.out.println(userTO.toString());
 
         User aUser = userDAO.find(userTO.getUserID());
@@ -49,7 +56,13 @@ public class Registrieren implements IRegistrieren {
         aUser.setEmail(userTO.getEmail());
         aUser.setPassword(userTO.getPasswort());
 
-        userDAO.update(aUser);
+        System.out.println("Test1");
+
+        boolean result = userDAO.update(aUser);
+
+        System.out.println("Test2");
+
+        return result;
 
     }
 }

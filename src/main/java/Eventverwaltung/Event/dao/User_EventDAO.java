@@ -5,6 +5,8 @@ import Eventverwaltung.Event.entity.internal.User_Event;
 import Eventverwaltung.Teilnehmer.dao.GenericDAO;
 import Eventverwaltung.Teilnehmer.entity.UserTO;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -12,8 +14,9 @@ import java.util.Map;
 
 public class User_EventDAO extends GenericDAO<User_Event> {
 
-    public User_EventDAO(){
-        super(User_Event.class);
+    @Inject
+    public User_EventDAO(EntityManager em){
+        super(em, User_Event.class);
     }
 
     public void delete(User_Event user_event){

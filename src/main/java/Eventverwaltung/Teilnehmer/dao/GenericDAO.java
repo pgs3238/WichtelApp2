@@ -1,6 +1,5 @@
 package Eventverwaltung.Teilnehmer.dao;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
@@ -13,25 +12,36 @@ public abstract class GenericDAO<T> {
 //    private final String UNIT_NAME = "Wichtel_AppCtr_EJB";
 
 //    @PersistenceContext(unitName = UNIT_NAME)
-    @Inject
+
     private EntityManager em;
 
     private Class<T> entityClass;
 
     public GenericDAO() {}
 
-
-
-    public GenericDAO(Class<T> entityClass) {
+    public GenericDAO(EntityManager em, Class<T> entityClass) {
+        this.em = em;
         this.entityClass = entityClass;
     }
 
-    public void save(T entity) {
-        this.em.persist(entity);
+    public boolean save(T entity) {
+        try {
+            this.em.persist(entity);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    public T update(T entity) {
-        return em.merge(entity);
+    public boolean update(T entity) {
+        try {
+            this.em.merge(entity);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     protected boolean delete(Object id, Class<T> classe){

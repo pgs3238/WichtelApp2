@@ -5,6 +5,6 @@ import Eventverwaltung.Teilnehmer.entity.UserTO;
 public interface IRegistrieren {
 
     public boolean userLoeschen (int nummer);
-    public void userAnlegen(UserTO userTO);
-    public void userSpeichern(UserTO userTO);
+    public boolean userAnlegen(UserTO userTO);
+    public boolean userSpeichern(UserTO userTO);
 }
