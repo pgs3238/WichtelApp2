@@ -23,9 +23,9 @@ function Layout() {
         <form onSubmit={handleSubmit}>
             <h1>Secret Santa</h1>
             <h2>Erstellen Sie ein neues Event:</h2>
-
-            <label>
-                <div className="eventname">
+            <div className="eventname">
+                <label> Wie soll das Event heißen? </label>
+                &nbsp;
                 <input
                     type = "text"
                     placeholder="Eventname"
@@ -34,40 +34,48 @@ function Layout() {
                     value = {inputs.eventName || ""}
                     onChange = {handleChange}
                 />
-                </div>
-            </label>
+            </div>
             <br/>
-            <label>Wann soll das Event stattfinden?:
+            <div className="eventdatum">
+                <label>Wann soll das Event starten? </label>
+                &emsp;&nbsp;&nbsp;&nbsp;
                 <input
+
                     type = "date"
                     onChange = {e=>setDate(e.target.value)}
                 />
-                <p>Selected Date: {date}</p>
-            </label>
-            <br/>
-
-            <label>Event location:
+                <p>Gewähltes Datum: {date}</p>
+            </div>
+            <div className="eventlocation">
+                <label> Wo findet das Event statt? </label>
+                &nbsp;&nbsp;
                 <input
                     type="text"
+                    placeholder="Eventlocation"
                     id = "location"
                     value = {inputs.eventLocation || ""}
                     onChange = {handleChange}
                     />
-            </label>
+            </div>
             <br/>
-
-            <label>Secret Santa distribution:
+            <div className="sstermin">
+                <label> Secret Santa Termin: </label>
+                &emsp;&emsp;&emsp;&emsp;&emsp;
                 <input
                     type = "date"
                     onChange = {e=>setDate(e.target.value)}
                 />
-                <p>Selected Date: {date}</p>
-            </label>
+                <p>Gewähltes Datum: {date}</p>
+            </div>
+            <div className="bsave">
+                <button>Event speichern</button>
+            </div>
+            <br/>
+            <div className="bcancel">
+                <button>Abbrechen</button>
+            </div>
             <br/>
 
-            <button>cancel</button>
-
-            <button>save event</button>
 
         </form>
     );

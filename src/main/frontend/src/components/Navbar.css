@@ -39,7 +39,7 @@
     height: 100%;
     display: flex;
     align-items: center;
-    padding: 5 16px;
+    padding: 5px 16px;
     border-radius: 7px;
 }
 
@@ -51,6 +51,7 @@
 /* Menü so groß genug, damit Rahmen der Menüpunkte nicht größer sind als das Fenster */
 .nav-menu-items {
     width: 100%;
+    list-style-type: none;
 }
 
 /* X (Schliessen)-Details */

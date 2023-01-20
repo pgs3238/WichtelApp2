@@ -1,10 +1,11 @@
 package Eventverwaltung.Teilnehmer.dao;
 
 import Eventverwaltung.Event.entity.EventTO;
-import Eventverwaltung.Event.entity.internal.User_Event;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,8 +16,9 @@ import java.util.Map;
 @RequestScoped
 public class UserDAO extends GenericDAO<User> {
 
-    public UserDAO() {
-        super(User.class);
+    @Inject
+    public UserDAO(EntityManager em) {
+        super(em, User.class);
     }
 
     public User findUserByEmail(String email) {
@@ -32,10 +34,15 @@ public class UserDAO extends GenericDAO<User> {
         super.delete(aUser.getId(),User.class);
     }
 
+
+
     public Collection<User> findTeilnehmerByEvent(EventTO eventTO){
         Map<String, Object> eventParameter = new HashMap<>();
         eventParameter.put("event",eventTO.toEvent());
 
         return super.findListResult(User.GET_TEILNEHMER_VON_EVENT,eventParameter);
     }
+
+
+
 }

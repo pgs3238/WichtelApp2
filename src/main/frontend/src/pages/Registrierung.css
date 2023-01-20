@@ -1,22 +1,18 @@
-
-.eventname {
+.name {
     text-align: center;
 }
-
-.eventdatum {
+.nname {
     text-align: center;
 }
-
-.eventlocation {
+.email {
     text-align: center;
 }
-
-.sstermin {
+.passwort {
     text-align: center;
 }
-.bsave {
+.repasswort {
     text-align: center;
 }
-.bcancel {
+.register {
     text-align: center;
 }
