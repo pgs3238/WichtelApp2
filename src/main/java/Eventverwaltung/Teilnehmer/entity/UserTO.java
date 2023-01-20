@@ -20,7 +20,12 @@ public abstract class UserTO implements Serializable {
         this.passwort = passwort;
     }
 
-    public abstract User toUser();
+    public UserTO(){};
+
+    public User toUser() {
+        User user = new User(this.userID,this.passwort,this.email,this.name,this.vorname);
+        return user;
+    }
 
     public int getUserID() { return userID; }
 

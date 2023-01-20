@@ -41,4 +41,8 @@ public class User_EventDAO extends GenericDAO<User_Event> {
 
         return super.findListResult(User_Event.GET_GROESSESUBGRUPPE, parameters);
     }
+    @Override
+    public void save(User_Event userEvent){
+        super.save(userEvent);
+    }
 }

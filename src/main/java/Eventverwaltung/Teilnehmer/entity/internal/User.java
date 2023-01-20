@@ -1,5 +1,6 @@
 package Eventverwaltung.Teilnehmer.entity.internal;
 
+import Eventverwaltung.Teilnehmer.entity.UserTO;
 import org.hibernate.annotations.NamedQuery;
 
 import javax.persistence.*;
@@ -25,6 +26,20 @@ public class User {
 
 
     public User() {}
+
+    public User(int id, String password, String email, String name, String vorname) {
+        this.id = id;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.vorname = vorname;
+    }
+
+    //Fehler da UserTO eine abstract class ist (warte auf rückfrage)
+    public UserTO toUserTO() {
+        //    UserTO userTO = new UserTO(this.id,this.name,this.vorname,this.email,this.password);
+        return null;
+    }
 
     public int getId() {
         return id;
