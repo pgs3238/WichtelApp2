@@ -1,21 +1,21 @@
 package Eventverwaltung.Teilnehmer.entity;
 
 import Eventverwaltung.Teilnehmer.entity.internal.User;
+import org.hibernate.validator.constraints.Length;
 
-import javax.ws.rs.FormParam;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 
 public class UserTO implements Serializable {
 
-    @FormParam("userId")
     Integer userID;
-    @FormParam("name")
+    @Length(min = 3)
     String name;
-    @FormParam("vorname")
+    @Length(min = 3)
     String vorname;
-    @FormParam("email")
+    @Email
     String email;
-    @FormParam("passwort")
+    @Length(min = 3)
     String passwort;
 
     public UserTO (Integer userID, String name, String vorname, String email, String passwort) {

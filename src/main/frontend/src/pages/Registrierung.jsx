@@ -11,9 +11,36 @@ function Layout() {
         setInputs(values => ({...values, [name]: value}))
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        alert(inputs);
+
+        alert(JSON.stringify(inputs));
+
+        if (inputs.passwort !== inputs.repasswort) {
+            alert("pass?")
+            return;
+        }
+
+        let query = await fetch("/users/register", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "name": inputs.nachname,
+                "vorname": inputs.vorname,
+                "email": inputs.email,
+                "passwort": inputs.passwort
+            })
+        });
+
+        if (query.status !== 200) {
+            let json = await query.json();
+            alert(JSON.stringify(json));
+            return;
+        }
+
+        alert("OK")
     }
     return (
         <form onSubmit={handleSubmit}>
@@ -27,7 +54,6 @@ function Layout() {
                     placeholder="Vorname"
                     id="vname"
                     name="vorname"
-                    value={inputs.name || ""}
                     onChange={handleChange}
                 />
             </div>
@@ -38,9 +64,8 @@ function Layout() {
                 <input
                     type="text"
                     placeholder="Nachname"
-                    id="nname"
+                    id="nachname"
                     name="nachname"
-                    value={inputs.name || ""}
                     onChange={handleChange}
                 />
             </div>
@@ -53,7 +78,6 @@ function Layout() {
                     placeholder="E-Mail Adresse"
                     id="email"
                     name="email"
-                    value={inputs.email || ""}
                     onChange={handleChange}
                 />
             </div>
@@ -66,7 +90,6 @@ function Layout() {
                     placeholder="Passwort"
                     id="passwort"
                     name="passwort"
-                    value={inputs.password || ""}
                     onChange={handleChange}
                 />
             </div>
@@ -79,7 +102,6 @@ function Layout() {
                     placeholder="Passwort"
                     id="repasswort"
                     name="repasswort"
-                    value={inputs.password || ""}
                     onChange={handleChange}
                 />
             </div>

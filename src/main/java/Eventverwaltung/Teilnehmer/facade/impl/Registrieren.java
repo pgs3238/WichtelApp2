@@ -4,15 +4,17 @@ import Eventverwaltung.Teilnehmer.dao.UserDAO;
 import Eventverwaltung.Teilnehmer.entity.UserTO;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
 import Eventverwaltung.Teilnehmer.facade.IRegistrieren;
-import org.jboss.resteasy.annotations.Form;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 
 @Path("/users")
-@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+@Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class Registrieren implements IRegistrieren {
 
@@ -23,7 +25,7 @@ public class Registrieren implements IRegistrieren {
     @Path("/delete")
     @SuppressWarnings("unused")
     @Override
-    public boolean userLoeschen(@FormParam("nummer") int nummer) {
+    public boolean userLoeschen(@QueryParam("nummer") @Positive int nummer) {
         User aUser = userDAO.find(nummer);
         /* TODO System.out.println("User "+aUser.getEmail()+" gefunden zum Loeschen"); */
         if (aUser == null) {
@@ -37,17 +39,22 @@ public class Registrieren implements IRegistrieren {
     @POST
     @Path("/register")
     @Override
-    public boolean userAnlegen(@Form UserTO userTO) {
+    public Response userAnlegen(@Valid UserTO userTO) {
         User aUser = new User();
         aUser = userTO.toUser();
         System.out.println("Hier");
-        return userDAO.save(aUser);
+
+        if (userDAO.save(aUser)) {
+            return Response.ok().build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
     }
 
     @POST
     // @PermitAll
     @Override
-    public boolean userSpeichern(@Form UserTO userTO) {
+    public boolean userSpeichern(@Valid UserTO userTO) {
         System.out.println(userTO.toString());
 
         User aUser = userDAO.find(userTO.getUserID());
