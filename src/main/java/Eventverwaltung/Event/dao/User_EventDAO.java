@@ -39,6 +39,6 @@ public class User_EventDAO extends GenericDAO<User_Event> {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("event",eventTO.toEvent());
 
-        return super.findListResult(User_Event.GET_SubgrNachGroesse, parameters);
+        return super.findListResult(User_Event.GET_GROESSESUBGRUPPE, parameters);
     }
 }
