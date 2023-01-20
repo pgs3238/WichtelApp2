@@ -65,6 +65,18 @@ function Layout() {
                     onChange={handleChange}
                 />
             </label>
+            <br/>
+            <label>Reenter Password:
+                &emsp;&emsp;
+                <input
+                    type="password"
+                    placeholder="Passwort"
+                    id="repasswort"
+                    name="repasswort"
+                    value={inputs.password || ""}
+                    onChange={handleChange}
+                />
+            </label>
             <br/><br/>
             <input type="submit" id="adduser" value="Registrieren"/>
         </form>

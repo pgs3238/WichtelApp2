@@ -1,6 +1,8 @@
 
 import React, {useState} from 'react';
 
+import './EventAnlegen.css'
+
 function Layout() {
     const [inputs, setInputs] = useState({});
 
@@ -21,18 +23,20 @@ function Layout() {
         <form onSubmit={handleSubmit}>
             <h1>Secret Santa</h1>
             <h2>Erstellen Sie ein neues Event:</h2>
-            <label>Eventname:
-                &emsp;&emsp;&nbsp;
+
+            <label>
+                <div className="eventname">
                 <input
                     type = "text"
+                    placeholder="Eventname"
                     id = "ename"
                     name = "eventName"
                     value = {inputs.eventName || ""}
                     onChange = {handleChange}
                 />
+                </div>
             </label>
             <br/>
-
             <label>Wann soll das Event stattfinden?:
                 <input
                     type = "date"
