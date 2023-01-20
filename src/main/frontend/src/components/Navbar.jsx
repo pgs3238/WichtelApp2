@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
-import {SidebarData} from './SidebarData';
-
-import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
-import {IconContext} from "react-icons";
+import { Link } from 'react-router-dom';
+import { SidebarData } from './SidebarData';
+import { IconContext } from 'react-icons'
+import * as AiIcons from "react-icons/ai";
+import * as FaIcons from "react-icons/fa";
+import * as MdIcons from "react-icons/md";
+import * as RiIcons from "react-icons/ri";
 import './Navbar.css';
+
 
 function Navbar() {
 
@@ -47,5 +49,6 @@ function Navbar() {
         </>
     );
 }
+
 
 export default Navbar;
