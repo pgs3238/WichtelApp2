@@ -66,7 +66,7 @@ function Layout() {
                 type="submit"
                 id="pwvergessen"
                 value="Passwort vergessen?"/>
-                &emsp;
+                &emsp;&nbsp;&nbsp;
             </div>
         </form>
 
