@@ -1,5 +1,5 @@
-
 import React, {useState} from 'react';
+import './EventAnsehen.css'
 
 function Layout () {
 
@@ -16,54 +16,67 @@ function Layout () {
         setInputs (values => ({...values, [name]: value}))
     }
 
-    /* Hier fehlt noch die Anzeige von    */
-
     return (
         <form onSubmit={handleSubmit}>
             <h1>Event ansehen</h1>
 
-            <label>Das Wichteln findet statt am:
-                &emsp;&emsp;
-            </label>
+            <div className="eventdatum">
+                <label>Das Event findet statt am: </label>
+                %EVENTDATUM%
+            </div>
 
             <br/>
-            <br/>
 
-            <label>bei:
-                &emsp;&emsp;
-            </label>
-
-            <br/>
-            <br/>
-            <br/>
-
-
-
-            <input
-                type="submit"
-                id="bearbeiten"
-                value="bearbeiten"/>
+            <div className="eventlocation">
+                <label> bei </label>
+                %EVENTLOCATION%
+            </div>
 
             <br/>
+
+            <div className="eventverteilungdatum">
+                <label>Wichtel werden verteilt am:  </label>
+                 %EVENTVERTEILUNGDATUM%
+            </div>
+
             <br/>
 
-            <input
-                type="submit"
-                id="wichtelzuordnungStarten"
-                value="Wichtelzuordnung starten"/>
-            <br/><br/>
+            <div className="eventRegeln">
+                <label> Weitere Regeln: </label>
+                <br/>
+                <input
+                    type="text"
+                    placeholder="(Optonal) EventRegeln hier eingeben"
+                    id = "eventRegeln"
+                    name="eventRegeln"
+                    value = {inputs.eventRegeln || ""}
+                    onChange = {handleChange}
+                />
+            </div>
 
-            <input
-                type="submit"
-                id="abbrechen"
-                value="Abbrechen"/>
-            &emsp;
+            <br/>
 
-            <input
-                type="submit"
-                id="teilnehmerliste"
-                value="Teilnehmerliste"/>
+            <div className="eventedit">
+                <button>bearbeiten</button>
+            </div>
 
+            <br/>
+
+            <div className="zuordnungstart">
+                <button>Wichtelzuordnung starten</button>
+            </div>
+
+            <br/>
+
+            <div className="eventcancel">
+                <button>Abbrechen</button>
+            </div>
+
+            <br/>
+
+            <div className="teilnehmerlist">
+                <button>Teilnehmerliste</button>
+            </div>
 
         </form>
 
