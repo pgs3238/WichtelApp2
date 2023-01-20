@@ -1,3 +1,22 @@
+
 .eventname {
+    text-align: center;
+}
+
+.eventdatum {
+    text-align: center;
+}
+
+.eventlocation {
+    text-align: center;
+}
+
+.sstermin {
+    text-align: center;
+}
+.bsave {
+    text-align: center;
+}
+.bcancel {
     text-align: center;
 }
