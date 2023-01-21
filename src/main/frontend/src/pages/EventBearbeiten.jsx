@@ -1,11 +1,19 @@
 
 import React, {useState} from 'react';
+import './EventBearbeiten.css'
 import * as PropTypes from "prop-types";
+import {useNavigate} from "react-router-dom";
 /*import ReactDOM from "react-dom/client";*/
 
 
 function Layout() {
     const [inputs, setInputs] = useState({});
+    const [date, setDate] = useState();
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate("/")
+    }
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -21,140 +29,63 @@ function Layout() {
     return (
 
         <form onSubmit={handleSubmit}>
-
-            <h2>EventBearbeiten</h2>
-
-            <input
-                type="text"
-                placeholder="Eventname"
-                id="eventName"
-                name="eventName"
-                //value={inputs.eventName || ""}
-                onChange={handleChange}
-            />
-            <br/>
-            <br/>
-            <input
-                type="text"
-                placeholder="Wann soll das Event stattfinden?"
-                id="eventStart"
-                name="eventStart"
-                //value={inputs.email || ""}
-                onChange={handleChange}
-            />
-            <br/>
-            <br/>
-            <input
-                type="text"
-                placeholder="Wo soll das Event stattfinden?"
-                id="eventOrt"
-                name="eventOrt"
-                //value={inputs.email || ""}
-                onChange={handleChange}
-            />
-            <br/>
-            <br/>
-            <input
-                type="text"
-                placeholder="Wann sollen die Wichtel verteilt werden?"
-                id="eventZuordnungStart"
-                name="eventZuordnungStart"
-                //value={inputs.email || ""}
-                onChange={handleChange}
-            />
-            <br/>
-            <br/>
-            <input
-                type="text"
-                placeholder="Geben Sie ggf. weitere Regeln für das Wichteln an"
-                id="eventRegel"
-                name="eventRegel"
-                //value={inputs.password || ""}
-                onChange={handleChange}
-            />
-
-
-            <br/>
-            <br/>
-            &emsp;&emsp;
-            <input type="submit"
-                   id="eventLoeschen"
-                   value="Event loeschen"/>
-            <br/>
-            <br/>
-            <input type="submit"
-                   id="abbrechen"
-                   value="abbrechen"/>
-
-            &emsp;&emsp;
-
-            <input type="submit"
-                   id="eventSpeichern"
-                   value="Event speichern"/>
-        </form>
-
-    )
-
-
-
-
-
-
-
-}
-
-/*function MyForm() {
-    const [inputs, setInputs] = useState({});
-
-    const handleChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        setInputs(values => ({...values, [name]: value}))
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        alert(inputs);
-    }
-
-    return (
-        <form onSubmit={handleSubmit}>
-            <label>Enter Email Adress:
+            <h1>Secret Santa</h1>
+            <h2>Event Bearbeiten:</h2>
+            <div className="eventname">
+                <label> Wie soll das Event heißen? </label>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
                 <input
                     type="text"
-                    name="email"
-                    value={inputs.email || ""}
+                    placeholder="Eventname"
+                    id="eventname"
+                    name="eventName"
                     onChange={handleChange}
                 />
-            </label>
+            </div>
             <br/>
-            <label>Enter Password:
+            <div className="eventdatum">
+                <label>Wann soll das Event starten? </label>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
                 <input
-                    type="password"
-                    name="password"
-                    value={inputs.password || ""}
+                    type="date"
+                    name="eventDate"
+                    onChange= {e=>setDate(e.target.value)}
+                />
+            </div>
+            <br/>
+            <div className="eventregeln">
+                <label> Welche Regeln liegen für das Event vor? </label>
+                &nbsp;
+                <input
+                    type="text"
+                    placeholder="Eventregeln"
+                    id="eventegeln"
+                    name="eventRegeln"
                     onChange={handleChange}
                 />
-            </label>
+            </div>
             <br/>
-            <input type="submit" />
+            <div className="sstermin">
+                <label> Secret Santa Termin: </label>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
+                <input
+                    type="date"
+                    name="eventDeadline"
+                    onChange= {e=>setDate(e.target.value)}
+                />
+            </div>
+            <br/>
+            <div className="bsave">
+                <input type="submit" id="saveevent" value="Event speichern"/>
+            </div>
+            <br/>
+            <div className="bcancel">
+                <input type="button" id="cancel" value="Abbrechen - TODO FEHLT EINE OBERSEITE!!" onClick={handleClick}/>
+            </div>
+            <br/>
         </form>
-    )
-}*/
 
-
-
-
-
-
-/*const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <React.StrictMode>
-        <Layout />
-        <MyForm />
-    </React.StrictMode>
-);*/
-
-
+    );
+}
 
 export default Layout;

@@ -29,10 +29,10 @@ function Layout() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                "name": inputs.name,
-                "regeln": inputs.regeln,
-                "deadline": inputs.deadline,
-                "eventdate": inputs.eventdate
+                "name": inputs.eventName,
+                "regeln": inputs.eventRegeln,
+                "deadline": inputs.eventDeadline,
+                "eventDate": inputs.eventDate
 
             })
         });
@@ -71,6 +71,7 @@ function Layout() {
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
                 <input
                     type = "date"
+                    name = "eventDate"
                     onChange = {e=>setDate(e.target.value)}
                 />
             </div>
@@ -82,8 +83,9 @@ function Layout() {
                     type="text"
                     placeholder="Eventregeln"
                     id = "eventregel"
+                    name="eventRegeln"
                     onChange = {handleChange}
-                    />
+                />
             </div>
             <br/>
             <div className="sstermin">
@@ -91,6 +93,7 @@ function Layout() {
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
                 <input
                     type = "date"
+                    name = "eventDeadline"
                     onChange = {e=>setDate(e.target.value)}
                 />
             </div>
