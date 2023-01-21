@@ -27,7 +27,7 @@ public class Registrieren implements IRegistrieren {
     @Override
     public boolean userLoeschen(@QueryParam("nummer") @Positive int nummer) {
         User aUser = userDAO.find(nummer);
-        /* TODO System.out.println("User "+aUser.getEmail()+" gefunden zum Loeschen"); */
+       //  TODO System.out.println("User "+aUser.getEmail()+" gefunden zum Loeschen");
         if (aUser == null) {
             return Boolean.FALSE;
         } else {

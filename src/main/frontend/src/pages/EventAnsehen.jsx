@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import './EventAnsehen.css'
 
 function Layout () {
 
@@ -15,9 +16,44 @@ function Layout () {
         setInputs (values => ({...values, [name]: value}))
     }
 
+
     return (
         <form onSubmit={handleSubmit}>
-            <h1>Event ansehen</h1>
+            <h1>Secret Santa</h1>
+            <h2>Alle Events:</h2>
+            <div className="eventTable">
+                <table>
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Regeln
+                        </th>
+                        <th>
+                            Start des Events
+                        </th>
+                        <th>
+                            Deadline
+                        </th>
+                    </tr>
+                    <tr>
+                        <col>
+                            {}
+                        </col>
+                        <col>
+                            {}
+                        </col>
+                        <col>
+                            {}
+                        </col>
+                        <col>
+                            {}
+                        </col>
+                    </tr>
+
+                </table>
+            </div>
 
             <div className="eventdatum">
                 <label>Das Event findet statt am: </label>
