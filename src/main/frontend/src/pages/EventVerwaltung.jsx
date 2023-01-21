@@ -1,5 +1,4 @@
-
-import React, {useState} from 'react';
+import React, {useState} from "react";
 
 
 function Layout() {
@@ -14,15 +13,12 @@ function Layout() {
     return (
         <form onSubmit={handleSubmit}>
             <h1>Secret Santa</h1>
-            <h2>Eventübersicht</h2>
+            <h2>Eventverwaltung</h2>
 
-
-
-            <button>Neues Event anlegen</button>
-            <button>Auswählen</button>
         </form>
 
-            );
+
+    );
 }
 
 export default Layout;

@@ -27,6 +27,8 @@ import UserZuSubgruppeHinzufuegen from "./pages/UserZuSubgruppeHinzufuegen";
 import WichtelzuordnungPopup from "./pages/WichtelzuordnungPopup";
 import Anmelden from "./pages/Anmelden";
 import * as PropTypes from "prop-types";
+import Events from "./pages/EventVerwaltung";
+import EventVerwaltung from "./pages/EventVerwaltung";
 
 
 //alter code - darunter neuer code
@@ -64,17 +66,18 @@ export default function Apps() {
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
                     <Route path="anmelden" element={<Anmelden />} />
-                    <Route path="eventAnlegen" element={<EventAnlegen />} />
-                    <Route path="eventAnsehen" element={<EventAnsehen />} />
+                    <Route path="eventVerwaltung" element={<EventVerwaltung />} />
+                    <Route path="eventVerwaltung/eventAnlegen" element={<EventAnlegen />} />
+                    <Route path="eventVerwaltung/eventAnsehen" element={<EventAnsehen />} />
                     <Route path="eventAuswahl" element={<EventAuswahl />} />
-                    <Route path="eventBearbeiten" element={<EventBearbeiten />} />
-                    <Route path="gastEinladen" element={<GastEinladen />} />
+                    <Route path="eventVerwaltung/eventAnsehen/eventBearbeiten" element={<EventBearbeiten />} />
+                    <Route path="eventVerwaltung/eventAnsehen/teliEinsehen/gastEinladen" element={<GastEinladen />} />
                     <Route path="gastEntfernenPopup" element={<GastEntfernenPopup />} />
                     <Route path="mitteilungAnOrganisator" element={<MitteilungAnOrganisator />} />
                     <Route path="registrierung" element={<Registrierung />} />
-                    <Route path="subgruppenHinzufuegen" element={<SubgruppenHinzufuegen />} />
-                    <Route path="teilnehmerlisteEinsehen" element={<TeilnehmerListeEinsehen />} />
-                    <Route path="userZuSubgruppeHinzufuegen" element={<UserZuSubgruppeHinzufuegen />} />
+                    <Route path="eventVerwaltung/eventAnsehen/teliEinsehen/subgruHinz" element={<SubgruppenHinzufuegen />} />
+                    <Route path="eventVerwaltung/eventAnsehen/teliEinsehen" element={<TeilnehmerListeEinsehen />} />
+                    <Route path="eventVerwaltung/eventAnsehen/teliEinsehen/uZuSub" element={<UserZuSubgruppeHinzufuegen />} />
                     <Route path="wichtelZuordnungPopup" element={<WichtelzuordnungPopup />} />
                     <Route path="*" element={<NoPage />} />
                 </Route>

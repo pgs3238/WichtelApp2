@@ -12,7 +12,7 @@ function Layout() {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate("/")
+        navigate("/eventVerwaltung/eventAnsehen")
     }
 
     const handleChange = (event) => {
@@ -80,7 +80,7 @@ function Layout() {
             </div>
             <br/>
             <div className="bcancel">
-                <input type="button" id="cancel" value="Abbrechen - TODO FEHLT EINE OBERSEITE!!" onClick={handleClick}/>
+                <input type="button" id="cancel" value="Abbrechen" onClick={handleClick}/>
             </div>
             <br/>
         </form>

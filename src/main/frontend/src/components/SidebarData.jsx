@@ -26,36 +26,41 @@ export const SidebarData = [
     },
 
     {
+        title: 'Eventverwaltung',
+        path: '/eventVerwaltung',
+        cName: 'nav-text'
+    },
+
+    {
         title: 'Event anlegen',
-        path: '/eventAnlegen',
+        path: '/eventVerwaltung/eventAnlegen',
         icon: <MdIcons.MdOutlineCreate/>,
         cName: 'nav-text'
     },
 
     {
+        title: 'Event ansehen',
+        path: '/eventVerwaltung/eventAnsehen',
+        icon: <AiIcons.AiFillEye/>,
+        cName: 'nav-text'
+    },
+
+    {
         title: 'Event bearbeiten',
-        path: '/eventBearbeiten',
+        path: 'eventVerwaltung/eventAnsehen/eventBearbeiten',
 
         cName: 'nav-text'
+    },
+
+    {
+        title:  'Teilnehmer',
+        path:   'eventVerwaltung/eventAnsehen/teliEinsehen',
+        cName:  'nav-text'
     },
 
     {
         title: 'Gast einladen',
-        path: '/gastEinladen',
-
-        cName: 'nav-text'
-    },
-
-    {
-        title: 'Subgruppen hinzufügen',
-        path: '/subgruppenHinzufuegen',
-
-        cName: 'nav-text'
-    },
-
-    {
-        title: 'User zu Subgruppe hinzufuegen',
-        path: '/userZuSubgruppeHinzufuegen',
+        path: '/eventVerwaltung/eventAnsehen/teliEinsehen/gastEinladen',
 
         cName: 'nav-text'
     },
@@ -68,9 +73,18 @@ export const SidebarData = [
     },
 
     {
-        title: 'Event ansehen',
-        path: '/eventAnsehen',
-        icon: <AiIcons.AiFillEye/>,
+        title: 'Subgruppen hinzufügen',
+        path: '/eventVerwaltung/eventAnsehen/teliEinsehen/subgruHinz',
+
         cName: 'nav-text'
     },
+
+    {
+        title: 'User zu Subgruppe hinzufuegen',
+        path: '/eventVerwaltung/eventAnsehen/teliEinsehen/uZuSub',
+
+        cName: 'nav-text'
+    },
+
+
 ]
