@@ -1,11 +1,9 @@
 package Eventverwaltung.Event.entity;
 
 import Eventverwaltung.Event.entity.internal.Event;
-import Eventverwaltung.Teilnehmer.entity.internal.User;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Collection;
 
 public class EventTO implements Serializable {
     private int EventId;

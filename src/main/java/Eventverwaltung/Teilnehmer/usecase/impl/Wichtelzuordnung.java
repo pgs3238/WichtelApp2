@@ -15,35 +15,44 @@ public class Wichtelzuordnung implements IWichtelzuordnung{
     User_EventDAO user_eventDAO;
 
     @Override
-    public Map<UserTO,UserTO> WichtelZulosen(EventTO event){
+    public Map<UserTO,UserTO> WichtelZulosen(EventTO event) {
         Collection<User_Event> teilnehmerByEvent = user_eventDAO.findUserEventByEvent(event);
         Collection<User_Event> wichtelListe = user_eventDAO.findUserEventByEvent(event);
         Map<UserTO, UserTO> zuordnung = new HashMap<>();
 
         //prüft ob das Event schon durchgelost wurde
-        if (istSchonDurchgelost(teilnehmerByEvent)){
+        if (istSchonDurchgelost(teilnehmerByEvent)) {
             return null;
         }
 
         //prüft ob die Subgruppen alle unter 50% der Teilnehmer haben
-        if(!kleineSubgruppen(event)){
+        if (!kleineSubgruppen(event)) {
             return null;
         }
 
         //prüft ob sich mehr als eine Person in dem Event befinden
-        if(teilnehmerByEvent.size() == 1) {
+        if (teilnehmerByEvent.size() == 1) {
             return null;
         }
 
         for (User_Event ue : teilnehmerByEvent) {
-             Optional<User_Event> neuWichtel = teilnehmerByEvent.stream().skip(new Random()
-                     .nextInt(teilnehmerByEvent.size())).findFirst();
-             if (neuWichtel.get().equals(ue) || neuWichtel.get().getSubgruppe().equals(ue.getSubgruppe())) {
+            boolean weiter = false;
 
-             }
+            do {
+                Optional<User_Event> neuWichtel = wichtelListe.stream().skip(new Random()
+                        .nextInt(wichtelListe.size())).findFirst();
+                if (!neuWichtel.get().equals(ue) || !neuWichtel.get().getSubgruppe().equals(ue.getSubgruppe())) {
+              //      zuordnung.put(ue.getUser(), neuWichtel.get().getUser());
+                    wichtelListe.remove(neuWichtel);
+                    ue.setWichtel(neuWichtel.get().getUser());
+                    user_eventDAO.save(ue);
+                    weiter = true;
+                } else weiter = false;
+
+            } while (weiter = false);
+
         }
-
-            return null;
+        return zuordnung;
     }
 
     // sortiert die User nach der Größe der Subgruppe

@@ -2,7 +2,6 @@ import React from "react";
 import * as AiIcons from "react-icons/ai";
 import * as FaIcons from "react-icons/fa";
 import * as MdIcons from "react-icons/md";
-import * as RiIcons from "react-icons/ri";
 
 export const SidebarData = [
     {
@@ -27,81 +26,65 @@ export const SidebarData = [
     },
 
     {
-        title: 'Event Service',
-        path: '/event',
-        cName: 'nav-text',
-        icon: <MdIcons.MdOutlineCreate/>,
-        iconClosed: <RiIcons.RiArrowDownSFill/>,
-        iconOpened: <RiIcons.RiArrowUpSFill/>,
-        subNav: [
-            {
-                title: 'Event anlegen',
-                path: '/eventAnlegen'
-            },
-            {
-                title: 'Event ansehen',
-                path: '/eventAnsehen'
-            },
-            {
-                title: 'Event auswählen',
-                path: '/eventAuswahl'
-            },
-            {
-                title: 'Event bearbeiten',
-                path: '/eventBearbeiten'
-            },
-            {
-                title: 'Teilnehmerliste ansehen',
-                path: '/teilnehmerListeEinsehen'
-            },
-        ]
-    },
-
-    {
-        title: 'Subgruppen Service',
-        path: '/subgruppen',
-        cName: 'nav-text',
-        icon: <MdIcons.MdOutlineCreate/>,
-        iconClosed: <RiIcons.RiArrowDownSFill/>,
-        iconOpened: <RiIcons.RiArrowUpSFill/>,
-        subNav: [
-            {
-                title: 'Subgruppen hinzufügen',
-                path: '/subgruppenHinzufuegen'
-            },
-            {
-                title: 'User zu Subgruppe hinzufügen',
-                path: '/userZuSubgruppeHinzufuegen'
-            }
-        ]
-    },
-
-    {
-        title: 'Message Service',
-        path: '/message',
-        cName: 'nav-text',
-        icon: <MdIcons.MdOutlineCreate/>,
-        iconClosed: <RiIcons.RiArrowDownSFill/>,
-        iconOpened: <RiIcons.RiArrowUpSFill/>,
-        subNav: [
-            {
-                title: 'Einladung versenden',
-                path: '/gastEinladen'
-            },
-            {
-                title: 'Mitteilung an Organisator',
-                path: '/mitteilungAnOrganisator'
-            }
-        ]
-    },
-
-    {
-        title: 'Wichtel starten',
-        path: '/wichtelzuordnungPopup',
-        icon: <MdIcons.MdNotStarted/>,
+        title: 'Eventverwaltung',
+        path: '/eventVerwaltung',
         cName: 'nav-text'
-    }
+    },
 
+    {
+        title: 'Event anlegen',
+        path: '/eventVerwaltung/eventAnlegen',
+        icon: <MdIcons.MdOutlineCreate/>,
+        cName: 'nav-text'
+    },
+
+    {
+        title: 'Event ansehen',
+        path: '/eventVerwaltung/eventAnsehen',
+        icon: <AiIcons.AiFillEye/>,
+        cName: 'nav-text'
+    },
+
+    {
+        title: 'Event bearbeiten',
+        path: 'eventVerwaltung/eventAnsehen/eventBearbeiten',
+
+        cName: 'nav-text'
+    },
+
+    {
+        title:  'Teilnehmer',
+        path:   'eventVerwaltung/eventAnsehen/teliEinsehen',
+        cName:  'nav-text'
+    },
+
+    {
+        title: 'Gast einladen',
+        path: '/eventVerwaltung/eventAnsehen/teliEinsehen/gastEinladen',
+
+        cName: 'nav-text'
+    },
+
+    {
+        title: 'Gast entfernen',
+        path: '/gastEntfernenPopup',
+
+        cName: 'nav-text'
+    },
+
+    {
+        title: 'Subgruppen hinzufügen',
+        path: '/eventVerwaltung/eventAnsehen/teliEinsehen/subgruHinz',
+
+        cName: 'nav-text'
+    },
+
+    {
+        title: 'User zu Subgruppe hinzufuegen',
+        path: '/eventVerwaltung/eventAnsehen/teliEinsehen/uZuSub',
+
+        cName: 'nav-text'
+    },
 
 
 ]

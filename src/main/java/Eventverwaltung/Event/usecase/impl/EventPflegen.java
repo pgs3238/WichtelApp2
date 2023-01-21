@@ -5,17 +5,22 @@ import Eventverwaltung.Event.entity.EventTO;
 import Eventverwaltung.Event.entity.internal.Event;
 import Eventverwaltung.Event.usecase.IEventPflegen;
 
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 //@Transactional
 //@RequestScoped
+@Path("/events")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class EventPflegen implements IEventPflegen {
 
     @Inject
     EventDAO eventDAO;
 
+    @POST
+    @Path("/create")
     @Override
     public void eventAnlegen(EventTO eventTO){
         Event aEvent = new Event();
@@ -23,6 +28,7 @@ public class EventPflegen implements IEventPflegen {
         eventDAO.save(aEvent);
     }
 
+    @POST
     @Override
     public void eventSpeichern(EventTO eventTO){
         Event aEvent = eventDAO.find(eventTO.getEventId());
@@ -35,6 +41,8 @@ public class EventPflegen implements IEventPflegen {
         eventDAO.update(aEvent);
     }
 
+    @POST
+    @Path("/delete")
     @Override
     public void eventLoeschen(EventTO eventTO){
         eventDAO.delete(eventTO.toEvent());

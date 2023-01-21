@@ -1,12 +1,10 @@
 package Eventverwaltung.Event.entity.internal;
 
 import Eventverwaltung.Event.entity.EventTO;
-import Eventverwaltung.Teilnehmer.entity.internal.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Collection;
 
 @Entity
 @Table(name = "wichtel_event")
@@ -59,9 +57,7 @@ public class Event implements Serializable {
         this.name = name;
     }
 
-    public String getRegeln() {
-        return regeln;
-    }
+    public String getRegeln() { return regeln; }
 
     public void setRegeln(String regeln) {
         this.regeln = regeln;

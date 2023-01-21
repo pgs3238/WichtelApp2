@@ -1,26 +1,41 @@
 package Eventverwaltung.Teilnehmer.entity;
 
 import Eventverwaltung.Teilnehmer.entity.internal.User;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 
-public abstract class UserTO implements Serializable {
+public class UserTO implements Serializable {
 
-    int userID;
+    Integer userID;
+    @Length(min = 3)
     String name;
+    @Length(min = 3)
     String vorname;
+    @Email
     String email;
+    @Length(min = 3)
     String passwort;
 
-    public UserTO (int userID, String name, String vorname, String email, String passwort) {
+    public UserTO (Integer userID, String name, String vorname, String email, String passwort) {
         this.userID = userID;
         this.name = name;
         this.vorname = vorname;
         this.email = email;
         this.passwort = passwort;
     }
+    public UserTO() {}
 
-    public abstract User toUser();
+    public User toUser() {
+        User user = new User();
+        user.setId(userID);
+        user.setName(name);
+        user.setVorname(vorname);
+        user.setEmail(email);
+        user.setPassword(passwort);
+        return user;
+    }
 
     public int getUserID() { return userID; }
 
@@ -41,6 +56,4 @@ public abstract class UserTO implements Serializable {
     public String getPasswort() { return passwort; }
 
     public void setPasswort(String passwort) { this.passwort = passwort; }
-
-
 }
