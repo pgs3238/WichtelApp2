@@ -3,9 +3,13 @@ package Eventverwaltung.Event.dao;
 import Eventverwaltung.Event.entity.internal.Event;
 import Eventverwaltung.Teilnehmer.dao.GenericDAO;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
+@Transactional
+@ApplicationScoped
 public class EventDAO extends GenericDAO<Event> {
 
     @Inject

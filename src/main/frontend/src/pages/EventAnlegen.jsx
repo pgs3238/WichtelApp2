@@ -12,9 +12,33 @@ function Layout() {
         setInputs(values => ({...values, [eventName]: value}))
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        alert(inputs);
+
+        alert(JSON.stringify(inputs));
+
+        let query = await fetch("/events/create", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "name": inputs.name,
+                "regeln": inputs.regeln,
+                "deadline": inputs.deadline,
+                "eventdate": inputs.eventdate
+
+            })
+        });
+
+        if (query.status !== 200) {
+            let json = await query.json();
+            alert(JSON.stringify(json));
+            return
+        }
+
+
+        alert("OK");
     }
 
     const [date, setDate] = useState();
@@ -25,50 +49,46 @@ function Layout() {
             <h2>Erstellen Sie ein neues Event:</h2>
             <div className="eventname">
                 <label> Wie soll das Event heißen? </label>
-                &nbsp;
+                &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
                 <input
                     type = "text"
                     placeholder="Eventname"
                     id = "ename"
                     name = "eventName"
-                    value = {inputs.eventName || ""}
                     onChange = {handleChange}
                 />
             </div>
             <br/>
             <div className="eventdatum">
                 <label>Wann soll das Event starten? </label>
-                &emsp;&nbsp;&nbsp;&nbsp;
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
                 <input
-
                     type = "date"
                     onChange = {e=>setDate(e.target.value)}
                 />
-                <p>Gewähltes Datum: {date}</p>
             </div>
-            <div className="eventlocation">
-                <label> Wo findet das Event statt? </label>
-                &nbsp;&nbsp;
+            <br/>
+            <div className="eventregeln">
+                <label> Welche Regeln liegen für das Event vor? </label>
+                &nbsp;
                 <input
                     type="text"
-                    placeholder="Eventlocation"
-                    id = "location"
-                    value = {inputs.eventLocation || ""}
+                    placeholder="Eventregeln"
+                    id = "eventregel"
                     onChange = {handleChange}
                     />
             </div>
             <br/>
             <div className="sstermin">
                 <label> Secret Santa Termin: </label>
-                &emsp;&emsp;&emsp;&emsp;&emsp;
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
                 <input
                     type = "date"
                     onChange = {e=>setDate(e.target.value)}
                 />
-                <p>Gewähltes Datum: {date}</p>
             </div>
             <div className="bsave">
-                <button>Event speichern</button>
+                <input type="submit" id="saveevent" value="Event speichern"/>
             </div>
             <br/>
             <div className="bcancel">
