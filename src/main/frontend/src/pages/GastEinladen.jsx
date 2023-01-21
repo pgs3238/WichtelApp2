@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import './GastEinladen.css'
 
 function Layout () {
 
@@ -16,46 +17,40 @@ function Layout () {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <h1>GastEinladen</h1>
-
-            <label>E-Mail:
-                &emsp;&emsp;
-            </label>
-
+            <h1>Secret Santa</h1>
+            <h2>Gäste Einladen</h2>
             <br/>
-
-
-            <input
-                type = "text"
-                placeholder= ""
-                id = "email"
-                name = "email"
-                value = {inputs.email || ""}
-                onChange = {handleChange}
-            />
-
-            <br/><br/>
-
-            <input
-                type="submit"
-                id="emailZuListe"
-                value="E-Mail zu Liste"/>
-
+            <div className="hier">
+                <label> HIER FEHLT EINE LISTE</label>
+            </div>
             <br/>
+            <div className="email">
+                <label>E-Mail: </label>
+                &emsp;
+                <input
+                    type = "text"
+                    placeholder= ""
+                    id = "email"
+                    name = "email"
+                    onChange = {handleChange}
+                />
+            </div>
             <br/>
-
-            <input
-                type="submit"
-                id="zurueck"
-                value="Zurueck"/>
-            &emsp;&emsp;
-
-            <input
-                type="submit"
-                id="listeEinladen"
-                value="Liste einladen"/>
-
-
+            <div className="submit">
+                <input type="submit" id="emailZuListe" value="E-Mail hinzufügen"/>
+                &nbsp;&nbsp;
+                <input type="submit" id="emailausListe" value="E-Mail Löschen"/>
+            </div>
+            <br/>
+            <div className="listeEinladen">
+                <input type="submit" id="listeEinladen" value="Liste einladen"/>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+            </div>
+            <br/>
+            <div className="abbrechen">
+                <input type="submit" id="abbrechen" value="Abbrechen"/>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+            </div>
         </form>
 
     );
