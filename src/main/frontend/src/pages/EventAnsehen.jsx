@@ -8,11 +8,15 @@ function Layout () {
     const navigate = useNavigate();
 
     const abbrechenClick = () => {
-        navigate("/eventVerwaltung")
+        navigate("/eventVerwaltung");
     }
 
     const zuTeilnehmer = () => {
-        navigate("/eventVerwaltung/eventAnsehen/teliEinsehen")
+        navigate("/eventVerwaltung/eventAnsehen/teliEinsehen");
+    }
+
+    const wichtelzuOrdnung = () => {
+        navigate("/");
     }
 
     const handleSubmit = (event) => {
@@ -32,60 +36,72 @@ function Layout () {
             <h1>Secret Santa</h1>
             <h2>Alle Events:</h2>
             <div className="eventTable">
-                <table>
-                    <tr>
-                        <th>
-                            Name
-                        </th>
-                        <th>
-                            Regeln
-                        </th>
-                        <th>
-                            Start des Events
-                        </th>
-                        <th>
-                            Deadline
-                        </th>
-                    </tr>
-                    <tr>
-                        <col>
-                            {}
-                        </col>
-                        <col>
-                            {}
-                        </col>
-                        <col>
-                            {}
-                        </col>
-                        <col>
-                            {}
-                        </col>
-                    </tr>
-
-                </table>
+                <center>
+                    <table>
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Regeln
+                            </th>
+                            <th>
+                                Start des Events
+                            </th>
+                            <th>
+                                Deadline
+                            </th>
+                        </tr>
+                        <tr>
+                            <col>
+                                {}
+                            </col>
+                            <col>
+                                {}
+                            </col>
+                            <col>
+                                {}
+                            </col>
+                            <col>
+                                {}
+                            </col>
+                        </tr>
+                    </table>
+                </center>
             </div>
+
+
+
+            <br/>
+            <div className="eventedit">
+                <input type="submit" id="adduser" value="Bearbeiten"/>
+                <input type="submit" id="adduser" value="Teilnehmer Anzeigen" onClick={zuTeilnehmer}/>
+            </div>
+            <br/>
+            <div className="zuordnungcancel">
+                <input type="submit" id="adduser" value="Wichtelzuordnung starten" onClick={wichtelzuOrdnung}/>
+                <input type="submit" id="adduser" value="Abbrechen" onClick={abbrechenClick}/>
+            </div>
+            <br/>
+
+
+
 
             <div className="eventdatum">
                 <label>Das Event findet statt am: </label>
                 %EVENTDATUM%
             </div>
-
             <br/>
-
             <div className="eventlocation">
                 <label> bei </label>
                 %EVENTLOCATION%
             </div>
-
             <br/>
-
             <div className="eventverteilungdatum">
                 <label>Wichtel werden verteilt am:  </label>
-                 %EVENTVERTEILUNGDATUM%
+                %EVENTVERTEILUNGDATUM%
             </div>
-
             <br/>
-
             <div className="eventRegeln">
                 <label> Weitere Regeln: </label>
                 <br/>
@@ -94,28 +110,21 @@ function Layout () {
                     placeholder="(Optonal) EventRegeln hier eingeben"
                     id = "eventRegeln"
                     name="eventRegeln"
-                    value = {inputs.eventRegeln || ""}
                     onChange = {handleChange}
                 />
             </div>
 
-            <br/>
 
-            <div className="eventedit">
-                <input type="submit" id="adduser" value="Bearbeiten"/>
-            </div>
-            <br/>
-            <div className="zuordnungstart">
-                <input type="submit" id="adduser" value="Wichtelzuordnung starten??? richtiger ort?"/>
-            </div>
-            <br/>
-            <div className="eventcancel">
-                <input type="submit" id="adduser" value="Abbrechen" onClick={abbrechenClick}/>
-            </div>
-            <br/>
-            <div className="teilnehmerlist">
-                <input type="submit" id="adduser" value="Teilnehmer Anzeigen" onClick={zuTeilnehmer}/>
-            </div>
+
+
+
+
+
+
+
+
+
+
         </form>
     );
 }

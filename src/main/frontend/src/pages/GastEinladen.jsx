@@ -1,9 +1,15 @@
 import React, {useState} from "react";
 import './GastEinladen.css'
+import {useNavigate} from "react-router-dom";
 
 function Layout () {
 
     const [inputs, setInputs] = useState ({});
+    const navigate = useNavigate();
+
+    const abbrechen = () => {
+        navigate("/eventVerwaltung/eventAnsehen/teliEinsehen");
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault ();
@@ -48,7 +54,7 @@ function Layout () {
             </div>
             <br/>
             <div className="abbrechen">
-                <input type="submit" id="abbrechen" value="Abbrechen"/>
+                <input type="submit" id="abbrechen" value="Abbrechen" onClick={abbrechen}/>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
             </div>
         </form>
