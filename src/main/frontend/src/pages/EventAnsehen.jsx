@@ -1,9 +1,19 @@
 import React, {useState} from 'react';
 import './EventAnsehen.css'
+import {useNavigate} from "react-router-dom";
 
 function Layout () {
 
     const [inputs, setInputs] = useState ({});
+    const navigate = useNavigate();
+
+    const abbrechenClick = () => {
+        navigate("/eventVerwaltung")
+    }
+
+    const zuTeilnehmer = () => {
+        navigate("/eventVerwaltung/eventAnsehen/teliEinsehen")
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault ();
@@ -92,29 +102,21 @@ function Layout () {
             <br/>
 
             <div className="eventedit">
-                <button>bearbeiten</button>
+                <input type="submit" id="adduser" value="Bearbeiten"/>
             </div>
-
             <br/>
-
             <div className="zuordnungstart">
-                <button>Wichtelzuordnung starten</button>
+                <input type="submit" id="adduser" value="Wichtelzuordnung starten??? richtiger ort?"/>
             </div>
-
             <br/>
-
             <div className="eventcancel">
-                <button>Abbrechen</button>
+                <input type="submit" id="adduser" value="Abbrechen" onClick={abbrechenClick}/>
             </div>
-
             <br/>
-
             <div className="teilnehmerlist">
-                <button>Teilnehmerliste</button>
+                <input type="submit" id="adduser" value="Teilnehmer Anzeigen" onClick={zuTeilnehmer}/>
             </div>
-
         </form>
-
     );
 }
 
