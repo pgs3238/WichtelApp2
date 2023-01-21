@@ -40,8 +40,8 @@ export const SidebarData = [
     },
 
     {
-        title: 'Gast entfernen',
-        path: '/gastEntfernenPopup',
+        title: 'Gast einladen',
+        path: '/gastEinladen',
 
         cName: 'nav-text'
     },

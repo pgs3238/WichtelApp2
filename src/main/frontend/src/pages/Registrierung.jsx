@@ -1,9 +1,15 @@
 
 import React, {useState} from 'react';
 import './Registrierung.css'
+import {useNavigate} from "react-router-dom";
 
 function Layout() {
     const [inputs, setInputs] = useState({});
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate("/anmelden");
+    }
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -42,6 +48,8 @@ function Layout() {
 
         alert("OK")
     }
+
+
     return (
         <form onSubmit={handleSubmit}>
             <h1>Secret Santa</h1>
@@ -108,6 +116,10 @@ function Layout() {
             <br/>
             <div className="register">
                 <input type="submit" id="adduser" value="Registrieren"/>
+            </div>
+            <br/>
+            <div className="bcancel">
+                <input type="button" id="cancel" value="Abbrechen" onClick={handleClick}/>
             </div>
         </form>
     );

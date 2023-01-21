@@ -2,9 +2,15 @@
 import React, {useState} from 'react';
 
 import './EventAnlegen.css'
+import {useNavigate} from "react-router-dom";
 
 function Layout() {
     const [inputs, setInputs] = useState({});
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate("/")
+    }
 
     const handleChange = (event) => {
         const eventName = event.target.eventName;
@@ -40,6 +46,7 @@ function Layout() {
 
         alert("OK");
     }
+
 
     const [date, setDate] = useState();
 
@@ -92,7 +99,8 @@ function Layout() {
             </div>
             <br/>
             <div className="bcancel">
-                <button>Abbrechen</button>
+
+                <input type="button" id="cancel" value="Abbrechen - TODO FEHLT EINE OBERSEITE!!" onClick={handleClick}/>
             </div>
             <br/>
 
