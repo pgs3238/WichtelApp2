@@ -21,7 +21,7 @@ public class TeilnehmerPflegen implements ITeilnehmerPflegen {
 
     @Override
     public void teilnehmerInEvent(UserTO teilnehmer, EventTO event){
-        User_Event user_event = new User_Event(teilnehmer.toUser(), event.toEvent(), "Gast");
+        User_Event user_event = new User_Event(teilnehmer.toUser(), event.toEvent());
         user_eventDAO.save(user_event);
     }
 }

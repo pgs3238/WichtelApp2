@@ -10,10 +10,11 @@ public class EventTO implements Serializable {
     private String name;
     private String regeln;
     private LocalDateTime deadline;
+    private String ort;
     private LocalDateTime eventDate;
 
     public Event toEvent(){
-        Event event = new Event(this.EventId, this.name,this.regeln,this.deadline,this.eventDate);
+        Event event = new Event(this.EventId, this.name,this.regeln,this.deadline,this.ort, this.eventDate);
         return event;
     }
 
@@ -59,4 +60,11 @@ public class EventTO implements Serializable {
         this.eventDate = eventDate;
     }
 
+    public String getOrt() {
+        return ort;
+    }
+
+    public void setOrt(String ort) {
+        this.ort = ort;
+    }
 }

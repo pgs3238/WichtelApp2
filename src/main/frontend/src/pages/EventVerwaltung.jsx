@@ -16,6 +16,10 @@ function Layout() {
         navigate("/eventVerwaltung/eventAnsehen");
     }
 
+    const email = () => {
+        navigate("/fehlt");
+    }
+
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -31,16 +35,20 @@ function Layout() {
             <h1>Secret Santa</h1>
             <h2>Eventverwaltung</h2>
             <br/>
-            <div className="eventanlegen">
-                <label>Neues Event Anlegen: </label>
-                &emsp;
-                <input type="button" id="eventanlegen" value="EventAnlegen" onClick={eventAnlegen}/>
+            <div className="hier">
+                <label>Hier fehlt eine Tabelle Aller Events an denen der Benutzer zugriff hat...</label>
             </div>
             <br/>
             <div className="eventansehen">
-                <label>Alle Events Ansehen: </label>
+                <input type="submit" id="eventansehen" value="An Event teilnehmen"/>
                 &emsp;
-                <input type="button" id="eventansehen" value="EventAnsehen" onClick={eventAnsehen}/>
+                <input type="button" id="eventansehen" value="E-Mail an Eventverwalter" onClick={email}/>
+            </div>
+            <br/>
+            <div className="eventanlegen">
+                <input type="button" id="eventanlegen" value="Event Anlegen" onClick={eventAnlegen}/>
+                &emsp;&emsp;&emsp;&emsp;
+                <input type="button" id="eventansehen" value="Eigene Events anzeigen" onClick={eventAnsehen}/>
             </div>
         </form>
 

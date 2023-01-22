@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class UserTO implements Serializable {
 
-    Integer userID;
+    //Integer userID;
     @Length(min = 3)
     String name;
     @Length(min = 3)
@@ -18,18 +18,24 @@ public class UserTO implements Serializable {
     @Length(min = 3)
     String passwort;
 
-    public UserTO (Integer userID, String name, String vorname, String email, String passwort) {
-        this.userID = userID;
+    public UserTO() {}
+
+    public UserTO(String email){
+        this.email = email;
+    }
+
+    public UserTO (String name, String vorname, String email, String passwort) {
         this.name = name;
         this.vorname = vorname;
         this.email = email;
         this.passwort = passwort;
     }
-    public UserTO() {}
+
+
+
 
     public User toUser() {
         User user = new User();
-        user.setId(userID);
         user.setName(name);
         user.setVorname(vorname);
         user.setEmail(email);
@@ -37,9 +43,9 @@ public class UserTO implements Serializable {
         return user;
     }
 
-    public int getUserID() { return userID; }
+   /* public int getUserID() { return userID; }
 
-    public void setUserID(int userID) { this.userID = userID; }
+    public void setUserID(int userID) { this.userID = userID; }*/
 
     public String getName() { return  name; }
 

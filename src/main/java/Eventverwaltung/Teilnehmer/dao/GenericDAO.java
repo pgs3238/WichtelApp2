@@ -59,6 +59,10 @@ public abstract class GenericDAO<T> {
         return em.find(entityClass, entityId);
     }
 
+    public T findem(String entityemail) {
+        return em.find(entityClass, entityemail);
+    }
+
     @SuppressWarnings({"unchecked", "rawtypes"})
     public List<T> findAll() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();

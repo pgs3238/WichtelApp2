@@ -8,7 +8,6 @@ import {useNavigate} from "react-router-dom";
 
 function Layout() {
     const [inputs, setInputs] = useState({});
-    const [date, setDate] = useState();
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -23,7 +22,9 @@ function Layout() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        alert(inputs);
+        alert(JSON.stringify(inputs));
+
+
     }
 
     return (
@@ -47,9 +48,9 @@ function Layout() {
                 <label>Wann soll das Event starten? </label>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
                 <input
-                    type="date"
+                    type="datetime-local"
                     name="eventDate"
-                    onChange= {e=>setDate(e.target.value)}
+                    onChange= {handleChange}
                 />
             </div>
             <br/>
@@ -65,13 +66,24 @@ function Layout() {
                 />
             </div>
             <br/>
+            <div className="ort">
+                <label> Wo findet Secret Santa statt: </label>
+                <input
+                    type="text"
+                    placeholder="Ort"
+                    id="ort"
+                    name="eventOrt"
+                    onChange={handleChange}
+                />
+            </div>
+            <br/>
             <div className="sstermin">
                 <label> Secret Santa Termin: </label>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
                 <input
-                    type="date"
+                    type="datetime-local"
                     name="eventDeadline"
-                    onChange= {e=>setDate(e.target.value)}
+                    onChange= {handleChange}
                 />
             </div>
             <br/>

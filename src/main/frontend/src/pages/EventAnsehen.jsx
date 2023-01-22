@@ -75,11 +75,13 @@ function Layout () {
             <br/>
             <div className="eventedit">
                 <input type="submit" id="adduser" value="Bearbeiten"/>
+                &emsp;&emsp;
                 <input type="submit" id="adduser" value="Teilnehmer Anzeigen" onClick={zuTeilnehmer}/>
             </div>
             <br/>
             <div className="zuordnungcancel">
                 <input type="submit" id="adduser" value="Wichtelzuordnung starten" onClick={wichtelzuOrdnung}/>
+                &nbsp;&nbsp;
                 <input type="submit" id="adduser" value="Abbrechen" onClick={abbrechenClick}/>
             </div>
             <br/>

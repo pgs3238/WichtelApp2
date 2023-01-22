@@ -7,8 +7,10 @@ import Eventverwaltung.Teilnehmer.facade.IRegistrieren;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-import javax.validation.constraints.Positive;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -25,9 +27,9 @@ public class Registrieren implements IRegistrieren {
     @Path("/delete")
     @SuppressWarnings("unused")
     @Override
-    public boolean userLoeschen(@QueryParam("nummer") @Positive int nummer) {
-        User aUser = userDAO.find(nummer);
-       //  TODO System.out.println("User "+aUser.getEmail()+" gefunden zum Loeschen");
+    public boolean userLoeschen(String email) {
+        User aUser = userDAO.findem(email);
+        //System.out.println("User "+aUser.getEmail()+" gefunden zum Loeschen");
         if (aUser == null) {
             return Boolean.FALSE;
         } else {
@@ -55,9 +57,9 @@ public class Registrieren implements IRegistrieren {
     // @PermitAll
     @Override
     public boolean userSpeichern(@Valid UserTO userTO) {
-        System.out.println(userTO.toString());
+        //System.out.println(userTO.toString());
 
-        User aUser = userDAO.find(userTO.getUserID());
+        User aUser = userDAO.findem(userTO.getEmail());
         aUser.setVorname(userTO.getVorname());
         aUser.setName(userTO.getName());
         aUser.setEmail(userTO.getEmail());
