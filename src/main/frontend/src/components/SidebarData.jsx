@@ -28,7 +28,15 @@ export const SidebarData = [
     {
         title: 'Eventverwaltung',
         path: '/eventVerwaltung',
+        icon: <MdIcons.MdManageAccounts/>,
         cName: 'nav-text'
+    },
+
+    {
+      title: 'Message Service',
+      path: '/messageService',
+      icon: <AiIcons.AiOutlineMessage/>,
+      cName: 'nav-text'
     },
 
     {

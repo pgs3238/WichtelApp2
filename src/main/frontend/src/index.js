@@ -29,6 +29,7 @@ import Anmelden from "./pages/Anmelden";
 import * as PropTypes from "prop-types";
 import Events from "./pages/EventVerwaltung";
 import EventVerwaltung from "./pages/EventVerwaltung";
+import MessageService from "./pages/MessageService";
 
 
 //alter code - darunter neuer code
@@ -80,6 +81,10 @@ export default function Apps() {
                     <Route path="eventVerwaltung/eventAnsehen/teliEinsehen/uZuSub" element={<UserZuSubgruppeHinzufuegen />} />
                     <Route path="wichtelZuordnungPopup" element={<WichtelzuordnungPopup />} />
                     <Route path="*" element={<NoPage />} />
+
+                    <Route path="messageService" element={<MessageService/>} />
+                    <Route path="messageService/gastEinladen" element={<GastEinladen/>} />
+                    <Route path="messageService/mitteilungAnOrganisator" element={<MitteilungAnOrganisator/>} />
                 </Route>
             </Routes>
         </BrowserRouter>

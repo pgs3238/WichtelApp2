@@ -32,7 +32,7 @@ function Layout() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h1>Secret Santa</h1>
+
             <h2>Eventverwaltung</h2>
             <br/>
             <div className="hier">
@@ -40,7 +40,10 @@ function Layout() {
             </div>
             <br/>
             <div className="eventansehen">
-                <input type="submit" id="eventansehen" value="An Event teilnehmen"/>
+                <input
+                    type="submit"
+                    id="eventansehen"
+                    value="An Event teilnehmen"/>
                 &emsp;
                 <input type="button" id="eventansehen" value="E-Mail an Eventverwalter" onClick={email}/>
             </div>

@@ -6,7 +6,7 @@ function Layout() {
 
     return (
         <div>
-        <h1>Secret Santa</h1>
+
         <br/>
         <h2>Was ist Secret Santa?</h2>
 
