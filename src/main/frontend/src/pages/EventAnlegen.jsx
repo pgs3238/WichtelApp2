@@ -51,8 +51,10 @@ function Layout() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h1>Secret Santa</h1>
+
             <h2>Erstellen Sie ein neues Event:</h2>
+            <br/>
+            <br/>
             <div className="eventname">
                 <label> Wie soll das Event heißen? </label>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;

@@ -35,6 +35,8 @@ function Layout () {
         <form onSubmit={handleSubmit}>
 
             <h2>Alle Events:</h2>
+            <br/>
+            <br/>
             <div className="eventTable">
                 <center>
                     <table>

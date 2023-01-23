@@ -18,10 +18,10 @@ function Layout() {
 
         return (
             <form onSubmit={handleSubmit}>
-                <h1>User zu Subgruppen hinzufügen</h1>
+                <h2>User zu Subgruppen hinzufügen</h2>
 
                 <br/>
-
+                <br/>
                 <th>[gewählten User] hinzufügen zu</th>
 
                 <br/>

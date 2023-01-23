@@ -13,7 +13,7 @@ function Layout() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h1>Secret Santa</h1>
+
             <h2>Eventübersicht</h2>
 
 

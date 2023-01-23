@@ -52,8 +52,10 @@ function Layout() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h1>Secret Santa</h1>
+
             <h2>Register</h2>
+            <br/>
+            <br/>
             <div className="name">
                 <label>Vorname: </label>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;

@@ -35,6 +35,7 @@ function Layout() {
 
             <h2>Eventverwaltung</h2>
             <br/>
+            <br/>
             <div className="hier">
                 <label>Hier fehlt eine Tabelle Aller Events an denen der Benutzer zugriff hat...</label>
             </div>

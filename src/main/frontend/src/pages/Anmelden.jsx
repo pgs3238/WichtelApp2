@@ -28,9 +28,10 @@ function Layout() {
     return (
 
         <form onSubmit={handleSubmit}>
-            <h1>Secret Santa</h1>
-            <h2>Login</h2>
 
+            <h2>Login</h2>
+            <br/>
+            <br/>
             <div className="email">
                 <label> E-Mail-Adresse: </label>
                 &nbsp;

@@ -12,8 +12,8 @@ function Layout() {
 
     return (
         <form>
-            <h1>Mitteilung an den Organisator versenden</h1>
-
+            <h2>Mitteilung an den Organisator versenden</h2>
+            <br/>
             <br/>
 
             <input
