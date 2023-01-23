@@ -31,7 +31,7 @@ public class UserDAO extends GenericDAO<User> {
 
 
     public void delete(User aUser) {
-        super.delete(aUser.getId(),User.class);
+        super.delete(aUser.getEmail(), User.class);
     }
 
 

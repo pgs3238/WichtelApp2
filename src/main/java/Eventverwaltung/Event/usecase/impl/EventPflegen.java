@@ -29,6 +29,7 @@ public class EventPflegen implements IEventPflegen {
     }
 
     @POST
+    @Path("overwrite")
     @Override
     public void eventSpeichern(EventTO eventTO){
         Event aEvent = eventDAO.find(eventTO.getEventId());
@@ -36,6 +37,7 @@ public class EventPflegen implements IEventPflegen {
         aEvent.setName(eventTO.getName());
         aEvent.setRegeln(eventTO.getRegeln());
         aEvent.setEventDate(eventTO.getEventDate());
+        aEvent.setOrt((eventTO.getOrt()));
         aEvent.setDeadline(eventTO.getDeadline());
 
         eventDAO.update(aEvent);

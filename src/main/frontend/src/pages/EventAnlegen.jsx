@@ -13,9 +13,9 @@ function Layout() {
     }
 
     const handleChange = (event) => {
-        const eventName = event.target.eventName;
+        const name = event.target.name;
         const value = event.target.value;
-        setInputs(values => ({...values, [eventName]: value}))
+        setInputs(values => ({...values, [name]: value}))
     }
 
     const handleSubmit = async (event) => {
@@ -32,6 +32,7 @@ function Layout() {
                 "name": inputs.eventName,
                 "regeln": inputs.eventRegeln,
                 "deadline": inputs.eventDeadline,
+                "ort": inputs.eventOrt,
                 "eventDate": inputs.eventDate
 
             })
@@ -47,8 +48,6 @@ function Layout() {
         alert("OK");
     }
 
-
-    const [date, setDate] = useState();
 
     return (
         <form onSubmit={handleSubmit}>
@@ -70,9 +69,9 @@ function Layout() {
                 <label>Wann soll das Event starten? </label>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
                 <input
-                    type = "date"
+                    type = "datetime-local"
                     name = "eventDate"
-                    onChange = {e=>setDate(e.target.value)}
+                    onChange = {handleChange}
                 />
             </div>
             <br/>
@@ -88,13 +87,24 @@ function Layout() {
                 />
             </div>
             <br/>
+            <div className="ort">
+                <label> Wo findet Secret Santa statt: </label>
+                <input
+                    type="text"
+                    placeholder="Ort"
+                    id="ort"
+                    name="eventOrt"
+                    onChange={handleChange}
+                />
+            </div>
+            <br/>
             <div className="sstermin">
                 <label> Secret Santa Termin: </label>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
                 <input
-                    type = "date"
+                    type = "datetime-local"
                     name = "eventDeadline"
-                    onChange = {e=>setDate(e.target.value)}
+                    onChange = {handleChange}
                 />
             </div>
             <div className="bsave">
@@ -102,12 +112,9 @@ function Layout() {
             </div>
             <br/>
             <div className="bcancel">
-
                 <input type="button" id="cancel" value="Abbrechen" onClick={handleClick}/>
             </div>
             <br/>
-
-
         </form>
     );
 }

@@ -1,21 +1,19 @@
-.email {
+.hier {
     text-align: center;
 }
 
-.passwort {
-    text-align: center;
-
-}
-
-.anmeldenBT{
-    text-align: center;
-
-}
-
-.pwvergessenBT{
+.gastsub {
     text-align: center;
 }
 
-.kontoanlegen{
+.gastzusubgr {
+    text-align: center;
+}
+
+.gastaussubgrent {
+    text-align: center;
+}
+
+.abbrechen {
     text-align: center;
 }

@@ -16,13 +16,16 @@ public class Event implements Serializable {
     private String name;
     private String regeln;
     private LocalDateTime deadline;
+
+    private String ort;
     private LocalDateTime eventDate;
 
-    public Event(int eventId, String name, String regeln, LocalDateTime deadline, LocalDateTime eventDate) {
+    public Event(int eventId, String name, String regeln, LocalDateTime deadline, String ort, LocalDateTime eventDate) {
         EventId = eventId;
         this.name = name;
         this.regeln = regeln;
         this.deadline = deadline;
+        this.ort = ort;
         this.eventDate = eventDate;
     }
 
@@ -37,6 +40,7 @@ public class Event implements Serializable {
         eventTO.setName(this.name);
         eventTO.setRegeln(this.regeln);
         eventTO.setEventDate(this.eventDate);
+        eventTO.setOrt(this.ort);
         eventTO.setDeadline(this.deadline);
         return eventTO;
     }
@@ -79,4 +83,11 @@ public class Event implements Serializable {
         this.eventDate = eventDate;
     }
 
+    public String getOrt() {
+        return ort;
+    }
+
+    public void setOrt(String ort) {
+        this.ort = ort;
+    }
 }

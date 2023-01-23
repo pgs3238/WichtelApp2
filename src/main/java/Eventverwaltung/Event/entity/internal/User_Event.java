@@ -10,7 +10,6 @@ import Eventverwaltung.Teilnehmer.entity.internal.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
 
 @Entity
 @Table(name = "wichtel_user_event")
@@ -25,10 +24,9 @@ public class User_Event implements Serializable {
     public User_Event() {
     }
 
-    public User_Event(User user, Event event, String rolle) {
+    public User_Event(User user, Event event) {
         this.user = user;
         this.event = event;
-        this.rolle = rolle;
     }
 
     @Id
@@ -49,8 +47,6 @@ public class User_Event implements Serializable {
     @ManyToOne
     private User wichtel;
 
-    @Column(name = "rolle")
-    private String rolle;
 
     public int getUser_event_id() {
         return user_event_id;
@@ -92,11 +88,4 @@ public class User_Event implements Serializable {
         this.wichtel = wichtel;
     }
 
-    public String getRolle() {
-        return rolle;
-    }
-
-    public void setRolle(String rolle) {
-        this.rolle = rolle;
-    }
 }

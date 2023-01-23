@@ -21,7 +21,5 @@ public class EventDAO extends GenericDAO<Event> {
         super.delete(event.getEventId(),Event.class);
     }
 
-    public Event find(int eventid){
-        return super.find(eventid);
-    }
+    public Event find(int eventid){ return super.find(eventid); }
 }

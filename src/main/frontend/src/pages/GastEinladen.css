@@ -2,20 +2,14 @@
     text-align: center;
 }
 
-.passwort {
-    text-align: center;
-
-}
-
-.anmeldenBT{
-    text-align: center;
-
-}
-
-.pwvergessenBT{
+.submit {
     text-align: center;
 }
 
-.kontoanlegen{
+.listeEinladen {
+    text-align: center;
+}
+
+.abbrechen {
     text-align: center;
 }

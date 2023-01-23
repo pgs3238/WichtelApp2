@@ -1,21 +1,20 @@
-.email {
+.explanation {
     text-align: center;
 }
 
-.passwort {
-    text-align: center;
-
-}
-
-.anmeldenBT{
-    text-align: center;
-
-}
-
-.pwvergessenBT{
+.hier {
     text-align: center;
 }
 
-.kontoanlegen{
+.neueSubgruppe {
     text-align: center;
 }
+
+.hinzufuegenloeschen {
+    text-align: center;
+}
+
+.abbrechen {
+    text-align: center;
+}
+
