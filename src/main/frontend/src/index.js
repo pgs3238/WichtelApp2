@@ -30,6 +30,7 @@ import * as PropTypes from "prop-types";
 import Events from "./pages/EventVerwaltung";
 import EventVerwaltung from "./pages/EventVerwaltung";
 import MessageService from "./pages/MessageService";
+import SubgruppenService from "./pages/SubgruppenService";
 
 
 //alter code - darunter neuer code
@@ -85,6 +86,10 @@ export default function Apps() {
                     <Route path="messageService" element={<MessageService/>} />
                     <Route path="messageService/gastEinladen" element={<GastEinladen/>} />
                     <Route path="messageService/mitteilungAnOrganisator" element={<MitteilungAnOrganisator/>} />
+
+                    <Route path="subgruppenService" element={<SubgruppenService/>} />
+                    <Route path="subgruppenService/subgruppenHinzufuegen" element={<SubgruppenHinzufuegen/>} />
+
                 </Route>
             </Routes>
         </BrowserRouter>
