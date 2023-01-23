@@ -1,5 +1,6 @@
 
 import React, {useState} from 'react';
+import './MitteilungAnOrganisator.css'
 
 
 function Layout() {
@@ -16,30 +17,36 @@ function Layout() {
             <br/>
             <br/>
 
-            <input
-                type = "email"
-                placeholder = "An: E-Mail-Adresse"
-                name = "email"
-                value = ""
-                onChange = {changeHandler}
-
-            />
-
+            <div classeName="anAdresse">
+                <h4 className="a">Geben Sie die Empfänger-Adresse ein:</h4>
+                <input className="adressfeld"
+                    type = "email"
+                    placeholder = "E-Mail-Adresse"
+                    name = "email"
+                    value = ""
+                    onChange = {changeHandler}/>
+            </div>
             <br/>
 
-            <input
+            <div className="message">
+                <h4 className="b">Geben Sie hier die Mitteilung ein:</h4>
+            <input className="messageFeld"
                 type = "text"
                 placeholder = "Nachricht"
                 name = "name"
                 value = ""
-                onChange = {changeHandler}
-            />
+                onChange = {changeHandler}/>
+            </div>
 
             <br/>
             <br/>
 
-            <input type="submit" id="senden" value="Senden"/>
-
+            <div className="mitteilungSenden">
+            <input
+                type="button"
+                id="senden"
+                value="Senden"/>
+            </div>
         </form>
     );
 }

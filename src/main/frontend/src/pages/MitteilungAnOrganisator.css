@@ -1,0 +1,19 @@
+
+.adressfeld {
+    text-align: left;
+    margin-left: 620px;
+    width: 12%;
+}
+
+.messageFeld {
+    text-align: left;
+    width: 60%;
+    height: 70px;
+    margin-left: 270px;
+}
+
+.mitteilungSenden {
+    text-align: center;
+}
+
+
