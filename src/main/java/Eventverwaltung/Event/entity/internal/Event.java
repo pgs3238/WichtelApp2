@@ -1,14 +1,27 @@
 package Eventverwaltung.Event.entity.internal;
 
 import Eventverwaltung.Event.entity.EventTO;
+import Eventverwaltung.Teilnehmer.entity.internal.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "wichtel_event")
+@NamedQuery(name = "User.Event", query = "select owner FROM User owner join Event we on owner.email=we.owner WHERE we.id=:id")
+@NamedQuery(name = "User.Event.teilnehmer", query = "select u FROM User u, IN (u.events) e WHERE e.id=:id")
+//@NamedQuery(name = "User.Event.unregteilnehmer", query = "select u FROM User u, Event e WHERE u in e.user")
+
 public class Event implements Serializable {
+
+    public static final String GET_EVENTOWNER = "User.Event";
+    public static final String GET_USERS = "User.Event.teilnehmer";
+    public static final String GET_GASTE = "User.Event.unregteilnehmer";
+    public static final String GET_SUBSIZE = "User.Event.grupsize";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,18 +33,37 @@ public class Event implements Serializable {
     private String ort;
     private LocalDateTime eventDate;
 
-    public Event(int eventId, String name, String regeln, LocalDateTime deadline, String ort, LocalDateTime eventDate) {
+
+    @JoinColumn(referencedColumnName = "email", nullable = false, table = "wichtel_user")
+    private String owner;
+
+    /*@OneToMany(targetEntity = User.class, cascade=CascadeType.ALL)
+    private List<User> gast;*/
+
+
+    @OneToMany(targetEntity = Subgruppe.class, cascade=CascadeType.ALL, orphanRemoval = true)
+    private List<Subgruppe> subgruppen;
+
+    @ManyToMany(targetEntity = User.class)
+    private Set<User> users = new HashSet<>();
+
+
+
+    public Event(int eventId, String name, String regeln, LocalDateTime deadline, String ort, LocalDateTime eventDate, String owner) {
         EventId = eventId;
         this.name = name;
         this.regeln = regeln;
         this.deadline = deadline;
         this.ort = ort;
         this.eventDate = eventDate;
+        this.owner = owner;
     }
+
 
     public Event(){
 
     }
+
 
     public EventTO toEventTO(){
         EventTO eventTO = new EventTO();
@@ -90,4 +122,36 @@ public class Event implements Serializable {
     public void setOrt(String ort) {
         this.ort = ort;
     }
+
+    public List<Subgruppe> getSubgruppen() {
+        return subgruppen;
+    }
+
+    public void setSubgruppen(List<Subgruppe> subgruppen) {
+        this.subgruppen = subgruppen;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public Set<User> getUser() {
+        return users;
+    }
+
+    public void setUser(Set<User> users) {
+        this.users = users;
+    }
+
+    /*public List<User> getGast() {
+        return gast;
+    }
+
+    public void setGast(List<User> gast) {
+        this.gast = gast;
+    }*/
 }

@@ -5,13 +5,17 @@ import Eventverwaltung.Event.entity.internal.User_Event;
 import Eventverwaltung.Teilnehmer.dao.GenericDAO;
 import Eventverwaltung.Teilnehmer.entity.UserTO;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Transactional
+@ApplicationScoped
 public class User_EventDAO extends GenericDAO<User_Event> {
 
     @Inject
@@ -46,8 +50,6 @@ public class User_EventDAO extends GenericDAO<User_Event> {
     }
     @Override
     public boolean save(User_Event userEvent){
-        super.save(userEvent);
-        //TODO IMPORTANT CHANGE DUE TO BOOLEAN!!!
-        return false;
+        return super.save(userEvent);
     }
 }

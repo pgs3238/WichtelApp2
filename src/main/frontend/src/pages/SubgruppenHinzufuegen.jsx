@@ -12,15 +12,38 @@ function Layout() {
         navigate("/eventVerwaltung/eventAnsehen/teliEinsehen");
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        alert(inputs);
-    }
-
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({...values, [name]: value}))
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        alert(JSON.stringify(inputs));
+        let query = await fetch("/subgruppen/create", {
+            method: "POST",
+            headers: {
+                //"":JSON.parse(document.cookie)["quarkus-credential"],
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                "subgruppeName": inputs.sgruppe
+
+            })
+        });
+
+        if (query.status !== 200) {
+            let json = await query.json();
+            alert(JSON.stringify(json));
+            return
+        }
+
+
+        alert("OK");
+
+
     }
 
     return (

@@ -28,7 +28,7 @@ public class Registrieren implements IRegistrieren {
     @SuppressWarnings("unused")
     @Override
     public boolean userLoeschen(String email) {
-        User aUser = userDAO.findem(email);
+        User aUser = userDAO.findUserByEmail(email);
         //System.out.println("User "+aUser.getEmail()+" gefunden zum Loeschen");
         if (aUser == null) {
             return Boolean.FALSE;
@@ -59,7 +59,7 @@ public class Registrieren implements IRegistrieren {
     public boolean userSpeichern(@Valid UserTO userTO) {
         //System.out.println(userTO.toString());
 
-        User aUser = userDAO.findem(userTO.getEmail());
+        User aUser = userDAO.findUserByEmail(userTO.getEmail());
         aUser.setVorname(userTO.getVorname());
         aUser.setName(userTO.getName());
         aUser.setEmail(userTO.getEmail());

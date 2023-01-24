@@ -2,6 +2,7 @@ package Eventverwaltung.Event.dao;
 
 import Eventverwaltung.Event.entity.internal.Event;
 import Eventverwaltung.Teilnehmer.dao.GenericDAO;
+import Eventverwaltung.Teilnehmer.entity.internal.User;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -21,5 +22,16 @@ public class EventDAO extends GenericDAO<Event> {
         super.delete(event.getEventId(),Event.class);
     }
 
-    public Event find(int eventid){ return super.find(eventid); }
+    public Event find(int eventID){ return super.find(eventID); }
+
+    public boolean addUserToEvent(User user, Event event){
+        event.getUser().add(user);
+        return update(event);
+    }
+
+    public boolean removeUserFromEvent(User user, Event event){
+        event.getUser().remove(user);
+        return update(event);
+    }
+
 }

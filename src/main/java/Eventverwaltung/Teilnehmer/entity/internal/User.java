@@ -1,5 +1,6 @@
 package Eventverwaltung.Teilnehmer.entity.internal;
 
+import Eventverwaltung.Event.entity.internal.Event;
 import io.quarkus.elytron.security.common.BcryptUtil;
 import io.quarkus.security.jpa.Password;
 import io.quarkus.security.jpa.Roles;
@@ -8,12 +9,14 @@ import io.quarkus.security.jpa.Username;
 import org.hibernate.annotations.NamedQuery;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @UserDefinition
 @Table(name = "wichtel_user")
 @NamedQuery(name= "User.findUserByEmail", query = "select u From User u Where u.email= :email")
-@NamedQuery(name = "User.findTeilnehmerVonEvent", query = "select ue.user from User_Event ue WHERE ue.event = :event")
+//@NamedQuery(name = "User.findTeilnehmerVonEvent", query = "select ue.user from User_Event ue WHERE ue.event = :event")
+@NamedQuery(name = "User.findTeilnehmnerVonEvent", query = "select u FROM User u, IN (u.events) e WHERE e.id=:id")
 public class User {
 
     public static final String FIND_BY_EMAIL = "User.findUserByEmail";
@@ -34,6 +37,9 @@ public class User {
     private String vorname;
     @Roles
     private String role = "user";
+
+    @ManyToMany
+    private Set<Event> events;
 
 
     public User() {}
@@ -66,6 +72,21 @@ public class User {
 
     public void setVorname(String vorname) { this.vorname = vorname; }
 
+    public String getRole() {
+        return role;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     /*@Override
     public int hashCode() {

@@ -6,26 +6,28 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class EventTO implements Serializable {
-    private int EventId;
+    private int eventId;
     private String name;
     private String regeln;
     private LocalDateTime deadline;
     private String ort;
     private LocalDateTime eventDate;
 
+    private String owner;
+
     public Event toEvent(){
-        Event event = new Event(this.EventId, this.name,this.regeln,this.deadline,this.ort, this.eventDate);
+        Event event = new Event(this.eventId, this.name,this.regeln,this.deadline,this.ort, this.eventDate, this.owner);
         return event;
     }
 
 
 
     public int getEventId() {
-        return EventId;
+        return eventId;
     }
 
     public void setEventId(int eventId) {
-        EventId = eventId;
+        this.eventId = eventId;
     }
 
     public String getName() {
@@ -66,5 +68,13 @@ public class EventTO implements Serializable {
 
     public void setOrt(String ort) {
         this.ort = ort;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }

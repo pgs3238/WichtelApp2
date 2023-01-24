@@ -1,7 +1,6 @@
 
 package Eventverwaltung.Event.entity;
 
-import Eventverwaltung.Event.entity.internal.Event;
 import Eventverwaltung.Event.entity.internal.Subgruppe;
 
 import java.io.Serializable;
@@ -10,16 +9,16 @@ public class SubgruppeTO implements Serializable {
 
     private int subgruppeId;
     private String subgruppeName;
-    private Event event;
+    private int eventID;
 
-    public SubgruppeTO(int subgruppeId, String subgruppeName, Event event) {
+    public SubgruppeTO(int subgruppeId, String subgruppeName, int eventID) {
         this.subgruppeId = subgruppeId;
         this.subgruppeName = subgruppeName;
-        this.event = event;
+        this.eventID = eventID;
     }
 
     public Subgruppe toSubgruppe(){
-        Subgruppe subgruppe= new Subgruppe(this.subgruppeId,this.subgruppeName,this.event);
+        Subgruppe subgruppe= new Subgruppe(this.subgruppeId,this.subgruppeName,this.eventID);
         return subgruppe;
     }
 
@@ -39,11 +38,11 @@ public class SubgruppeTO implements Serializable {
         this.subgruppeName = subgruppeName;
     }
 
-    public Event getEvent() {
-        return event;
+    public int getEventID() {
+        return eventID;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setEventID(int eventID) {
+        this.eventID = eventID;
     }
 }

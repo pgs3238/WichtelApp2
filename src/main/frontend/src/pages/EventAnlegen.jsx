@@ -26,8 +26,10 @@ function Layout() {
         let query = await fetch("/events/create", {
             method: "POST",
             headers: {
+                //"":JSON.parse(document.cookie)["quarkus-credential"],
                 "Content-Type": "application/json"
             },
+
             body: JSON.stringify({
                 "name": inputs.eventName,
                 "regeln": inputs.eventRegeln,

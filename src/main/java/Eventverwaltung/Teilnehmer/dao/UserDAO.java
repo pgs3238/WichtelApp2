@@ -22,11 +22,7 @@ public class UserDAO extends GenericDAO<User> {
     }
 
     public User findUserByEmail(String email) {
-        Map<String, Object> parameters = new HashMap<>();
-        System.out.println("Email: "+email);
-        parameters.put("email", email);
-
-        return super.findOneResult(User.FIND_BY_EMAIL, parameters);
+        return em.find(User.class,email);
     }
 
 

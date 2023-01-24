@@ -6,8 +6,13 @@ import Eventverwaltung.Event.entity.internal.Event;
 import Eventverwaltung.Event.usecase.IEventPflegen;
 
 import javax.inject.Inject;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
 
 //@Transactional
 //@RequestScoped
@@ -18,18 +23,22 @@ public class EventPflegen implements IEventPflegen {
 
     @Inject
     EventDAO eventDAO;
+    @Context
+    SecurityContext securityContext;
 
     @POST
     @Path("/create")
+    //@RolesAllowed("user")
     @Override
     public void eventAnlegen(EventTO eventTO){
         Event aEvent = new Event();
         aEvent = eventTO.toEvent();
+        //aEvent.setOwner(securityContext.getUserPrincipal().getName());
         eventDAO.save(aEvent);
     }
 
     @POST
-    @Path("overwrite")
+    @Path("/update")
     @Override
     public void eventSpeichern(EventTO eventTO){
         Event aEvent = eventDAO.find(eventTO.getEventId());

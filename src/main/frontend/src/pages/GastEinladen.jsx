@@ -6,14 +6,41 @@ function Layout () {
 
     const [inputs, setInputs] = useState ({});
     const navigate = useNavigate();
+    //TODO URL-ID
+    const id = 1;
 
     const abbrechen = () => {
         navigate("/eventVerwaltung/eventAnsehen/teliEinsehen");
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault ();
-        alert (inputs);
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        alert(JSON.stringify(inputs));
+
+        let query = await fetch("/teilnehmer/einladen", {
+            method: "POST",
+            headers: {
+                //"":JSON.parse(document.cookie)["quarkus-credential"],
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                "id": inputs.id,
+                "email": inputs.email
+
+            })
+        });
+
+        if (query.status !== 200) {
+            let json = await query.json();
+            alert(JSON.stringify(json));
+            return
+        }
+
+
+        alert("OK");
     }
 
     const handleChange = (event) => {
@@ -30,6 +57,11 @@ function Layout () {
             <div className="hier">
                 <label> HIER FEHLT EINE LISTE</label>
             </div>
+            <input
+                type="hidden"
+                name = "id"
+                value = {id}
+            />
             <br/>
             <div className="email">
                 <label>E-Mail: </label>

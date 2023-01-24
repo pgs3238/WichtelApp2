@@ -9,6 +9,8 @@ import {useNavigate} from "react-router-dom";
 function Layout() {
     const [inputs, setInputs] = useState({});
     const navigate = useNavigate();
+    //TODO URL-ID
+    const id = 1;
 
     const handleClick = () => {
         navigate("/eventVerwaltung/eventAnsehen")
@@ -20,9 +22,35 @@ function Layout() {
         setInputs(values => ({...values, [name]: value}))
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         alert(JSON.stringify(inputs));
+        let query = await fetch("/events/update", {
+            method: "POST",
+            headers: {
+                //"":JSON.parse(document.cookie)["quarkus-credential"],
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                "id": inputs.id,
+                "name": inputs.eventName,
+                "regeln": inputs.eventRegeln,
+                "deadline": inputs.eventDeadline,
+                "ort": inputs.eventOrt,
+                "eventDate": inputs.eventDate
+
+            })
+        });
+
+        if (query.status !== 200) {
+            let json = await query.json();
+            alert(JSON.stringify(json));
+            return
+        }
+
+
+        alert("OK");
 
 
     }
@@ -32,6 +60,11 @@ function Layout() {
         <form onSubmit={handleSubmit}>
 
             <h2>Event Bearbeiten:</h2>
+            <input
+                type="hidden"
+                name = "id"
+                value = {id}
+                />
             <div className="eventname">
                 <label> Wie soll das Event heißen? </label>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;

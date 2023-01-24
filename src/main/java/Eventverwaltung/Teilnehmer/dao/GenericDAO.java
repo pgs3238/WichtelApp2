@@ -2,6 +2,7 @@ package Eventverwaltung.Teilnehmer.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ public abstract class GenericDAO<T> {
 
 //    @PersistenceContext(unitName = UNIT_NAME)
 
-    private EntityManager em;
+    protected EntityManager em;
 
     private Class<T> entityClass;
 
@@ -44,7 +45,7 @@ public abstract class GenericDAO<T> {
         }
     }
 
-    protected boolean delete(Object id, Class<T> classe){
+    public boolean delete(Object id, Class<T> classe){
         T entityToBeRemoved = em.getReference(classe, id);
         try {
             em.remove(entityToBeRemoved);
@@ -59,27 +60,24 @@ public abstract class GenericDAO<T> {
         return em.find(entityClass, entityId);
     }
 
-    public T findem(String entityemail) {
-        return em.find(entityClass, entityemail);
-    }
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
+
     public List<T> findAll() {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        CriteriaQuery<T> cq = em.getCriteriaBuilder().createQuery(entityClass);
         cq.select(cq.from(entityClass));
         return em.createQuery(cq).getResultList();
     }
 
-    @SuppressWarnings("unchecked")
-    protected T findOneResult (String namedQuary, Map<String, Object> parameters) {
+
+    protected T findOneResult (String namedQuery, Map<String, Object> parameters) {
         T result = null;
         try {
-            Query query = em.createNamedQuery(namedQuary);
+            TypedQuery<T> query = em.createNamedQuery(namedQuery,entityClass);
             if(parameters != null && !parameters.isEmpty()){
                 populateQueryParameters(query, parameters);
             }
 
-            result = (T) query.getSingleResult();
+            result = query.getSingleResult();
         } catch (Exception e) {
             System.out.println("Fehler bei der Query: " + e.getMessage());
             e.printStackTrace();
@@ -87,20 +85,22 @@ public abstract class GenericDAO<T> {
         return result;
     }
 
-    @SuppressWarnings("unchecked")
+
     protected List<T> findListResult(String namedQuery, Map<String, Object> parameters) {
         List<T> result = null;
         try{
-            Query query = em.createNamedQuery(namedQuery);
+            TypedQuery<T> query = em.createNamedQuery(namedQuery,entityClass);
             if (parameters != null && !parameters.isEmpty()) {
                 populateQueryParameters(query, parameters);
             }
-            result = (List<T>) query.getResultList();
+            result = query.getResultList();
         } catch (Exception e) {
             System.out.println("Fehler bei der Query: " + e.getMessage());
         }
         return result;
     }
+
+
 
     private void populateQueryParameters(Query query, Map<String, Object> parameters) {
         for (Map.Entry<String, Object> entry : parameters.entrySet()) {

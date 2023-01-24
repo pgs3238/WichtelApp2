@@ -1,18 +1,31 @@
 package Eventverwaltung.Teilnehmer.usecase.impl;
 
+import Eventverwaltung.Event.dao.SubgruppeDAO;
 import Eventverwaltung.Event.dao.User_EventDAO;
 import Eventverwaltung.Event.entity.EventTO;
 import Eventverwaltung.Event.entity.SubgruppeTO;
+import Eventverwaltung.Event.entity.internal.Subgruppe;
 import Eventverwaltung.Event.entity.internal.User_Event;
+import Eventverwaltung.Teilnehmer.dao.UserDAO;
 import Eventverwaltung.Teilnehmer.entity.UserTO;
+import Eventverwaltung.Teilnehmer.entity.internal.User;
 import Eventverwaltung.Teilnehmer.usecase.ITeilnehmerZuSubgruppe;
 
 import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
+@Path("/teilnZuSubgruppen")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class TeilnehmerZuSubgruppe implements ITeilnehmerZuSubgruppe {
 
     @Inject
     User_EventDAO user_eventDAO;
+    @Inject
+    UserDAO userDAO;
+    @Inject
+    SubgruppeDAO subgruppeDAO;
 
     @Override
     public void TeilnehmerZuSubgruppe(UserTO user, EventTO event, SubgruppeTO subgruppe){
@@ -22,4 +35,25 @@ public class TeilnehmerZuSubgruppe implements ITeilnehmerZuSubgruppe {
 
         user_eventDAO.update(user_event);
     }
+    @POST
+    @Path("/add")
+    @Override
+    public boolean TeilnehmerZuSubgruppeHinz(@QueryParam("email") String email, @QueryParam("subgruppeId") int subgruppeId) {
+        User user = userDAO.findUserByEmail(email);
+        Subgruppe subgruppe = subgruppeDAO.find(subgruppeId);
+        return subgruppeDAO.addUserToSubgruppe(user, subgruppe);
+    }
+
+    @POST
+    @Path("/remove")
+    @Override
+    public boolean TeilnehmerAusSubgruppe(@QueryParam("email") String email, @QueryParam("subgruppeId") int subgruppeId) {
+        User user = userDAO.findUserByEmail(email);
+        Subgruppe subgruppe = subgruppeDAO.find(subgruppeId);
+        return subgruppeDAO.removeUserFromSubgruppe(user, subgruppe);
+    }
+
+
+
+
 }
