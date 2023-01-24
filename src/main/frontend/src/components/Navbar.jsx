@@ -4,8 +4,7 @@ import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons'
 import * as AiIcons from "react-icons/ai";
 import * as FaIcons from "react-icons/fa";
-import * as MdIcons from "react-icons/md";
-import * as RiIcons from "react-icons/ri";
+import * as GiIcons from "react-icons/gi"
 import './Navbar.css';
 
 
@@ -24,7 +23,7 @@ function Navbar() {
                         <FaIcons.FaBars onClick={showSidebar}/>
                     </Link>
                     <a className="brandName">
-                        Secret Santa
+                        Secret <GiIcons.GiPresent/> Santa
                     </a>
 
                 </div>

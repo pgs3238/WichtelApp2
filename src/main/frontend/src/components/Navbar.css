@@ -2,13 +2,13 @@
 .brandName {
     text-decoration: none;
     color: #ffffff;
-    text-indent: 410pt;
-
-
+    text-indent: 1000px;
     font-size: 8mm;
     font-variant: small-caps;
     font-style: normal;
     font-weight: bolder;
+    letter-spacing: 2px;
+    margin-bottom: 11px;
 }
 
 /*Balken ganz oben, auf dem Menü-Button positioniert ist */
