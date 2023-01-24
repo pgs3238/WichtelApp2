@@ -5,8 +5,7 @@
   font-family: 'Lato', sans-serif;
 }
 
-.home, .anmelden, .registrierung, .eventAnlegen, .eventBearbeiten, .gastEntfernen, .subgruppenHinzufuegen,
-.subgruppenHinzufuegen, .userZuSubgruppeHinzufuegen, .gastEntfernenPopup, .eventAnsehen {
+.home, .anmelden, .registrierung, .eventVerwaltung, .messageService, .subgruppenService {
   display: flex;
   height: 90vh;
   align-items: center;
@@ -14,3 +13,6 @@
   font-size: 3rem;
 }
 
+.schnee {
+  color: black;
+}
