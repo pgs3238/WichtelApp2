@@ -78,6 +78,7 @@
     display: flex;
     justify-content: start;
     align-items: center;
+    padding: 15px;
 }
 
 /* Farbe, wenn Corser auf Schließen Button kommt */
