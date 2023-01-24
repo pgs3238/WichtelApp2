@@ -1,7 +1,7 @@
 /*Secret Santa Überschrift/Brandname*/
 .brandName {
     text-decoration: none;
-    color: black;
+    color: #ffffff;
     text-indent: 410pt;
 
 
@@ -13,7 +13,7 @@
 
 /*Balken ganz oben, auf dem Menü-Button positioniert ist */
 .navbar {
-    background-color: chartreuse;
+    background-color: #060b26;
     height: 80px;
     display: flex;
     justify-content: start;
@@ -28,7 +28,7 @@
 }
 /* Menu verschwand */
 .nav-menu {
-    background-color: chartreuse;
+    background-color: #060b26;
     width: 300px;
     height: 100vh;
     display: flex;
@@ -60,7 +60,9 @@
 
 /* Farbe des Menüpunkts, wenn Corser darauf landet */
 .nav-text a:hover {
-    background-color: #e02aff;
+    background-color: #1a83ff;
+    padding: 15px;
+    width: auto;
 }
 
 /* Menü so groß genug, damit Rahmen der Menüpunkte nicht größer sind als das Fenster */
@@ -71,8 +73,7 @@
 
 /* X (Schliessen)-Details */
 .navbar-toggle {
-    background-color: chartreuse;
-    width: 100%;
+    width: auto;
     height: 50px;
     display: flex;
     justify-content: start;
@@ -81,9 +82,9 @@
 
 /* Farbe, wenn Corser auf Schließen Button kommt */
 .navbar-toggle:hover {
-    background-color: #e02aff;
+    background-color: #1a83ff;
 }
 
 span {
-    margin-left: 30px;
+    margin-left: 40px;
 }
