@@ -67,6 +67,9 @@ export default function Apps() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
+                    <Route path="home/registrierung" element={<Registrierung/>} />
+                    <Route path="home/anmelden" element={<Anmelden/>} />
+
                     <Route path="anmelden" element={<Anmelden />} />
                     <Route path="eventVerwaltung" element={<EventVerwaltung />} />
                     <Route path="eventVerwaltung/eventAnlegen" element={<EventAnlegen />} />
