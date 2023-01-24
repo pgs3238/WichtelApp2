@@ -89,6 +89,7 @@ export default function Apps() {
 
                     <Route path="subgruppenService" element={<SubgruppenService/>} />
                     <Route path="subgruppenService/subgruppenHinzufuegen" element={<SubgruppenHinzufuegen/>} />
+                    <Route path="subgruppenService/userZuSubgruppeHinzufuegen" element={<UserZuSubgruppeHinzufuegen/>} />
 
                 </Route>
             </Routes>
