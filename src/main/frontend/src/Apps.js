@@ -1,13 +1,11 @@
 import logo from './logo.svg';
-import './App.css';
+import './Apps.css';
 import Navbar from './components/Navbar';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import {Snowfall}  from 'react-snowfall';
 
- function App () {
+ function Apps () {
     return (
         <>
-            <Snowfall/>
             <Router>
                 <Navbar/>
                 <Routes>
@@ -19,4 +17,4 @@ import {Snowfall}  from 'react-snowfall';
     );
 }
 
-export default App;
+export default Apps;

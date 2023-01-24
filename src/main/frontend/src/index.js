@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import Snowfall from "react-snowfall";
 //alter code, darueber neuer code
 //import ReactDOM from 'react-dom';
-//folgende 3 Zeilen machen das drehende Bild. In Zeile 44 muss dazu Apps zu App
+//folgende 3 Zeilen machen das drehende Bild. In Zeile 44 muss dazu Apps zu Apps
 /*import './index.css';
-import App from './App';
+import Apps from './Apps';
 import reportWebVitals from './reportWebVitals';*/
 
 //Routes Import - 27.12.22 Schnieders
@@ -42,7 +43,7 @@ ReactDOM.render(
     element,
     document.getElementById('root')
 );
-ReactDOM.render(<App />, document.getElementById('root'));*/
+ReactDOM.render(<Apps />, document.getElementById('root'));*/
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -63,7 +64,9 @@ root.render(
 //Create Routes (Seiten verknüpfen aus pages)
 export default function Apps() {
     return (
+
         <BrowserRouter>
+            <Snowfall/>
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />

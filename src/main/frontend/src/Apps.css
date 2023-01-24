@@ -1,3 +1,7 @@
+body{
+  background-color: #060b26;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
