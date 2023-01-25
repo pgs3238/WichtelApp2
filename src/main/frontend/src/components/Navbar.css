@@ -2,7 +2,8 @@
 .brandName {
     text-decoration: none;
     color: #ffffff;
-    text-indent: 900px;
+    position: fixed;
+    right: 30pt;
     font-size: 8mm;
     font-variant: small-caps;
     font-style: normal;
@@ -12,7 +13,8 @@
 }
 
 .moon{
-    margin-left: 80px;
+    position: fixed;
+    right: 900pt;
 }
 
 /*Balken ganz oben, auf dem Menü-Button positioniert ist */
