@@ -2,13 +2,19 @@
 .brandName {
     text-decoration: none;
     color: #ffffff;
-    text-indent: 410pt;
-
-
+    position: fixed;
+    right: 30pt;
     font-size: 8mm;
     font-variant: small-caps;
     font-style: normal;
     font-weight: bolder;
+    letter-spacing: 2px;
+    margin-bottom: 11px;
+}
+
+.moon{
+    position: fixed;
+    right: 900pt;
 }
 
 /*Balken ganz oben, auf dem Menü-Button positioniert ist */
