@@ -17,7 +17,8 @@ public class Subgruppe implements Serializable {
     private int subgruppeId;
     private String subgruppeName;
 
-    @JoinColumn(referencedColumnName = "EventId", nullable = false, table = "wichtel_event")
+
+    @JoinColumn(name = "event_ID",referencedColumnName = "EventId", nullable = false, table = "wichtel_event")
     private int eventID;
 
     @ManyToMany(targetEntity = User.class)
