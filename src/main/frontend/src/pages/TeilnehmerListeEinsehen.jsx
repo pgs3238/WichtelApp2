@@ -45,9 +45,9 @@ function Layout () {
             <br/>
             <br/>
             <div className="gastsub">
-                <input type="submit" id="gastEinladen" value="Einladungen abschicken" onClick={einladen}/>
+                <input type="button" id="gastEinladen" value="Einladungen abschicken" onClick={einladen}/>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                <input type="submit" id="subgruppeErstellen" value="Subgruppen Erstellen" onClick={zuSubGrupErst}/>
+                <input type="button" id="subgruppeErstellen" value="Subgruppen Erstellen" onClick={zuSubGrupErst}/>
             </div>
             <br/>
             <div className="gastzusubgr">
@@ -63,7 +63,7 @@ function Layout () {
             </div>
             <br/>
             <div className="abbrechen">
-                <input type="submit" id="abbrechen" value="Abbrechen" onClick={Abbrechen}/>
+                <input type="button" id="abbrechen" value="Abbrechen" onClick={Abbrechen}/>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
             </div>

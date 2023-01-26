@@ -13,7 +13,7 @@ import java.util.Set;
 public class Subgruppe implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "grupseq")
     private int subgruppeId;
     private String subgruppeName;
 

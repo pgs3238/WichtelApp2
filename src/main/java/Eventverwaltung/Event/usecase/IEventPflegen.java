@@ -2,10 +2,12 @@ package Eventverwaltung.Event.usecase;
 
 import Eventverwaltung.Event.entity.EventTO;
 
+import javax.ws.rs.core.Response;
+
 public interface IEventPflegen {
-    public void eventAnlegen(EventTO eventTO);
+    public Response eventAnlegen(EventTO eventTO);
 
-    public void eventSpeichern(EventTO eventTO);
+    public boolean eventSpeichern(EventTO eventTO);
 
-    public void eventLoeschen(EventTO eventTO);
+    public boolean eventLoeschen(int eventId);
 }

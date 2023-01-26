@@ -17,6 +17,8 @@ public class SubgruppeTO implements Serializable {
         this.eventID = eventID;
     }
 
+    public SubgruppeTO() {}
+
     public Subgruppe toSubgruppe(){
         Subgruppe subgruppe= new Subgruppe(this.subgruppeId,this.subgruppeName,this.eventID);
         return subgruppe;

@@ -18,13 +18,28 @@ public class Wichtelzuordnung implements IWichtelzuordnung{
     @Inject
     EventDAO eventDAO;
 
-    /*@Override
+  /*  @Override
     public Map<String, String> WichtelLosen(int eventID) {
         Event event = eventDAO.find(eventID);
         Set<String> users = new HashSet<>();
 
         users.add(event.getOwner());
         users.addAll(event.getUser().stream().map(User::getEmail).toList());
+
+        //prüft ob das Event schon durchgelost wurde
+        if (istSchonDurchgelost(teilnehmerByEvent)) {
+            return null;
+        }
+
+        //prüft ob die Subgruppen alle unter 50% der Teilnehmer haben
+        if (!kleineSubgruppen(event)) {
+            return null;
+        }
+
+        //prüft ob sich mehr als eine Person in dem Event befinden
+        if (teilnehmerByEvent.size() == 1) {
+            return null;
+        }
 
 
     }*/

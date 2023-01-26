@@ -65,11 +65,11 @@ public class Registrieren implements IRegistrieren {
         aUser.setEmail(userTO.getEmail());
         aUser.setPassword(userTO.getPasswort());
 
-        System.out.println("Test1");
+       // System.out.println("Test1");
 
         boolean result = userDAO.update(aUser);
 
-        System.out.println("Test2");
+      //  System.out.println("Test2");
 
         return result;
 

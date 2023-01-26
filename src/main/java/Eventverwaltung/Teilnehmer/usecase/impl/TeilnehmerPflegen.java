@@ -13,6 +13,7 @@ import Eventverwaltung.Teilnehmer.usecase.ITeilnehmerPflegen;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/teilnehmer")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -42,10 +43,14 @@ public class TeilnehmerPflegen implements ITeilnehmerPflegen {
     @POST
     @Path("/einladen")
     @Override
-    public boolean teilnehmerEinladen(@QueryParam("email") String email,@QueryParam("eventID") int eventID) {
+    public Response teilnehmerEinladen(@QueryParam("email") String email, @QueryParam("eventID") int eventID) {
         Event event = eventDAO.find(eventID);
         User teilnehmer = userDAO.findUserByEmail(email);
-        return eventDAO.addUserToEvent(teilnehmer, event);
+        if (eventDAO.addUserToEvent(teilnehmer, event)) {
+            return Response.ok().build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
 
     }
 
@@ -55,7 +60,14 @@ public class TeilnehmerPflegen implements ITeilnehmerPflegen {
     public boolean teilnehemerLoeschen(@QueryParam("email") String email,@QueryParam("eventID") int eventID) {
         Event event = eventDAO.find(eventID);
         User teilnehmer = userDAO.findUserByEmail(email);
-        return eventDAO.removeUserFromEvent(teilnehmer, event);
+        if (teilnehmer == null) {
+            return Boolean.FALSE;
+        } else {
+            eventDAO.removeUserFromEvent(teilnehmer, event);
+            return Boolean.TRUE;
+        }
+
+
     }
 
 }

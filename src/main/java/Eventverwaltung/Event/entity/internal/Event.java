@@ -24,7 +24,7 @@ public class Event implements Serializable {
     public static final String GET_SUBSIZE = "User.Event.grupsize";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "eventseq")
     private int EventId;
     private String name;
     private String regeln;

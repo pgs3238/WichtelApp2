@@ -87,7 +87,7 @@ function Layout () {
             </div>
             <br/>
             <div className="abbrechen">
-                <input type="submit" id="abbrechen" value="Abbrechen" onClick={abbrechen}/>
+                <input type="button" id="abbrechen" value="Abbrechen" onClick={abbrechen}/>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
             </div>
         </form>

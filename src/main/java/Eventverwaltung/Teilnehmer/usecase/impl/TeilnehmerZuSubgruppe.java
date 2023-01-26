@@ -14,6 +14,7 @@ import Eventverwaltung.Teilnehmer.usecase.ITeilnehmerZuSubgruppe;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/teilnZuSubgruppen")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -38,10 +39,14 @@ public class TeilnehmerZuSubgruppe implements ITeilnehmerZuSubgruppe {
     @POST
     @Path("/add")
     @Override
-    public boolean TeilnehmerZuSubgruppeHinz(@QueryParam("email") String email, @QueryParam("subgruppeId") int subgruppeId) {
+    public Response TeilnehmerZuSubgruppeHinz(@QueryParam("email") String email, @QueryParam("subgruppeId") int subgruppeId) {
         User user = userDAO.findUserByEmail(email);
         Subgruppe subgruppe = subgruppeDAO.find(subgruppeId);
-        return subgruppeDAO.addUserToSubgruppe(user, subgruppe);
+        if (subgruppeDAO.addUserToSubgruppe(user, subgruppe)) {
+            return Response.ok().build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
     }
 
     @POST
@@ -50,7 +55,12 @@ public class TeilnehmerZuSubgruppe implements ITeilnehmerZuSubgruppe {
     public boolean TeilnehmerAusSubgruppe(@QueryParam("email") String email, @QueryParam("subgruppeId") int subgruppeId) {
         User user = userDAO.findUserByEmail(email);
         Subgruppe subgruppe = subgruppeDAO.find(subgruppeId);
-        return subgruppeDAO.removeUserFromSubgruppe(user, subgruppe);
+        if (user == null) {
+            return Boolean.FALSE;
+        } else {
+            subgruppeDAO.removeUserFromSubgruppe(user, subgruppe);
+            return Boolean.TRUE;
+        }
     }
 
 

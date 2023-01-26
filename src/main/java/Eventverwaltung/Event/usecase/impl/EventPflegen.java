@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 //@Transactional
@@ -30,17 +31,21 @@ public class EventPflegen implements IEventPflegen {
     @Path("/create")
     //@RolesAllowed("user")
     @Override
-    public void eventAnlegen(EventTO eventTO){
+    public Response eventAnlegen(EventTO eventTO){
         Event aEvent = new Event();
         aEvent = eventTO.toEvent();
         //aEvent.setOwner(securityContext.getUserPrincipal().getName());
-        eventDAO.save(aEvent);
+        if (eventDAO.save(aEvent)) {
+            return Response.ok().build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
     }
 
     @POST
     @Path("/update")
     @Override
-    public void eventSpeichern(EventTO eventTO){
+    public boolean eventSpeichern(EventTO eventTO){
         Event aEvent = eventDAO.find(eventTO.getEventId());
         aEvent.setEventId(eventTO.getEventId());
         aEvent.setName(eventTO.getName());
@@ -49,14 +54,23 @@ public class EventPflegen implements IEventPflegen {
         aEvent.setOrt((eventTO.getOrt()));
         aEvent.setDeadline(eventTO.getDeadline());
 
-        eventDAO.update(aEvent);
+        boolean result = eventDAO.update(aEvent);
+
+        return result;
     }
 
     @POST
     @Path("/delete")
     @Override
-    public void eventLoeschen(EventTO eventTO){
-        eventDAO.delete(eventTO.toEvent());
+    public boolean eventLoeschen(int eventId){
+        Event aEvent = eventDAO.find(eventId);
+        if (aEvent == null) {
+            return Boolean.FALSE;
+        } else {
+            eventDAO.delete(aEvent);
+            return Boolean.TRUE;
+        }
+
     }
 
 }

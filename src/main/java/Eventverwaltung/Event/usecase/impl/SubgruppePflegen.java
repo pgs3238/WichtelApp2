@@ -11,6 +11,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/subgruppen")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -23,9 +24,14 @@ public class SubgruppePflegen implements ISubgruppePflegen {
     @POST
     @Path("/create")
     @Override
-    public void subgruppeAnlegen(SubgruppeTO subgruppeTO){
+    public Response subgruppeAnlegen(SubgruppeTO subgruppeTO) {
         Subgruppe aSubgruppe = subgruppeTO.toSubgruppe();
-        subgruppeDAO.save(aSubgruppe);
+        if (subgruppeDAO.save(aSubgruppe)) {
+            return Response.ok().build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+
     }
 
     /*public void subgruppeLoeschen(SubgruppeTO subgruppeTO){

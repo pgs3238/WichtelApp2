@@ -58,8 +58,6 @@ function Layout() {
             <br/>
             <div className="anmeldenBT">
                 <input type="submit" id="anmelden" value="Login"/>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
-                <input type="button" id="pwvergessen" value="Passwort vergessen?"/>
             </div>
             <br/>
             <div className="kontoanlegen">

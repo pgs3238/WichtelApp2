@@ -2,6 +2,8 @@ package Eventverwaltung.Event.usecase;
 
 import Eventverwaltung.Event.entity.SubgruppeTO;
 
+import javax.ws.rs.core.Response;
+
 public interface ISubgruppePflegen {
-    void subgruppeAnlegen(SubgruppeTO subgruppeTO);
+    Response subgruppeAnlegen(SubgruppeTO subgruppeTO);
 }

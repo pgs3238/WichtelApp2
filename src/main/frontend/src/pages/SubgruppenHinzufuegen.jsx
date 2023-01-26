@@ -78,11 +78,11 @@ function Layout() {
             <div className="hinzufuegenloeschen">
                 <input type="submit" id="hinzufuegen" value = "Subgruppe Hinzufügen"/>
                 &emsp;&emsp;&emsp;
-                <input type="submit" id="loeschen" value = "Subgruppe Löschen"/>
+                <input type="button" id="loeschen" value = "Subgruppe Löschen"/>
             </div>
             <br/>
             <div className="abbrechen">
-                <input type="submit" id="abbrechen" value="Abbrechen" onClick={abbrechen}/>
+                <input type="button" id="abbrechen" value="Abbrechen" onClick={abbrechen}/>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                 &emsp;&emsp;&nbsp;&nbsp;&nbsp;
             </div>
