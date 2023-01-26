@@ -9,6 +9,8 @@ import io.quarkus.security.jpa.Username;
 import org.hibernate.annotations.NamedQuery;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -35,8 +37,8 @@ public class User {
     private String email;
     private String name;
     private String vorname;
-    @Roles
-    private String role = "user";
+    @Roles @ElementCollection
+    private List<String> roles = new ArrayList<>();
 
     @ManyToMany
     private Set<Event> events;
@@ -72,10 +74,6 @@ public class User {
 
     public void setVorname(String vorname) { this.vorname = vorname; }
 
-    public String getRole() {
-        return role;
-    }
-
     public Set<Event> getEvents() {
         return events;
     }
@@ -84,8 +82,26 @@ public class User {
         this.events = events;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public List<String> getRoles() { return roles; }
+
+    public void setRoles(List<String> roles) { this.roles = roles; }
+
+    public String getRole() {
+        if (roles.contains("ADMIN")) {
+            return "ADMIN";
+        } else if (roles.contains("OWNER")) {
+            return "OWNER";
+        } else {
+            return "USER";
+        }
+    }
+
+    public void addRole(String role) {
+        this.roles.add(role);
+    }
+
+    public void removeRole(String role) {
+        this.roles.remove(role);
     }
 
     /*@Override
