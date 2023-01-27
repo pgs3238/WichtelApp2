@@ -11,7 +11,7 @@ public class PublicResource {
 
     @GET
     @PermitAll
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public String publicResource(){
         return "public";
     }

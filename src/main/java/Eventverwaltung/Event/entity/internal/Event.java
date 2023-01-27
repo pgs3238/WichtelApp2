@@ -44,7 +44,7 @@ public class Event implements Serializable {
     @OneToMany(targetEntity = Subgruppe.class, cascade=CascadeType.ALL, orphanRemoval = true)
     private List<Subgruppe> subgruppen;
 
-    @ManyToMany(targetEntity = User.class)
+    @ManyToMany(targetEntity = User.class, fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();
 
 

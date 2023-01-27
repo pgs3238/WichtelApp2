@@ -20,7 +20,7 @@ function Layout() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        alert(JSON.stringify(inputs));
+       // alert(JSON.stringify(inputs));
 
         if (inputs.passwort !== inputs.repasswort) {
             alert("pass?")
@@ -46,7 +46,7 @@ function Layout() {
             return;
         }
 
-        alert("OK")
+      //  alert("OK")
     }
 
 

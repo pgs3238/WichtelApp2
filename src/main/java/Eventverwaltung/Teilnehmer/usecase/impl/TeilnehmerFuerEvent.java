@@ -5,6 +5,7 @@ import Eventverwaltung.Teilnehmer.dao.UserDAO;
 import Eventverwaltung.Teilnehmer.usecase.ITeilnehmerFuerEvent;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -21,6 +22,7 @@ public class TeilnehmerFuerEvent implements ITeilnehmerFuerEvent {
     @Inject
     UserDAO userDAO;
 
+    @RolesAllowed({"admin", "owner"})
     @POST
     @Override
     public Collection<User> teilnehmerFuerEvent(EventTO event){

@@ -11,6 +11,7 @@ import Eventverwaltung.Teilnehmer.entity.UserTO;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
 import Eventverwaltung.Teilnehmer.usecase.ITeilnehmerZuSubgruppe;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -36,6 +37,7 @@ public class TeilnehmerZuSubgruppe implements ITeilnehmerZuSubgruppe {
 
         user_eventDAO.update(user_event);
     }
+    @RolesAllowed({"admin", "owner"})
     @POST
     @Path("/add")
     @Override
@@ -49,6 +51,7 @@ public class TeilnehmerZuSubgruppe implements ITeilnehmerZuSubgruppe {
         }
     }
 
+    @RolesAllowed({"admin", "owner"})
     @POST
     @Path("/remove")
     @Override

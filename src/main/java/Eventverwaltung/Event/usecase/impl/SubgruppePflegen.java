@@ -5,6 +5,7 @@ import Eventverwaltung.Event.entity.SubgruppeTO;
 import Eventverwaltung.Event.entity.internal.Subgruppe;
 import Eventverwaltung.Event.usecase.ISubgruppePflegen;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -21,6 +22,7 @@ public class SubgruppePflegen implements ISubgruppePflegen {
     @Inject
     SubgruppeDAO subgruppeDAO;
 
+    @RolesAllowed({"admin", "owner"})
     @POST
     @Path("/create")
     @Override

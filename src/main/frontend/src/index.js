@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import Snowfall from "react-snowfall";
 //alter code, darueber neuer code
@@ -63,6 +63,9 @@ root.render(
 
 //Create Routes (Seiten verknüpfen aus pages)
 export default function Apps() {
+    const [token, setToken] = useState();
+
+   // if(!token) { return <Anmelden setToken={setToken} /> }
     return (
 
         <BrowserRouter>

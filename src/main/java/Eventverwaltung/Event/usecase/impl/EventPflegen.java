@@ -5,6 +5,7 @@ import Eventverwaltung.Event.entity.EventTO;
 import Eventverwaltung.Event.entity.internal.Event;
 import Eventverwaltung.Event.usecase.IEventPflegen;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -27,6 +28,7 @@ public class EventPflegen implements IEventPflegen {
     @Context
     SecurityContext securityContext;
 
+    @RolesAllowed({"admin", "user","owner"})
     @POST
     @Path("/create")
     //@RolesAllowed("user")
@@ -42,6 +44,7 @@ public class EventPflegen implements IEventPflegen {
         }
     }
 
+    @RolesAllowed({"admin", "owner"})
     @POST
     @Path("/update")
     @Override
@@ -59,6 +62,7 @@ public class EventPflegen implements IEventPflegen {
         return result;
     }
 
+    @RolesAllowed({"admin", "owner"})
     @POST
     @Path("/delete")
     @Override

@@ -25,8 +25,13 @@ public class EventDAO extends GenericDAO<Event> {
     public Event find(int eventID){ return super.find(eventID); }
 
     public boolean addUserToEvent(User user, Event event){
-        event.getUser().add(user);
-        return update(event);
+        try {
+            event.getUser().add(user);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public boolean removeUserFromEvent(User user, Event event){

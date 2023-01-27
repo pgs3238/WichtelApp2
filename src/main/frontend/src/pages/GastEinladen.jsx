@@ -27,7 +27,7 @@ function Layout () {
             },
 
             body: JSON.stringify({
-                "id": inputs.id,
+                "eventID": inputs.id,
                 "email": inputs.email
 
             })

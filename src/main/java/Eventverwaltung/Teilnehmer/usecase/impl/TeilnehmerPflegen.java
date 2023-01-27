@@ -10,6 +10,7 @@ import Eventverwaltung.Teilnehmer.entity.UserTO;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
 import Eventverwaltung.Teilnehmer.usecase.ITeilnehmerPflegen;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -40,6 +41,7 @@ public class TeilnehmerPflegen implements ITeilnehmerPflegen {
     @Inject
     UserDAO userDAO;
 
+    @RolesAllowed({"admin", "owner"})
     @POST
     @Path("/einladen")
     @Override
@@ -54,6 +56,7 @@ public class TeilnehmerPflegen implements ITeilnehmerPflegen {
 
     }
 
+    @RolesAllowed({"admin", "owner"})
     @POST
     @Path("/ausladen")
     @Override

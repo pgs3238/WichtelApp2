@@ -21,7 +21,7 @@ public class Subgruppe implements Serializable {
     @JoinColumn(name = "event_ID",referencedColumnName = "EventId", nullable = false, table = "wichtel_event")
     private int eventID;
 
-    @ManyToMany(targetEntity = User.class)
+    @ManyToMany(targetEntity = User.class, fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();
 
     public Subgruppe() {

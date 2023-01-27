@@ -11,11 +11,14 @@ import javax.ws.rs.core.SecurityContext;
 @Path("/api/users")
 public class UserResource {
 
+
     @GET
-    @RolesAllowed({"user","bla"})
-    @Path("/me")
+    @RolesAllowed({"user"})
     @Produces(MediaType.APPLICATION_JSON)
-    public String me(@Context SecurityContext securityContext) {
+    public String userResource(@Context SecurityContext securityContext) {
+        if (!Permissions.check(securityContext, 1)){ //pathparam queryparam
+            return "Access denied!";
+        }
         //securityContext.isUserInRole("wichtel1");
         return securityContext.getUserPrincipal().getName();
     }

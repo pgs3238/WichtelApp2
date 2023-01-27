@@ -9,6 +9,8 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
+import static io.quarkus.mailer.Mail.*;
+
 @Path("/mail")
 public class Mail {
 
@@ -19,7 +21,7 @@ public class Mail {
     @GET
     @Blocking
     public void sendEmail(){
-        mailer.send(io.quarkus.mailer.Mail.withText("email@email.de",  //TODO inject email Address to send to
+        mailer.send(withText("email@email.de",  //TODO inject email Address to send to
                 "Sie wurden zu einem Secret Santa Event eingeladen",
                 "Folgen Sie dem Link, um an dem Event Teilzunehmen."));
        /* mailer.send(
@@ -34,7 +36,7 @@ public class Mail {
     @GET
     @Blocking
     public void sendEmailToAdmin(){
-        mailer.send(io.quarkus.mailer.Mail.withText("email@email.de",  //TODO inject email Address to send to
+        mailer.send(withText("email@email.de",  //TODO inject email Address to send to
                 "Ein Nutzer moechte eine Frage stellen",
                 "Hallo ich habe ein Problem mit... "));//TODO inject email Body from Webpage
        /* mailer.send(
@@ -53,7 +55,7 @@ public class Mail {
     @Path("/reactive")
     public Uni<Void> sendEmailUsingReactiveMailer() {
         return reactiveMailer.send(
-                io.quarkus.mailer.Mail.withText("email@email.de",  //TODO inject email Address to send to
+                withText("email@email.de",  //TODO inject email Address to send to
                         "Ein Nutzer moechte eine Frage stellen",
                         "Hallo ich habe ein Problem mit... "  //TODO inject email Body from Webpage
                 )

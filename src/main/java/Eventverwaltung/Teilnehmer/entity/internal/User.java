@@ -38,7 +38,7 @@ public class User {
     private String name;
     private String vorname;
     @Roles @ElementCollection
-    private List<String> roles = new ArrayList<>();
+    private List<String> roles = new ArrayList<String>(List.of("user"));
 
     @ManyToMany
     private Set<Event> events;

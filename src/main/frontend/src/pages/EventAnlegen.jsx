@@ -27,7 +27,8 @@ function Layout() {
             method: "POST",
             headers: {
                 //"":JSON.parse(document.cookie)["quarkus-credential"],
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": "Basic "+ btoa("string@123:string") //TODO
             },
 
             body: JSON.stringify({

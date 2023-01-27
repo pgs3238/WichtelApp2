@@ -22,12 +22,16 @@ function Layout() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        alert(inputs);
+        alert(JSON.stringify(inputs));
+
+
+        return true;
+
     }
 
     return (
 
-        <form onSubmit={handleSubmit}>
+        <form action="/j_security_check" method="POST">
 
             <h2>Login</h2>
             <br/>
@@ -39,8 +43,8 @@ function Layout() {
                     type="text"
                     placeholder="E-Mail-Adresse"
                     id="email"
-                    name="email"
-                    onChange={handleChange}
+                    name="j_username"
+
                 />
             </div>
             <br/>
@@ -48,11 +52,11 @@ function Layout() {
                 <label>Passwort: </label>
                 &emsp;&emsp;&emsp;
                 <input
-                    type="text"
+                    type="password"
                     placeholder="Passwort"
                     id="passwort"
-                    name="passwort"
-                    onChange={handleChange}
+                    name="j_password"
+
                 />
             </div>
             <br/>
