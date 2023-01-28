@@ -37,7 +37,7 @@ public class User {
     private String email;
     private String name;
     private String vorname;
-    @Roles @ElementCollection
+    @Roles @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<String>(List.of("user"));
 
     @ManyToMany

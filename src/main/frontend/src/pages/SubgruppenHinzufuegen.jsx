@@ -1,7 +1,9 @@
 
 import React, {useState} from 'react';
+import cookies from "js-cookie";
 import './SubgruppenHinzufuegen.css'
 import {useNavigate} from "react-router-dom";
+
 
 function Layout() {
 
@@ -25,7 +27,8 @@ function Layout() {
             method: "POST",
             headers: {
                 //"":JSON.parse(document.cookie)["quarkus-credential"],
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "quarkus-credential": cookies.get("quarkus-credential")
             },
 
             body: JSON.stringify({

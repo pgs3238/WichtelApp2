@@ -3,3 +3,6 @@
 -- insert into myentity (id, field) values(nextval('hibernate_sequence'), 'field-1');
 -- insert into myentity (id, field) values(nextval('hibernate_sequence'), 'field-2');
 -- insert into myentity (id, field) values(nextval('hibernate_sequence'), 'field-3');
+INSERT INTO wichtel_user (email, name, password, vorname) VALUES ('danield@entenhausen.de', 'Duesentrieb', '$2a$10$JmYdquLaQO5ejpxsa9Fxg.NYuAcZz3f.YSEMdL6d6ZP27un3PSMJO', 'Daniel');
+INSERT INTO user_roles (user_email, roles) VALUES ('danield@entenhausen.de', 'user');
+-- passwort: 12345

@@ -48,7 +48,7 @@ public class TeilnehmerPflegen implements ITeilnehmerPflegen {
     public Response teilnehmerEinladen(@QueryParam("email") String email, @QueryParam("eventID") int eventID) {
         Event event = eventDAO.find(eventID);
         User teilnehmer = userDAO.findUserByEmail(email);
-        if (eventDAO.addUserToEvent(teilnehmer, event)) {
+        if (teilnehmer != null && eventDAO.addUserToEvent(teilnehmer, event)) {
             return Response.ok().build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST).build();

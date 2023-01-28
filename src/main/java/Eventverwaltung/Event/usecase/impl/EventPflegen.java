@@ -4,6 +4,8 @@ import Eventverwaltung.Event.dao.EventDAO;
 import Eventverwaltung.Event.entity.EventTO;
 import Eventverwaltung.Event.entity.internal.Event;
 import Eventverwaltung.Event.usecase.IEventPflegen;
+import Eventverwaltung.Teilnehmer.dao.UserDAO;
+import Eventverwaltung.Teilnehmer.entity.internal.User;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
@@ -25,6 +27,9 @@ public class EventPflegen implements IEventPflegen {
 
     @Inject
     EventDAO eventDAO;
+
+    @Inject
+    UserDAO userDAO;
     @Context
     SecurityContext securityContext;
 
@@ -36,8 +41,12 @@ public class EventPflegen implements IEventPflegen {
     public Response eventAnlegen(EventTO eventTO){
         Event aEvent = new Event();
         aEvent = eventTO.toEvent();
-        //aEvent.setOwner(securityContext.getUserPrincipal().getName());
+        aEvent.setOwner(securityContext.getUserPrincipal().getName());
         if (eventDAO.save(aEvent)) {
+            User user = userDAO.findUserByEmail(securityContext.getUserPrincipal().getName());
+            user.getRoles().add("Event" + aEvent.getEventId());
+            user.getRoles().add("owner");
+            userDAO.update(user);
             return Response.ok().build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST).build();

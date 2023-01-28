@@ -13,10 +13,10 @@ public class UserResource {
 
 
     @GET
-    @RolesAllowed({"user"})
+    @RolesAllowed({"admin","user"})
     @Produces(MediaType.APPLICATION_JSON)
     public String userResource(@Context SecurityContext securityContext) {
-        if (!Permissions.check(securityContext, 1)){ //pathparam queryparam
+        if (!Permissions.check(securityContext, 1)){ //TODO pathparam queryparam
             return "Access denied!";
         }
         //securityContext.isUserInRole("wichtel1");

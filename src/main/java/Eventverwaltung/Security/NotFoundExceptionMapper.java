@@ -15,7 +15,7 @@ public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundExceptio
     @Override
     @Produces(MediaType.TEXT_HTML)
     public Response toResponse(NotFoundException exception) {
-        InputStream resource = ClassLoader.getSystemResourceAsStream("META-INF/resources/index.html");
+        InputStream resource = Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/resources/index.html");
         return null == resource
                 ? Response.status(NOT_FOUND).build()
                 : Response.ok().entity(resource).build();

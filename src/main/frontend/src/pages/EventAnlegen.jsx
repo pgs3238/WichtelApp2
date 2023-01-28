@@ -1,6 +1,6 @@
 
 import React, {useState} from 'react';
-
+import cookies from "js-cookie";
 import './EventAnlegen.css'
 import {useNavigate} from "react-router-dom";
 
@@ -21,14 +21,14 @@ function Layout() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        alert(JSON.stringify(inputs));
+       // alert(JSON.stringify(inputs));
 
         let query = await fetch("/events/create", {
             method: "POST",
             headers: {
                 //"":JSON.parse(document.cookie)["quarkus-credential"],
                 "Content-Type": "application/json",
-                "Authorization": "Basic "+ btoa("string@123:string") //TODO
+                "quarkus-credential": cookies.get("quarkus-credential")
             },
 
             body: JSON.stringify({
@@ -48,7 +48,7 @@ function Layout() {
         }
 
 
-        alert("OK");
+       // alert("OK");
     }
 
 

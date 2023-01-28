@@ -1,5 +1,6 @@
 package Eventverwaltung.Teilnehmer.usecase.impl;
 
+import Eventverwaltung.Event.dao.EventDAO;
 import Eventverwaltung.Event.dao.SubgruppeDAO;
 import Eventverwaltung.Event.dao.User_EventDAO;
 import Eventverwaltung.Event.entity.EventTO;
@@ -14,8 +15,10 @@ import Eventverwaltung.Teilnehmer.usecase.ITeilnehmerZuSubgruppe;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 
 @Path("/teilnZuSubgruppen")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -28,6 +31,10 @@ public class TeilnehmerZuSubgruppe implements ITeilnehmerZuSubgruppe {
     UserDAO userDAO;
     @Inject
     SubgruppeDAO subgruppeDAO;
+    @Inject
+    EventDAO eventDAO;
+    @Context
+    SecurityContext securityContext;
 
     @Override
     public void TeilnehmerZuSubgruppe(UserTO user, EventTO event, SubgruppeTO subgruppe){
@@ -45,6 +52,8 @@ public class TeilnehmerZuSubgruppe implements ITeilnehmerZuSubgruppe {
         User user = userDAO.findUserByEmail(email);
         Subgruppe subgruppe = subgruppeDAO.find(subgruppeId);
         if (subgruppeDAO.addUserToSubgruppe(user, subgruppe)) {
+      //      User duser = userDAO.findUserByEmail(securityContext.getUserPrincipal().getName());
+       //     user.getRoles().
             return Response.ok().build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST).build();
