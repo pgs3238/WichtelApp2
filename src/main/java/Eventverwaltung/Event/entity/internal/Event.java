@@ -6,9 +6,7 @@ import Eventverwaltung.Teilnehmer.entity.internal.User;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "wichtel_event")
@@ -44,7 +42,8 @@ public class Event implements Serializable {
     @ManyToMany(mappedBy = "event", targetEntity = User.class, fetch = FetchType.EAGER)
     private Set<User> user = new HashSet<>();
 
-
+    @ElementCollection
+    private Map<String, String> partner = new HashMap<>();
 
     public Event(int eventId, String name, String regeln, LocalDateTime deadline, String ort, LocalDateTime eventDate, String owner) {
         EventId = eventId;
@@ -144,12 +143,13 @@ public class Event implements Serializable {
         this.user = user;
     }
 
-    /*public List<User> getGast() {
-        return gast;
+    public Map<String, String> getPartner() {
+        return partner;
     }
 
-    public void setGast(List<User> gast) {
-        this.gast = gast;
-    }*/
+    public void setPartner(Map<String, String> partner) {
+        this.partner = partner;
+    }
+
 
 }

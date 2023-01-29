@@ -29,6 +29,7 @@ function Layout() {
                 //"":JSON.parse(document.cookie)["quarkus-credential"],
                 "Content-Type": "application/json",
                 "quarkus-credential": cookies.get("quarkus-credential")
+
             },
 
             body: JSON.stringify({

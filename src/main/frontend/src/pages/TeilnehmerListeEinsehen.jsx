@@ -2,10 +2,11 @@
 import React, {useState} from 'react';
 import './TeilnehmerListeEinsehen.css'
 import {useNavigate} from "react-router-dom";
+import cookies from "js-cookie";
 
 
 
-const events = [
+let events = [
     {eventid:"1", deadline:"12.01.2023", eventdate:"30.01.2023", name:"wichteln", owner:"danield@entenhausen.de", regeln:"kaffee"},
     {eventid:"2", deadline:"15.01.2023", eventdate:"31.01.2023", name:"kaffee", owner:"dagobert@entenhausen.de", regeln:"wasser"}
 ]
@@ -14,19 +15,34 @@ const events = [
 
 const Row = (props) => {
     const {eventid, deadline, eventdate, name, owner, regeln} = props
-    return(<tr>
-        <td>{eventid}</td>
-        <td>{deadline}</td>
-        <td>{eventdate}</td>
-        <td>{name}</td>
-        <td>{owner}</td>
-        <td>{regeln}</td>
-    </tr>)
+    if (owner == cookies.get("username")) {
+        return(<tr>
+            <td><a href={"/"}>{eventid}</a></td>
+            <td>{deadline}</td>
+            <td>{eventdate}</td>
+            <td>{name}</td>
+            <td>{owner}</td>
+            <td>{regeln}</td>
+        </tr>)
+    } else {
+        return(<tr>
+            <td>{eventid}</td>
+            <td>{deadline}</td>
+            <td>{eventdate}</td>
+            <td>{name}</td>
+            <td>{owner}</td>
+            <td>{regeln}</td>
+        </tr>)
+    }
+
 }
 
 const Table = (props) => {
     const{data} = props
     return (<center><table>
+        <thead>
+        <td>tTOOOOOODODDDODDODO</td>
+        </thead>
         <tbody>
         {data.map(row =>
             <Row eventid = {row.eventid}
@@ -62,10 +78,11 @@ function Layout () {
         navigate("/eventVerwaltung/eventAnsehen/teliEinsehen/subgruHinz");
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
        // event.preventDefault ();
 
-        let query = fetch("events/allEvents")
+        let query = await fetch("events/allEvents");
+        this.events = await query.json();
     }
 
     const handleChange = (event) => {

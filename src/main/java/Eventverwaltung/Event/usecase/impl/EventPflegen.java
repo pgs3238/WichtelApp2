@@ -17,8 +17,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 //@Transactional
@@ -93,11 +91,10 @@ public class EventPflegen implements IEventPflegen {
 
     @POST
     @Path("/allEvents")
-    public List Events() {
-        List<Event> events = new ArrayList<>(Arrays.asList((Event)eventDAO.findAll()));
-       // Event aEvent = (Event) eventDAO.findAll();
+    public List <EventTO> Events() {
 
-        return events;
+
+        return eventDAO.findAll().stream().map(Event::toEventTO).toList();
     }
 
 }

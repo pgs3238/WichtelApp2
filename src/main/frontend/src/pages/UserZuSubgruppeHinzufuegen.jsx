@@ -14,6 +14,8 @@ function Layout() {
     }
 
     const ausloggen = () => {
+        cookies.remove("quarkus-credential");
+        cookies.remove("username");
         navigate("/anmelden");
       //TODO
     }

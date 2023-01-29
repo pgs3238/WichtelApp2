@@ -3,12 +3,8 @@ package Eventverwaltung.Teilnehmer.usecase.impl;
 import Eventverwaltung.Event.dao.EventDAO;
 import Eventverwaltung.Event.dao.SubgruppeDAO;
 import Eventverwaltung.Event.dao.User_EventDAO;
-import Eventverwaltung.Event.entity.EventTO;
-import Eventverwaltung.Event.entity.SubgruppeTO;
 import Eventverwaltung.Event.entity.internal.Subgruppe;
-import Eventverwaltung.Event.entity.internal.User_Event;
 import Eventverwaltung.Teilnehmer.dao.UserDAO;
-import Eventverwaltung.Teilnehmer.entity.UserTO;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
 import Eventverwaltung.Teilnehmer.usecase.ITeilnehmerZuSubgruppe;
 
@@ -36,14 +32,6 @@ public class TeilnehmerZuSubgruppe implements ITeilnehmerZuSubgruppe {
     @Context
     SecurityContext securityContext;
 
-    @Override
-    public void TeilnehmerZuSubgruppe(UserTO user, EventTO event, SubgruppeTO subgruppe){
-        User_Event user_event = user_eventDAO.findOneResult(user,event);
-
-        user_event.setSubgruppe(subgruppe.toSubgruppe());
-
-        user_eventDAO.update(user_event);
-    }
     @RolesAllowed({"admin", "owner"})
     @POST
     @Path("/add")

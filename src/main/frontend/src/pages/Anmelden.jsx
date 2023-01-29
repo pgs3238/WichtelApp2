@@ -4,6 +4,7 @@ import * as PropTypes from "prop-types";
 /*import ReactDOM from "react-dom/client";*/
 import './Anmelden.css'
 import {useNavigate} from "react-router-dom";
+import cookies from "js-cookie";
 
 
 function Layout() {
@@ -21,17 +22,17 @@ function Layout() {
     }
 
     const handleSubmit = (event) => {
-        event.preventDefault();
-        alert(JSON.stringify(inputs));
-
-
+        //event.preventDefault();
+       // alert(JSON.stringify(inputs));
+        let formdata = new FormData(event.target);
+        cookies.set("username",formdata.get("j_username"))
         return true;
 
     }
 
     return (
 
-        <form action="/j_security_check" method="POST">
+        <form action="/j_security_check" method="POST" onSubmit={handleSubmit}>
 
             <h2>Login</h2>
             <br/>

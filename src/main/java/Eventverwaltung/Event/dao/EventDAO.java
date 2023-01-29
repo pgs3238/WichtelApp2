@@ -26,6 +26,9 @@ public class EventDAO extends GenericDAO<Event> {
 
     public boolean addUserToEvent(User user, Event event){
         try {
+            if (event.getPartner().size() > 0) {
+                return false;
+            }
             event.getUser().add(user);
             user.getEvent().add(event);
             em.merge(user);
@@ -38,8 +41,18 @@ public class EventDAO extends GenericDAO<Event> {
     }
 
     public boolean removeUserFromEvent(User user, Event event){
-        event.getUser().remove(user);
-        return update(event);
+        try {
+            if (event.getPartner().size() > 0) {
+                return false;
+            }
+            event.getUser().remove(user);
+            user.getEvent().remove(event);
+            em.merge(user);
+            return update(event);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

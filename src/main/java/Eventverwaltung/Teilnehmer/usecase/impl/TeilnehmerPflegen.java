@@ -2,11 +2,8 @@ package Eventverwaltung.Teilnehmer.usecase.impl;
 
 import Eventverwaltung.Event.dao.EventDAO;
 import Eventverwaltung.Event.dao.User_EventDAO;
-import Eventverwaltung.Event.entity.EventTO;
 import Eventverwaltung.Event.entity.internal.Event;
-import Eventverwaltung.Event.entity.internal.User_Event;
 import Eventverwaltung.Teilnehmer.dao.UserDAO;
-import Eventverwaltung.Teilnehmer.entity.UserTO;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
 import Eventverwaltung.Teilnehmer.usecase.ITeilnehmerPflegen;
 
@@ -23,18 +20,6 @@ public class TeilnehmerPflegen implements ITeilnehmerPflegen {
 
     @Inject
     User_EventDAO user_eventDAO;
-
-    @Override
-    public void teilnehmerAusEventEntfernen(UserTO teilnehmer, EventTO event){
-        User_Event user_event = user_eventDAO.findOneResult(teilnehmer, event);
-        user_eventDAO.delete(user_event);
-    }
-
-    @Override
-    public void teilnehmerInEvent(UserTO teilnehmer, EventTO event){
-        User_Event user_event = new User_Event(teilnehmer.toUser(), event.toEvent());
-        user_eventDAO.save(user_event);
-    }
 
     @Inject
     EventDAO eventDAO;
@@ -60,14 +45,13 @@ public class TeilnehmerPflegen implements ITeilnehmerPflegen {
     @POST
     @Path("/ausladen")
     @Override
-    public boolean teilnehemerLoeschen(@QueryParam("email") String email,@QueryParam("eventID") int eventID) {
+    public Response teilnehemerLoeschen(@QueryParam("email") String email,@QueryParam("eventID") int eventID) {
         Event event = eventDAO.find(eventID);
         User teilnehmer = userDAO.findUserByEmail(email);
-        if (teilnehmer == null) {
-            return Boolean.FALSE;
+        if (teilnehmer != null && eventDAO.removeUserFromEvent(teilnehmer, event)) {
+            return Response.ok().build();
         } else {
-            eventDAO.removeUserFromEvent(teilnehmer, event);
-            return Boolean.TRUE;
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
 
