@@ -18,11 +18,11 @@ public class Subgruppe implements Serializable {
     private String subgruppeName;
 
 
-    @JoinColumn(name = "event_ID",referencedColumnName = "EventId", nullable = false, table = "wichtel_event")
+    @JoinColumn(referencedColumnName = "EventId", nullable = false, table = "wichtel_event")
     private int eventID;
 
-    @ManyToMany(targetEntity = User.class, fetch = FetchType.EAGER)
-    private Set<User> users = new HashSet<>();
+    @ManyToMany(mappedBy = "subgruppe", targetEntity = User.class, fetch = FetchType.EAGER)
+    private Set<User> user = new HashSet<>();
 
     public Subgruppe() {
 
@@ -62,11 +62,12 @@ public class Subgruppe implements Serializable {
         this.eventID = event;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public Set<User> getUser() {
+        return user;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setUser(Set<User> user) {
+        this.user = user;
     }
+
 }

@@ -18,13 +18,20 @@ public class SubgruppeDAO extends GenericDAO<Subgruppe> {
         super(em, Subgruppe.class);
     }
 
-    public boolean addUserToSubgruppe(User user, Subgruppe sub){
-        sub.getUsers().add(user);
-        return update(sub);
+    public boolean addUserToSubgruppe(User user, Subgruppe subgruppe){
+        try {
+            subgruppe.getUser().add(user);
+            user.getSubgruppe().add(subgruppe);
+            em.merge(user);
+            return update(subgruppe);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public boolean removeUserFromSubgruppe(User user, Subgruppe sub){
-        sub.getUsers().remove(user);
+        sub.getUser().remove(user);
         return update(sub);
     }
 }

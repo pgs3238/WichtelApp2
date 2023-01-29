@@ -1,6 +1,7 @@
 package Eventverwaltung.Teilnehmer.entity.internal;
 
 import Eventverwaltung.Event.entity.internal.Event;
+import Eventverwaltung.Event.entity.internal.Subgruppe;
 import io.quarkus.elytron.security.common.BcryptUtil;
 import io.quarkus.security.jpa.Password;
 import io.quarkus.security.jpa.Roles;
@@ -42,6 +43,12 @@ public class User {
             joinColumns = @JoinColumn(name = "user_email"),
             inverseJoinColumns = @JoinColumn(name = "event_eventid"))
     private Set<Event> event = new HashSet<>();
+
+    @ManyToMany(targetEntity = Subgruppe.class, fetch = FetchType.EAGER)
+    @JoinTable(name = "wichtel_subgruppe_wichtel_user",
+            joinColumns = @JoinColumn(name = "user_email"),
+            inverseJoinColumns = @JoinColumn(name = "subgruppe_subgruppeid"))
+    private Set<Subgruppe> subgruppe = new HashSet<>();
 
 
     public User() {}
@@ -98,6 +105,14 @@ public class User {
 
     public void removeRole(String role) {
         this.roles.remove(role);
+    }
+
+    public Set<Subgruppe> getSubgruppe() {
+        return subgruppe;
+    }
+
+    public void setSubgruppe(Set<Subgruppe> subgruppe) {
+        this.subgruppe = subgruppe;
     }
 
     @Override

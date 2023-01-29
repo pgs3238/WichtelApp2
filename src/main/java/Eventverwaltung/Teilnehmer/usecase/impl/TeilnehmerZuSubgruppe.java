@@ -51,9 +51,7 @@ public class TeilnehmerZuSubgruppe implements ITeilnehmerZuSubgruppe {
     public Response TeilnehmerZuSubgruppeHinz(@QueryParam("email") String email, @QueryParam("subgruppeId") int subgruppeId) {
         User user = userDAO.findUserByEmail(email);
         Subgruppe subgruppe = subgruppeDAO.find(subgruppeId);
-        if (subgruppeDAO.addUserToSubgruppe(user, subgruppe)) {
-      //      User duser = userDAO.findUserByEmail(securityContext.getUserPrincipal().getName());
-       //     user.getRoles().
+        if (user != null && subgruppeDAO.addUserToSubgruppe(user, subgruppe)) {
             return Response.ok().build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST).build();
