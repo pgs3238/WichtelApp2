@@ -1,5 +1,6 @@
 package Eventverwaltung.Event.usecase.impl;
 
+import Eventverwaltung.Event.dao.EventDAO;
 import Eventverwaltung.Event.dao.SubgruppeDAO;
 import Eventverwaltung.Event.entity.SubgruppeTO;
 import Eventverwaltung.Event.entity.internal.Subgruppe;
@@ -21,6 +22,8 @@ public class SubgruppePflegen implements ISubgruppePflegen {
 
     @Inject
     SubgruppeDAO subgruppeDAO;
+    @Inject
+    EventDAO eventDAO;
 
     @RolesAllowed({"admin", "owner"})
     @POST
@@ -29,6 +32,7 @@ public class SubgruppePflegen implements ISubgruppePflegen {
     public Response subgruppeAnlegen(SubgruppeTO subgruppeTO) {
         Subgruppe aSubgruppe = subgruppeTO.toSubgruppe();
         if (subgruppeDAO.save(aSubgruppe)) {
+
             return Response.ok().build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST).build();

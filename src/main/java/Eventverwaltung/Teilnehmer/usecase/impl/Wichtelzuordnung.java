@@ -18,7 +18,7 @@ public class Wichtelzuordnung implements IWichtelzuordnung{
     @Inject
     EventDAO eventDAO;
 
-  /*  @Override
+    /*@Override
     public Map<String, String> WichtelLosen(int eventID) {
         Event event = eventDAO.find(eventID);
         Set<String> users = new HashSet<>();
@@ -39,6 +39,16 @@ public class Wichtelzuordnung implements IWichtelzuordnung{
         //prüft ob sich mehr als eine Person in dem Event befinden
         if (teilnehmerByEvent.size() == 1) {
             return null;
+        }
+
+        for (Event ev : teilnehmerByEvent) {
+            boolean weiter = false;
+
+
+            do {
+                Optional<Event> neuWichtel = users.stream().skip(new Random().nextInt(users.size())).findFirst();
+                if (!neuWichtel.get() equals(ev) || !neuWichtel.g)
+            }
         }
 
 

@@ -13,7 +13,8 @@ import java.util.Set;
 @Entity
 @Table(name = "wichtel_event")
 @NamedQuery(name = "User.Event", query = "select owner FROM User owner join Event we on owner.email=we.owner WHERE we.id=:id")
-@NamedQuery(name = "User.Event.teilnehmer", query = "select u FROM User u, IN (u.events) e WHERE e.id=:id")
+@NamedQuery(name = "User.Event.teilnehmer", query = "select u FROM User u, IN (u.event) e WHERE e.id=:id")
+//@NamedQuery(name = "AlleEvents", query = "select '*' FROM wichtel_event")
 //@NamedQuery(name = "User.Event.unregteilnehmer", query = "select u FROM User u, Event e WHERE u in e.user")
 
 public class Event implements Serializable {
@@ -37,15 +38,11 @@ public class Event implements Serializable {
     @JoinColumn(referencedColumnName = "email", nullable = false, table = "wichtel_user")
     private String owner;
 
-    /*@OneToMany(targetEntity = User.class, cascade=CascadeType.ALL)
-    private List<User> gast;*/
-
-
     @OneToMany(targetEntity = Subgruppe.class, cascade=CascadeType.ALL, orphanRemoval = true)
     private List<Subgruppe> subgruppen;
 
-    @ManyToMany(targetEntity = User.class, fetch = FetchType.EAGER)
-    private Set<User> users = new HashSet<>();
+    @ManyToMany(mappedBy = "event", targetEntity = User.class, fetch = FetchType.EAGER)
+    private Set<User> user = new HashSet<>();
 
 
 
@@ -140,11 +137,11 @@ public class Event implements Serializable {
     }
 
     public Set<User> getUser() {
-        return users;
+        return user;
     }
 
-    public void setUser(Set<User> users) {
-        this.users = users;
+    public void setUser(Set<User> user) {
+        this.user = user;
     }
 
     /*public List<User> getGast() {
@@ -154,4 +151,5 @@ public class Event implements Serializable {
     public void setGast(List<User> gast) {
         this.gast = gast;
     }*/
+
 }

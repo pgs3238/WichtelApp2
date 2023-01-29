@@ -17,6 +17,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 //@Transactional
 //@RequestScoped
@@ -33,7 +36,7 @@ public class EventPflegen implements IEventPflegen {
     @Context
     SecurityContext securityContext;
 
-    @RolesAllowed({"admin", "user","owner"})
+    @RolesAllowed({"admin", "user", "owner"})
     @POST
     @Path("/create")
     //@RolesAllowed("user")
@@ -52,6 +55,8 @@ public class EventPflegen implements IEventPflegen {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
+
+
 
     @RolesAllowed({"admin", "owner"})
     @POST
@@ -84,6 +89,15 @@ public class EventPflegen implements IEventPflegen {
             return Boolean.TRUE;
         }
 
+    }
+
+    @POST
+    @Path("/allEvents")
+    public List Events() {
+        List<Event> events = new ArrayList<>(Arrays.asList((Event)eventDAO.findAll()));
+       // Event aEvent = (Event) eventDAO.findAll();
+
+        return events;
     }
 
 }

@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import cookies from "js-cookie";
 import './GastEinladen.css'
 import {useNavigate} from "react-router-dom";
 
@@ -23,7 +24,8 @@ function Layout () {
             method: "POST",
             headers: {
                 //"":JSON.parse(document.cookie)["quarkus-credential"],
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "quarkus-credential": cookies.get("quarkus-credential")
             },
 
             body: JSON.stringify({
@@ -57,11 +59,18 @@ function Layout () {
             <div className="hier">
                 <label> HIER FEHLT EINE LISTE</label>
             </div>
-            <input
-                type="hidden"
-                name = "id"
-                value = {id}
-            />
+            <br/>
+            <div className="eventId">
+                <label>Event ID: </label>
+                <input
+                    type="text"
+                    placeholder="Number"
+                    id="eventid"
+                    name = "id"
+                    onChange={handleChange}
+                />
+            </div>
+
             <br/>
             <div className="email">
                 <label>E-Mail: </label>

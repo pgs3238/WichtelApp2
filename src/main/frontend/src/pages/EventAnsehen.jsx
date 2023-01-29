@@ -87,48 +87,6 @@ function Layout () {
                 <input type="button" id="adduser" value="Abbrechen" onClick={abbrechenClick}/>
             </div>
             <br/>
-
-
-
-
-            <div className="eventdatum">
-                <label>Das Event findet statt am: </label>
-                %EVENTDATUM%
-            </div>
-            <br/>
-            <div className="eventlocation">
-                <label> bei </label>
-                %EVENTLOCATION%
-            </div>
-            <br/>
-            <div className="eventverteilungdatum">
-                <label>Wichtel werden verteilt am:  </label>
-                %EVENTVERTEILUNGDATUM%
-            </div>
-            <br/>
-            <div className="eventRegeln">
-                <label> Weitere Regeln: </label>
-                <br/>
-                <input
-                    type="text"
-                    placeholder="(Optonal) EventRegeln hier eingeben"
-                    id = "eventRegeln"
-                    name="eventRegeln"
-                    onChange = {handleChange}
-                />
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
         </form>
     );
 }

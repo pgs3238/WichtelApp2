@@ -10,6 +10,7 @@ import org.hibernate.annotations.NamedQuery;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -18,15 +19,11 @@ import java.util.Set;
 @Table(name = "wichtel_user")
 @NamedQuery(name= "User.findUserByEmail", query = "select u From User u Where u.email= :email")
 //@NamedQuery(name = "User.findTeilnehmerVonEvent", query = "select ue.user from User_Event ue WHERE ue.event = :event")
-@NamedQuery(name = "User.findTeilnehmnerVonEvent", query = "select u FROM User u, IN (u.events) e WHERE e.id=:id")
+@NamedQuery(name = "User.findTeilnehmnerVonEvent", query = "select u FROM User u, IN (u.event) e WHERE e.id=:id")
 public class User {
 
     public static final String FIND_BY_EMAIL = "User.findUserByEmail";
     public static final String GET_TEILNEHMER_VON_EVENT = "User.findTeilnehmerVonEvent";
-
-    /*@Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "userseq")
-    private Integer id;*/
 
     @Password
     @Column(unique = true)
@@ -40,19 +37,14 @@ public class User {
     @Roles @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<String>(List.of("user"));
 
-    @ManyToMany
-    private Set<Event> events;
+    @ManyToMany(targetEntity = Event.class, fetch = FetchType.EAGER)
+    @JoinTable(name = "wichtel_event_wichtel_user",
+            joinColumns = @JoinColumn(name = "user_email"),
+            inverseJoinColumns = @JoinColumn(name = "event_eventid"))
+    private Set<Event> event = new HashSet<>();
 
 
     public User() {}
-
-    /*public int getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }*/
 
     public String getPassword() {
         return password;
@@ -74,17 +66,21 @@ public class User {
 
     public void setVorname(String vorname) { this.vorname = vorname; }
 
-    public Set<Event> getEvents() {
-        return events;
+    public Set<Event> getEvent() {
+        return event;
     }
 
-    public void setEvents(Set<Event> events) {
-        this.events = events;
+    public void setEvent(Set<Event> event) {
+        this.event = event;
     }
 
     public List<String> getRoles() { return roles; }
 
     public void setRoles(List<String> roles) { this.roles = roles; }
+
+
+
+
 
     public String getRole() {
         if (roles.contains("ADMIN")) {
@@ -103,11 +99,6 @@ public class User {
     public void removeRole(String role) {
         this.roles.remove(role);
     }
-
-    /*@Override
-    public int hashCode() {
-        return getId();
-    }*/
 
     @Override
     public boolean equals(Object obj) {
