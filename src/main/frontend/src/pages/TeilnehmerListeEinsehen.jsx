@@ -78,16 +78,12 @@ function Layout() {
         navigate("/eventVerwaltung/eventAnsehen");
     }
 
-    const zuGastSub = () => {
-        navigate("/subgruppenService/userZuSubgruppeHinzufuegen");
-    }
-
     const einladen = () => {
         navigate("/eventVerwaltung/eventAnsehen/teliEinsehen/gastEinladen");
     }
 
-    const zuSubGrupErst = () => {
-        navigate("/eventVerwaltung/eventAnsehen/teliEinsehen/subgruHinz");
+    const zuSubGruppen = () => {
+        navigate("/subgruppenService");
     }
 
     const ausloggen = () => {
@@ -119,7 +115,7 @@ function Layout() {
             <br/>
             <br/>
             <div className="hier">
-                <label>HIER FEHLT EINE TABELLE (+ fehlende subgruppen, dynamische tabelle??)</label>
+                <label>Hier wird eine Test-Tabelle dargestellt, die aufgrund von Fehlern noch nicht durch eine Echte Tabelle ersetzt wurde.</label>
             </div>
             <br/>
             <Table data={rows}/>
@@ -130,19 +126,12 @@ function Layout() {
             <br/>
             <div className="gastsub">
                 <input type="button" id="gastEinladen" value="Einladungen abschicken" onClick={einladen}/>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                <input type="button" id="subgruppeErstellen" value="Subgruppen Erstellen" onClick={zuSubGrupErst}/>
+                &emsp;&emsp;&emsp;&emsp;
+                <input type="button" id="subgruppeErstellen" value="Subgruppen" onClick={zuSubGruppen}/>
             </div>
             <br/>
-            <div className="gastzusubgr">
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                &emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
-                <input type="button" id="gastZuSubgruppe" value="Gast zu Subgruppe" onClick={zuGastSub}/>
-            </div>
             <div className="abbrechen">
                 <input type="button" id="abbrechen" value="Abbrechen" onClick={Abbrechen}/>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
             </div>
             <br/>
             <div className="logout">

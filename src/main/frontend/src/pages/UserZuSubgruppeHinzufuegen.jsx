@@ -4,13 +4,51 @@ import cookies from "js-cookie";
 import './UserZuSubgruppeHinzufuegen.css'
 import {useNavigate} from "react-router-dom";
 
+
+
+
+let events = [
+    {user_email:"doduck@entenhausen.de", subgruppe_subgruppeid: "1"},
+    {user_email:"dagoduck@entenhausen.de", subgruppe_subgruppeid:"1"}
+]
+
+
+
+
+const Row = (props) => {
+    const {user_email, subgruppe_subgruppeid} = props
+    return(<tr>
+        <td>{user_email}</td>
+        <td>{subgruppe_subgruppeid}</td>
+    </tr>)
+}
+
+
+
+const Table = (props) => {
+    const{data} = props
+    return (<center><table>
+        <thead>
+        <td>Gast E-Mail</td>
+        <td>Subgruppen ID</td>
+        </thead>
+        <tbody>
+        {data.map(row =>
+            <Row user_email = {row.user_email}
+                 subgruppe_subgruppeid = {row.subgruppe_subgruppeid}/>
+        )}
+        </tbody>
+    </table></center>)
+}
+
 function Layout() {
 
     const [inputs, setInputs] = useState({});
     const navigate = useNavigate();
+    const [rows, setRows] = useState(events);
 
     const abbrechen = () => {
-        navigate("/eventVerwaltung/eventAnsehen/teliEinsehen");
+        navigate("/subgruppenService");
     }
 
     const ausloggen = () => {
@@ -59,12 +97,14 @@ function Layout() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h2>User zu Subgruppen hinzufügen</h2>
+            <h2>Gast zu Subgruppen hinzufügen</h2>
             <br/>
             <br/>
             <div className="hier">
-                <label> HIER FEHLT EINE LISTE</label>
+                <label> Das ist eine Demo Tabelle und symbolisiert nur wie der Endzustand hätte aussehen sollen</label>
             </div>
+            <br/>
+            <Table data={rows}/>
             <br/>
             <div className="GruppenID">
                 <label> GruppenID: </label>
@@ -79,6 +119,7 @@ function Layout() {
             <br/>
             <div className="email">
                 <label> E-Mail: </label>
+                &emsp;&emsp;
                 <input
                     type = "text"
                     placeholder = "max@mustermann.de"
@@ -90,6 +131,7 @@ function Layout() {
             <br/>
             <div className="submit">
                 <input type="submit" id="emailzusubgru" value="E-Mail hinzufügen"/>
+                &emsp;&emsp;
 
                 <input type="button" id="emailaussubgru" value="E-Mail entfernen" onClick={entfernen}/>
             </div>

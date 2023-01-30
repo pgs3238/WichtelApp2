@@ -5,13 +5,53 @@ import './SubgruppenHinzufuegen.css'
 import {useNavigate} from "react-router-dom";
 
 
+
+
+let events = [
+    {subgruppeid:"1", eventid: "1", subgruppename: "duck"},
+    {subgruppeid:"2", eventid: "1", subgruppename: "gans"}
+]
+
+
+
+
+const Row = (props) => {
+    const {subgruppeid, eventid, subgruppename} = props
+    return(<tr>
+        <td>{subgruppeid}</td>
+        <td>{eventid}</td>
+        <td>{subgruppename}</td>
+    </tr>)
+}
+
+
+
+const Table = (props) => {
+    const{data} = props
+    return (<center><table>
+        <thead>
+        <td>Subgruppen ID</td>
+        <td>Event ID</td>
+        <td>Subgruppenname</td>
+        </thead>
+        <tbody>
+        {data.map(row =>
+            <Row subgruppeid = {row.subgruppeid}
+                 eventid = {row.eventid}
+                 subgruppename = {row.subgruppename}/>
+        )}
+        </tbody>
+    </table></center>)
+}
+
 function Layout() {
 
     const [inputs, setInputs] = useState({});
     const navigate = useNavigate();
+    const [rows, setRows] = useState(events);
 
     const abbrechen = () => {
-        navigate("/eventVerwaltung/eventAnsehen/teliEinsehen");
+        navigate("/subgruppenService");
     }
 
     const handleChange = (event) => {
@@ -68,11 +108,13 @@ function Layout() {
                         <center> sich nicht gegenseitig beschenken können. </center>
                     <center> Dafür müssen alle Familienmitglieder </center>
                     <center>zu einer Subgruppe hinzugefügt werden! </center></label>
+            <br/>
+            </div>
+            <div className="hier">
+                <label>Das ist eine Demo Tabelle und symbolisiert nur wie der Endzustand hätte aussehen sollen</label>
             </div>
             <br/>
-            <div className="hier">
-                <label>HIER FEHLT EINE LISTE</label>
-            </div>
+            <Table data={rows}/>
             <br/>
             <div className="neueSubgruppe">
                 <label>Name der Subgruppe: </label>
@@ -94,8 +136,6 @@ function Layout() {
             <br/>
             <div className="abbrechen">
                 <input type="button" id="abbrechen" value="Abbrechen" onClick={abbrechen}/>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                &emsp;&emsp;&nbsp;&nbsp;&nbsp;
             </div>
             <br/>
             <div className="logout">

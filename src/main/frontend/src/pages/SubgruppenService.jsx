@@ -18,6 +18,10 @@ function Layout (){
         alert(inputs);
     }
 
+    const Abbrechen = () => {
+        navigate("/eventVerwaltung/eventAnsehen/teliEinsehen");
+    }
+
     const ausloggen = () => {
         cookies.remove("quarkus-credential");
         cookies.remove("username");
@@ -56,13 +60,13 @@ function Layout (){
                 />
             </div>
             <br/>
+            <div className="abbrechen">
+                <input type="button" id="abbrechen" value="Abbrechen" onClick={Abbrechen}/>
+            </div>
+            <br/>
             <div className="logout">
                 <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
             </div>
-
-
-
-
         </form>
     );
 }
