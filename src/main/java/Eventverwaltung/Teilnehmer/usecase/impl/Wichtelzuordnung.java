@@ -1,11 +1,7 @@
 package Eventverwaltung.Teilnehmer.usecase.impl;
 
 import Eventverwaltung.Event.dao.EventDAO;
-import Eventverwaltung.Event.dao.User_EventDAO;
-import Eventverwaltung.Event.entity.EventTO;
 import Eventverwaltung.Event.entity.internal.Event;
-import Eventverwaltung.Event.entity.internal.User_Event;
-import Eventverwaltung.Teilnehmer.entity.UserTO;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
 import Eventverwaltung.Teilnehmer.usecase.IWichtelzuordnung;
 
@@ -18,10 +14,7 @@ import java.util.stream.Collectors;
 @Path("/wichteln")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class Wichtelzuordnung implements IWichtelzuordnung{
-
-    @Inject
-    User_EventDAO user_eventDAO;
+public class Wichtelzuordnung implements IWichtelzuordnung {
 
     @Inject
     EventDAO eventDAO;
@@ -88,7 +81,9 @@ public class Wichtelzuordnung implements IWichtelzuordnung{
         Event event = eventDAO.find(eventID);
         Set<String> users = event.getUser().stream().map(User::getEmail).collect(Collectors.toSet());
         List<List<String>> userGroups = event.getSubgruppen().stream().map(sub -> sub.getUser().stream().map(User::getEmail).toList()).toList();
-        System.out.println(userGroups.stream().map(List::size).toList());
+       // System.out.println(userGroups.stream().map(List::size).toList());
+
+        //Vorprüfungen TODO
 
         List<WeightedPair> pairs = new ArrayList<>();
         // Annahme: Jeder Nutzer kann jeden beschenken
@@ -165,38 +160,9 @@ public class Wichtelzuordnung implements IWichtelzuordnung{
         return partners;
     }
 
-    /*@Override
-    public Map<String, String> WichtelLosen(int eventID) {
-        Event event = eventDAO.find(eventID);
-        Set<String> users = new HashSet<>();
+}
 
-        users.add(event.getOwner());
-        users.addAll(event.getUser().stream().map(User::getEmail).toList());
-
-        //prüft ob das Event schon durchgelost wurde
-        if (istSchonDurchgelost(teilnehmerByEvent)) {
-            return null;
-        }
-
-        //prüft ob die Subgruppen alle unter 50% der Teilnehmer haben
-        if (!kleineSubgruppen(event)) {
-            return null;
-        }
-
-        //prüft ob sich mehr als eine Person in dem Event befinden
-        if (teilnehmerByEvent.size() == 1) {
-            return null;
-        }
-
-
-
-
-
-
-
-    }*/
-
-    @Override
+  /*  @Override
     public Map<UserTO,UserTO> WichtelZulosen(EventTO event) {
         Collection<User_Event> teilnehmerByEvent = user_eventDAO.findUserEventByEvent(event);
         Collection<User_Event> wichtelListe = user_eventDAO.findUserEventByEvent(event);
@@ -273,4 +239,4 @@ public class Wichtelzuordnung implements IWichtelzuordnung{
         }
      return true;
     }
-}
+}*/

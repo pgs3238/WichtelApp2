@@ -36,13 +36,13 @@ public class Event implements Serializable {
     @JoinColumn(referencedColumnName = "email", nullable = false, table = "wichtel_user")
     private String owner;
 
-    @OneToMany(targetEntity = Subgruppe.class, cascade=CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(targetEntity = Subgruppe.class, cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Subgruppe> subgruppen;
 
     @ManyToMany(mappedBy = "event", targetEntity = User.class, fetch = FetchType.EAGER)
     private Set<User> user = new HashSet<>();
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Map<String, String> partner = new HashMap<>();
 
     public Event(int eventId, String name, String regeln, LocalDateTime deadline, String ort, LocalDateTime eventDate, String owner) {

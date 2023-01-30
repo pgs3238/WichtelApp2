@@ -22,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prod": "react-scripts build --dest && mv build/* ../resources/META-INF/resources"
+    "prod": "react-scripts build --dest"
   },
   "eslintConfig": {
     "extends": [

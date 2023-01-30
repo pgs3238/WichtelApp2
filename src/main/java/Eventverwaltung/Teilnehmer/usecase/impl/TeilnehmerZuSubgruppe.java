@@ -2,7 +2,6 @@ package Eventverwaltung.Teilnehmer.usecase.impl;
 
 import Eventverwaltung.Event.dao.EventDAO;
 import Eventverwaltung.Event.dao.SubgruppeDAO;
-import Eventverwaltung.Event.dao.User_EventDAO;
 import Eventverwaltung.Event.entity.internal.Subgruppe;
 import Eventverwaltung.Teilnehmer.dao.UserDAO;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
@@ -21,8 +20,6 @@ import javax.ws.rs.core.SecurityContext;
 @Produces(MediaType.APPLICATION_JSON)
 public class TeilnehmerZuSubgruppe implements ITeilnehmerZuSubgruppe {
 
-    @Inject
-    User_EventDAO user_eventDAO;
     @Inject
     UserDAO userDAO;
     @Inject

@@ -1,7 +1,6 @@
 package Eventverwaltung.Teilnehmer.usecase.impl;
 
 import Eventverwaltung.Event.dao.EventDAO;
-import Eventverwaltung.Event.dao.User_EventDAO;
 import Eventverwaltung.Event.entity.internal.Event;
 import Eventverwaltung.Teilnehmer.dao.UserDAO;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
@@ -17,9 +16,6 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class TeilnehmerPflegen implements ITeilnehmerPflegen {
-
-    @Inject
-    User_EventDAO user_eventDAO;
 
     @Inject
     EventDAO eventDAO;

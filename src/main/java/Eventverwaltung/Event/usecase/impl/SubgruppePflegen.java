@@ -3,6 +3,7 @@ package Eventverwaltung.Event.usecase.impl;
 import Eventverwaltung.Event.dao.EventDAO;
 import Eventverwaltung.Event.dao.SubgruppeDAO;
 import Eventverwaltung.Event.entity.SubgruppeTO;
+import Eventverwaltung.Event.entity.internal.Event;
 import Eventverwaltung.Event.entity.internal.Subgruppe;
 import Eventverwaltung.Event.usecase.ISubgruppePflegen;
 
@@ -32,6 +33,9 @@ public class SubgruppePflegen implements ISubgruppePflegen {
     public Response subgruppeAnlegen(SubgruppeTO subgruppeTO) {
         Subgruppe aSubgruppe = subgruppeTO.toSubgruppe();
         if (subgruppeDAO.save(aSubgruppe)) {
+            Event event = eventDAO.find(aSubgruppe.getEventID());
+            event.getSubgruppen().add(aSubgruppe);
+            eventDAO.update(event);
 
             return Response.ok().build();
         } else {
