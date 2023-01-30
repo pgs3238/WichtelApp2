@@ -23,9 +23,7 @@ function Navbar() {
                     <Link to="#" className='menu-bars'>
                         <FaIcons.FaBars onClick={showSidebar}/>
                     </Link>
-                    <b className="moon">
-                        <BsIcons.BsFillMoonFill size='30px'/>
-                    </b>
+
                     <a className="brandName">
                         Secret <GiIcons.GiPresent size='20px'/> Santa
                     </a>

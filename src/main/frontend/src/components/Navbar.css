@@ -12,11 +12,6 @@
     margin-bottom: 11px;
 }
 
-.moon{
-    position: fixed;
-    right: 900pt;
-}
-
 /*Balken ganz oben, auf dem Menü-Button positioniert ist */
 .navbar {
     background-color: #060b26;
