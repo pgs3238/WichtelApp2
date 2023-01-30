@@ -67,7 +67,7 @@ function Layout() {
             <br/>
             <div className="eventname">
                 <label> Wie soll das Event heißen? </label>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
+                &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;
                 <input
                     type = "text"
                     placeholder="Eventname"
@@ -79,7 +79,7 @@ function Layout() {
             <br/>
             <div className="eventdatum">
                 <label>Wann soll das Event starten? </label>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                 <input
                     type = "datetime-local"
                     name = "eventDate"
@@ -89,7 +89,7 @@ function Layout() {
             <br/>
             <div className="eventregeln">
                 <label> Welche Regeln liegen für das Event vor? </label>
-                &nbsp;
+                &nbsp;&emsp;&emsp;
                 <input
                     type="text"
                     placeholder="Eventregeln"
@@ -101,6 +101,7 @@ function Layout() {
             <br/>
             <div className="ort">
                 <label> Wo findet Secret Santa statt: </label>
+                &emsp;&emsp; &emsp;&emsp; &emsp;&emsp;&emsp;
                 <input
                     type="text"
                     placeholder="Ort"
@@ -119,6 +120,7 @@ function Layout() {
                     onChange = {handleChange}
                 />
             </div>
+            <br/>
             <div className="bsave">
                 <input type="submit" id="saveevent" value="Event speichern"/>
             </div>
