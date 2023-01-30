@@ -19,17 +19,21 @@ function Layout() {
 
             <div classeName="anAdresse">
                 <h4 className="a">Geben Sie die Empfänger-Adresse ein:</h4>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+
                 <input className="adressfeld"
                     type = "email"
                     placeholder = "E-Mail-Adresse"
                     name = "email"
                     value = ""
                     onChange = {changeHandler}/>
+
             </div>
             <br/>
 
             <div className="message">
                 <h4 className="b">Geben Sie hier die Mitteilung ein:</h4>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
             <input className="messageFeld"
                 type = "text"
                 placeholder = "Nachricht"
