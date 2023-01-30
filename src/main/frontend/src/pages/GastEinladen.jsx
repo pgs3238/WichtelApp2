@@ -3,10 +3,50 @@ import cookies from "js-cookie";
 import './GastEinladen.css'
 import {useNavigate} from "react-router-dom";
 
+
+
+
+
+let events = [
+    {user_email:"doduck@entenhausen.de", event_eventid: "1"},
+    {user_email:"dagoduck@entenhausen.de", event_eventid:"1"}
+]
+
+
+
+
+const Row = (props) => {
+    const {user_email, event_eventid} = props
+    return(<tr>
+        <td>{user_email}</td>
+        <td>{event_eventid}</td>
+    </tr>)
+}
+
+
+
+const Table = (props) => {
+    const{data} = props
+    return (<center><table>
+        <thead>
+        <td>Gast E-Mail</td>
+        <td>Event ID</td>
+        </thead>
+        <tbody>
+        {data.map(row =>
+            <Row user_email = {row.user_email}
+                 event_eventid = {row.event_eventid}/>
+        )}
+        </tbody>
+    </table></center>)
+}
+
+
 function Layout () {
 
     const [inputs, setInputs] = useState ({});
     const navigate = useNavigate();
+    const [rows, setRows] = useState(events);
     //TODO URL-ID
     const id = 1;
 
@@ -63,8 +103,10 @@ function Layout () {
             <br/>
             <br/>
             <div className="hier">
-                <label> HIER FEHLT EINE LISTE</label>
+                <label> Das ist eine Demo Tabelle und symbolisiert nur wie der Endzustand hätte aussehen sollen</label>
             </div>
+            <br/>
+            <Table data={rows}/>
             <br/>
             <div className="eventId">
                 <label>Event ID: </label>
@@ -83,7 +125,7 @@ function Layout () {
                 &emsp;
                 <input
                     type = "text"
-                    placeholder= ""
+                    placeholder= "Email"
                     id = "email"
                     name = "email"
                     onChange = {handleChange}
@@ -93,17 +135,11 @@ function Layout () {
             <div className="submit">
                 <input type="submit" id="emailZuListe" value="E-Mail hinzufügen"/>
                 &nbsp;&nbsp;
-                <input type="submit" id="emailausListe" value="E-Mail Löschen"/>
-            </div>
-            <br/>
-            <div className="listeEinladen">
-                <input type="submit" id="listeEinladen" value="Liste einladen"/>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                <input type="button" id="emailausListe" value="E-Mail Löschen"/>
             </div>
             <br/>
             <div className="abbrechen">
                 <input type="button" id="abbrechen" value="Abbrechen" onClick={abbrechen}/>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
             </div>
             <br/>
             <div className="logout">
