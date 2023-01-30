@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './EventAnsehen.css'
 import {useNavigate} from "react-router-dom";
+import cookies from "js-cookie";
 
 function Layout () {
 
@@ -22,6 +23,12 @@ function Layout () {
     const handleSubmit = (event) => {
         event.preventDefault ();
         alert (inputs);
+    }
+
+    const ausloggen = () => {
+        cookies.remove("quarkus-credential");
+        cookies.remove("username");
+        navigate("/anmelden");
     }
 
     const handleChange = (event) => {
@@ -87,6 +94,9 @@ function Layout () {
                 <input type="button" id="adduser" value="Abbrechen" onClick={abbrechenClick}/>
             </div>
             <br/>
+            <div className="logout">
+                <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
+            </div>
         </form>
     );
 }

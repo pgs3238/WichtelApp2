@@ -20,6 +20,12 @@ function Layout() {
         setInputs(values => ({...values, [name]: value}))
     }
 
+    const ausloggen = () => {
+        cookies.remove("quarkus-credential");
+        cookies.remove("username");
+        navigate("/anmelden");
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         alert(JSON.stringify(inputs));
@@ -90,6 +96,10 @@ function Layout() {
                 <input type="button" id="abbrechen" value="Abbrechen" onClick={abbrechen}/>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                 &emsp;&emsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <br/>
+            <div className="logout">
+                <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
             </div>
             </form>
     );

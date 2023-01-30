@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import './EventVerwaltung.css'
 import {useNavigate} from "react-router-dom";
+import cookies from "js-cookie";
 
 
 function Layout() {
@@ -14,6 +15,12 @@ function Layout() {
 
     const eventAnsehen = () => {
         navigate("/eventVerwaltung/eventAnsehen");
+    }
+
+    const ausloggen = () => {
+        cookies.remove("quarkus-credential");
+        cookies.remove("username");
+        navigate("/anmelden");
     }
 
     const email = () => {
@@ -53,6 +60,10 @@ function Layout() {
                 <input type="button" id="eventanlegen" value="Event Anlegen" onClick={eventAnlegen}/>
                 &emsp;&emsp;&emsp;&emsp;
                 <input type="button" id="eventansehen" value="Eigene Events anzeigen" onClick={eventAnsehen}/>
+            </div>
+            <br/>
+            <div className="logout">
+                <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
             </div>
         </form>
 

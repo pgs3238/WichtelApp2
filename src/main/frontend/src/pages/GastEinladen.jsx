@@ -14,6 +14,12 @@ function Layout () {
         navigate("/eventVerwaltung/eventAnsehen/teliEinsehen");
     }
 
+    const ausloggen = () => {
+        cookies.remove("quarkus-credential");
+        cookies.remove("username");
+        navigate("/anmelden");
+    }
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -98,6 +104,10 @@ function Layout () {
             <div className="abbrechen">
                 <input type="button" id="abbrechen" value="Abbrechen" onClick={abbrechen}/>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+            </div>
+            <br/>
+            <div className="logout">
+                <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
             </div>
         </form>
 

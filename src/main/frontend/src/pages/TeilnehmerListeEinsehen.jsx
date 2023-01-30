@@ -17,7 +17,7 @@ const Row = (props) => {
     const {eventid, deadline, eventdate, name, owner, regeln} = props
     if (owner == cookies.get("username")) {
         return(<tr>
-            <td><a href={"/"}>{eventid}</a></td>
+            <td><a href={"/eventVerwaltung/eventAnsehen/teliEinsehen/eventBearbeiten"}>{eventid}</a></td>
             <td>{deadline}</td>
             <td>{eventdate}</td>
             <td>{name}</td>
@@ -78,6 +78,12 @@ function Layout () {
         navigate("/eventVerwaltung/eventAnsehen/teliEinsehen/subgruHinz");
     }
 
+    const ausloggen = () => {
+        cookies.remove("quarkus-credential");
+        cookies.remove("username");
+        navigate("/anmelden");
+    }
+
     const handleSubmit = async (event) => {
        // event.preventDefault ();
 
@@ -120,6 +126,10 @@ function Layout () {
                 <input type="button" id="abbrechen" value="Abbrechen" onClick={Abbrechen}/>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <br/>
+            <div className="logout">
+                <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
             </div>
         </form>
 

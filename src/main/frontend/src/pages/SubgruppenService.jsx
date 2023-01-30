@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import './SubgruppenService.css';
+import cookies from "js-cookie";
 
 function Layout (){
 
@@ -15,6 +16,12 @@ function Layout (){
     const handleSubmit = (event) => {
         event.preventDefault();
         alert(inputs);
+    }
+
+    const ausloggen = () => {
+        cookies.remove("quarkus-credential");
+        cookies.remove("username");
+        navigate("/anmelden");
     }
 
     const subgruppenHinzufuegen = () => {
@@ -47,6 +54,10 @@ function Layout (){
                     value="User zu Subgruppe"
                     onClick={userZuSubgruppeHinzufuegen}
                 />
+            </div>
+            <br/>
+            <div className="logout">
+                <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
             </div>
 
 

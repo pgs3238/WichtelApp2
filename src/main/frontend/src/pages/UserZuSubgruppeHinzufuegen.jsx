@@ -17,7 +17,6 @@ function Layout() {
         cookies.remove("quarkus-credential");
         cookies.remove("username");
         navigate("/anmelden");
-      //TODO
     }
 
     const entfernen = () => {
@@ -97,7 +96,9 @@ function Layout() {
             <br/>
             <div className="abbrechen">
                 <input type="button" id="abbrechen" value="Abbrechen" onClick={abbrechen}/>
-
+            </div>
+            <br/>
+            <div className="logout">
                 <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
             </div>
         </form>

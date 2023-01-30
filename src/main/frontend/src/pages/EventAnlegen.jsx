@@ -12,6 +12,12 @@ function Layout() {
         navigate("/eventVerwaltung")
     }
 
+    const ausloggen = () => {
+        cookies.remove("quarkus-credential");
+        cookies.remove("username");
+        navigate("/anmelden");
+    }
+
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -121,6 +127,9 @@ function Layout() {
                 <input type="button" id="cancel" value="Abbrechen" onClick={handleClick}/>
             </div>
             <br/>
+            <div className="logout">
+                <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
+            </div>
         </form>
     );
 }

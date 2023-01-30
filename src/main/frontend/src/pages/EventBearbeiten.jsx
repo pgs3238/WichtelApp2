@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import './EventBearbeiten.css'
 import * as PropTypes from "prop-types";
 import {useNavigate} from "react-router-dom";
+import cookies from "js-cookie";
 /*import ReactDOM from "react-dom/client";*/
 
 
@@ -20,6 +21,12 @@ function Layout() {
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({...values, [name]: value}))
+    }
+
+    const ausloggen = () => {
+        cookies.remove("quarkus-credential");
+        cookies.remove("username");
+        navigate("/anmelden");
     }
 
     const handleSubmit = async (event) => {
@@ -128,6 +135,9 @@ function Layout() {
                 <input type="button" id="cancel" value="Abbrechen" onClick={handleClick}/>
             </div>
             <br/>
+            <div className="logout">
+                <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
+            </div>
         </form>
 
     );
