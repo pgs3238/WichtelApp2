@@ -65,17 +65,16 @@ function Layout() {
                 <input type="submit" id="anmelden" value="Login"/>
             </div>
             <br/>
+            <div className="pwvergessenBT">
+                <input type="submit" id="neuespasswortanfordern" value="Passwort vergessen?"/>
+            </div>
+            <br/>
             <div className="kontoanlegen">
-                <input type="button" id="kontoanlegen" value="Neues Konto Anlegen" onClick={neuesKonto}/>
+                <input type="button" id="kontoanlegen" value="Neues Konto erstellen" onClick={neuesKonto}/>
             </div>
         </form>
 
     )
-
-
-
-
-
 
 
 }

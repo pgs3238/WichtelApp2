@@ -4,12 +4,10 @@
 
 .passwort {
     text-align: center;
-
 }
 
 .anmeldenBT{
     text-align: center;
-
 }
 
 .pwvergessenBT{
@@ -19,3 +17,45 @@
 .kontoanlegen{
     text-align: center;
 }
+
+/*!* General button styling *!*/
+/*input[type="submit"],*/
+/*input[type="button"] {*/
+/*    background: linear-gradient(135deg, #4CAF50, #45a049);*/
+/*    color: white;*/
+/*    font-size: 16px;*/
+/*    font-weight: bold;*/
+/*    padding: 12px 24px;*/
+/*    margin: 8px;*/
+/*    border: none;*/
+/*    border-radius: 8px;*/
+/*    cursor: pointer;*/
+/*    box-shadow: 0px 4px 8px rgba(0,0,0,0.2);*/
+/*    transition: all 0.2s ease-in-out;*/
+/*}*/
+
+/*!* Hover effect *!*/
+/*input[type="submit"]:hover,*/
+/*input[type="button"]:hover {*/
+/*    transform: translateY(-2px);*/
+/*    box-shadow: 0px 6px 12px rgba(0,0,0,0.3);*/
+/*    background: linear-gradient(135deg, #5CD65C, #3e8e41);*/
+/*}*/
+
+/*!* "Passwort vergessen?" button → secondary style *!*/
+/*#neuespasswortanfordern {*/
+/*    background: linear-gradient(135deg, #ff9800, #f57c00);*/
+/*}*/
+
+/*#neuespasswortanfordern:hover {*/
+/*    background: linear-gradient(135deg, #ffb74d, #ef6c00);*/
+/*}*/
+
+/*!* "Neues Konto erstellen" button → highlight *!*/
+/*#kontoanlegen {*/
+/*    background: linear-gradient(135deg, #2196F3, #1976D2);*/
+/*}*/
+
+/*#kontoanlegen:hover {*/
+/*    background: linear-gradient(135deg, #64b5f6, #1565c0);*/
+/*}*/
