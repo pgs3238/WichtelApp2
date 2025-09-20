@@ -70,6 +70,7 @@ public class Event implements Serializable {
         eventTO.setEventDate(this.eventDate);
         eventTO.setOrt(this.ort);
         eventTO.setDeadline(this.deadline);
+        eventTO.setOwner(this.owner);
         return eventTO;
     }
 
