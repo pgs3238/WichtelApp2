@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 
 function Layout() {
     const [inputs, setInputs] = useState({});
+    const [showMessage, setShowMessage] = useState(false); // <-- modal flag
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -56,11 +57,73 @@ function Layout() {
 
 
        // alert("OK");
+        // Show success modal
+        setShowMessage(true);
+    }
+
+    const handleOk = () => {
+        setShowMessage(false);
+        navigate("/eventVerwaltung");
     }
 
 
     return (
-        <form onSubmit={handleSubmit}>
+        <>
+            <form onSubmit={handleSubmit} className={"form-container"}>
+                <h2>Erstellen Sie ein neues Event:</h2>
+
+                <div className="form-row">
+                    <label>Wie soll das Event heißen?</label>
+                    <input type="text" name="eventName" placeholder="Eventname" onChange={handleChange} />
+                </div>
+
+                <div className="form-row">
+                    <label>Wann soll das Event starten?</label>
+                    <input type="datetime-local" name="eventDate" onChange={handleChange} />
+                </div>
+
+                <div className="form-row">
+                    <label>Welche Regeln liegen für das Event vor?</label>
+                    <input type="text" name="eventRegeln" placeholder="Eventregeln" onChange={handleChange} />
+                </div>
+
+                <div className="form-row">
+                    <label>Wo findet Secret Santa statt:</label>
+                    <input type="text" name="eventOrt" placeholder="Ort" onChange={handleChange} />
+                </div>
+
+                <div className="form-row">
+                    <label>Secret Santa Termin:</label>
+                    <input type="datetime-local" name="eventDeadline" onChange={handleChange} />
+                </div>
+
+                <div className="form-actions">
+                    <input type="submit" value="Event speichern" />
+                    <input type="button" value="Abbrechen" onClick={handleClick} />
+                </div>
+
+                <div className="logout">
+                    <input type="button" value="Logout" onClick={ausloggen} />
+                </div>
+            </form>
+
+            {/* Success Modal */}
+            {showMessage && (
+                <div className="modal-overlay">
+                    <div className="modal-box">
+                        <p>Event angelegt!</p>
+                        <button onClick={handleOk}>OK</button>
+                    </div>
+                </div>
+            )}
+        </>
+
+    );
+
+
+
+
+        {/* <form onSubmit={handleSubmit}>
 
             <h2>Erstellen Sie ein neues Event:</h2>
             <br/>
@@ -132,8 +195,9 @@ function Layout() {
             <div className="logout">
                 <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
             </div>
-        </form>
-    );
+        </form> */}
+
+
 }
 
 export default Layout;

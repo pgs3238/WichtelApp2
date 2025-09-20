@@ -15,34 +15,36 @@
     max-width: 90%;
     margin: 20px auto;
     border: 1px solid #ccc;
-    border-radius: 12px;
+    border-radius: 4px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     background-color: #f9f9f9;
     overflow: hidden;
     font-family: Arial, sans-serif;
 }
 
-.table-window-header {
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
-    padding: 10px 15px;
-    font-size: 18px;
+.table-window > table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
 }
 
 .table-window-body {
-    padding: 15px;
-    overflow-x: auto;
+    {/*padding: 15px;
+    overflow-x: auto;*/}
+    overflow-y: auto;
 }
 
-table {
+.table-window-body table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 }
+
 
 table td, table th {
     border: 1px solid #ddd;
     padding: 8px;
+    word-wrap: break-word;
 }
 
 table th {

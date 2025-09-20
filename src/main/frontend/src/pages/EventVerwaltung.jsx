@@ -4,14 +4,6 @@ import {useNavigate} from "react-router-dom";
 import cookies from "js-cookie";
 
 
-
-
-// let events = [
-//     {eventId:"1", deadline:"12.01.2023", eventDate:"30.01.2023", name:"wichteln", owner:"danield@entenhausen.de", regeln:"kaffee", ort:"caprivi"},
-//     {eventId:"2", deadline:"15.01.2023", eventDate:"31.01.2023", name:"kaffee", owner:"dagobert@entenhausen.de", regeln:"wasser", ort:"westerberg"}
-// ]
-
-
 //New Table
 const Row = ({ eventId, deadline, eventDate, name, owner, regeln, ort }) => (
     <tr>
@@ -55,38 +47,73 @@ const Row = ({ eventId, deadline, eventDate, name, owner, regeln, ort }) => (
 //     </center>
 // );
 
-const TableWindow = ({ data, title }) => (
-    <div className="table-window">
-        <div className="table-window-body">
+const TableWindow = ({ data =[] }) => { // default empty array
+    const minVisibleRows = 5;
+    const maxVisibleRows = 10;
+    const rowHeight = 40; // approximate height of a row in px
+    const rowCount = Array.isArray(data) ? data.length : 0;
+    const bodyHeight = Math.max(minVisibleRows, Math.min(data.length, maxVisibleRows)) * rowHeight;
+
+    // ✅ Date formatter (DD.MM.YYYY HH:MM, 24h)
+    const formatDate = (isoString) => {
+        if (!isoString) return "";
+        const d = new Date(isoString);
+        return d
+            .toLocaleString("de-DE", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false,
+            })
+            .replace(",", ""); // remove comma from German locale
+    };
+
+
+    return (
+        <div className="table-window">
             <table>
                 <thead>
                 <tr>
-                    <td>Event ID</td>
-                    <td>Event Name</td>
-                    <td>Wichtel Datum</td>
-                    <td>Geschenk Tag</td>
-                    <td>Owner</td>
-                    <td>Regeln</td>
-                    <td>Location</td>
+                    <th>Event ID</th>
+                    <th>Event Name</th>
+                    <th>Wichtel Datum</th>
+                    <th>Geschenk Tag</th>
+                    <th>Owner</th>
+                    <th>Regeln</th>
+                    <th>Location</th>
                 </tr>
                 </thead>
-                <tbody>
-                {data.map(row => (
-                    <tr key={row.eventId}>
-                        <td>{row.eventId}</td>
-                        <td>{row.name}</td>
-                        <td>{row.eventDate}</td>
-                        <td>{row.deadline}</td>
-                        <td>{row.owner}</td>
-                        <td>{row.regeln}</td>
-                        <td>{row.ort}</td>
-                    </tr>
-                ))}
-                </tbody>
             </table>
+            <div className="table-window-body" style={{ maxHeight: `${bodyHeight}px` }}>
+                <table>
+                    <tbody>
+                    {rowCount > 0 ? (
+                        data.map((row) => (
+                            <tr key={row.eventId}>
+                                <td>{row.eventId}</td>
+                                <td>{row.name}</td>
+                                <td>{formatDate(row.eventDate)}</td>
+                                <td>{formatDate(row.deadline)}</td>
+                                <td>{row.owner}</td>
+                                <td>{row.regeln}</td>
+                                <td>{row.ort}</td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="7" style={{ textAlign: "center", padding: "10px" }}>
+                                No events available
+                            </td>
+                        </tr>
+                    )}
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
 function Layout() {
 
@@ -140,10 +167,6 @@ function Layout() {
 
             <h2>Eventverwaltung</h2>
             <br/>
-            <br/>
-            <div className="hier">
-                <label>Das ist eine Demo Tabelle und symbolisiert nur wie der Endzustand hätte aussehen sollen</label>
-            </div>
             <br/>
             {/*<Table data={rows}/>*/}
             <TableWindow data={rows} title="Eventverwaltung" />
