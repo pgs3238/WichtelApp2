@@ -15,6 +15,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/*
+Create User
+Created tables
+wichtel_user
+wichtel_event_wichtel_user
+wichtel_subgruppe_wichtel_user
+ */
 @Entity
 @UserDefinition
 @Table(name = "wichtel_user")
@@ -38,12 +45,23 @@ public class User {
     @Roles @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<String>(List.of("user"));
 
+    /*
+    wichtel_event_wichtel_user
+    All participants of a Wichtel
+    //TODO Change this to add a value "radio" with start value = 0 -
+       when email has been sent its turned to 1 -
+       that way a check is in place, so that noone gets emails everytime the button is pressed
+     */
     @ManyToMany(targetEntity = Event.class, fetch = FetchType.EAGER)
     @JoinTable(name = "wichtel_event_wichtel_user",
             joinColumns = @JoinColumn(name = "user_email"),
             inverseJoinColumns = @JoinColumn(name = "event_eventid"))
     private Set<Event> event = new HashSet<>();
 
+    /*
+    wichtel_subgruppe_wichtel_user
+    All participants within a subgroup
+     */
     @ManyToMany(targetEntity = Subgruppe.class, fetch = FetchType.EAGER)
     @JoinTable(name = "wichtel_subgruppe_wichtel_user",
             joinColumns = @JoinColumn(name = "user_email"),

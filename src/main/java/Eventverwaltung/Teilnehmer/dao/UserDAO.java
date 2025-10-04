@@ -11,7 +11,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/*
+Abstract Class to find and delete Users
+Note: DAO = Data Access Object, a layer to handle all data operations cleanly
+ */
 @Transactional
 @RequestScoped
 public class UserDAO extends GenericDAO<User> {

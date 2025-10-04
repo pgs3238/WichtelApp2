@@ -7,7 +7,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.Map;
 
-
+/*
+Abstract class for functions such as:
+save, update, delete, find, findAll (list), findOneResult, findListResult
+Note: DAO = Data Access Object, a layer to handle all data operations cleanly
+ */
 public abstract class GenericDAO<T> {
 
 //    private final String UNIT_NAME = "Wichtel_AppCtr_EJB";

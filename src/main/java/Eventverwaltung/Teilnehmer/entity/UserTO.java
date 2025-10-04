@@ -6,6 +6,11 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
 
+/*
+TO for User
+Note: TO=Transfer Object
+Frontend Connected to TO - no direct connection to backend!
+ */
 public class UserTO implements Serializable {
 
     //Integer userID;

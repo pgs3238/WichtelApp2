@@ -3,12 +3,6 @@
 -- insert into myentity (id, field) values(nextval('hibernate_sequence'), 'field-1');
 -- insert into myentity (id, field) values(nextval('hibernate_sequence'), 'field-2');
 -- insert into myentity (id, field) values(nextval('hibernate_sequence'), 'field-3');
-INSERT INTO wichtel_user (email, name, password, vorname) VALUES ('danield@entenhausen.de', 'Duesentrieb', '$2a$10$JmYdquLaQO5ejpxsa9Fxg.NYuAcZz3f.YSEMdL6d6ZP27un3PSMJO', 'Daniel');
-INSERT INTO user_roles (user_email, roles) VALUES ('danield@entenhausen.de', 'user');
--- passwort: 12345
-
-INSERT INTO wichtel_user (email, name, password, vorname) VALUES ('doduck@entenhausen.de', 'Duck', '$2a$10$pWeBuWHLA6ilqQq4b3JXc.AU8QmsaxMsd6.svvmVv9oXzZd6fTry.', 'Donald');
-INSERT INTO public.user_roles (user_email, roles) VALUES ('doduck@entenhausen.de', 'user');
 
 --Testuser für Wichtel - passwort: string
 INSERT INTO public.wichtel_user (email, name, password, vorname) VALUES ('string@1', 'string', '$2a$10$kKLh2n8AJFpIUbWKYjVIUeTyY.W8U2EQzqs63U1cTh7qIVRr4wcFq', 'string');
@@ -31,5 +25,33 @@ INSERT INTO public.user_roles (user_email, roles) VALUES ('string@7', 'user');
 INSERT INTO public.user_roles (user_email, roles) VALUES ('string@8', 'user');
 INSERT INTO public.user_roles (user_email, roles) VALUES ('string@9', 'user');
 INSERT INTO public.user_roles (user_email, roles) VALUES ('string@10', 'user');
+
+
+-- Haupt Testuser
+-- Username:    danield@entenhausen.de
+-- Passwort:    12345
+
+INSERT INTO wichtel_user (email, name, password, vorname) VALUES ('danield@entenhausen.de', 'Duesentrieb', '$2a$10$JmYdquLaQO5ejpxsa9Fxg.NYuAcZz3f.YSEMdL6d6ZP27un3PSMJO', 'Daniel');
+INSERT INTO user_roles (user_email, roles) VALUES ('danield@entenhausen.de', 'user');
+-- passwort: 12345
+
+--Weiterer Testuser
+INSERT INTO wichtel_user (email, name, password, vorname) VALUES ('doduck@entenhausen.de', 'Duck', '$2a$10$pWeBuWHLA6ilqQq4b3JXc.AU8QmsaxMsd6.svvmVv9oXzZd6fTry.', 'Donald');
+INSERT INTO public.user_roles (user_email, roles) VALUES ('doduck@entenhausen.de', 'user');
+
+--Wichtelevents Angelegt mit ersten Teilnehmern
+INSERT INTO wichtel_event (eventid, deadline, eventdate, name, ort, owner, regeln) VALUES('1000' ,'2025-10-11 15:00:00.000000', '2025-10-04 15:00:00.000000', 'Döner macht schöner', 'Dönerladen', 'danield@entenhausen.de', 'Döner für alle');
+INSERT INTO wichtel_event_wichtel_user(user_email, event_eventid) VALUES ('string@1', '1000');
+INSERT INTO wichtel_event_wichtel_user(user_email, event_eventid) VALUES ('string@3', '1000');
+INSERT INTO wichtel_event_wichtel_user(user_email, event_eventid) VALUES ('string@5', '1000');
+INSERT INTO wichtel_event_wichtel_user(user_email, event_eventid) VALUES ('string@6', '1000');
+INSERT INTO wichtel_event (eventid, deadline, eventdate, name, ort, owner, regeln) VALUES('2000' ,'2025-10-20 19:00:00.000000', '2025-10-06 17:00:00.000000', 'Schokolade', 'Bei mir', 'danield@entenhausen.de', 'Eine Tafel Schokolade');
+INSERT INTO wichtel_event (eventid, deadline, eventdate, name, ort, owner, regeln) VALUES('3000' ,'2025-10-22 07:45:00.000000', '2025-10-02 12:00:00.000000', 'Kaffee', 'Hamburg', 'doduck@entenhausen.de', 'Kaffee für alle');
+
+
+
+
+
+
 
 

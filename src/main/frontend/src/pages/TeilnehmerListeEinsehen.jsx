@@ -1,5 +1,6 @@
 
 import React, {useState} from 'react';
+import { useLocation } from "react-router-dom"
 import './TeilnehmerListeEinsehen.css'
 import {useNavigate} from "react-router-dom";
 import cookies from "js-cookie";
@@ -11,7 +12,10 @@ let events = [
     {eventId:"2", deadline:"15.01.2023", eventDate:"31.01.2023", name:"kaffee", owner:"dagobert@entenhausen.de", regeln:"wasser", ort:"westerberg"}
 ]
 
-
+const TeilnehmerPage = () => {
+    const { state } = useLocation();
+    const eventid = state?.eventId;
+};
 
 
 const Row = (props) => {

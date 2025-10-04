@@ -4,8 +4,15 @@ import './EventAnsehen.css';
 import {useNavigate} from "react-router-dom";
 import cookies from "js-cookie";
 
-const Row = ({ eventid, deadline, eventdate, name, owner, regeln, ort }) => (
-    <tr>
+const Row = ({ eventid, deadline, eventdate, name, owner, regeln, ort, isSelected, onSelect }) => (
+    <tr
+        onClick={() => onSelect(eventid)}
+        style={{
+                backgroundColor: isSelected ? "#d0f0ff" : "transparent",
+                cursor: "pointer",
+            }}
+
+    >
         <td>{eventid}</td>
         <td>{name}</td>
         <td>{eventdate}</td>
@@ -16,7 +23,7 @@ const Row = ({ eventid, deadline, eventdate, name, owner, regeln, ort }) => (
     </tr>
 );
 
-const Table = ({ data }) => (
+const Table = ({ data, selectedId, onSelect }) => (
     <div className="table-window">
         <table>
             <thead>
@@ -41,6 +48,8 @@ const Table = ({ data }) => (
                     owner={row.owner}
                     regeln={row.regeln}
                     ort={row.ort}
+                    isSelected={row.eventId === selectedId}
+                    onSelect={onSelect}
                 />
             ))}
             </tbody>
@@ -48,37 +57,16 @@ const Table = ({ data }) => (
     </div>
 );
 
-// const Table = (props) => {
-//     const{data} = props
-//     return (<center><table>
-//         <thead>
-//         <td>Event ID</td>
-//         <td>Wichtel Datum</td>
-//         <td>Geschenk Tag</td>
-//         <td>Event Name</td>
-//         <td>Owner</td>
-//         <td>Regeln</td>
-//         <td>Location</td>
-//         </thead>
-//         <tbody>
-//         {data.map(row =>
-//             <Row eventid = {row.eventId}
-//                  deadline = {row.deadline}
-//                  eventdate = {row.eventDate}
-//                  name = {row.name}
-//                  owner = {row.owner}
-//                  regeln = {row.regeln}
-//                  ort = {row.ort} />
-//         )}
-//         </tbody>
-//     </table></center>)
-// }
-
 function Layout () {
 
     const [inputs, setInputs] = useState ({});
     const navigate = useNavigate();
     const [rows, setRows] = useState([]);
+    const [selectedEventId, setSelectedEventId] = useState(null);
+    const handleSelect = (id) => {
+        console.log("Selected event:", id);
+        setSelectedEventId(id);
+    };
 
     // Fetch events owned by current user
     useEffect(() => {
@@ -106,8 +94,13 @@ function Layout () {
         navigate("/eventVerwaltung");
     }
 
-    const zuTeilnehmer = () => {
-        navigate("/eventVerwaltung/eventAnsehen/teliEinsehen");
+    const zuTeilnehmer = (eventid) => {
+        if (eventid) {
+            navigate("/eventVerwaltung/eventAnsehen/teliEinsehen", {
+                state: { eventid },
+            });
+        }
+
     }
 
     const zuBearbeiten = () => {
@@ -115,7 +108,7 @@ function Layout () {
     }
 
     const wichtelzuOrdnung = () => {
-        navigate("/");
+        //navigate("/");
     }
 
     const handleSubmit = (event) => {
@@ -140,11 +133,30 @@ function Layout () {
         <form onSubmit={handleSubmit}>
             <div className="form-container">
                 <h2>Meine Events verwalten:</h2>
-                <Table data={rows}/>
+                {/*<Table*/}
+                {/*    data={rows}*/}
+                {/*    selectedId={selectedEventId}*/}
+                {/*    onSelect={setSelectedEventId}*/}
+                {/*/>*/}
+                <Table
+                    data={rows}
+                    selectedId={selectedEventId}
+                    onSelect={(id) => {
+                        setSelectedEventId(id);  // update state
+                        handleSelect(id);        // call any other handler
+                    }}
+                />
+
 
                 <div className="eventedit">
                     <input type="button" id="adduser" value="Bearbeiten" onClick={zuBearbeiten}/>
-                    <input type="button" id="adduser" value="Teilnehmer Anzeigen" onClick={zuTeilnehmer}/>
+                    <input
+                        type="button"
+                        id="adduser"
+                        value="Teilnehmer Hinzufügen"
+                        onClick={() => zuTeilnehmer(selectedEventId)}
+                        disabled={!selectedEventId}
+                    />
                 </div>
 
                 <div className="zuordnungcancel">
