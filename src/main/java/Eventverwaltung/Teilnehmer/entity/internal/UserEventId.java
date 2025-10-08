@@ -8,31 +8,31 @@ import java.util.Objects;
 public class UserEventId implements Serializable {
 
     @Column(name = "usermail")
-    private String UserEmail;
+    private String userEmail;
 
     @Column(name = "event_eventid")
-    private Long eventId;
+    private int eventId;
 
     public UserEventId() {}
 
-    public UserEventId(String userEmail, Long eventId) {
-        this.UserEmail = userEmail;
+    public UserEventId(String userEmail, int eventId) {
+        this.userEmail = userEmail;
         this.eventId = eventId;
     }
 
     public String getUserEmail() {
-        return UserEmail;
+        return userEmail;
     }
 
-    public Long getEventId() {
+    public int getEventId() {
         return eventId;
     }
 
     public void setUserEmail(String userEmail) {
-        this.UserEmail = userEmail;
+        this.userEmail = userEmail;
     }
 
-    public void setEventId(Long eventId) {
+    public void setEventId(int eventId) {
         this.eventId = eventId;
     }
 
@@ -41,12 +41,12 @@ public class UserEventId implements Serializable {
         if (this == o) return true;
         if (!(o instanceof UserEventId)) return false;
         UserEventId that = (UserEventId) o;
-        return Objects.equals(UserEmail, that.UserEmail) &&
+        return Objects.equals(userEmail, that.userEmail) &&
                 Objects.equals(eventId, that.eventId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(UserEmail, eventId);
+        return Objects.hash(userEmail, eventId);
     }
 }

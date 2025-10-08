@@ -11,7 +11,6 @@ const Row = ({ eventid, deadline, eventdate, name, owner, regeln, ort, isSelecte
                 backgroundColor: isSelected ? "#d0f0ff" : "transparent",
                 cursor: "pointer",
             }}
-
     >
         <td>{eventid}</td>
         <td>{name}</td>

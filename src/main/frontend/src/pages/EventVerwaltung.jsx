@@ -17,36 +17,6 @@ const Row = ({ eventId, deadline, eventDate, name, owner, regeln, ort }) => (
     </tr>
 );
 
-// const Table = ({ data }) => (
-//     <center>
-//         <table>
-//             <thead>
-//             <tr>
-//                 <td>Event ID</td>
-//                 <td>Wichtel Datum</td>
-//                 <td>Geschenk Tag</td>
-//                 <td>Event Name</td>
-//                 <td>Owner</td>
-//                 <td>Regeln</td>
-//                 <td>Location</td>
-//             </tr>
-//             </thead>
-//             <tbody>
-//             {data.map(row =>
-//                 <Row key={row.eventId}
-//                      eventId={row.eventId}
-//                      deadline={row.deadline}
-//                      eventDate={row.eventDate}
-//                      name={row.name}
-//                      owner={row.owner}
-//                      regeln={row.regeln}
-//                      ort={row.ort}/>
-//             )}
-//             </tbody>
-//         </table>
-//     </center>
-// );
-
 const TableWindow = ({ data =[] }) => { // default empty array
     const minVisibleRows = 5;
     const maxVisibleRows = 10;
