@@ -12,7 +12,7 @@ let events = [
     {user_email:"dagoduck@entenhausen.de", subgruppe_subgruppeid:"1"}
 ]
 
-
+// TODO this page is not connected with Backend
 
 
 const Row = (props) => {

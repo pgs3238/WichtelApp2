@@ -1,7 +1,6 @@
 package Eventverwaltung.Event.entity;
 
 import Eventverwaltung.Event.entity.internal.Event;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -19,8 +18,6 @@ public class EventTO implements Serializable {
         Event event = new Event(this.eventId, this.name,this.regeln,this.deadline,this.ort, this.eventDate, this.owner);
         return event;
     }
-
-
 
     public int getEventId() {
         return eventId;

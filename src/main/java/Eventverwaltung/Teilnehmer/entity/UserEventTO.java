@@ -2,6 +2,8 @@ package Eventverwaltung.Teilnehmer.entity;
 
 //import Eventverwaltung.Teilnehmer.entity.internal.UserEvent;
 
+//TODO is this TO being used? why is the import deactivated? Check this TO something is confusing me.
+
 public class UserEventTO {
 
     private String userEmail;

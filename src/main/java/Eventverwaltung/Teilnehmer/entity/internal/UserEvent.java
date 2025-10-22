@@ -10,8 +10,6 @@ public class UserEvent {
 
     @EmbeddedId
     @AttributeOverrides({
-            //@AttributeOverride(name = "userEmail", column = @Column(name = "keypartone")),
-            //@AttributeOverride(name = "eventId", column = @Column(name = "keyparttwo"))
             @AttributeOverride(name = "userEmail", column = @Column(name = "usermail")),
             @AttributeOverride(name = "eventId", column = @Column(name = "event_eventid"))
     })
@@ -19,13 +17,11 @@ public class UserEvent {
 
     @ManyToOne
     @MapsId("userEmail")
-    //@JoinColumn(name = "keypartone")
     @JoinColumn(name = "usermail")
     private User user;
 
     @ManyToOne
     @MapsId("eventId")
-    //@JoinColumn(name = "keyparttwo")
     @JoinColumn(name = "event_eventid")
     private Event event;
 

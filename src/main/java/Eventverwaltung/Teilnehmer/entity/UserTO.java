@@ -4,12 +4,16 @@ import Eventverwaltung.Teilnehmer.entity.internal.User;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
+//import jakarta.validation.constraints.Email;
 import java.io.Serializable;
+
+//TODO clean up unused getters and setters - constraint email needs to be modified with a regex
+// new jakarta constraint does not work with quarkus 2.x
+// create branch, test what happens if upgrading project to quarkus 3.x
 
 /*
 TO for User
 Note: TO=Transfer Object
-Frontend Connected to TO - no direct connection to backend!
  */
 public class UserTO implements Serializable {
 

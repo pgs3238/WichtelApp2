@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
+//TODO Tests not implemented and being used! Modify or remove
+
 @QuarkusTest
 public class GreetingResourceTest {
 

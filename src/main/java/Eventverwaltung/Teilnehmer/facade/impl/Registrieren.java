@@ -14,10 +14,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-/*
-Register new User
-with create user and delete user
- */
 @Path("/users")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -32,7 +28,6 @@ public class Registrieren implements IRegistrieren {
     @Override
     public boolean userLoeschen(String email) {
         User aUser = userDAO.findUserByEmail(email);
-        //System.out.println("User "+aUser.getEmail()+" gefunden zum Loeschen");
         if (aUser == null) {
             return Boolean.FALSE;
         } else {
@@ -58,23 +53,14 @@ public class Registrieren implements IRegistrieren {
     }
 
     @POST
-    // @PermitAll
     @Override
     public boolean userSpeichern(@Valid UserTO userTO) {
-        //System.out.println(userTO.toString());
-
         User aUser = userDAO.findUserByEmail(userTO.getEmail());
         aUser.setVorname(userTO.getVorname());
         aUser.setName(userTO.getName());
         aUser.setEmail(userTO.getEmail());
         aUser.setPassword(userTO.getPasswort());
-
-       // System.out.println("Test1");
-
         boolean result = userDAO.update(aUser);
-
-      //  System.out.println("Test2");
-
         return result;
 
     }

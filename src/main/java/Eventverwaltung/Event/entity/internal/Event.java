@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 
+//TODO Clean up unused named queries when testing has finished
+
 @Entity
 @Table(name = "wichtel_event")
 @NamedQuery(name = "User.Event", query = "select owner FROM User owner join Event we on owner.email=we.owner WHERE we.id=:id")
@@ -15,7 +17,6 @@ import java.util.*;
 @NamedQuery(name = "Event.findByOwner", query = "SELECT e FROM Event e WHERE e.owner = :owner")
 //@NamedQuery(name = "AlleEvents", query = "select '*' FROM wichtel_event")
 //@NamedQuery(name = "User.Event.unregteilnehmer", query = "select u FROM User u, Event e WHERE u in e.user")
-
 public class Event implements Serializable {
 
     public static final String GET_EVENTOWNER = "User.Event";

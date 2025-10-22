@@ -11,6 +11,12 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.*;
 import java.util.stream.Collectors;
+
+//TODO - Test Code. Last time this code was tested was in January of 2023
+// - when Backend and Frontend are connected,
+// test if all code can actually create fully functional "Wichtelzuordnungen".
+// Only then clean up code.
+
 @Path("/wichteln")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)

@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import './TeilnehmerListeEinsehen.css'
 import cookies from "js-cookie";
 
-
+// TODO Clean up after finishing modifications
 
 // let events = [
 //     {eventId:"1", deadline:"12.01.2023", eventDate:"30.01.2023", name:"wichteln", owner:"danield@entenhausen.de", regeln:"kaffee", ort:"caprivi"},

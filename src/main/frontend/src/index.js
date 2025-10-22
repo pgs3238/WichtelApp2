@@ -33,6 +33,7 @@ import EventVerwaltung from "./pages/EventVerwaltung";
 import MessageService from "./pages/MessageService";
 import SubgruppenService from "./pages/SubgruppenService";
 
+// TODO (2025) - find out what the plan was and or clean up!!
 
 //alter code - darunter neuer code
 /*function Welcome(props) {

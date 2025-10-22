@@ -11,6 +11,10 @@ import javax.ws.rs.core.SecurityContext;
 @Path("/api/users")
 public class UserResource {
 
+    /*
+    TODO - changed idea of making users get Admin rights when creating a new event to getting the rights trough login.
+    pathparam queryparam is no longer needed, clean up and remove
+     */
 
     @GET
     @RolesAllowed({"admin","user"})

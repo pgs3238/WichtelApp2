@@ -7,6 +7,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.Map;
 
+//TODO clean up unused code
+
 /*
 Abstract class for functions such as:
 save, update, delete, find, findAll (list), findOneResult, findListResult

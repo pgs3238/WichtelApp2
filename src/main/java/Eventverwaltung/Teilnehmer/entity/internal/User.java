@@ -15,6 +15,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+//TODO clean up after testing code. Note: Cleanup wont be possible before adding email system
+
 /*
 Create User
 Created tables

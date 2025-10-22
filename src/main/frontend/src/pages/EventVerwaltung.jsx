@@ -3,6 +3,8 @@ import './EventVerwaltung.css'
 import {useNavigate} from "react-router-dom";
 import cookies from "js-cookie";
 
+// TODO BUG FIX - WichtelDatum muss nach aktuellem Datum sein! GeschenkTag muss nach WichtelDatum sein.
+
 
 //New Table
 const Row = ({ eventId, deadline, eventDate, name, owner, regeln, ort }) => (
@@ -24,7 +26,7 @@ const TableWindow = ({ data =[] }) => { // default empty array
     const rowCount = Array.isArray(data) ? data.length : 0;
     const bodyHeight = Math.max(minVisibleRows, Math.min(data.length, maxVisibleRows)) * rowHeight;
 
-    // ✅ Date formatter (DD.MM.YYYY HH:MM, 24h)
+    // Date formatter (DD.MM.YYYY HH:MM, 24h)
     const formatDate = (isoString) => {
         if (!isoString) return "";
         const d = new Date(isoString);

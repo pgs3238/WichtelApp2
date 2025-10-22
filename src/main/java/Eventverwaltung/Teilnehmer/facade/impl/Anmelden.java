@@ -8,9 +8,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
-/*
-Login function - find User by Email
- */
 //@Stateless in Quarkus =
 @Transactional
 @RequestScoped

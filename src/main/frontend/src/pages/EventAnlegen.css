@@ -1,6 +1,6 @@
 /* Center the form and limit width */
 .form-container {
-    max-width: 500px;       /* or whatever fits your design */
+    max-width: 500px;
     margin: 0 auto;          /* centers the form horizontally */
     padding: 20px;
     background: #f9f9f9;

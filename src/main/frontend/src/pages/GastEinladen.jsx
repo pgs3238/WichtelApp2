@@ -3,17 +3,12 @@ import cookies from "js-cookie";
 import './GastEinladen.css'
 import {useNavigate} from "react-router-dom";
 
-
-
-
+//TODO - Not connected to Backend
 
 let events = [
     {user_email:"doduck@entenhausen.de", event_eventid: "1"},
     {user_email:"dagoduck@entenhausen.de", event_eventid:"1"}
 ]
-
-
-
 
 const Row = (props) => {
     const {user_email, event_eventid} = props
@@ -22,8 +17,6 @@ const Row = (props) => {
         <td>{event_eventid}</td>
     </tr>)
 }
-
-
 
 const Table = (props) => {
     const{data} = props

@@ -24,7 +24,7 @@ const Row = (props) => {
     </tr>)
 }
 
-
+// TODO This Page is not connected to Backend
 
 const Table = (props) => {
     const{data} = props
