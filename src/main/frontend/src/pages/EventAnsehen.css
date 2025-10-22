@@ -1,43 +1,61 @@
-
-.form-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
+.eventedit,
+.zuordnungcancel {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 10px 0;
 }
 
-.table-window {
+.eventedit input,
+.zuordnungcancel input {
+    width: 180px;
+}
+
+.logout {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.table-window-event-ansehen {
+    width: 900px;
+    max-width: 90%;
+    margin: 20px auto;
     max-height: 400px; /* scrollable if > 10 rows */
-    overflow-y: auto;
+    /*overflow-y: auto;*/
     border: 1px solid #ccc;
-    border-radius: 6px;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background-color: #f9f9f9;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
 }
 
-table {
+.table-window-event-ansehen > table {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
 }
 
-thead {
-    position: sticky;
-    top: 0;
-    background-color: #f2f2f2;
-    z-index: 1;
+.table-window-event-ansehen-body {
+    overflow-y: auto;
 }
 
-td, th {
+.table-window-event-ansehen-body table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+table td, table th {
     border: 1px solid #ddd;
     padding: 8px;
     word-wrap: break-word;
 }
 
-tr:nth-child(even) { background-color: #f9f9f9; }
-tr:hover { background-color: #e6f7ff; }
-
-.eventedit, .zuordnungcancel, .logout {
-    text-align: center;
+table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
 }
 
-.eventedit input, .zuordnungcancel input {
-    margin: 0 5px;
-}
+table tr:nth-child(even) { background-color: #f9f9f9; }
+table tr:hover { background-color: #e6f7ff; }

@@ -4,6 +4,19 @@ import './EventAnsehen.css';
 import {useNavigate} from "react-router-dom";
 import cookies from "js-cookie";
 
+//TODO Event Bearbeiten - noch nicht richtig eingebaut ggf. entfernen??
+// Besser ein neues Event anzulegen als ein altes zu ändern...
+// neue Idee - bei select event show table Teilnehmer,
+// darunter dann butten Teilnehmer hinzufügen Teilnehmer enfernen,
+// jeweils popup mit eingabe etc.
+// Button Wichtelzuordnung starten ist für Testzwecke und sollte später
+// automatisch bei Zuordnungsdatum stattfinden, daher dann button entfernen;
+// anstelle von Gruppen soll es Einschränkungen geben, jedem Nutzer kann eingeschränkt
+// werden wem er keine Geschenke geben soll
+
+
+//TODO überflüssigen Code entfernen nach thorough test!
+
 const Row = ({ eventid, deadline, eventdate, name, owner, regeln, ort, isSelected, onSelect }) => (
     <tr
         onClick={() => onSelect(eventid)}
@@ -22,43 +35,114 @@ const Row = ({ eventid, deadline, eventdate, name, owner, regeln, ort, isSelecte
     </tr>
 );
 
-const Table = ({ data, selectedId, onSelect }) => (
-    <div className="table-window">
-        <table>
-            <thead>
-            <tr>
-                <th>Event ID</th>
-                <th>Event Name</th>
-                <th>Wichtel Datum</th>
-                <th>Geschenk Tag</th>
-                <th>Owner</th>
-                <th>Regeln</th>
-                <th>Location</th>
-            </tr>
-            </thead>
-            <tbody>
-            {data.map(row => (
-                <Row
-                    key={row.eventId}
-                    eventid={row.eventId}
-                    name={row.name}
-                    eventdate={row.eventDate}
-                    deadline={row.deadline}
-                    owner={row.owner}
-                    regeln={row.regeln}
-                    ort={row.ort}
-                    isSelected={row.eventId === selectedId}
-                    onSelect={onSelect}
-                />
-            ))}
-            </tbody>
-        </table>
-    </div>
-);
+const Table = ({ data, selectedId, onSelect }) => {
 
-function Layout () {
+    const minVisibleRows = 5;
+    const maxVisibleRows = 10;
+    const rowHeight = 40; // approximate height of a row in px
+    const rowCount = Array.isArray(data) ? data.length : 0;
+    const bodyHeight = Math.max(minVisibleRows, Math.min(data.length, maxVisibleRows)) * rowHeight;
 
-    const [inputs, setInputs] = useState ({});
+    // Date formatter (DD.MM.YYYY HH:MM, 24h)
+    const formatDate = (isoString) => {
+        if (!isoString) return "";
+        const d = new Date(isoString);
+        return d
+            .toLocaleString("de-DE", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false,
+            })
+            .replace(",", ""); // remove comma from German locale
+    };
+
+    // return (
+    //     <div className="table-window-event-ansehen">
+    //         <table>
+    //             <thead>
+    //             <tr>
+    //                 <th>Event ID</th>
+    //                 <th>Event Name</th>
+    //                 <th>Wichtel Datum</th>
+    //                 <th>Geschenk Tag</th>
+    //                 <th>Owner</th>
+    //                 <th>Regeln</th>
+    //                 <th>Location</th>
+    //             </tr>
+    //             </thead>
+    //             <tbody>
+    //             {data.map(row => (
+    //                 <Row
+    //                     key={row.eventId}
+    //                     eventid={row.eventId}
+    //                     name={row.name}
+    //                     eventdate={formatDate(row.eventDate)}
+    //                     deadline={formatDate(row.deadline)}
+    //                     owner={row.owner}
+    //                     regeln={row.regeln}
+    //                     ort={row.ort}
+    //                     isSelected={row.eventId === selectedId}
+    //                     onSelect={onSelect}
+    //                 />
+    //             ))}
+    //             </tbody>
+    //         </table>
+    //     </div>
+    // );
+    return (
+        <div className="table-window-event-ansehen">
+            <table>
+                <thead>
+                <tr>
+                    <th>Event ID</th>
+                    <th>Event Name</th>
+                    <th>Wichtel Datum</th>
+                    <th>Geschenk Tag</th>
+                    <th>Owner</th>
+                    <th>Regeln</th>
+                    <th>Location</th>
+                </tr>
+                </thead>
+            </table>
+            <div className="table-window-event-ansehen-body" style={{maxHeight: `${bodyHeight}px`}}>
+                <table>
+                    <tbody>
+                    {data.map((row) => {
+                        const isSelected = row.eventId === selectedId;
+                        return (
+                            <tr
+                                key={row.eventId}
+                                onClick={() => onSelect(row.eventId)}
+                                style={{
+                                    backgroundColor: isSelected ? '#d0f0ff' : 'transparent',
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                <td>{row.eventId}</td>
+                                <td>{row.name}</td>
+                                <td>{formatDate(row.eventDate)}</td>
+                                <td>{formatDate(row.deadline)}</td>
+                                <td>{row.owner}</td>
+                                <td>{row.regeln}</td>
+                                <td>{row.ort}</td>
+                            </tr>
+                        );
+                    })}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
+
+}
+
+
+function Layout() {
+
+    const [inputs, setInputs] = useState({});
     const navigate = useNavigate();
     const [rows, setRows] = useState([]);
     const [selectedEventId, setSelectedEventId] = useState(null);
@@ -130,42 +214,49 @@ function Layout () {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className="form-container">
-                <h2>Meine Events verwalten:</h2>
-                {/*<Table*/}
-                {/*    data={rows}*/}
-                {/*    selectedId={selectedEventId}*/}
-                {/*    onSelect={setSelectedEventId}*/}
-                {/*/>*/}
-                <Table
-                    data={rows}
-                    selectedId={selectedEventId}
-                    onSelect={(id) => {
-                        setSelectedEventId(id);  // update state
-                        handleSelect(id);        // call any other handler
-                    }}
+            <h2>Meine Events</h2>
+            <br/>
+            <Table
+                data={rows}
+                selectedId={selectedEventId}
+                onSelect={(id) => {
+                    setSelectedEventId(id);  // update state
+                    handleSelect(id);        // call any other handler
+                }}
+            />
+            <br/>
+            <div className="eventedit">
+                <input
+                    type="button"
+                    id="adduser"
+                    value="Bearbeiten"
+                    onClick={zuBearbeiten}
                 />
-
-
-                <div className="eventedit">
-                    <input type="button" id="adduser" value="Bearbeiten" onClick={zuBearbeiten}/>
-                    <input
-                        type="button"
-                        id="adduser"
-                        value="Teilnehmer Hinzufügen"
-                        onClick={() => zuTeilnehmer(selectedEventId)}
-                        disabled={!selectedEventId}
-                    />
-                </div>
-
-                <div className="zuordnungcancel">
-                    <input type="button" id="adduser" value="Wichtelzuordnung starten" onClick={wichtelzuOrdnung}/>
-                    <input type="button" id="adduser" value="Abbrechen" onClick={abbrechenClick}/>
-                </div>
-
-                <div className="logout">
-                    <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
-                </div>
+                <input
+                    type="button"
+                    id="adduser"
+                    value="Teilnehmer Hinzufügen"
+                    onClick={() => zuTeilnehmer(selectedEventId)}
+                    disabled={!selectedEventId}
+                />
+            </div>
+            <div className="zuordnungcancel">
+                <input
+                    type="button"
+                    id="adduser"
+                    value="Wichtelzuordnung starten"
+                    onClick={wichtelzuOrdnung}
+                />
+                <input
+                    type="button"
+                    id="adduser"
+                    value="Abbrechen"
+                    onClick={abbrechenClick}
+                />
+            </div>
+            <br/>
+            <div className="logout">
+                <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
             </div>
         </form>
     );

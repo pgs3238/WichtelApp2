@@ -139,31 +139,42 @@ function Layout() {
 
             <h2>Eventverwaltung</h2>
             <br/>
-            <br/>
-            {/*<Table data={rows}/>*/}
             <TableWindow data={rows} title="Eventverwaltung" />
             <br/>
-            <div className="eventansehen">
-                <input
-                    type="submit"
-                    id="eventansehen"
-                    value="An Event teilnehmen"/>
-                &emsp;
-                <input type="button" id="eventansehen" value="E-Mail an Eventverwalter" onClick={email}/>
-            </div>
-            <br/>
-            <div className="eventanlegen">
-                <input type="button" id="eventanlegen" value="Event Anlegen" onClick={eventAnlegen}/>
-                &emsp;&emsp;&emsp;&emsp;
-                <input type="button" id="eventansehen" value="Eigene Events anzeigen" onClick={eventAnsehen}/>
+            <div className="button-group">
+                <div className="eventansehen">
+                    <input
+                        type="submit"
+                        id="eventteilnehmen"
+                        value="An Event teilnehmen"
+                    />
+                    <input
+                        type="button"
+                        id="email"
+                        value="E-Mail an Eventverwalter"
+                        onClick={email}
+                    />
+                </div>
+                <div className="eventanlegen">
+                    <input
+                        type="button"
+                        id="eventanlegen"
+                        value="Event Anlegen"
+                        onClick={eventAnlegen}
+                    />
+                    <input
+                        type="button"
+                        id="eventansehen"
+                        value="Eigene Events anzeigen"
+                        onClick={eventAnsehen}
+                    />
+                </div>
             </div>
             <br/>
             <div className="logout">
                 <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
             </div>
         </form>
-
-
     );
 }
 
