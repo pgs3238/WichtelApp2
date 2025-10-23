@@ -1,18 +1,82 @@
-.name {
+.register-form-container {
+    max-width: 500px;
+    margin: 0 auto;          /* centers the form horizontally */
+    padding: 20px;
+    /*background: #f9f9f9;*/
+    border-radius: 6px;
+    /*box-shadow: 0 3px 8px rgba(0,0,0,0.1);*/
+}
+
+.register-form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.register-form-row label {
+    width: 150px;           /* fixed label width for alignment */
+    text-align: right;
+    margin-right: 10px;
+}
+
+.register-form-row input {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+    max-width: 300px;
+}
+
+.register-form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.register-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-modal-box {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 8px;
     text-align: center;
 }
-.nname {
-    text-align: center;
+
+.register-modal-box button {
+    margin-top: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
 }
-.email {
-    text-align: center;
-}
-.passwort {
-    text-align: center;
-}
-.repasswort {
-    text-align: center;
-}
-.register {
-    text-align: center;
-}
+
+
+
+/*.name {*/
+/*    text-align: center;*/
+/*}*/
+/*.nname {*/
+/*    text-align: center;*/
+/*}*/
+/*.email {*/
+/*    text-align: center;*/
+/*}*/
+/*.passwort {*/
+/*    text-align: center;*/
+/*}*/
+/*.repasswort {*/
+/*    text-align: center;*/
+/*}*/
+/*.register {*/
+/*    text-align: center;*/
+/*}*/

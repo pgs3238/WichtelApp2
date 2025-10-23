@@ -6,6 +6,8 @@ import './Anmelden.css'
 import {useNavigate} from "react-router-dom";
 import cookies from "js-cookie";
 
+//TODO Remove this page!!!
+// Check first if all Links have been changed!! <-- Not yet
 
 function Layout() {
     const [inputs, setInputs] = useState({});

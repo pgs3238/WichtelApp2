@@ -3,12 +3,15 @@ import React, {useState} from 'react';
 import './Registrierung.css'
 import {useNavigate} from "react-router-dom";
 
+//TODO Handle Error missing Data
+
 function Layout() {
     const [inputs, setInputs] = useState({});
+    const [showMessage, setShowMessage] = useState(false); // <-- modal flag
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate("/anmelden");
+        navigate("/home");
     }
 
     const handleChange = (event) => {
@@ -47,83 +50,64 @@ function Layout() {
         }
 
       //  alert("OK")
+        setShowMessage(true);
     }
 
+    const handleOk = () => {
+        setShowMessage(false);
+        navigate("/home");
+    }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <>
+            <form onSubmit={handleSubmit} className={"register-form-container"}>
+                <h2>Neues Konto erstellen</h2>
 
-            <h2>Register</h2>
-            <br/>
-            <br/>
-            <div className="name">
-                <label>Vorname: </label>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
-                <input
-                    type="text"
-                    placeholder="Vorname"
-                    id="vname"
-                    name="vorname"
-                    onChange={handleChange}
-                />
-            </div>
-            <br/>
-            <div className="nname">
-                <label>Nachname: </label>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
-                <input
-                    type="text"
-                    placeholder="Nachname"
-                    id="nachname"
-                    name="nachname"
-                    onChange={handleChange}
-                />
-            </div>
-            <br/>
-            <div className="email">
-                <label>Email-Addresse: </label>
-                &emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
-                <input
-                    type="text"
-                    placeholder="E-Mail Adresse"
-                    id="email"
-                    name="email"
-                    onChange={handleChange}
-                />
-            </div>
-            <br/>
-            <div className="passwort">
-                <label>Passwort eingeben: </label>
-                &emsp;&emsp;&nbsp;&nbsp;&nbsp;
-                <input
-                    type="password"
-                    placeholder="Passwort"
-                    id="passwort"
-                    name="passwort"
-                    onChange={handleChange}
-                />
-            </div>
-            <br/>
-            <div className="repasswort">
-                <label>Passwort erneut eingeben: </label>
-                &nbsp;
-                <input
-                    type="password"
-                    placeholder="Passwort"
-                    id="repasswort"
-                    name="repasswort"
-                    onChange={handleChange}
-                />
-            </div>
-            <br/>
-            <div className="register">
-                <input type="submit" id="adduser" value="Registrieren"/>
-            </div>
-            <br/>
-            <div className="bcancel">
-                <input type="button" id="cancel" value="Abbrechen" onClick={handleClick}/>
-            </div>
-        </form>
+                <div className="register-form-row">
+                    <label>Vorname: </label>
+                    <input type="text" placeholder="Vorname" id="vname" name="vorname" onChange={handleChange}
+                    />
+                </div>
+
+                <div className="register-form-row">
+                    <label>Nachname: </label>
+                    <input type="text" placeholder="Nachname" id="nachname" name="nachname" onChange={handleChange}
+                    />
+                </div>
+
+                <div className="register-form-row">
+                    <label>E-mail: </label>
+                    <input type="text" placeholder="E-Mail Adresse" id="email" name="email" onChange={handleChange}
+                    />
+                </div>
+
+                <div className="register-form-row">
+                    <label>Passwort: </label>
+                    <input type="password" placeholder="Passwort" id="passwort" name="passwort" onChange={handleChange}
+                    />
+                </div>
+
+                <div className="register-form-row">
+                    <label>Passwort wiederholen: </label>
+                    <input type="password" placeholder="Passwort" id="repasswort" name="repasswort" onChange={handleChange}
+                    />
+                </div>
+
+                <div className="register-form-actions">
+                    <input type="submit" id="adduser" value="Registrieren"/>
+                    <input type="button" id="cancel" value="Abbrechen" onClick={handleClick}/>
+                </div>
+            </form>
+
+            {showMessage && (
+                <div className="register-modal-overlay">
+                    <div className="register-modal-box">
+                        <p>Konto angelegt!</p>
+                        <button onClick={handleOk}>OK</button>
+                    </div>
+                </div>
+            )}
+        </>
     );
 }
 
