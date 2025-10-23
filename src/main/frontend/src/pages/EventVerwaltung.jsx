@@ -57,32 +57,28 @@ const TableWindow = ({ data =[] }) => { // default empty array
                     <th>Location</th>
                 </tr>
                 </thead>
-            </table>
-            <div className="table-window-body" style={{ maxHeight: `${bodyHeight}px` }}>
-                <table>
-                    <tbody>
-                    {rowCount > 0 ? (
-                        data.map((row) => (
-                            <tr key={row.eventId}>
-                                <td>{row.eventId}</td>
-                                <td>{row.name}</td>
-                                <td>{formatDate(row.eventDate)}</td>
-                                <td>{formatDate(row.deadline)}</td>
-                                <td>{row.owner}</td>
-                                <td>{row.regeln}</td>
-                                <td>{row.ort}</td>
-                            </tr>
-                        ))
-                    ) : (
-                        <tr>
-                            <td colSpan="7" style={{ textAlign: "center", padding: "10px" }}>
-                                No events available
-                            </td>
+                <tbody className="table-window-body" style={{ maxHeight: `${bodyHeight}px` }}>
+                {rowCount > 0 ? (
+                    data.map((row) => (
+                        <tr key={row.eventId}>
+                            <td>{row.eventId}</td>
+                            <td>{row.name}</td>
+                            <td>{formatDate(row.eventDate)}</td>
+                            <td>{formatDate(row.deadline)}</td>
+                            <td>{row.owner}</td>
+                            <td>{row.regeln}</td>
+                            <td>{row.ort}</td>
                         </tr>
-                    )}
-                    </tbody>
-                </table>
-            </div>
+                    ))
+                ) : (
+                    <tr>
+                        <td colSpan="7" style={{ textAlign: "center", padding: "10px" }}>
+                            No events available
+                        </td>
+                    </tr>
+                )}
+                </tbody>
+            </table>
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 import Snowfall from "react-snowfall";
 //alter code, darueber neuer code
@@ -59,18 +59,45 @@ root.render(
  /* If you want to start measuring performance in your app, pass a function
  to log results (for example: reportWebVitals(console.log))
  or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals */
-//TODO not implemented yet (???) so deaktivated currently 31.12.2022
+//TODO not implemented yet (???) so deactivated currently 31.12.2022
 // reportWebVitals();
 
 //Create Routes (Seiten verknüpfen aus pages)
 export default function Apps() {
     const [token, setToken] = useState();
+    const [snowflakes, setSnowflakes] = useState(
+        //make snowfall density responsive
+        Math.max(60, Math.min(window.innerWidth / 10, 150))
+    )
+
+    useEffect(() => {
+        const handleResize = () => {
+            setSnowflakes(Math.max(60, Math.min(window.innerWidth / 10, 150)));
+        };
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+
 
    // if(!token) { return <Anmelden setToken={setToken} /> }
     return (
 
         <BrowserRouter>
-            <Snowfall/>
+            <Snowfall
+                snowflakeCount={snowflakes}
+                color="#fff"
+                style={{
+                    position:'fixed',
+                    width: '100vw',
+                    height: '100vh',
+                    top: 0,
+                    left: 0,
+                    zIndex: 1,
+                    pointerEvents:'none',
+                }}
+            />
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />

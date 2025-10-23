@@ -4,6 +4,11 @@ import cookies from "js-cookie";
 import './EventAnlegen.css'
 import {useNavigate} from "react-router-dom";
 
+// Todo change DateTime picker to MUI DateTimePicker - Problem is timezone is added.
+//  Backend needs modification to handle it.
+//  Frontend needs modification to handle Timezones. https://mui.com/x/react-date-pickers/
+//  alternative, just incase: https://www.npmjs.com/package/react-datepicker
+
 function Layout() {
     const [inputs, setInputs] = useState({});
     const [showMessage, setShowMessage] = useState(false); // <-- modal flag

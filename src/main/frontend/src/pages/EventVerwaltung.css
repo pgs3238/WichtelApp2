@@ -18,31 +18,35 @@
 }
 
 .table-window {
-    width: 900px;
+    width: 1200px;
     max-width: 90%;
     margin: 20px auto;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     background-color: #f9f9f9;
-    overflow: hidden;
+    overflow-x: auto; /* Allow horizontal scrolling */
+    /*overflow: hidden;*/
     font-family: Arial, sans-serif;
 }
 
 .table-window > table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
+    /*table-layout: fixed;*/
+    table-layout: auto;
 }
 
 .table-window-body {
+    overflow-x: auto; /* Allow horizontal scrolling */
     overflow-y: auto;
 }
 
 .table-window-body table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
+    /*table-layout: fixed;*/
+    table-layout: auto;
 }
 
 
