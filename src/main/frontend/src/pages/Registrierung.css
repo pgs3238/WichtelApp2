@@ -7,6 +7,10 @@
     /*box-shadow: 0 3px 8px rgba(0,0,0,0.1);*/
 }
 
+.register-form-title {
+    text-align: center;
+}
+
 .register-form-row {
     display: flex;
     justify-content: space-between;
@@ -59,24 +63,3 @@
     font-size: 14px;
     cursor: pointer;
 }
-
-
-
-/*.name {*/
-/*    text-align: center;*/
-/*}*/
-/*.nname {*/
-/*    text-align: center;*/
-/*}*/
-/*.email {*/
-/*    text-align: center;*/
-/*}*/
-/*.passwort {*/
-/*    text-align: center;*/
-/*}*/
-/*.repasswort {*/
-/*    text-align: center;*/
-/*}*/
-/*.register {*/
-/*    text-align: center;*/
-/*}*/

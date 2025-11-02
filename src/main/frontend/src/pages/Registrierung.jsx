@@ -61,7 +61,7 @@ function Layout() {
     return (
         <>
             <form onSubmit={handleSubmit} className={"register-form-container"}>
-                <h2>Neues Konto erstellen</h2>
+                <h2 className="register-form-title">Neues Konto erstellen</h2>
 
                 <div className="register-form-row">
                     <label>Vorname: </label>

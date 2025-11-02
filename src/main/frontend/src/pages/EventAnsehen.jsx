@@ -38,10 +38,11 @@ const Row = ({ eventid, deadline, eventdate, name, owner, regeln, ort, isSelecte
 const Table = ({ data, selectedId, onSelect }) => {
 
     const minVisibleRows = 5;
-    const maxVisibleRows = 10;
+    const maxVisibleRows = 6;
     const rowHeight = 40; // approximate height of a row in px
     const rowCount = Array.isArray(data) ? data.length : 0;
     const bodyHeight = Math.max(minVisibleRows, Math.min(data.length, maxVisibleRows)) * rowHeight;
+    //const bodyHeight = maxVisibleRows * rowHeight; // always max height
 
     // Date formatter (DD.MM.YYYY HH:MM, 24h)
     const formatDate = (isoString) => {
@@ -59,39 +60,6 @@ const Table = ({ data, selectedId, onSelect }) => {
             .replace(",", ""); // remove comma from German locale
     };
 
-    // return (
-    //     <div className="table-window-event-ansehen">
-    //         <table>
-    //             <thead>
-    //             <tr>
-    //                 <th>Event ID</th>
-    //                 <th>Event Name</th>
-    //                 <th>Wichtel Datum</th>
-    //                 <th>Geschenk Tag</th>
-    //                 <th>Owner</th>
-    //                 <th>Regeln</th>
-    //                 <th>Location</th>
-    //             </tr>
-    //             </thead>
-    //             <tbody>
-    //             {data.map(row => (
-    //                 <Row
-    //                     key={row.eventId}
-    //                     eventid={row.eventId}
-    //                     name={row.name}
-    //                     eventdate={formatDate(row.eventDate)}
-    //                     deadline={formatDate(row.deadline)}
-    //                     owner={row.owner}
-    //                     regeln={row.regeln}
-    //                     ort={row.ort}
-    //                     isSelected={row.eventId === selectedId}
-    //                     onSelect={onSelect}
-    //                 />
-    //             ))}
-    //             </tbody>
-    //         </table>
-    //     </div>
-    // );
     return (
         <div className="table-window-event-ansehen">
             <table>
@@ -106,37 +74,39 @@ const Table = ({ data, selectedId, onSelect }) => {
                     <th>Location</th>
                 </tr>
                 </thead>
+                <tbody className="table-window-event-ansehen-body" style={{maxHeight: `${bodyHeight}px`}}>
+                {/*<tbody className="table-window-event-ansehen-body">*/}
+                {data.map((row) => {
+                    const isSelected = row.eventId === selectedId;
+                    return (
+                        <tr
+                            key={row.eventId}
+                            onClick={() => onSelect(row.eventId)}
+                            style={{
+                                backgroundColor: isSelected ? '#d0f0ff' : 'transparent',
+                                cursor: 'pointer',
+                            }}
+                        >
+                            <td>{row.eventId}</td>
+                            <td>{row.name}</td>
+                            <td>{formatDate(row.eventDate)}</td>
+                            <td>{formatDate(row.deadline)}</td>
+                            <td>{row.owner}</td>
+                            <td>{row.regeln}</td>
+                            <td>{row.ort}</td>
+                        </tr>
+                    );
+                })}
+                {/*/!* Fill empty rows to always reach maxVisibleRows *!/*/}
+                {/*{Array.from({ length: Math.max(0, maxVisibleRows - data.length) }).map((_, idx) => (*/}
+                {/*    <tr key={`empty-${idx}`} style={{ height: `${rowHeight}px`, display: 'table', width: '100%', tableLayout: 'fixed' }}>*/}
+                {/*        <td colSpan={7}>&nbsp;</td>*/}
+                {/*    </tr>*/}
+                {/*))}*/}
+                </tbody>
             </table>
-            <div className="table-window-event-ansehen-body" style={{maxHeight: `${bodyHeight}px`}}>
-                <table>
-                    <tbody>
-                    {data.map((row) => {
-                        const isSelected = row.eventId === selectedId;
-                        return (
-                            <tr
-                                key={row.eventId}
-                                onClick={() => onSelect(row.eventId)}
-                                style={{
-                                    backgroundColor: isSelected ? '#d0f0ff' : 'transparent',
-                                    cursor: 'pointer',
-                                }}
-                            >
-                                <td>{row.eventId}</td>
-                                <td>{row.name}</td>
-                                <td>{formatDate(row.eventDate)}</td>
-                                <td>{formatDate(row.deadline)}</td>
-                                <td>{row.owner}</td>
-                                <td>{row.regeln}</td>
-                                <td>{row.ort}</td>
-                            </tr>
-                        );
-                    })}
-                    </tbody>
-                </table>
-            </div>
         </div>
-    );
-
+);
 }
 
 
@@ -214,8 +184,7 @@ function Layout() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h2>Meine Events</h2>
-            <br/>
+            <h2 className="eventa-form-title">Meine Events</h2>
             <Table
                 data={rows}
                 selectedId={selectedEventId}
@@ -224,7 +193,6 @@ function Layout() {
                     handleSelect(id);        // call any other handler
                 }}
             />
-            <br/>
             <div className="eventedit">
                 <input
                     type="button"
@@ -254,7 +222,6 @@ function Layout() {
                     onClick={abbrechenClick}
                 />
             </div>
-            <br/>
             <div className="logout">
                 <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
             </div>

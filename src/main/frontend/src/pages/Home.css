@@ -1,19 +1,51 @@
-h2 {
-    color: #24292e;
-    text-align: center;
-    font-size: 7mm;
+.home-form-container {
+    max-width: 500px;
+    margin: 0 auto;          /* centers the form horizontally */
+    padding: 20px;
+    /*background: #f9f9f9;*/
+    border-radius: 6px;
+    /*box-shadow: 0 3px 8px rgba(0,0,0,0.1);*/
 }
 
-h3 {
-    color: #24292e;
-    text-align: center;
-    font-size: 4mm;
-}
-
-.registrierung {
+.home-form-title {
     text-align: center;
 }
 
-.anmelden {
-    text-align: center;
+.home-form-description {
+    text-align: center;   /* Center the text */
+    word-wrap: break-word; /* Ensure long lines wrap */
+    margin: 16px 0;        /* Space around the text */
+    /*border: 1px solid #ccc; !* Optional border if needed *!*/
+    padding: 16px;
+    border-radius: 8px;
 }
+
+.home-form-row {
+    display: flex;
+    /*justify-content: space-between;*/
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    gap: 10px;
+}
+
+.home-form-row label {
+    width: 150px;           /* fixed label width for alignment */
+    text-align: right;
+    margin-right: 10px;
+}
+
+.home-form-row input {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+    max-width: 250px;
+}
+
+.home-form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin: 20px 0;
+}
+

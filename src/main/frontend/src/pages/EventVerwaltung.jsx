@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import cookies from "js-cookie";
 
 // TODO BUG FIX - WichtelDatum muss nach aktuellem Datum sein! GeschenkTag muss nach WichtelDatum sein.
+// TODO - Add function to Buttons - An Event Teilnehmen, E-Mail an Eventverwalter (do i want this button)
 
 
 //New Table
@@ -133,10 +134,8 @@ function Layout() {
     return (
         <form onSubmit={handleSubmit}>
 
-            <h2>Eventverwaltung</h2>
-            <br/>
+            <h2 className="eventv-form-title">Eventverwaltung</h2>
             <TableWindow data={rows} title="Eventverwaltung" />
-            <br/>
             <div className="button-group">
                 <div className="eventansehen">
                     <input
@@ -166,7 +165,6 @@ function Layout() {
                     />
                 </div>
             </div>
-            <br/>
             <div className="logout">
                 <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
             </div>

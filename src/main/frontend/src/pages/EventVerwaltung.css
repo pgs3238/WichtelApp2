@@ -17,6 +17,10 @@
     margin: 10px 0;
 }
 
+.eventv-form-title {
+    text-align: center;
+}
+
 .table-window {
     width: 1200px;
     max-width: 90%;

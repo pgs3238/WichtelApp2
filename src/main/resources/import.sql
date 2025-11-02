@@ -48,6 +48,11 @@ INSERT INTO wichtel_event_wichtel_user(user_email, event_eventid) VALUES ('strin
 INSERT INTO wichtel_event_wichtel_user1(event_eventid, usermail, radio) VALUES ('1000', 'string@1', '1');
 INSERT INTO wichtel_event_wichtel_user1(event_eventid, usermail, radio) VALUES ('1000', 'string@3', '0');
 INSERT INTO wichtel_event (eventid, deadline, eventdate, name, ort, owner, regeln) VALUES('2000' ,'2025-10-20 19:00:00.000000', '2025-10-06 17:00:00.000000', 'Schokolade', 'Bei mir', 'danield@entenhausen.de', 'Eine Tafel Schokolade');
+INSERT INTO wichtel_event (eventid, deadline, eventdate, name, ort, owner, regeln) VALUES('2001' ,'2025-10-20 19:00:00.000000', '2025-10-06 17:00:00.000000', 'Schokolade', 'Bei mir', 'danield@entenhausen.de', 'Eine Tafel Schokolade');
+INSERT INTO wichtel_event (eventid, deadline, eventdate, name, ort, owner, regeln) VALUES('2002' ,'2025-10-20 19:00:00.000000', '2025-10-06 17:00:00.000000', 'Schokolade', 'Bei mir', 'danield@entenhausen.de', 'Eine Tafel Schokolade');
+INSERT INTO wichtel_event (eventid, deadline, eventdate, name, ort, owner, regeln) VALUES('2003' ,'2025-10-20 19:00:00.000000', '2025-10-06 17:00:00.000000', 'Schokolade', 'Bei mir', 'danield@entenhausen.de', 'Eine Tafel Schokolade');
+INSERT INTO wichtel_event (eventid, deadline, eventdate, name, ort, owner, regeln) VALUES('2004' ,'2025-10-20 19:00:00.000000', '2025-10-06 17:00:00.000000', 'Schokolade', 'Bei mir', 'danield@entenhausen.de', 'Eine Tafel Schokolade');
+INSERT INTO wichtel_event (eventid, deadline, eventdate, name, ort, owner, regeln) VALUES('2005' ,'2025-10-20 19:00:00.000000', '2025-10-06 17:00:00.000000', 'Schokolade', 'Bei mir', 'danield@entenhausen.de', 'Eine Tafel Schokolade');
 INSERT INTO wichtel_event (eventid, deadline, eventdate, name, ort, owner, regeln) VALUES('3000' ,'2025-10-22 07:45:00.000000', '2025-10-02 12:00:00.000000', 'Kaffee', 'Hamburg', 'doduck@entenhausen.de', 'Kaffee für alle');
 
 

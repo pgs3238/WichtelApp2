@@ -27,62 +27,46 @@ function Layout() {
     }
 
     return (
-        <form action="/j_security_check" method="POST" onSubmit={handleSubmit}>
-        <br/>
-        <h2>Was ist Secret Santa?</h2>
-            <h3><center>Hier hast du die Möglichkeit dich zusammen mit Familie, Freunden oder Kollegen </center>
-                <center>für eine unterhaltsame Wichtelrunde anzumelden. Sobald die Wichtelrunde durch den Organisator </center>
-                <center>gestartet wird, wirst du per Zufall einer Person zugewiesen werden,</center>
-                <center>für die du ein Geschenk kaufen kannst.</center>
-                <center>Lass die Vorfreude beginnen und registrier dich heute noch.</center>
-            </h3>
-            <div className="kontoanlegen">
-                <input
-                type ="button"
-                id="kontoanlegen"
-                value="Neues Konto erstellen"
-                onClick={neuesKonto}/>
-            </div>
-            <br/>
-            <div className="anmelden">
-                <h3 className="a">Du hast bereits einen Account bei uns?</h3>
-                <br/>
-                <div className="email">
-                    <label> E-Mail-Adresse: </label>
-                    &nbsp;
-                    <input
-                        type="text"
-                        placeholder="E-Mail-Adresse"
-                        id="email"
-                        name="j_username"
-                    />
+        <>
+            <form action="/j_security_check" method="POST" className={"home-form-container"} onSubmit={handleSubmit}>
+                <h2 className="home-form-title">Was ist Secret Santa?</h2>
+
+                <h3 className="home-form-description">
+                    Wichteln (Secret Santa) ist eine schöne Tradition, bei der sich Freunde,
+                    Familie oder Kollegen gegenseitig kleine Überraschungen machen
+                    – ohne zu wissen, von wem das Geschenk kommt.
+                    <br/>
+                    <br/>
+                    Mit dieser App wird das Organisieren kinderleicht: Der Ersteller der Runde legt den
+                    Wichtel-Termin und das Budget fest, und die App lost automatisch die Paare aus.
+                    So bleibt das Geheimnis gewahrt – und die Vorfreude kann beginnen!
+                </h3>
+
+                <div className="home-form-actions">
+                    <input type="button" id="kontoanlegen" value="Neues Konto anlegen" onClick={neuesKonto}/>
                 </div>
-                <br/>
-                <div className="passwort">
-                    <label>Passwort: </label>
-                    &emsp;&emsp;&emsp;
-                    <input
-                        type="password"
-                        placeholder="Passwort"
-                        id="passwort"
-                        name="j_password"
-                    />
+
+                <div className="anmelden">
+                    <h3 className="home-form-description">Hast du schon ein Konto?</h3>
+
+                    <div className="home-form-row">
+                        <label> E-Mail: </label>
+                        <input type="text" placeholder="E-Mail-Adresse" id="email" name="j_username"/>
+                    </div>
+
+                    <div className="home-form-row">
+                        <label>Passwort: </label>
+                        <input type="password" placeholder="Passwort" id="passwort" name="j_password"/>
+                    </div>
+
+                    <div className="home-form-actions">
+                        <input type="submit" id="anmelden" value="Login"/>
+                        <input type="button" id="neuespasswortanfordern" value="Passwort vergessen?" onClick={() => {}}/>
+                    </div>
                 </div>
-                <br/>
-                <div className="anmeldenBT">
-                    <input type="submit" id="anmelden" value="Login"/>
-                </div>
-                <br/>
-                <div className="pwvergessenBT">
-                    <input
-                        type="button"
-                        id="neuespasswortanfordern"
-                        value="Passwort vergessen?"
-                        onClick={() => {}}
-                    />
-                </div>
-            </div>
-        </form>
+            </form>
+        </>
+
     );
 }
 
