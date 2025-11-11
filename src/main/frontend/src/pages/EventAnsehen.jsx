@@ -517,7 +517,7 @@ const Table = ({ data, selectedId, onSelect }) => {
     ];
 
     const maxTableWidth = 1200;
-    const rowHeight = 40;
+    const rowHeight = 35; //was 40
     const minVisibleRows = 5;
     const maxVisibleRows = 6;
     const bodyHeight = Math.max(minVisibleRows, Math.min(data.length, maxVisibleRows)) * rowHeight;
@@ -552,7 +552,7 @@ const Table = ({ data, selectedId, onSelect }) => {
         // Create a hidden canvas to measure text precisely
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");
-        ctx.font = "14px Arial, sans-serif";
+        ctx.font = "16px Arial, sans-serif";
 
         const measureText = (text) => ctx.measureText(text).width + 24; // add padding allowance
 
@@ -588,6 +588,7 @@ const Table = ({ data, selectedId, onSelect }) => {
         wordBreak: "break-word",
         whiteSpace: "normal",
         boxSizing: "border-box",
+        fontFamily: "Arial, sans-serif",
     });
 
     const containerStyle = {
