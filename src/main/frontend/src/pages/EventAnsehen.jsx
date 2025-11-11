@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from'./EventAnsehen.module.css';
 import './EventAnsehen.css';
 import {useNavigate} from "react-router-dom";
@@ -35,16 +35,498 @@ const Row = ({ eventid, deadline, eventdate, name, owner, regeln, ort, isSelecte
     </tr>
 );
 
-const Table = ({ data, selectedId, onSelect }) => {
+// const Table = ({ data, selectedId, onSelect }) => {
+//
+//     const minVisibleRows = 5;
+//     const maxVisibleRows = 6;
+//     const rowHeight = 40; // approximate height of a row in px
+//     const rowCount = Array.isArray(data) ? data.length : 0;
+//     const bodyHeight = Math.max(minVisibleRows, Math.min(data.length, maxVisibleRows)) * rowHeight;
+//     //const bodyHeight = maxVisibleRows * rowHeight; // always max height
+//
+//     // Date formatter (DD.MM.YYYY HH:MM, 24h)
+//     const formatDate = (isoString) => {
+//         if (!isoString) return "";
+//         const d = new Date(isoString);
+//         return d
+//             .toLocaleString("de-DE", {
+//                 year: "numeric",
+//                 month: "2-digit",
+//                 day: "2-digit",
+//                 hour: "2-digit",
+//                 minute: "2-digit",
+//                 hour12: false,
+//             })
+//             .replace(",", ""); // remove comma from German locale
+//     };
+//
+//     return (
+//         <div className="table-window-event-ansehen">
+//             <table>
+//                 <thead>
+//                 <tr>
+//                     <th>Event ID</th>
+//                     <th>Event Name</th>
+//                     <th>Wichtel Datum</th>
+//                     <th>Geschenk Tag</th>
+//                     <th>Owner</th>
+//                     <th>Regeln</th>
+//                     <th>Location</th>
+//                 </tr>
+//                 </thead>
+//                 <tbody className="table-window-event-ansehen-body" style={{maxHeight: `${bodyHeight}px`}}>
+//                 {/*<tbody className="table-window-event-ansehen-body">*/}
+//                 {data.map((row) => {
+//                     const isSelected = row.eventId === selectedId;
+//                     return (
+//                         <tr
+//                             key={row.eventId}
+//                             onClick={() => onSelect(row.eventId)}
+//                             style={{
+//                                 backgroundColor: isSelected ? '#d0f0ff' : 'transparent',
+//                                 cursor: 'pointer',
+//                             }}
+//                         >
+//                             <td>{row.eventId}</td>
+//                             <td>{row.name}</td>
+//                             <td>{formatDate(row.eventDate)}</td>
+//                             <td>{formatDate(row.deadline)}</td>
+//                             <td>{row.owner}</td>
+//                             <td>{row.regeln}</td>
+//                             <td>{row.ort}</td>
+//                         </tr>
+//                     );
+//                 })}
+//                 {/*/!* Fill empty rows to always reach maxVisibleRows *!/*/}
+//                 {/*{Array.from({ length: Math.max(0, maxVisibleRows - data.length) }).map((_, idx) => (*/}
+//                 {/*    <tr key={`empty-${idx}`} style={{ height: `${rowHeight}px`, display: 'table', width: '100%', tableLayout: 'fixed' }}>*/}
+//                 {/*        <td colSpan={7}>&nbsp;</td>*/}
+//                 {/*    </tr>*/}
+//                 {/*))}*/}
+//                 </tbody>
+//             </table>
+//         </div>
+// );
+// }
 
+//TODO - Better Version 01
+
+// const Table = ({ data, selectedId, onSelect }) => {
+//     const minVisibleRows = 5;
+//     const maxVisibleRows = 6;
+//     const rowHeight = 40;
+//     const bodyHeight = Math.max(minVisibleRows, Math.min(data.length, maxVisibleRows)) * rowHeight;
+//
+//     const headerRef = useRef(null);
+//     const bodyRef = useRef(null);
+//     const [colWidths, setColWidths] = useState([]);
+//
+//     // // After render, measure header cell widths
+//     // useEffect(() => {
+//     //     if (headerRef.current) {
+//     //         const ths = Array.from(headerRef.current.querySelectorAll('th'));
+//     //         const widths = ths.map((th) => th.offsetWidth);
+//     //         setColWidths(widths);
+//     //     }
+//     // }, [data]);
+//
+//     // --- Measure and calculate dynamic widths ---
+//     useEffect(() => {
+//         if (!headerRef.current || !bodyRef.current) return;
+//
+//         const headerCells = headerRef.current.querySelectorAll('th');
+//         const bodyRows = bodyRef.current.querySelectorAll('tr');
+//
+//         // 1. Measure header cell widths
+//         const headerWidths = Array.from(headerCells).map(th => th.scrollWidth);
+//
+//         // 2. Measure max body cell width per column
+//         const bodyWidths = Array(columns.length).fill(0);
+//         bodyRows.forEach(row => {
+//             const cells = row.querySelectorAll('td');
+//             cells.forEach((td, i) => {
+//                 bodyWidths[i] = Math.max(bodyWidths[i], td.scrollWidth);
+//             });
+//         });
+//
+//         // 3. Take the maximum for each column
+//         let combinedWidths = headerWidths.map((w, i) => Math.max(w, bodyWidths[i]));
+//
+//         // 4. Scale down if total width > 1200
+//         const total = combinedWidths.reduce((a, b) => a + b, 0);
+//         if (total > 1200) {
+//             const scale = 1200 / total;
+//             combinedWidths = combinedWidths.map(w => Math.floor(w * scale));
+//         }
+//
+//         setColWidths(combinedWidths);
+//     }, [data]);
+//
+//     const columns = [
+//         "Event ID", "Event Name", "Wichtel Datum",
+//         "Geschenk Tag", "Owner", "Regeln", "Location"
+//     ];
+//
+//     const formatDate = (isoString) => {
+//         if (!isoString) return "";
+//         const d = new Date(isoString);
+//         return d
+//             .toLocaleString("de-DE", {
+//                 year: "numeric",
+//                 month: "2-digit",
+//                 day: "2-digit",
+//                 hour: "2-digit",
+//                 minute: "2-digit",
+//                 hour12: false,
+//             })
+//             .replace(",", "");
+//     };
+//
+//     const tableStyle = {
+//         width: "1200px",
+//         maxWidth: "90%",
+//         margin: "20px auto",
+//         border: "1px solid #ccc",
+//         borderRadius: "4px",
+//         boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+//         backgroundColor: "#f9f9f9",
+//         fontFamily: "Arial, sans-serif",
+//     };
+//
+//     const headerCellStyle = (i) => ({
+//         border: "1px solid #ddd",
+//         padding: "8px",
+//         backgroundColor: "#f2f2f2",
+//         fontWeight: "bold",
+//         width: colWidths[i] ? `${colWidths[i]}px` : "auto",
+//         wordWrap: "break-word",
+//         whiteSpace: "normal",
+//     });
+//
+//     const cellStyle = (i) => ({
+//         border: "1px solid #ddd",
+//         padding: "8px",
+//         width: colWidths[i] ? `${colWidths[i]}px` : "auto",
+//         wordWrap: "break-word",
+//         whiteSpace: "normal",
+//     });
+//
+//     return (
+//         <div style={tableStyle}>
+//             {/* Header */}
+//             <table style={{ width: "100%", borderCollapse: "collapse", tableLayout: "fixed" }}>
+//                 <thead ref={headerRef}>
+//                 <tr>
+//                     {columns.map((c, i) => (
+//                         <th key={i} style={headerCellStyle(i)}>{c}</th>
+//                     ))}
+//                 </tr>
+//                 </thead>
+//             </table>
+//
+//             {/* Scrollable Body */}
+//             <div
+//                 // ref={bodyRef}
+//                 style={{
+//                     display: "block",
+//                     overflowY: "scroll",
+//                     height: `${bodyHeight}px`,
+//                     width: "100%",
+//                 }}
+//             >
+//                 <table
+//                     ref={bodyRef}
+//                     style={{
+//                         width: "100%",
+//                         borderCollapse: "collapse",
+//                         tableLayout: "fixed",
+//                     }}
+//                 >
+//                     {/*<table style={{width: "100%", borderCollapse: "collapse"}}>*/}
+//
+//                         <tbody>
+//                         {data.map((row) => {
+//                             const isSelected = row.eventId === selectedId;
+//                             return (
+//                                 <tr
+//                                     key={row.eventId}
+//                                     onClick={() => onSelect(row.eventId)}
+//                                     style={{
+//                                         backgroundColor: isSelected ? '#d0f0ff' : 'transparent',
+//                                         cursor: 'pointer',
+//                                     }}
+//                                 >
+//                                     <td style={cellStyle(0)}>{row.eventId}</td>
+//                                     <td style={cellStyle(1)}>{row.name}</td>
+//                                     <td style={cellStyle(2)}>{formatDate(row.eventDate)}</td>
+//                                     <td style={cellStyle(3)}>{formatDate(row.deadline)}</td>
+//                                     <td style={cellStyle(4)}>{row.owner}</td>
+//                                     <td style={cellStyle(5)}>{row.regeln}</td>
+//                                     <td style={cellStyle(6)}>{row.ort}</td>
+//                                 </tr>
+//                             );
+//                         })}
+//                         </tbody>
+//                     </table>
+//             </div>
+//         </div>
+// );
+// };
+
+// const Table = ({ data, selectedId, onSelect }) => {
+//     const minVisibleRows = 5;
+//     const maxVisibleRows = 6;
+//     const rowHeight = 40;
+//     const bodyHeight = Math.max(minVisibleRows, Math.min(data.length, maxVisibleRows)) * rowHeight;
+//
+//     const formatDate = (isoString) => {
+//         if (!isoString) return "";
+//         const d = new Date(isoString);
+//         return d
+//             .toLocaleString("de-DE", {
+//                 year: "numeric",
+//                 month: "2-digit",
+//                 day: "2-digit",
+//                 hour: "2-digit",
+//                 minute: "2-digit",
+//                 hour12: false,
+//             })
+//             .replace(",", "");
+//     };
+//
+//     return (
+//         <div
+//             style={{
+//                 maxWidth: "1200px",
+//                 margin: "20px auto",
+//                 border: "1px solid #ccc",
+//                 borderRadius: "4px",
+//                 boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+//                 backgroundColor: "#f9f9f9",
+//                 fontFamily: "Arial, sans-serif",
+//                 overflowX: "auto", // fallback for narrow screens
+//             }}
+//         >
+//             <table
+//                 style={{
+//                     width: "100%",
+//                     borderCollapse: "collapse",
+//                     tableLayout: "auto", // let columns size to content
+//                 }}
+//             >
+//                 <thead>
+//                 <tr>
+//                     <th>Event ID</th>
+//                     <th>Event Name</th>
+//                     <th>Wichtel Datum</th>
+//                     <th>Geschenk Tag</th>
+//                     <th>Owner</th>
+//                     <th>Regeln</th>
+//                     <th>Location</th>
+//                 </tr>
+//                 </thead>
+//
+//                 <tbody
+//                     style={{
+//                         display: "block",
+//                         overflowY: "auto",
+//                         height: `${bodyHeight}px`,
+//                     }}
+//                 >
+//                 {data.map((row) => {
+//                     const isSelected = row.eventId === selectedId;
+//                     return (
+//                         <tr
+//                             key={row.eventId}
+//                             onClick={() => onSelect(row.eventId)}
+//                             style={{
+//                                 display: "table",
+//                                 width: "100%",
+//                                 tableLayout: "auto",
+//                                 backgroundColor: isSelected ? "#d0f0ff" : "transparent",
+//                                 cursor: "pointer",
+//                             }}
+//                         >
+//                             <td style={{ wordBreak: "break-word", padding: "8px", border: "1px solid #ddd" }}>{row.eventId}</td>
+//                             <td style={{ wordBreak: "break-word", padding: "8px", border: "1px solid #ddd" }}>{row.name}</td>
+//                             <td style={{ wordBreak: "break-word", padding: "8px", border: "1px solid #ddd" }}>{formatDate(row.eventDate)}</td>
+//                             <td style={{ wordBreak: "break-word", padding: "8px", border: "1px solid #ddd" }}>{formatDate(row.deadline)}</td>
+//                             <td style={{ wordBreak: "break-word", padding: "8px", border: "1px solid #ddd" }}>{row.owner}</td>
+//                             <td style={{ wordBreak: "break-word", padding: "8px", border: "1px solid #ddd" }}>{row.regeln}</td>
+//                             <td style={{ wordBreak: "break-word", padding: "8px", border: "1px solid #ddd" }}>{row.ort}</td>
+//                         </tr>
+//                     );
+//                 })}
+//                 </tbody>
+//             </table>
+//         </div>
+//     );
+// };
+
+//TODO Better Version 02
+
+// const Table = ({ data, selectedId, onSelect }) => {
+//     const minVisibleRows = 5;
+//     const maxVisibleRows = 6;
+//     const rowHeight = 40;
+//     const bodyHeight = Math.max(minVisibleRows, Math.min(data.length, maxVisibleRows)) * rowHeight;
+//
+//     const headerRef = useRef(null);
+//     const bodyRef = useRef(null);
+//     const [colWidths, setColWidths] = useState([]);
+//
+//     const columns = [
+//         "Event ID",
+//         "Event Name",
+//         "Wichtel Datum",
+//         "Geschenk Tag",
+//         "Owner",
+//         "Regeln",
+//         "Location",
+//     ];
+//
+//     // Format dates
+//     const formatDate = (isoString) => {
+//         if (!isoString) return "";
+//         const d = new Date(isoString);
+//         return d
+//             .toLocaleString("de-DE", {
+//                 year: "numeric",
+//                 month: "2-digit",
+//                 day: "2-digit",
+//                 hour: "2-digit",
+//                 minute: "2-digit",
+//                 hour12: false,
+//             })
+//             .replace(",", "");
+//     };
+//
+//     // Measure column widths after render
+//     useEffect(() => {
+//         if (!headerRef.current || !bodyRef.current) return;
+//
+//         // Measure header widths
+//         const headerCells = Array.from(headerRef.current.querySelectorAll("th"));
+//         const bodyRows = Array.from(bodyRef.current.querySelectorAll("tr"));
+//
+//         const headerWidths = headerCells.map((th) => th.scrollWidth);
+//         const bodyWidths = new Array(columns.length).fill(0);
+//
+//         bodyRows.forEach((row) => {
+//             const cells = Array.from(row.querySelectorAll("td"));
+//             cells.forEach((td, i) => {
+//                 bodyWidths[i] = Math.max(bodyWidths[i], td.scrollWidth);
+//             });
+//         });
+//
+//         // Pick max between header and body width per column
+//         let widths = headerWidths.map((w, i) => Math.max(w, bodyWidths[i]));
+//
+//         // Cap total width at 1200px
+//         const total = widths.reduce((a, b) => a + b, 0);
+//         if (total > 1200) {
+//             const scale = 1200 / total;
+//             widths = widths.map((w) => Math.floor(w * scale));
+//         }
+//
+//         setColWidths(widths);
+//     }, [data]);
+//
+//     const headerStyle = {
+//         width: "fit-content",
+//         maxWidth: "1200px",
+//         margin: "20px auto 0",
+//         borderCollapse: "collapse",
+//         border: "1px solid #ccc",
+//         backgroundColor: "#f2f2f2",
+//     };
+//
+//     const bodyWrapperStyle = {
+//         width: "fit-content",
+//         maxWidth: "1200px",
+//         margin: "0 auto 20px",
+//         overflowY: "auto",
+//         border: "1px solid #ccc",
+//         height: `${bodyHeight}px`,
+//     };
+//
+//     const cellStyle = (i) => ({
+//         border: "1px solid #ddd",
+//         padding: "8px",
+//         wordBreak: "break-word",
+//         whiteSpace: "normal",
+//         width: colWidths[i] ? `${colWidths[i]}px` : "auto",
+//     });
+//
+//     return (
+//         <div>
+//             {/* Header Table */}
+//             <table ref={headerRef} style={headerStyle}>
+//                 <thead>
+//                 <tr>
+//                     {columns.map((c, i) => (
+//                         <th key={i} style={cellStyle(i)}>
+//                             {c}
+//                         </th>
+//                     ))}
+//                 </tr>
+//                 </thead>
+//             </table>
+//
+//             {/* Body Table inside scroll container */}
+//             <div style={bodyWrapperStyle}>
+//                 <table ref={bodyRef} style={{ borderCollapse: "collapse" }}>
+//                     <tbody>
+//                     {data.map((row) => {
+//                         const isSelected = row.eventId === selectedId;
+//                         return (
+//                             <tr
+//                                 key={row.eventId}
+//                                 onClick={() => onSelect(row.eventId)}
+//                                 style={{
+//                                     backgroundColor: isSelected ? "#d0f0ff" : "transparent",
+//                                     cursor: "pointer",
+//                                 }}
+//                             >
+//                                 <td style={cellStyle(0)}>{row.eventId}</td>
+//                                 <td style={cellStyle(1)}>{row.name}</td>
+//                                 <td style={cellStyle(2)}>{formatDate(row.eventDate)}</td>
+//                                 <td style={cellStyle(3)}>{formatDate(row.deadline)}</td>
+//                                 <td style={cellStyle(4)}>{row.owner}</td>
+//                                 <td style={cellStyle(5)}>{row.regeln}</td>
+//                                 <td style={cellStyle(6)}>{row.ort}</td>
+//                             </tr>
+//                         );
+//                     })}
+//                     </tbody>
+//                 </table>
+//             </div>
+//         </div>
+//     );
+// };
+
+const Table = ({ data, selectedId, onSelect }) => {
+    const columns = [
+        "Event ID",
+        "Event Name",
+        "Wichtel Datum",
+        "Geschenk Tag",
+        "Owner",
+        "Regeln",
+        "Location",
+    ];
+
+    const maxTableWidth = 1200;
+    const rowHeight = 40;
     const minVisibleRows = 5;
     const maxVisibleRows = 6;
-    const rowHeight = 40; // approximate height of a row in px
-    const rowCount = Array.isArray(data) ? data.length : 0;
     const bodyHeight = Math.max(minVisibleRows, Math.min(data.length, maxVisibleRows)) * rowHeight;
-    //const bodyHeight = maxVisibleRows * rowHeight; // always max height
 
-    // Date formatter (DD.MM.YYYY HH:MM, 24h)
+    const headerRef = useRef(null);
+    const bodyRef = useRef(null);
+    const [colWidths, setColWidths] = useState([]);
+
+    // Utility: date formatter
     const formatDate = (isoString) => {
         if (!isoString) return "";
         const d = new Date(isoString);
@@ -57,57 +539,147 @@ const Table = ({ data, selectedId, onSelect }) => {
                 minute: "2-digit",
                 hour12: false,
             })
-            .replace(",", ""); // remove comma from German locale
+            .replace(",", "");
+    };
+
+    // After render, measure header + body text widths
+    useEffect(() => {
+        if (!headerRef.current || !bodyRef.current) return;
+
+        const headerCells = Array.from(headerRef.current.querySelectorAll("th"));
+        const bodyRows = Array.from(bodyRef.current.querySelectorAll("tr"));
+
+        // Create a hidden canvas to measure text precisely
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        ctx.font = "14px Arial, sans-serif";
+
+        const measureText = (text) => ctx.measureText(text).width + 24; // add padding allowance
+
+        const headerWidths = headerCells.map((th) => measureText(th.textContent));
+        const bodyWidths = new Array(columns.length).fill(0);
+
+        // Find the maximum width of text per column
+        bodyRows.forEach((row) => {
+            const cells = Array.from(row.querySelectorAll("td"));
+            cells.forEach((td, i) => {
+                bodyWidths[i] = Math.max(bodyWidths[i], measureText(td.textContent || ""));
+            });
+        });
+
+        let widths = headerWidths.map((w, i) => Math.max(w, bodyWidths[i]));
+
+        // Scale down proportionally if total > maxTableWidth
+        const totalWidth = widths.reduce((a, b) => a + b, 0);
+        if (totalWidth > maxTableWidth) {
+            const scale = maxTableWidth / totalWidth;
+            widths = widths.map((w) => Math.floor(w * scale));
+        }
+
+        setColWidths(widths);
+    }, [data]);
+
+    const cellStyle = (i, isHeader = false) => ({
+        border: "1px solid #ccc",
+        padding: "8px",
+        backgroundColor: isHeader ? "#f2f2f2" : "white",
+        fontWeight: isHeader ? "bold" : "normal",
+        width: colWidths[i] ? `${colWidths[i]}px` : "auto",
+        wordBreak: "break-word",
+        whiteSpace: "normal",
+        boxSizing: "border-box",
+    });
+
+    const containerStyle = {
+        width: `${maxTableWidth}px`,
+        margin: "20px auto",
+        border: "1px solid #ccc",
+        borderRadius: "4px",
+        backgroundColor: "#f9f9f9",
+        boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+    };
+
+    const bodyWrapperStyle = {
+        overflowY: "auto",
+        height: `${bodyHeight}px`,
+        width: "100%",
     };
 
     return (
-        <div className="table-window-event-ansehen">
-            <table>
+        <div style={containerStyle}>
+            {/* Header */}
+            <table
+                ref={headerRef}
+                style={{ borderCollapse: "collapse", width: "100%", tableLayout: "fixed" }}
+            >
                 <thead>
                 <tr>
-                    <th>Event ID</th>
-                    <th>Event Name</th>
-                    <th>Wichtel Datum</th>
-                    <th>Geschenk Tag</th>
-                    <th>Owner</th>
-                    <th>Regeln</th>
-                    <th>Location</th>
+                    {columns.map((col, i) => (
+                        <th key={i} style={cellStyle(i, true)}>
+                            {col}
+                        </th>
+                    ))}
                 </tr>
                 </thead>
-                <tbody className="table-window-event-ansehen-body" style={{maxHeight: `${bodyHeight}px`}}>
-                {/*<tbody className="table-window-event-ansehen-body">*/}
-                {data.map((row) => {
-                    const isSelected = row.eventId === selectedId;
-                    return (
-                        <tr
-                            key={row.eventId}
-                            onClick={() => onSelect(row.eventId)}
-                            style={{
-                                backgroundColor: isSelected ? '#d0f0ff' : 'transparent',
-                                cursor: 'pointer',
-                            }}
-                        >
-                            <td>{row.eventId}</td>
-                            <td>{row.name}</td>
-                            <td>{formatDate(row.eventDate)}</td>
-                            <td>{formatDate(row.deadline)}</td>
-                            <td>{row.owner}</td>
-                            <td>{row.regeln}</td>
-                            <td>{row.ort}</td>
-                        </tr>
-                    );
-                })}
-                {/*/!* Fill empty rows to always reach maxVisibleRows *!/*/}
-                {/*{Array.from({ length: Math.max(0, maxVisibleRows - data.length) }).map((_, idx) => (*/}
-                {/*    <tr key={`empty-${idx}`} style={{ height: `${rowHeight}px`, display: 'table', width: '100%', tableLayout: 'fixed' }}>*/}
-                {/*        <td colSpan={7}>&nbsp;</td>*/}
-                {/*    </tr>*/}
-                {/*))}*/}
-                </tbody>
             </table>
+
+            {/* Body */}
+            <div style={bodyWrapperStyle}>
+                <table
+                    ref={bodyRef}
+                    style={{ borderCollapse: "collapse", width: "100%", tableLayout: "fixed" }}
+                >
+                    <tbody>
+                    {data.map((row) => {
+                        // const isSelected = row.eventId === selectedId;
+                        const id = row.eventId ?? row.eventid; // covers both cases
+                        const isSelected = id === selectedId;
+                        return (
+                            <tr
+                                key={row.eventId}
+                                onClick={() => onSelect(row.eventId)}
+                                style={{
+                                    backgroundColor: isSelected ? "#d0f0ff" : "transparent",
+                                    cursor: "pointer",
+                                }}
+                            >
+                                {/*<td style={cellStyle(0)}>{row.eventId}</td>*/}
+                                {/*<td style={cellStyle(1)}>{row.name}</td>*/}
+                                {/*<td style={cellStyle(2)}>{formatDate(row.eventDate)}</td>*/}
+                                {/*<td style={cellStyle(3)}>{formatDate(row.deadline)}</td>*/}
+                                {/*<td style={cellStyle(4)}>{row.owner}</td>*/}
+                                {/*<td style={cellStyle(5)}>{row.regeln}</td>*/}
+                                {/*<td style={cellStyle(6)}>{row.ort}</td>*/}
+                                <td style={{...cellStyle(0), backgroundColor: isSelected ? "#e6f7ff" : "white"}}>
+                                    {row.eventId}
+                                </td>
+                                <td style={{...cellStyle(1), backgroundColor: isSelected ? "#e6f7ff" : "white"}}>
+                                    {row.name}
+                                </td>
+                                <td style={{...cellStyle(2), backgroundColor: isSelected ? "#e6f7ff" : "white"}}>
+                                    {formatDate(row.eventDate)}
+                                </td>
+                                <td style={{...cellStyle(3), backgroundColor: isSelected ? "#e6f7ff" : "white"}}>
+                                    {formatDate(row.deadline)}
+                                </td>
+                                <td style={{...cellStyle(4), backgroundColor: isSelected ? "#e6f7ff" : "white"}}>
+                                    {row.owner}
+                                </td>
+                                <td style={{...cellStyle(5), backgroundColor: isSelected ? "#e6f7ff" : "white"}}>
+                                    {row.regeln}
+                                </td>
+                                <td style={{...cellStyle(6), backgroundColor: isSelected ? "#e6f7ff" : "white"}}>
+                                    {row.ort}
+                                </td>
+                            </tr>
+                        );
+                    })}
+                    </tbody>
+                </table>
+            </div>
         </div>
-);
-}
+    );
+};
 
 
 function Layout() {

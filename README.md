@@ -1,71 +1,99 @@
-# code-with-quarkus Project
+# Wichtel App 2.0
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+>Lore Ipsum yada yada...
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+---
 
-## Running the application in dev mode
+### Screenshot
 
-You can run your application in dev mode that enables live coding using:
+---
+
+## 🧭 Goal
+
+bla bla
+
+---
+
+## ⚙️ Features
+
+- 🔐 User-Account Creation
+- Event creation and management
+- Invite people to join your event
+- Set who people can or can not give presents
+- Set Event properties
+- On day set for partner choosing, partners are automatically set
+- Information both in App as well as informed via email. 
+
+
+---
+
+## 🧰 Technology-Stack
+
+| Area                 | Technology / Version              |
+|:---------------------|:----------------------------------|
+| **Backend**          | Quarkus `2.13.4`, Gradle `7.5.1`  |
+| **Frontend / Build** | React `18.2.0`, Node.js `18.12.1` |
+| **Databank**         | PostgreSQL (Docker)               |
+| **Language**         | Java `17`, JavaScript             |
+
+**Implemented Quarkus-Addons:**
+```gradle
+    implementation 'io.quarkus:quarkus-hibernate-orm'
+    implementation 'io.quarkus:quarkus-hibernate-validator'
+    implementation 'io.quarkus:quarkus-resteasy-reactive-jsonb'
+    implementation 'io.quarkus:quarkus-smallrye-openapi'
+    implementation 'io.quarkus:quarkus-resteasy-reactive'
+    //implementation 'io.quarkus:quarkus-resteasy-mutiny'
+    implementation 'io.quarkus:quarkus-security-jpa'
+    implementation 'io.quarkus:quarkus-jdbc-postgresql'
+    implementation 'io.quarkus:quarkus-arc'
+    implementation 'io.quarkus:quarkus-mailer'
+```
+> 🧪 While folders for test und native-test are present, no tests are implemented at this time.
+
+---
+
+## 🛠️ Installation & Setup
+Requirements
+
+- Docker is installed and running
+- PostgreSQL is running in a Container
+- Java 17, Gradle, Node.js are installed (or are installed via the Build-Script)
+
+Steps
 ```shell script
+#Clone repository
+git clone https://github.com/pgs3238/WichtelApp2.git
+cd WichtelApp
+
+# Run build (installs Node, npm-dependencies und builds the application)
+./gradlew build
+
+# Run the application in dev mode
 ./gradlew quarkusDev
 ```
+---
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+## 🚀 Nutzung
 
-## Packaging and running the application
+1. Anwendung starten
+2. Im Browser die Login-Seite öffnen
+3. Benutzerkonto anlegen
+4. Benutzer anmelden → Cookie wird gesetzt
+5. Zugriff auf geschützte Seiten möglich
+6. Logout → Cookie wird gelöscht
 
-The application can be packaged using:
-```shell script
-./gradlew build
-```
-It produces the `quarkus-run.jar` file in the `build/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `build/quarkus-app/lib/` directory.
+## ⚠️ Hinweise
 
-The application is now runnable using `java -jar build/quarkus-app/quarkus-run.jar`.
+> 🔒 Dieses Projekt dient ausschließlich zu Lern- und Demonstrationszwecken.
+Die Cookie-basierte Speicherung von Nutzerdaten ist nicht für produktive Umgebungen geeignet.
 
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./gradlew build -Dquarkus.package.type=uber-jar
-```
+---
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar build/*-runner.jar`.
+## 🧑‍💻 Author & Contact
+| Name                | Contact                                                                                                                                                                |
+|:--------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Paul-Gerhard Siegel | [GitHub](https://github.com/pgs3238) · [LinkedIn](https://www.linkedin.com/in/paul-gerhard-siegel-719a4512/) · [Xing](https://www.xing.com/profile/PaulGerhard_Siegel) |
+| Contributers        |                                                                                                                                                                        |
 
-## Creating a native executable
 
-You can create a native executable using: 
-```shell script
-./gradlew build -Dquarkus.package.type=native
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./build/code-with-quarkus-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/gradle-tooling.
-
-## Related Guides
-
-- Hibernate ORM ([guide](https://quarkus.io/guides/hibernate-orm)): Define your persistent model with Hibernate ORM and JPA
-- RESTEasy Classic JSON-B ([guide](https://quarkus.io/guides/rest-json)): JSON-B serialization support for RESTEasy Classic
-- SmallRye OpenAPI ([guide](https://quarkus.io/guides/openapi-swaggerui)): Document your REST APIs with OpenAPI - comes with Swagger UI
-- RESTEasy Classic ([guide](https://quarkus.io/guides/resteasy)): REST endpoint framework implementing JAX-RS and more
-- Security JPA ([guide](https://quarkus.io/guides/security-jpa)): Secure your applications with username/password stored in a database via JPA
-- JDBC Driver - PostgreSQL ([guide](https://quarkus.io/guides/datasource)): Connect to the PostgreSQL database via JDBC
-
-## Provided Code
-
-### Hibernate ORM
-
-Create your first JPA entity
-
-[Related guide section...](https://quarkus.io/guides/hibernate-orm)
-
-### RESTEasy JAX-RS
-
-Easily start your RESTful Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)

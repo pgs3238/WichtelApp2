@@ -20,91 +20,91 @@
     text-align: center;
 }
 
-.table-window-event-ansehen {
-    width: 1200px;
-    max-width: 90%;
-    margin: 20px auto;
-    /*max-height: 250px; !* each row 40px, scrollable if > 6 rows *!*/
-    /*overflow-y: auto;*/
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    background-color: #f9f9f9;
-    /*overflow: hidden;*/
-    font-family: Arial, sans-serif;
-    /*table-layout: auto;*/
-  /*  display: inline-grid;*/
-  /*  grid-template-areas:*/
-  /*"head-fixed"*/
-  /*"body-scrollable";*/
-}
-
-.table-window-event-ansehen > table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: auto; /*needed for layout!*/
-}
-
-/*.table-window-event-ansehen thead {*/
-/*    grid-area: head-fixed;*/
+/*.table-window-event-ansehen {*/
+/*    width: 1200px;*/
+/*    max-width: 90%;*/
+/*    margin: 20px auto;*/
+/*    !*max-height: 250px; !* each row 40px, scrollable if > 6 rows *!*!*/
+/*    !*overflow-y: auto;*!*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 4px;*/
+/*    box-shadow: 0 4px 10px rgba(0,0,0,0.1);*/
+/*    background-color: #f9f9f9;*/
+/*    !*overflow: hidden;*!*/
+/*    font-family: Arial, sans-serif;*/
+/*    !*table-layout: auto;*!*/
+/*  !*  display: inline-grid;*!*/
+/*  !*  grid-template-areas:*!*/
+/*  !*"head-fixed"*!*/
+/*  !*"body-scrollable";*!*/
 /*}*/
 
-.table-window-event-ansehen tbody {
-    display: block;
-    /*overflow: auto;*/
-    overflow-x: auto;
-    overflow-y: scroll;
-    height: 200px; /* define height depending on your needs */
-}
+/*.table-window-event-ansehen > table {*/
+/*    width: 100%;*/
+/*    border-collapse: collapse;*/
+/*    table-layout: auto; !*needed for layout!*!*/
+/*}*/
 
+/*!*.table-window-event-ansehen thead {*!*/
+/*!*    grid-area: head-fixed;*!*/
+/*!*}*!*/
 
-/*.table-window-event-ansehen-body {*/
-/*    !*!*display: block;          !* allow scrolling *!*!*!*/
-/*    !*!*max-height: 250px;       !* max height for rows *!*!*!*/
-/*    !*overflow-y: auto;        !* vertical scroll *!*!*/
-/*    overflow-y: scroll;*/
-/*    overflow-x: auto;*/
-/*    grid-area: body-scrollable;*/
+/*.table-window-event-ansehen tbody {*/
+/*    display: block;*/
 /*    !*overflow: auto;*!*/
+/*    overflow-x: auto;*/
+/*    overflow-y: scroll;*/
 /*    height: 200px; !* define height depending on your needs *!*/
 /*}*/
 
+
+/*!*.table-window-event-ansehen-body {*!*/
+/*!*    !*!*display: block;          !* allow scrolling *!*!*!*!*/
+/*!*    !*!*max-height: 250px;       !* max height for rows *!*!*!*!*/
+/*!*    !*overflow-y: auto;        !* vertical scroll *!*!*!*/
+/*!*    overflow-y: scroll;*!*/
+/*!*    overflow-x: auto;*!*/
+/*!*    grid-area: body-scrollable;*!*/
+/*!*    !*overflow: auto;*!*!*/
+/*!*    height: 200px; !* define height depending on your needs *!*!*/
+/*!*}*!*/
+
+/*!*.table-window-event-ansehen tbody tr {*!*/
+/*!*    display: table;          !* keep row layout aligned with thead *!*!*/
+/*!*    width: 100%;*!*/
+/*!*    table-layout: auto;      !* keep columns auto-sized *!*!*/
+/*!*}*!*/
+
+/*!*.table-window-event-ansehen-body table {*!*/
+/*!*    width: 100%;*!*/
+/*!*    border-collapse: collapse;*!*/
+/*!*    !*table-layout: fixed;*!*!*/
+/*!*    table-layout: auto;*!*/
+/*!*}*!*/
+
 /*.table-window-event-ansehen tbody tr {*/
-/*    display: table;          !* keep row layout aligned with thead *!*/
+/*    display: table; !* keep row layout aligned with thead *!*/
 /*    width: 100%;*/
-/*    table-layout: auto;      !* keep columns auto-sized *!*/
+/*    table-layout: auto; !* or fixed if you want fixed widths *!*/
 /*}*/
 
-/*.table-window-event-ansehen-body table {*/
+/*.table-window-event-ansehen thead,*/
+/*.table-window-event-ansehen tbody tr {*/
+/*    display: table;*/
 /*    width: 100%;*/
-/*    border-collapse: collapse;*/
-/*    !*table-layout: fixed;*!*/
-/*    table-layout: auto;*/
+/*    table-layout: auto; !* ensures proper alignment *!*/
 /*}*/
 
-.table-window-event-ansehen tbody tr {
-    display: table; /* keep row layout aligned with thead */
-    width: 100%;
-    table-layout: auto; /* or fixed if you want fixed widths */
-}
+/*table td, table th {*/
+/*    border: 1px solid #ddd;*/
+/*    padding: 8px;*/
+/*    word-wrap: break-word;*/
+/*}*/
 
-.table-window-event-ansehen thead,
-.table-window-event-ansehen tbody tr {
-    display: table;
-    width: 100%;
-    table-layout: auto; /* ensures proper alignment */
-}
+/*table th {*/
+/*    background-color: #f2f2f2;*/
+/*    font-weight: bold;*/
+/*}*/
 
-table td, table th {
-    border: 1px solid #ddd;
-    padding: 8px;
-    word-wrap: break-word;
-}
-
-table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
-
-table tr:nth-child(even) { background-color: #f9f9f9; }
-table tr:hover { background-color: #e6f7ff; }
+/*table tr:nth-child(even) { background-color: #f9f9f9; }*/
+/*table tr:hover { background-color: #e6f7ff; }*/
