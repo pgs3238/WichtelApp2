@@ -1,6 +1,6 @@
 # 🌟🎁 WichtelApp 2
 
-> New version of WichtelApp, improving functionality and user experience while completing the original Secret Santa app.
+> New version of [WichtelApp](https://github.com/pgs3238/WichtelApp), improving functionality and user experience while completing the original Secret Santa app.
 
 **Last Updated:** 12 November 2025
 
