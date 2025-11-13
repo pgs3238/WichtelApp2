@@ -30,6 +30,8 @@ The original WichtelApp was a university group project aimed at creating a funct
 - 🎁 Secret Santa assignment ("Wichteln")
 - ❌ Automatic cookie deletion on logout
 
+Passwords are hashed on the frontend before being sent to the backend, which compares them to the stored hashes. Adding salting and stronger security measures is planned for future steps.
+
 ---
 
 ## 🧰 Technologie-Stack (at the moment)
@@ -86,18 +88,36 @@ The original WichtelApp was a university group project aimed at creating a funct
 
 > ⚠️ Note: Not all buttons are functional. Table entries are test data used for analyzing and debugging.
 
-### Next Steps
-1. Add a new function to replace groups.
-2. Add a backend table for users without accounts (contains email addresses and function replacing groups). When a user creates an account, this data merges with the main User table and the user-event table.
-3. Test adding users and new function with multiple test users.
-4. Rewrite Secret Santa function for the new groups replacement and test it.
-5. Update Quarkus to 3.x and fix broken functionality (email and cookie require Quarkus 3.x).
-6. Add email service: invites sent via email; users must accept in the app. Email is primary key.
-7. Test all email functionality; possibly add more email features.
-8. Fix cookie issue.
-9. Modify taskbar: consider moving link to event creation to top menu and add logout to top menu; remove logout button from bottom or keep both.
-10. Improve frontend styling.
-11. Finish the app
+### Completed / Deprecated
+- ~~Implement table in *Display Events* page~~
+- ~~Modify layout of *User Creation* page~~
+- ~~Implement table in *My Events* page; add scroll function to limit table size to six lines~~
+- ~~Implement table from *Display Users in Event* page within *My Events* page; table should populate with data when an event is selected~~
+- ~~Implement functionality from *Add Users to Event* page in *My Events* page, to add users to an event;~~ connect frontend with backend and make entry functional 
+- ~~Modified backend joined table Event + User: now a joined table with dual key (event, user), and an additional entry indicating whether an email was sent~~
+- ~~Modified backend to make the new Event + User table usable in frontend~~
+- deprecated joined table Event + User is still active but no longer used
+- deprecated *Login* page (+CSS) still active
+- deprecated *Display Users in Event* page (+CSS) still active
+- deprecated *Add Users to Event* page (+CSS) still active
+- deprecated *Group Main* page (+CSS) still active
+- deprecated *Add/Remove Groups* page (+CSS) still active
+- deprecated *Add Users to Groups* page (+CSS) still active
+> ⚠️ Deprecated pages and tables remain in place until replacement features are fully tested and verified to maintain application stability.
+
+### Upcoming / Next Steps
+
+- Add a new function to replace groups.
+- Add a backend table for users without accounts (contains email addresses and function replacing groups). When a user creates an account, this data merges with the main User table and the user-event table.
+- Test adding users and new function with multiple test users.
+- Rewrite Secret Santa function for the new groups replacement and test it.
+- Update Quarkus to 3.x and fix broken functionality (email and updated cookie require Quarkus 3.x).
+- Add email service: invites sent via email; users must accept in the app. Email is primary key.
+- Test all email functionality; possibly add more email features.
+- Fix cookie issue.
+- Modify taskbar: consider moving link to event creation to top menu and add logout to top menu; remove logout button from bottom or keep both.
+- Improve frontend styling.
+- Finish the app
 
 ### Note to self - Missing in implementation
 - Add a “hook” to indicate whether the creator wants to participate in their own event.
