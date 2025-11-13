@@ -225,24 +225,139 @@ const Table = ({ data, selectedId, onSelect }) => {
 
 
 
-function Layout() {
+// function Layout() {
+//
+//     const [inputs, setInputs] = useState({});
+//     const navigate = useNavigate();
+//     const [rows, setRows] = useState([]);
+//     const [selectedEventId, setSelectedEventId] = useState(null);
+//     const handleSelect = (id) => {
+//         console.log("Selected event:", id);
+//         setSelectedEventId(id);
+//     };
+//
+//     // Fetch events owned by current user
+//     useEffect(() => {
+//         const fetchMyEvents = async () => {
+//             const res = await fetch('/api/events/mine', {
+//                 method: "GET",
+//                 credentials: "include" // <--- important
+//                 //headers: { "quarkus-credential": cookies.get("quarkus-credential") }
+//             });
+//             if (res.ok) {
+//                 const data = await res.json();
+//                 setRows(data);
+//             } else {
+//                 alert("Fehler beim Laden der Events");
+//             }
+//         };
+//
+//         fetchMyEvents();
+//     }, []);
+//
+//
+//
+//
+//     const abbrechenClick = () => {
+//         navigate("/eventVerwaltung");
+//     }
+//
+//     const zuTeilnehmer = (eventid) => {
+//         if (eventid) {
+//             navigate("/eventVerwaltung/eventAnsehen/teliEinsehen", {
+//                 state: { eventid },
+//             });
+//         }
+//
+//     }
+//
+//     const zuBearbeiten = () => {
+//         navigate("/eventVerwaltung/eventAnsehen/eventBearbeiten");
+//     }
+//
+//     const wichtelzuOrdnung = () => {
+//         //navigate("/");
+//     }
+//
+//     const handleSubmit = (event) => {
+//         event.preventDefault ();
+//         alert (inputs);
+//     }
+//
+//     const ausloggen = () => {
+//         cookies.remove("quarkus-credential");
+//         cookies.remove("username");
+//         navigate("/anmelden");
+//     }
+//
+//     const handleChange = (event) => {
+//         const name = event.target.name;
+//         const value = event.target.value;
+//         setInputs (values => ({...values, [name]: value}))
+//     }
+//
+//
+//     return (
+//         <form onSubmit={handleSubmit}>
+//             <h2 className="eventa-form-title">Meine Events</h2>
+//             <Table
+//                 data={rows}
+//                 selectedId={selectedEventId}
+//                 onSelect={(id) => {
+//                     setSelectedEventId(id);  // update state
+//                     handleSelect(id);        // call any other handler
+//                 }}
+//             />
+//             <div className="eventedit">
+//                 <input
+//                     type="button"
+//                     id="adduser"
+//                     value="Bearbeiten"
+//                     onClick={zuBearbeiten}
+//                 />
+//                 <input
+//                     type="button"
+//                     id="adduser"
+//                     value="Teilnehmer Hinzufügen"
+//                     onClick={() => zuTeilnehmer(selectedEventId)}
+//                     disabled={!selectedEventId}
+//                 />
+//             </div>
+//             <div className="zuordnungcancel">
+//                 <input
+//                     type="button"
+//                     id="adduser"
+//                     value="Wichtelzuordnung starten"
+//                     onClick={wichtelzuOrdnung}
+//                 />
+//                 <input
+//                     type="button"
+//                     id="adduser"
+//                     value="Abbrechen"
+//                     onClick={abbrechenClick}
+//                 />
+//             </div>
+//             <div className="logout">
+//                 <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
+//             </div>
+//         </form>
+//     );
+// }
 
+function Layout() {
     const [inputs, setInputs] = useState({});
     const navigate = useNavigate();
-    const [rows, setRows] = useState([]);
+    const [rows, setRows] = useState([]); // events
     const [selectedEventId, setSelectedEventId] = useState(null);
-    const handleSelect = (id) => {
-        console.log("Selected event:", id);
-        setSelectedEventId(id);
-    };
+    const [participants, setParticipants] = useState([]); // participants data
+    const [loadingParticipants, setLoadingParticipants] = useState(false);
 
     // Fetch events owned by current user
     useEffect(() => {
         const fetchMyEvents = async () => {
             const res = await fetch('/api/events/mine', {
                 method: "GET",
-                credentials: "include" // <--- important
-                //headers: { "quarkus-credential": cookies.get("quarkus-credential") }
+                credentials: "include"
             });
             if (res.ok) {
                 const data = await res.json();
@@ -251,68 +366,239 @@ function Layout() {
                 alert("Fehler beim Laden der Events");
             }
         };
-
         fetchMyEvents();
     }, []);
 
+    // Fetch participants for the selected event
+    useEffect(() => {
+        if (selectedEventId == null) return;
+        const fetchParticipants = async () => {
+            setLoadingParticipants(true);
+            try {
+                const res = await fetch(`/api/eventTeilnehmer/${selectedEventId}`, {
+                    method: "GET",
+                    credentials: "include",
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    setParticipants(data);
+                } else {
+                    setParticipants([]);
+                    setLoadingParticipants(false);
+                }
+            } catch (err) {
+                console.error("Fehler beim Laden der Teilnehmer:", err);
+                setParticipants([]);
+            } finally {
+                setLoadingParticipants(false);
+            }
+        };
+        fetchParticipants();
+    }, [selectedEventId]);
 
-
-
-    const abbrechenClick = () => {
-        navigate("/eventVerwaltung");
-    }
-
+    // navigation & buttons
+    const abbrechenClick = () => navigate("/eventVerwaltung");
     const zuTeilnehmer = (eventid) => {
         if (eventid) {
             navigate("/eventVerwaltung/eventAnsehen/teliEinsehen", {
                 state: { eventid },
             });
         }
-
-    }
-
-    const zuBearbeiten = () => {
-        navigate("/eventVerwaltung/eventAnsehen/eventBearbeiten");
-    }
-
-    const wichtelzuOrdnung = () => {
-        //navigate("/");
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault ();
-        alert (inputs);
-    }
-
+    };
+    const zuBearbeiten = () => navigate("/eventVerwaltung/eventAnsehen/eventBearbeiten");
+    const wichtelzuOrdnung = () => {};
     const ausloggen = () => {
         cookies.remove("quarkus-credential");
         cookies.remove("username");
         navigate("/anmelden");
-    }
+    };
 
-    const handleChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        setInputs (values => ({...values, [name]: value}))
-    }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        alert(inputs);
+    };
+
+    //New participants table components
+    const ParticipantsRow = ({ userEmail, eventId, radio }) => (
+        <tr>
+            <td>{userEmail}</td>
+            <td>{eventId}</td>
+            <td>{radio}</td>
+        </tr>
+    );
+
+    const ParticipantsTable = ({ data, selectedEventId }) => {
+        // Determine what message to show in the empty table
+        let emptyMessage = "";
+        if (selectedEventId == null) {
+            emptyMessage = "Bitte ein Event auswählen";
+        } else if (data.length === 0) {
+            emptyMessage = "Keine Teilnehmer vorhanden";
+        }
+        return (
+            <div
+                className="participants-table-container"
+                style={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    width: "1200px",
+                    margin: "0 auto",
+                }}
+            >
+                {/* Left side: actual Table*/}
+                <div
+                    style={{
+                        width: "550px",
+                        textAlign: "left",
+                    }}
+                >
+                    <h3 style={{marginLeft: "10px"}}>Teilnehmerliste</h3>
+                    <div className="table-window">
+                        <table style={{borderCollapse: "collapse", width: "100%"}}>
+                            <thead>
+                            <tr>
+                                <th style={{border: "1px solid #ccc", padding: "8px"}}>Teilnehmer Email</th>
+                                <th style={{border: "1px solid #ccc", padding: "8px"}}>Event ID</th>
+                                <th style={{border: "1px solid #ccc", padding: "8px"}}>Einladung abgeschickt</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {data.length > 0 ? (
+                                data.map((row, index) => (
+                                    <ParticipantsRow
+                                        key={index}
+                                        userEmail={row.userEmail}
+                                        eventId={row.eventId}
+                                        radio={row.radio}
+                                    />
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="3" style={{textAlign: "center", padding: "10px", color: "#999"}}>
+                                        {emptyMessage}
+                                    </td>
+                                </tr>
+                            )}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {/*Right side: 650px reserved */}
+                <div
+                    style={{
+                        width: "650px",
+                        backgroundColor: "white",
+                    }}
+                >
+                    <h3 style={{marginBottom: "10px"}}>Teilnehmer bearbeiten</h3>
+
+                    {/* Event ID (readonly) */}
+                    <div style={{marginBottom: "15px"}}>
+                        <label
+                            htmlFor="eventId"
+                            style={{
+                                display: "block",
+                                fontWeight: "bold",
+                                marginBottom: "5px",
+                            }}
+                        >
+                            Event ID:
+                        </label>
+                        <input
+                            type="text"
+                            id="eventId"
+                            value={selectedEventId || ""}
+                            readOnly
+                            style={{
+                                width: "100%",
+                                padding: "8px",
+                                border: "1px solid #ccc",
+                                borderRadius: "4px",
+                                backgroundColor: "#f5f5f5",
+                                color: "#555",
+                            }}
+                        />
+                    </div>
+
+                    {/* Email address input */}
+                    <div style={{marginBottom: "15px"}}>
+                        <label
+                            htmlFor="participantEmail"
+                            style={{
+                                display: "block",
+                                fontWeight: "bold",
+                                marginBottom: "5px",
+                            }}
+                        >
+                            Teilnehmer Email:
+                        </label>
+                        <input
+                            type="email"
+                            id="participantEmail"
+                            placeholder="name@example.com"
+                            style={{
+                                width: "100%",
+                                padding: "8px",
+                                border: "1px solid #ccc",
+                                borderRadius: "4px",
+                            }}
+                        />
+                    </div>
+
+                    {/* Add/Remove button */}
+                    <div>
+                        <button
+                            type="button"
+                            style={{
+                                padding: "10px 20px",
+                                backgroundColor: "#007bff",
+                                color: "white",
+                                border: "none",
+                                borderRadius: "4px",
+                                cursor: "pointer",
+                            }}
+                        >
+                            Hinzufügen / Entfernen
+                        </button>
+                    </div>
 
 
+                </div>
+            </div>
+        );
+    };
+
+    // --- JSX Layout ---
     return (
         <form onSubmit={handleSubmit}>
             <h2 className="eventa-form-title">Meine Events</h2>
+
+            {/* Events Table */}
             <Table
                 data={rows}
                 selectedId={selectedEventId}
                 onSelect={(id) => {
-                    setSelectedEventId(id);  // update state
-                    handleSelect(id);        // call any other handler
+                    setSelectedEventId(id);
                 }}
             />
+
+            {/* Participants Table */}
+            <div style={{marginTop: "30px", marginBottom: "30px"}}>
+                {loadingParticipants ? (
+                    <p style={{textAlign: "left", marginLeft: "5%"}}>
+                        Teilnehmer werden geladen...
+                    </p>
+                ) : (
+                    <ParticipantsTable data={participants} selectedEventId={selectedEventId}/>
+                )}
+            </div>
+
+            {/* Buttons below */}
             <div className="eventedit">
                 <input
                     type="button"
                     id="adduser"
-                    value="Bearbeiten"
+                    value="Event Anlegen / Bearbeiten"
                     onClick={zuBearbeiten}
                 />
                 <input
@@ -323,6 +609,7 @@ function Layout() {
                     disabled={!selectedEventId}
                 />
             </div>
+
             <div className="zuordnungcancel">
                 <input
                     type="button"
@@ -337,6 +624,7 @@ function Layout() {
                     onClick={abbrechenClick}
                 />
             </div>
+
             <div className="logout">
                 <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
             </div>

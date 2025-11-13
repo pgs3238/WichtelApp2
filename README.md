@@ -1,99 +1,195 @@
-# Wichtel App 2.0
+# 🌟🎁 WichtelApp 2
 
->Lore Ipsum yada yada...
+> New version of WichtelApp, improving functionality and user experience while completing the original Secret Santa app.
+
+**Last Updated:** 12 November 2025
+
+---
+### Landing Screen
+![Landing Screen](assets/login2.PNG)
 
 ---
 
-### Screenshot
+## 🧭 Motivation
 
----
-
-## 🧭 Goal
-
-bla bla
+The original WichtelApp was a university group project aimed at creating a functional Secret Santa application. The goal of this continuation is to fix, complete, and improve the app, enhancing functionality and user experience while consolidating lessons learned in full-stack development.
 
 ---
 
 ## ⚙️ Features
 
-- 🔐 User-Account Creation
-- Event creation and management
-- Invite people to join your event
-- Set who people can or can not give presents
-- Set Event properties
-- On day set for partner choosing, partners are automatically set
-- Information both in App as well as informed via email. 
-
+- 🧾 Account Creation
+- 🔐 User-Login & Logout
+- 🌐 Access to protected areas after login
+- 🎉 Event Creation
+- ✏️ Event modification
+- ➕ Adding users to events
+- 📧 Invite users to join the app
+- 🔔 Notify users (new or existing) of events they have been invited to
+- 🚫🎁 Specify users who cannot give presents to each other
+- 🎁 Secret Santa assignment ("Wichteln")
+- ❌ Automatic cookie deletion on logout
 
 ---
 
-## 🧰 Technology-Stack
+## 🧰 Technologie-Stack (at the moment)
 
 | Area                 | Technology / Version              |
 |:---------------------|:----------------------------------|
-| **Backend**          | Quarkus `2.13.4`, Gradle `7.5.1`  |
+| **Backend**          | Quarkus `2.16.6`, Gradle `7.5.1`  |
 | **Frontend / Build** | React `18.2.0`, Node.js `18.12.1` |
-| **Databank**         | PostgreSQL (Docker)               |
-| **Language**         | Java `17`, JavaScript             |
+| **Database**         | PostgreSQL (Docker)               |
+| **Language(s)**      | Java `17`, JavaScript             |
 
-**Implemented Quarkus-Addons:**
+**Quarkus extensions used:**
 ```gradle
     implementation 'io.quarkus:quarkus-hibernate-orm'
     implementation 'io.quarkus:quarkus-hibernate-validator'
-    implementation 'io.quarkus:quarkus-resteasy-reactive-jsonb'
+    implementation 'io.quarkus:quarkus-resteasy-jsonb'
     implementation 'io.quarkus:quarkus-smallrye-openapi'
-    implementation 'io.quarkus:quarkus-resteasy-reactive'
-    //implementation 'io.quarkus:quarkus-resteasy-mutiny'
+    implementation 'io.quarkus:quarkus-resteasy'
     implementation 'io.quarkus:quarkus-security-jpa'
     implementation 'io.quarkus:quarkus-jdbc-postgresql'
     implementation 'io.quarkus:quarkus-arc'
     implementation 'io.quarkus:quarkus-mailer'
+    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.rest-assured:rest-assured'
 ```
-> 🧪 While folders for test und native-test are present, no tests are implemented at this time.
+> 🧪 Test folders (test and native-test) exist but currently contain no implemented tests.
+
+---
+## ⚠️ Development Status
+
+### Backend
+| Area                    | Status                           |
+|:------------------------|:---------------------------------|
+| Login                   | implemented                      |
+| User management         | implemented                      |
+| Event Setup             | implemented                      |
+| Secret Santa assignment | theoretically complete, untested |
+| Email notification      | planned                          |
+
+### Frontend
+| Area                        | Status                                                           |
+|:----------------------------|:-----------------------------------------------------------------|
+| Landing Page                | implemented and functional                                       |
+| Login                       | Integrated into *Landing Page* (⚠️logout sometimes returns here) |
+| User creation               | implemented and functional                                       |
+| Event creation              | implemented and functional                                       |
+| Display events page         | implemented and functional                                       |
+| My Events page              | implemented and partially functional                             |
+| Display Users in Event Page | Integrated into *My Events Page*                                 |
+| Add Users to Event Page     | Integrated into *My Events Page*                                 |
+| Group Main Page             | removed                                                          |
+| Add/Remove Groups Page      | removed; new function will be added to *My Events Page*          |
+| Add Users to Groups Page    | removed; new function will be added to *My Events Page*          |
+
+> ⚠️ Note: Not all buttons are functional. Table entries are test data used for analyzing and debugging.
+
+### Next Steps
+1. Add a new function to replace groups.
+2. Add a backend table for users without accounts (contains email addresses and function replacing groups). When a user creates an account, this data merges with the main User table and the user-event table.
+3. Test adding users and new function with multiple test users.
+4. Rewrite Secret Santa function for the new groups replacement and test it.
+5. Update Quarkus to 3.x and fix broken functionality (email and cookie require Quarkus 3.x).
+6. Add email service: invites sent via email; users must accept in the app. Email is primary key.
+7. Test all email functionality; possibly add more email features.
+8. Fix cookie issue.
+9. Modify taskbar: consider moving link to event creation to top menu and add logout to top menu; remove logout button from bottom or keep both.
+10. Improve frontend styling.
+11. Finish the app
+
+### Note to self - Missing in implementation
+- Add a “hook” to indicate whether the creator wants to participate in their own event.
+
+### 📸 Current Condition / Screenshots
+
+#### 1. Eventverwaltung
+![Eventverwaltung](assets/eventverwaltung.PNG)
+*Shows a table with all events (for testing purposes). In the release version, it will display all events the logged-in user has joined or created.*
+
+#### 2. Meine Events 1
+![Meine Events 1](assets/meine_events.PNG)
+*Displays events created by the user (top table). Selecting an event populates the bottom-left table with participants (if any). Bottom-right allows adding/removing users via email input. Emails will be sent separately once implemented.*
+
+#### 3. Meine Events 2
+![Meine Events 2](assets/meine_events2.PNG)
+*Shows participant list and add/remove functionality for a selected event. The “Einladung Abgeschickt” column indicates if an email was sent (1 = sent, 0 = not sent). Future implementation will replace numbers with icons.*
 
 ---
 
 ## 🛠️ Installation & Setup
-Requirements
+Prerequisites:
 
-- Docker is installed and running
-- PostgreSQL is running in a Container
-- Java 17, Gradle, Node.js are installed (or are installed via the Build-Script)
+- Docker installed and running
+- PostgreSQL running in a container
+- Java 17, Gradle, Node.js installed (or installed via build script)
 
-Steps
+Steps:
 ```shell script
-#Clone repository
+#Clone the repository
 git clone https://github.com/pgs3238/WichtelApp2.git
 cd WichtelApp
 
-# Run build (installs Node, npm-dependencies und builds the application)
+# Build project (installs Node, npm dependencies and runs build)
 ./gradlew build
 
-# Run the application in dev mode
+# Start the application in development mode
 ./gradlew quarkusDev
+```
+
+### 🐳 Database Configuration (Docker)
+
+To run the application locally, a PostgreSQL container must be set up with the following configuration:
+
+| Setting   | Value       |
+|:-----------|:------------|
+| Host       | `localhost` |
+| Port       | `5433`      |
+| User       | `quarkus`   |
+| Password   | `quarkus`   |
+| Database   | `quarkus`   |
+| JDBC URL   | `jdbc:postgresql://localhost:5433/quarkus` |
+
+You can start a compatible PostgreSQL container with:
+
+```bash
+docker run --name postgres-quarkus \
+  -e POSTGRES_USER=quarkus \
+  -e POSTGRES_PASSWORD=quarkus \
+  -e POSTGRES_DB=quarkus \
+  -p 5433:5432 \
+  -d postgres:latest
 ```
 ---
 
-## 🚀 Nutzung
+## 🚀 Usage
 
-1. Anwendung starten
-2. Im Browser die Login-Seite öffnen
-3. Benutzerkonto anlegen
-4. Benutzer anmelden → Cookie wird gesetzt
-5. Zugriff auf geschützte Seiten möglich
-6. Logout → Cookie wird gelöscht
+1. Start the application
+2. Open the landing/login page in your browser
+3. Create a user account
+4. Log in → cookie will be set
+5. Access protected pages
+6. View main page (shows all events; planned modification: only show events the user is part of or has created)
+7. Click **Eigene Events anzeigen** to display user-created events. 
+8. In *My Events* select an event to view participants and add/remove users
+9. Logout → cookie will be deleted
 
-## ⚠️ Hinweise
+---
 
-> 🔒 Dieses Projekt dient ausschließlich zu Lern- und Demonstrationszwecken.
-Die Cookie-basierte Speicherung von Nutzerdaten ist nicht für produktive Umgebungen geeignet.
+## ⚠️ Notes
+
+> 🔒 This project is for learning and demonstration purposes only.
+Cookie-based storage of user data is not suitable for production environments.
 
 ---
 
 ## 🧑‍💻 Author & Contact
-| Name                | Contact                                                                                                                                                                |
-|:--------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Paul-Gerhard Siegel | [GitHub](https://github.com/pgs3238) · [LinkedIn](https://www.linkedin.com/in/paul-gerhard-siegel-719a4512/) · [Xing](https://www.xing.com/profile/PaulGerhard_Siegel) |
-| Contributers        |                                                                                                                                                                        |
+| Name                | Area                            | Contact                                                                                                                                                                |
+|:--------------------|:--------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Paul-Gerhard Siegel | Backend (User & Login)          | [GitHub](https://github.com/pgs3238) · [LinkedIn](https://www.linkedin.com/in/paul-gerhard-siegel-719a4512/) · [Xing](https://www.xing.com/profile/PaulGerhard_Siegel) |
+
+> ✨ This project is a continuation of the original [WichtelApp](https://github.com/pgs3238/WichtelApp),  
+> developed as part of the **IT-Projekt** university course.
 
 
