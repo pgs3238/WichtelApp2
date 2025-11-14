@@ -47,7 +47,7 @@ function Layout() {
                 </div>
 
                 <div className="anmelden">
-                    <h3 className="home-form-description">🎅 Schon Teil des Wichtelspaßes? Dann logge dich unten ein!</h3>
+                    <h3 className="home-form-description">{/*🎅*/} Schon Teil des Wichtelspaßes? Dann logge dich unten ein!</h3>
 
                     <div className="home-form-row">
                         <label> E-Mail: </label>
