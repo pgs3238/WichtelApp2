@@ -6,14 +6,8 @@ import {useNavigate} from "react-router-dom";
 import cookies from "js-cookie";
 
 //TODO Event Bearbeiten - noch nicht richtig eingebaut ggf. entfernen??
-// Besser ein neues Event anzulegen als ein altes zu ändern...
-// neue Idee - bei select event show table Teilnehmer,
-// darunter dann butten Teilnehmer hinzufügen Teilnehmer enfernen,
-// jeweils popup mit eingabe etc.
 // Button Wichtelzuordnung starten ist für Testzwecke und sollte später
 // automatisch bei Zuordnungsdatum stattfinden, daher dann button entfernen;
-// anstelle von Gruppen soll es Einschränkungen geben, jedem Nutzer kann eingeschränkt
-// werden wem er keine Geschenke geben soll
 
 
 //TODO überflüssigen Code entfernen nach thorough test!
