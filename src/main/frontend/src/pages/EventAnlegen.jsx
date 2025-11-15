@@ -68,7 +68,8 @@ function Layout() {
 
     const handleOk = () => {
         setShowMessage(false);
-        navigate("/eventVerwaltung");
+        // navigate("/eventVerwaltung");
+        navigate("/eventVerwaltung/eventAnsehen");
     }
 
 

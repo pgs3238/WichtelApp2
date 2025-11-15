@@ -26,7 +26,7 @@ function Layout() {
        // alert(JSON.stringify(inputs));
 
         if (inputs.passwort !== inputs.repasswort) {
-            alert("pass?")
+            alert("Your passwords don’t match. Please re-enter them.")
             return;
         }
 

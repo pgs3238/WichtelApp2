@@ -4,6 +4,9 @@ import Eventverwaltung.Teilnehmer.entity.internal.User;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 //import jakarta.validation.constraints.Email;
 import java.io.Serializable;
 
@@ -18,13 +21,22 @@ Note: TO=Transfer Object
 public class UserTO implements Serializable {
 
     //Integer userID;
-    @Length(min = 3)
+    @NotNull(message = "Der Name muss zwischen 5 und 256 Zeichen lang sein.")
+    @NotBlank(message = "Der Name muss zwischen 5 und 256 Zeichen lang sein.")
+    @Length(min = 2, max = 60, message = "Der Name muss mindestens 2  Zeichen lang sein.")
     String name;
-    @Length(min = 3)
+    @NotNull(message = "Der Vorname muss zwischen 5 und 256 Zeichen lang sein.")
+    @NotBlank(message = "Der Vorname muss zwischen 5 und 256 Zeichen lang sein.")
+    @Length(min = 2, max = 50, message = "Der Vorname muss mindestens 2 Zeichen lang sein. ")
     String vorname;
-    @Email
+    @NotNull(message = "E-Mail-Adresse muss zwischen 5 und 256 Zeichen lang sein.")
+    @NotBlank(message = "E-Mail-Adresse muss zwischen 5 und 256 Zeichen lang sein.")
+    @Email(message = "Bitte geben Sie eine gültige E-Mail-Adresse ein.")
+    @Size(min = 5, max = 256, message = "E-Mail-Adresse muss zwischen 5 und 256 Zeichen lang sein.")
     String email;
-    @Length(min = 3)
+    @NotNull(message = "Das Passwort muss mindestens 5 Zeichen lang sein.")
+    @NotBlank(message = "Das Passwort muss mindestens 5 Zeichen lang sein.")
+    @Length(min = 5, max = 128, message = "Das Passwort muss mindestens 5 Zeichen lang sein.")
     String passwort;
 
     public UserTO() {}

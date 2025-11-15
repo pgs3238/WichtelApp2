@@ -61,8 +61,8 @@ const Table = ({ data, selectedId, onSelect }) => {
 
     const maxTableWidth = 1200;
     const rowHeight = 41;
-    const minVisibleRows = 5;
-    const maxVisibleRows = 6;
+    const minVisibleRows = 4;
+    const maxVisibleRows = 5;
     const bodyHeight = Math.max(minVisibleRows, Math.min(data.length, maxVisibleRows)) * rowHeight;
 
     const tableRef = useRef(null);
@@ -223,127 +223,6 @@ const Table = ({ data, selectedId, onSelect }) => {
     );
 };
 
-
-
-// function Layout() {
-//
-//     const [inputs, setInputs] = useState({});
-//     const navigate = useNavigate();
-//     const [rows, setRows] = useState([]);
-//     const [selectedEventId, setSelectedEventId] = useState(null);
-//     const handleSelect = (id) => {
-//         console.log("Selected event:", id);
-//         setSelectedEventId(id);
-//     };
-//
-//     // Fetch events owned by current user
-//     useEffect(() => {
-//         const fetchMyEvents = async () => {
-//             const res = await fetch('/api/events/mine', {
-//                 method: "GET",
-//                 credentials: "include" // <--- important
-//                 //headers: { "quarkus-credential": cookies.get("quarkus-credential") }
-//             });
-//             if (res.ok) {
-//                 const data = await res.json();
-//                 setRows(data);
-//             } else {
-//                 alert("Fehler beim Laden der Events");
-//             }
-//         };
-//
-//         fetchMyEvents();
-//     }, []);
-//
-//
-//
-//
-//     const abbrechenClick = () => {
-//         navigate("/eventVerwaltung");
-//     }
-//
-//     const zuTeilnehmer = (eventid) => {
-//         if (eventid) {
-//             navigate("/eventVerwaltung/eventAnsehen/teliEinsehen", {
-//                 state: { eventid },
-//             });
-//         }
-//
-//     }
-//
-//     const zuBearbeiten = () => {
-//         navigate("/eventVerwaltung/eventAnsehen/eventBearbeiten");
-//     }
-//
-//     const wichtelzuOrdnung = () => {
-//         //navigate("/");
-//     }
-//
-//     const handleSubmit = (event) => {
-//         event.preventDefault ();
-//         alert (inputs);
-//     }
-//
-//     const ausloggen = () => {
-//         cookies.remove("quarkus-credential");
-//         cookies.remove("username");
-//         navigate("/anmelden");
-//     }
-//
-//     const handleChange = (event) => {
-//         const name = event.target.name;
-//         const value = event.target.value;
-//         setInputs (values => ({...values, [name]: value}))
-//     }
-//
-//
-//     return (
-//         <form onSubmit={handleSubmit}>
-//             <h2 className="eventa-form-title">Meine Events</h2>
-//             <Table
-//                 data={rows}
-//                 selectedId={selectedEventId}
-//                 onSelect={(id) => {
-//                     setSelectedEventId(id);  // update state
-//                     handleSelect(id);        // call any other handler
-//                 }}
-//             />
-//             <div className="eventedit">
-//                 <input
-//                     type="button"
-//                     id="adduser"
-//                     value="Bearbeiten"
-//                     onClick={zuBearbeiten}
-//                 />
-//                 <input
-//                     type="button"
-//                     id="adduser"
-//                     value="Teilnehmer Hinzufügen"
-//                     onClick={() => zuTeilnehmer(selectedEventId)}
-//                     disabled={!selectedEventId}
-//                 />
-//             </div>
-//             <div className="zuordnungcancel">
-//                 <input
-//                     type="button"
-//                     id="adduser"
-//                     value="Wichtelzuordnung starten"
-//                     onClick={wichtelzuOrdnung}
-//                 />
-//                 <input
-//                     type="button"
-//                     id="adduser"
-//                     value="Abbrechen"
-//                     onClick={abbrechenClick}
-//                 />
-//             </div>
-//             <div className="logout">
-//                 <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
-//             </div>
-//         </form>
-//     );
-// }
-
 function Layout() {
     const [inputs, setInputs] = useState({});
     const navigate = useNavigate();
@@ -351,6 +230,9 @@ function Layout() {
     const [selectedEventId, setSelectedEventId] = useState(null);
     const [participants, setParticipants] = useState([]); // participants data
     const [loadingParticipants, setLoadingParticipants] = useState(false);
+    const [selectedUserEmail, setSelectedUserEmail] = useState(""); // the user we are editing
+    const [restrictions, setRestrictions] = useState({}); // { userEmail: [restrictedEmails] }
+    const [selectedParticipantEmail, setSelectedParticipantEmail] = useState(null);
 
     // Fetch events owned by current user
     useEffect(() => {
@@ -418,14 +300,52 @@ function Layout() {
         alert(inputs);
     };
 
+    const stickyThStyle = {
+        position: "sticky",
+        top: 0,
+        zIndex: 2,
+        backgroundColor: "#f2f2f2", // same as header background
+    };
+
     //New participants table components
-    const ParticipantsRow = ({ userEmail, eventId, radio }) => (
-        <tr>
-            <td>{userEmail}</td>
-            <td>{eventId}</td>
-            <td>{radio}</td>
-        </tr>
-    );
+    // const ParticipantsRow = ({ userEmail, eventId, radio }) => {
+    //     const renderStatus = () => {
+    //         if (radio === 0) return '☐';           // empty box
+    //         if (radio === 1) return '✅';           // tick/swish
+    //         return '';                              // fallback
+    //     };
+    //
+    //     return (
+    //         <tr>
+    //             {/* <td>{eventId}</td> */}
+    //             <td>{userEmail}</td>
+    //             <td style={{ textAlign: "center", fontSize: "18px" }}>{renderStatus()}</td>
+    //         </tr>
+    //     );
+    // };
+    const ParticipantsRow = ({ userEmail, eventId, radio, isSelected, onSelect }) => {
+        const [isHovered, setIsHovered] = useState(false);
+
+        const backgroundColor = isSelected
+            ? "#d0f0ff"  // selected
+            : isHovered
+                ? "#f2faff"  // hover
+                : "transparent";
+
+        return (
+            <tr
+                onClick={() => onSelect(userEmail)}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                style={{ cursor: "pointer", backgroundColor, transition: "background-color 0.15s" }}
+            >
+                <td>{userEmail}</td>
+                <td style={{ textAlign: "center", fontSize: "18px" }}>
+                    {radio === 0 ? "☐" : "✅"}
+                </td>
+            </tr>
+        );
+    };
 
     const ParticipantsTable = ({ data, selectedEventId }) => {
         // Determine what message to show in the empty table
@@ -443,6 +363,8 @@ function Layout() {
                     justifyContent: "flex-start",
                     width: "1200px",
                     margin: "0 auto",
+                    marginTop: "15px",
+                    marginBottom: "15px",
                 }}
             >
                 {/* Left side: actual Table*/}
@@ -452,14 +374,22 @@ function Layout() {
                         textAlign: "left",
                     }}
                 >
-                    <h3 style={{marginLeft: "10px"}}>Teilnehmerliste</h3>
-                    <div className="table-window">
+                    {/*<h3 style={{marginLeft: "10px"}}>Teilnehmerliste</h3>*/}
+                    <h3>Teilnehmerliste</h3>
+                    <div className="table-window"
+                         style={{
+                             maxHeight: participants.length > 6 ? '290px' : 'auto', // 6 rows * ~41px per row
+                             overflowY: participants.length > 6 ? 'auto' : 'visible',
+                             border: "1px solid #ccc",
+                             borderRadius: "4px",
+                         }}
+                    >
                         <table style={{borderCollapse: "collapse", width: "100%"}}>
                             <thead>
                             <tr>
-                                <th style={{border: "1px solid #ccc", padding: "8px"}}>Teilnehmer Email</th>
-                                <th style={{border: "1px solid #ccc", padding: "8px"}}>Event ID</th>
-                                <th style={{border: "1px solid #ccc", padding: "8px"}}>Einladung abgeschickt</th>
+                                {/*<th style={{border: "1px solid #ccc", padding: "8px"}}>Event ID</th>*/}
+                                <th style={{border: "1px solid #ccc", padding: "8px", ...stickyThStyle}}>Teilnehmer</th>
+                                <th style={{border: "1px solid #ccc", padding: "8px", ...stickyThStyle}}>Eingeladen</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -467,9 +397,11 @@ function Layout() {
                                 data.map((row, index) => (
                                     <ParticipantsRow
                                         key={index}
+                                        // eventId={row.eventId}
                                         userEmail={row.userEmail}
-                                        eventId={row.eventId}
                                         radio={row.radio}
+                                        isSelected={selectedParticipantEmail === row.userEmail}
+                                        onSelect={setSelectedParticipantEmail}
                                     />
                                 ))
                             ) : (
@@ -484,86 +416,214 @@ function Layout() {
                     </div>
                 </div>
                 {/*Right side: 650px reserved */}
-                <div
-                    style={{
-                        width: "650px",
-                        backgroundColor: "white",
-                    }}
-                >
-                    <h3 style={{marginBottom: "10px"}}>Teilnehmer bearbeiten</h3>
+                {/*<div*/}
+                {/*    style={{*/}
+                {/*        width: "650px",*/}
+                {/*        backgroundColor: "white",*/}
+                {/*    }}*/}
+                {/*>*/}
+                {/*    <h3 style={{marginBottom: "10px"}}>Teilnehmer bearbeiten</h3>*/}
 
-                    {/* Event ID (readonly) */}
-                    <div style={{marginBottom: "15px"}}>
-                        <label
-                            htmlFor="eventId"
-                            style={{
-                                display: "block",
-                                fontWeight: "bold",
-                                marginBottom: "5px",
-                            }}
-                        >
-                            Event ID:
-                        </label>
-                        <input
-                            type="text"
-                            id="eventId"
-                            value={selectedEventId || ""}
-                            readOnly
-                            style={{
-                                width: "100%",
-                                padding: "8px",
-                                border: "1px solid #ccc",
-                                borderRadius: "4px",
-                                backgroundColor: "#f5f5f5",
-                                color: "#555",
-                            }}
-                        />
-                    </div>
+                {/*    /!* Event ID (readonly) *!/*/}
+                {/*    <div style={{marginBottom: "15px"}}>*/}
+                {/*        <label*/}
+                {/*            htmlFor="eventId"*/}
+                {/*            style={{*/}
+                {/*                display: "block",*/}
+                {/*                fontWeight: "bold",*/}
+                {/*                marginBottom: "5px",*/}
+                {/*            }}*/}
+                {/*        >*/}
+                {/*            Event ID:*/}
+                {/*        </label>*/}
+                {/*        <input*/}
+                {/*            type="text"*/}
+                {/*            id="eventId"*/}
+                {/*            value={selectedEventId || ""}*/}
+                {/*            readOnly*/}
+                {/*            style={{*/}
+                {/*                width: "75px",*/}
+                {/*                padding: "8px",*/}
+                {/*                border: "1px solid #ccc",*/}
+                {/*                borderRadius: "4px",*/}
+                {/*                backgroundColor: "#f5f5f5",*/}
+                {/*                color: "#555",*/}
+                {/*            }}*/}
+                {/*        />*/}
+                {/*    </div>*/}
 
-                    {/* Email address input */}
-                    <div style={{marginBottom: "15px"}}>
-                        <label
-                            htmlFor="participantEmail"
-                            style={{
-                                display: "block",
-                                fontWeight: "bold",
-                                marginBottom: "5px",
-                            }}
-                        >
-                            Teilnehmer Email:
-                        </label>
-                        <input
-                            type="email"
-                            id="participantEmail"
-                            placeholder="name@example.com"
-                            style={{
-                                width: "100%",
-                                padding: "8px",
-                                border: "1px solid #ccc",
-                                borderRadius: "4px",
-                            }}
-                        />
-                    </div>
+                {/*    /!* Email address input *!/*/}
+                {/*    <div style={{marginBottom: "15px"}}>*/}
+                {/*        <label*/}
+                {/*            htmlFor="participantEmail"*/}
+                {/*            style={{*/}
+                {/*                display: "block",*/}
+                {/*                fontWeight: "bold",*/}
+                {/*                marginBottom: "5px",*/}
+                {/*            }}*/}
+                {/*        >*/}
+                {/*            Teilnehmer Emailadresse:*/}
+                {/*        </label>*/}
+                {/*        <input*/}
+                {/*            type="email"*/}
+                {/*            id="participantEmail"*/}
+                {/*            placeholder="name@example.com"*/}
+                {/*            style={{*/}
+                {/*                width: "250px",*/}
+                {/*                padding: "8px",*/}
+                {/*                border: "1px solid #ccc",*/}
+                {/*                borderRadius: "4px",*/}
+                {/*            }}*/}
+                {/*        />*/}
+                {/*    </div>*/}
 
-                    {/* Add/Remove button */}
+                {/*    /!* Add/Remove button *!/*/}
+                {/*    <div>*/}
+                {/*        <button*/}
+                {/*            type="button"*/}
+                {/*            style={{*/}
+                {/*                padding: "10px 20px",*/}
+                {/*                backgroundColor: "#007bff",*/}
+                {/*                color: "white",*/}
+                {/*                border: "none",*/}
+                {/*                borderRadius: "4px",*/}
+                {/*                cursor: "pointer",*/}
+                {/*            }}*/}
+                {/*        >*/}
+                {/*            Hinzufügen / Entfernen*/}
+                {/*        </button>*/}
+                {/*    </div>*/}
+
+
+                {/*</div>*/}
+                <div style={{width: "650px", backgroundColor: "white", paddingLeft: "10px"}}>
                     <div>
-                        <button
-                            type="button"
-                            style={{
-                                padding: "10px 20px",
-                                backgroundColor: "#007bff",
-                                color: "white",
-                                border: "none",
-                                borderRadius: "4px",
-                                cursor: "pointer",
-                            }}
-                        >
-                            Hinzufügen / Entfernen
-                        </button>
+                        <h3 style={{marginBottom: "10px"}}>Teilnehmer bearbeiten</h3>
+                        <div style={{display: "flex", alignItems: "flex-end", gap: "10px", marginBottom: "15px"}}>
+                            {/* Event ID */}
+                            <div>
+                                <label htmlFor="eventId"
+                                       style={{display: "block", fontWeight: "bold", marginBottom: "5px"}}>
+                                    Event ID
+                                </label>
+                                <input
+                                    type="text"
+                                    id="eventId"
+                                    value={selectedEventId || ""}
+                                    readOnly
+                                    style={{
+                                        width: "75px",
+                                        padding: "8px",
+                                        border: "1px solid #ccc",
+                                        borderRadius: "4px",
+                                        backgroundColor: "#f5f5f5",
+                                        color: "#555",
+                                    }}
+                                />
+                            </div>
+
+                            {/* Email input */}
+                            <div>
+                                <label htmlFor="participantEmail"
+                                       style={{display: "block", fontWeight: "bold", marginBottom: "5px"}}>
+                                    Teilnehmer Email
+                                </label>
+                                <input
+                                    type="email"
+                                    id="participantEmail"
+                                    placeholder="name@example.com"
+                                    style={{
+                                        width: "300px",
+                                        padding: "8px",
+                                        border: "1px solid #ccc",
+                                        borderRadius: "4px",
+                                    }}
+                                />
+                            </div>
+
+                            {/* Add/Remove button */}
+                            <div>
+                                <button
+                                    type="button"
+                                    style={{
+                                        padding: "10px 20px",
+                                        backgroundColor: "#007bff",
+                                        color: "white",
+                                        border: "none",
+                                        borderRadius: "4px",
+                                        cursor: "pointer",
+                                        marginTop: "22px", // align with inputs
+                                    }}
+                                >
+                                    Hinzufügen / Entfernen
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div style={{marginTop: "20px", paddingTop: "10px", borderTop: "1px solid #ccc"}}>
+                        <h4 style={{marginBottom: "10px"}}>Einschränkungen: Wer darf an wen keine Geschenke überreichen?</h4>
+
+                        {/* Dropdown / checkbox list of participants (excluding selected user) */}
+                        {selectedUserEmail ? (
+                            <div>
+                                {participants
+                                    .filter(p => p.userEmail !== selectedUserEmail)
+                                    .map((p, idx) => (
+                                        <label key={idx} style={{display: "block", marginBottom: "4px"}}>
+                                            <input
+                                                type="checkbox"
+                                                checked={
+                                                    restrictions[selectedUserEmail]?.includes(p.userEmail) || false
+                                                }
+                                                onChange={(e) => {
+                                                    const checked = e.target.checked;
+                                                    setRestrictions(prev => {
+                                                        const current = prev[selectedUserEmail] || [];
+                                                        let updated;
+                                                        if (checked) {
+                                                            updated = [...current, p.userEmail];
+                                                        } else {
+                                                            updated = current.filter(email => email !== p.userEmail);
+                                                        }
+                                                        return {...prev, [selectedUserEmail]: updated};
+                                                    });
+                                                }}
+                                            />
+                                            {p.userEmail}
+                                        </label>
+                                    ))
+                                }
+
+                                <button
+                                    type="button"
+                                    style={{
+                                        marginTop: "10px",
+                                        padding: "8px 15px",
+                                        backgroundColor: "#28a745",
+                                        color: "white",
+                                        border: "none",
+                                        borderRadius: "4px",
+                                        cursor: "pointer",
+                                    }}
+                                    onClick={() => {
+                                        // call API to save restrictions for selectedUserEmail
+                                        console.log("Save restrictions:", restrictions[selectedUserEmail]);
+                                    }}
+                                >
+                                    Speichern
+                                </button>
+                            </div>
+                        ) : (
+                            <p>Bitte zuerst einen Teilnehmer auswählen</p>
+                        )}
                     </div>
 
 
                 </div>
+
+
             </div>
         );
     };
@@ -583,7 +643,7 @@ function Layout() {
             />
 
             {/* Participants Table */}
-            <div style={{marginTop: "30px", marginBottom: "30px"}}>
+            <div>
                 {loadingParticipants ? (
                     <p style={{textAlign: "left", marginLeft: "5%"}}>
                         Teilnehmer werden geladen...
@@ -598,7 +658,7 @@ function Layout() {
                 <input
                     type="button"
                     id="adduser"
-                    value="Event Anlegen / Bearbeiten"
+                    value="Bearbeiten"
                     onClick={zuBearbeiten}
                 />
                 <input

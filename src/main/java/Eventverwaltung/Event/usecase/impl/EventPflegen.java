@@ -8,7 +8,9 @@ import Eventverwaltung.Teilnehmer.dao.UserDAO;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
 
 import javax.annotation.security.RolesAllowed;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -34,9 +36,8 @@ public class EventPflegen implements IEventPflegen {
     @RolesAllowed({"admin", "user", "owner"})
     @POST
     @Path("/create")
-    //@RolesAllowed("user")
     @Override
-    public Response eventAnlegen(EventTO eventTO){
+    public Response eventAnlegen(@Valid EventTO eventTO){
         Event aEvent = new Event();
         aEvent = eventTO.toEvent();
         aEvent.setOwner(securityContext.getUserPrincipal().getName());
@@ -51,13 +52,11 @@ public class EventPflegen implements IEventPflegen {
         }
     }
 
-
-
     @RolesAllowed({"admin", "owner"})
     @POST
     @Path("/update")
     @Override
-    public boolean eventSpeichern(EventTO eventTO){
+    public boolean eventSpeichern(@Valid EventTO eventTO){
         Event aEvent = eventDAO.find(eventTO.getEventId());
         aEvent.setEventId(eventTO.getEventId());
         aEvent.setName(eventTO.getName());

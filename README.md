@@ -14,6 +14,8 @@
 
 The original WichtelApp was a university group project aimed at creating a functional Secret Santa application. The goal of this continuation is to fix, complete, and improve the app, enhancing functionality and user experience while consolidating lessons learned in full-stack development.
 
+While the original WichtelApp was designed to include multiple navigable pages, this version focuses on two main pages. The primary page displays all events the user has been invited to, as well as those they are administrating. The lower section of this page provides a view of Secret Santa partners for selected events. The second page is dedicated entirely to event administration, offering tools to manage and organize events efficiently.
+
 ---
 
 ## ⚙️ Features
@@ -62,6 +64,17 @@ Passwords are hashed on the frontend before being sent to the backend, which com
 ---
 ## ⚠️ Development Status
 
+### SQL tables
+| Table          | Status                  | Name                        |
+|:---------------|:------------------------|:----------------------------|
+| User           | implemented             | wichtel_user                |
+| Unknown User   | not yet implemented     |                             |
+| Event          | implemented             | wichtel_event               |
+| User Login     | implemented             | user_roles                  |
+| Event Owner    | implemented             | wichtel_event_wichtel_user1 |
+| User exclusion | implemented             | user_event_exclusion        |
+| Event partner  | implemented (unchecked) | event_partner               |
+
 ### Backend
 | Area                    | Status                           |
 |:------------------------|:---------------------------------|
@@ -95,8 +108,13 @@ Passwords are hashed on the frontend before being sent to the backend, which com
 - ~~Implement table from *Display Users in Event* page within *My Events* page; table should populate with data when an event is selected~~
 - ~~Implement functionality from *Add Users to Event* page in *My Events* page, to add users to an event;~~ connect frontend with backend and make entry functional 
 - ~~Modified backend joined table Event + User: now a joined table with dual key (event, user), and an additional entry indicating whether an email was sent~~
-- ~~Modified backend to make the new Event + User table usable in frontend~~
-- deprecated joined table Event + User is still active but no longer used
+- ~~Modified backend to make the new Event + User table usable in frontend - (wichtel_event_wichtel_user1)~~
+- ~~Modified backend, created new table to replace subgroups (user_event_exclusions)~~
+- Add a new function to replace groups. (untested)
+- deprecated joined table Event + User (wichtel_event_wichtel_user)is still active but no longer used
+- deprecated table - (wichtel_event_wichtel_subgruppe) is still active but no longer used
+- deprecated table - (wichtel_subgruppe) is still active but no longer used
+- deprecated table - (wichtel_subgruppe_wichtel_user) is still active but no longer used
 - deprecated *Login* page (+CSS) still active
 - deprecated *Display Users in Event* page (+CSS) still active
 - deprecated *Add Users to Event* page (+CSS) still active
@@ -107,8 +125,7 @@ Passwords are hashed on the frontend before being sent to the backend, which com
 
 ### Upcoming / Next Steps
 
-- Add a new function to replace groups.
-- Add a backend table for users without accounts (contains email addresses and function replacing groups). When a user creates an account, this data merges with the main User table and the user-event table.
+- Add a backend table for users without accounts (contains email address). When a user creates an account, this data merges with the main User table and the user-event table.
 - Test adding users and new function with multiple test users.
 - Rewrite Secret Santa function for the new groups replacement and test it.
 - Update Quarkus to 3.x and fix broken functionality (email and updated cookie require Quarkus 3.x).
@@ -120,7 +137,7 @@ Passwords are hashed on the frontend before being sent to the backend, which com
 - Finish the app
 
 ### Note to self - Missing in implementation
-- Add a “hook” to indicate whether the creator wants to participate in their own event.
+- Add a “hook” to indicate whether the creator wants to participate in their own event. At the moment, the creator must manually add themselves to the event after it’s created, rather than having a “participate” option.
 
 ### 📸 Current Condition / Screenshots
 
