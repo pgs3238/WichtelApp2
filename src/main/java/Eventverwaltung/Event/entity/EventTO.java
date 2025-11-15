@@ -16,7 +16,7 @@ public class EventTO implements Serializable {
     private String name;
     @NotNull(message = "Regeln muss zwischen 5 und 256 Zeichen lang sein.")
     @NotBlank(message = "Regeln muss zwischen 5 und 256 Zeichen lang sein.")
-    @Size(min = 5, max = 256, message = "Regeln muss zwischen 5 und 256 Zeichen lang sein.")
+    @Size(min = 2, max = 256, message = "Regeln muss zwischen 5 und 256 Zeichen lang sein.")
     private String regeln;
     @NotNull(message = "Wichteldatum muss gesetzt sein.")
     private LocalDateTime deadline;

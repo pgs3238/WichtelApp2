@@ -33,7 +33,12 @@ function Layout() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-       // alert(JSON.stringify(inputs));
+        let combinedRule = inputs.rule;
+
+        if (!combinedRule) {
+            alert("Bitte wählen Sie einen Wert oder geben Sie eine Regel ein!");
+            return;
+        }
 
         let query = await fetch("/events/create", {
             method: "POST",
@@ -46,7 +51,8 @@ function Layout() {
 
             body: JSON.stringify({
                 "name": inputs.eventName,
-                "regeln": inputs.eventRegeln,
+                // "regeln": inputs.eventRegeln,
+                "regeln": combinedRule,
                 "deadline": inputs.eventDeadline,
                 "ort": inputs.eventOrt,
                 "eventDate": inputs.eventDate
@@ -80,36 +86,68 @@ function Layout() {
 
                 <div className="form-row">
                     <label>Wie soll das Event heißen?</label>
-                    <input type="text" name="eventName" placeholder="Eventname" onChange={handleChange} />
+                    <input type="text" name="eventName" placeholder="Eventname" onChange={handleChange}/>
                 </div>
 
                 <div className="form-row">
-                    <label>Wann soll das Event starten?</label>
-                    <input type="datetime-local" name="eventDate" onChange={handleChange} />
+                    <label>Wann soll gewichtelt werden?</label>
+                    <input type="datetime-local" name="eventDate" onChange={handleChange}/>
                 </div>
 
+                {/*<div className="form-row">*/}
+                {/*    <label>Welche Regeln liegen für das Event vor?</label>*/}
+                {/*    <input type="text" name="eventRegeln" placeholder="Eventregeln" onChange={handleChange} />*/}
+                {/*</div>*/}
+
                 <div className="form-row">
-                    <label>Welche Regeln liegen für das Event vor?</label>
-                    <input type="text" name="eventRegeln" placeholder="Eventregeln" onChange={handleChange} />
+                    <label>Regeln:</label>
+
+                    <div className="rules-wrapper">
+                        <div className="rules-radios">
+                            {["20€", "50€", "100€"].map((preset) => (
+                                <label key={preset}>
+                                    <input
+                                        type="radio"
+                                        name="rulePreset"
+                                        value={preset}
+                                        checked={inputs.rule === preset}
+                                        onChange={() => setInputs({...inputs, rule: preset})}
+                                    />
+                                    {preset}
+                                </label>
+                            ))}
+                        </div>
+
+                        <input
+                            type="text"
+                            name="ruleCustom"
+                            placeholder="z.B. 5€ + Keine Scherzgeschenke"
+                            value={
+                                !["20€", "50€", "100€"].includes(inputs.rule) ? inputs.rule || "" : ""
+                            }
+                            onChange={(e) => setInputs({...inputs, rule: e.target.value})}
+                        />
+                    </div>
                 </div>
+
 
                 <div className="form-row">
                     <label>Wo findet Secret Santa statt:</label>
-                    <input type="text" name="eventOrt" placeholder="Ort" onChange={handleChange} />
+                    <input type="text" name="eventOrt" placeholder="Ort" onChange={handleChange}/>
                 </div>
 
                 <div className="form-row">
-                    <label>Secret Santa Termin:</label>
-                    <input type="datetime-local" name="eventDeadline" onChange={handleChange} />
+                    <label>Wann findet die Verteilung der Geschenke statt:</label>
+                    <input type="datetime-local" name="eventDeadline" onChange={handleChange}/>
                 </div>
 
                 <div className="form-actions">
-                    <input type="submit" value="Event speichern" />
-                    <input type="button" value="Abbrechen" onClick={handleClick} />
+                    <input type="submit" value="Event speichern"/>
+                    <input type="button" value="Abbrechen" onClick={handleClick}/>
                 </div>
 
                 <div className="logout">
-                    <input type="button" value="Logout" onClick={ausloggen} />
+                    <input type="button" value="Logout" onClick={ausloggen}/>
                 </div>
             </form>
 
