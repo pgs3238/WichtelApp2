@@ -2,11 +2,11 @@
 
 > New version of [WichtelApp](https://github.com/pgs3238/WichtelApp), improving functionality and user experience while completing the original Secret Santa app.
 
-**Last Updated:** 12 November 2025
+**Last Updated:** 15 November 2025
 
 ---
 ### Landing Screen
-![Landing Screen](assets/login2.PNG)
+![Landing Screen](assets/login3.PNG)
 
 ---
 
@@ -153,6 +153,9 @@ Passwords are hashed on the frontend before being sent to the backend, which com
 ![Meine Events 2](assets/meine_events2.PNG)
 *Shows participant list and add/remove functionality for a selected event. The “Einladung Abgeschickt” column indicates if an email was sent (1 = sent, 0 = not sent). Future implementation will replace numbers with icons.*
 
+#### 4. Meine Events 3
+![Meine Events 3](assets/meine_events3.PNG)
+*Demonstrates the development of **Meine Events**. The participant list now shows only email addresses and invitation statuses. The layout has been updated to provide space for a feature that restricts who can be assigned as a Secret Santa, e.g., preventing siblings or family members from giving gifts to each other.*
 ---
 
 ## 🛠️ Installation & Setup
