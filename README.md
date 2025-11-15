@@ -156,6 +156,7 @@ Passwords are hashed on the frontend before being sent to the backend, which com
 #### 4. Meine Events 3
 ![Meine Events 3](assets/meine_events3.PNG)
 *Demonstrates the development of **Meine Events**. The participant list now shows only email addresses and invitation statuses. The layout has been updated to provide space for a feature that restricts who can be assigned as a Secret Santa, e.g., preventing siblings or family members from giving gifts to each other.*
+
 ---
 
 ## 🛠️ Installation & Setup
