@@ -145,15 +145,7 @@ Passwords are hashed on the frontend before being sent to the backend, which com
 ![Eventverwaltung](assets/eventverwaltung.PNG)
 *Shows a table with all events (for testing purposes). In the release version, it will display all events the logged-in user has joined or created.*
 
-#### 2. Meine Events 1
-![Meine Events 1](assets/meine_events.PNG)
-*Displays events created by the user (top table). Selecting an event populates the bottom-left table with participants (if any). Bottom-right allows adding/removing users via email input. Emails will be sent separately once implemented.*
-
-#### 3. Meine Events 2
-![Meine Events 2](assets/meine_events2.PNG)
-*Shows participant list and add/remove functionality for a selected event. The “Einladung Abgeschickt” column indicates if an email was sent (1 = sent, 0 = not sent). Future implementation will replace numbers with icons.*
-
-#### 4. Meine Events 3
+#### 2. Meine Events
 ![Meine Events 3](assets/meine_events3.PNG)
 *Demonstrates the development of **Meine Events**. The participant list now shows only email addresses and invitation statuses. The layout has been updated to provide space for a feature that restricts who can be assigned as a Secret Santa, e.g., preventing siblings or family members from giving gifts to each other.*
 
