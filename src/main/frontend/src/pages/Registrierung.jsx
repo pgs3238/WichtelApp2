@@ -100,10 +100,23 @@ function Layout() {
             </form>
 
             {showMessage && (
-                <div className="register-modal-overlay">
+                <div
+                    className="register-modal-overlay"
+                         onKeyDown={(e) => {
+                             if (e.key === "Enter") {
+                                 e.preventDefault(); // Prevent form submission
+                                 handleOk();         // Trigger OK click
+                             }
+                         }}
+                         tabIndex={-1} // Needed to make div focusable
+                         autoFocus
+                >
                     <div className="register-modal-box">
                         <p>Konto angelegt!</p>
-                        <button onClick={handleOk}>OK</button>
+                        <button
+                            onClick={handleOk}
+                            autoFocus // ensure Enter triggers this button
+                        >OK</button>
                     </div>
                 </div>
             )}
