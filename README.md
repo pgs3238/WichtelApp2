@@ -1,8 +1,10 @@
 # 🌟🎁 WichtelApp 2
 
-> New version of [WichtelApp](https://github.com/pgs3238/WichtelApp), improving functionality and user experience while completing the original Secret Santa app.
+> **WichtelApp2** is a professional evolution of my university project 
+[WichtelApp](https://github.com/pgs3238/WichtelApp). This version serves as a sandbox for exploring **modern 
+cloud-native Java development**, focusing on the migration from legacy Java EE patterns to **Quarkus** and **Jakarta EE**.
 
-**Last Updated:** 15 November 2025
+**Status:** Active Refactoring (Nov 2025).
 
 ---
 ### Landing Screen
@@ -10,69 +12,71 @@
 
 ---
 
-## 🧭 Motivation
+## 🏗️ Architectural Vision
 
-The original WichtelApp was a university group project aimed at creating a functional Secret Santa application. The goal of this continuation is to fix, complete, and improve the app, enhancing functionality and user experience while consolidating lessons learned in full-stack development.
+This project is currently undergoing a structural transformation. My goal is to modernize the monolithic structure 
+into a more robust, maintainable architecture.
 
-While the original WichtelApp was designed to include multiple navigable pages, this version focuses on two main pages. The primary page displays all events the user has been invited to, as well as those they are administrating. The lower section of this page provides a view of Secret Santa partners for selected events. The second page is dedicated entirely to event administration, offering tools to manage and organize events efficiently.
-
----
-
-## ⚙️ Features
-
-- 🧾 Account Creation & Login/Logout
-- 🎉 Event Creation & Management
-- ➕ Adding and inviting users to events
-- 🔔 Notifications to users about events
-- 🚫🎁 Specify users who cannot give presents to each other
-- 🎁 Secret Santa assignment ("Wichteln")
-
-Passwords are hashed on the frontend before being sent to the backend, which compares them to the stored hashes. Adding salting and stronger security measures is planned for future steps.
+- **RESTful API Evolution:** The application currently utilizes **Java EE REST (JAX-RS)** for its API layer. 
+I am actively refactoring these components to align with modern **Jakarta EE** standards and **Quarkus**-native 
+features.
+- **API Documentation:** Integrated **SmallRye OpenAPI** to provide an interactive Swagger UI, ensuring the API 
+contract is fully documented and developer-friendly.
+- **Refactoring:** Moving away from legacy Java EE patterns towards a clean **Jakarta EE / Quarkus** ecosystem.
+- **Security:** Transitioning from frontend-hashed credentials to a production-grade authentication flow (planned).
+- **Frontend Evolution:** Evaluating a migration from standard React to TypeScript to ensure type safety 
+across the entire API contract.
 
 ---
 
-## 🧰 Technologie-Stack
+## 🛠️ Technologie-Stack
 
-| Area                 | Technology / Version              |
-|:---------------------|:----------------------------------|
-| **Backend**          | Quarkus `2.16.6`, Gradle `7.5.1`  |
-| **Frontend / Build** | React `18.2.0`, Node.js `18.12.1` |
-| **Database**         | PostgreSQL (Docker)               |
-| **Language(s)**      | Java `17`, JavaScript             |
-
-**Quarkus extensions used:**
-```gradle
-    implementation 'io.quarkus:quarkus-hibernate-orm'
-    implementation 'io.quarkus:quarkus-hibernate-validator'
-    implementation 'io.quarkus:quarkus-resteasy-jsonb'
-    implementation 'io.quarkus:quarkus-smallrye-openapi'
-    implementation 'io.quarkus:quarkus-resteasy'
-    implementation 'io.quarkus:quarkus-security-jpa'
-    implementation 'io.quarkus:quarkus-jdbc-postgresql'
-    implementation 'io.quarkus:quarkus-arc'
-    implementation 'io.quarkus:quarkus-mailer'
-    testImplementation 'io.quarkus:quarkus-junit5'
-    testImplementation 'io.rest-assured:rest-assured'
-```
-> 🧪 Test folders (test and native-test) exist but currently contain no implemented tests.
-> Quarkus extensions used include Hibernate ORM, RESTEasy, Security JPA, OpenAPI, Mailer, and Arc.
+| Area                 | Technology / Version                        |
+|:---------------------|:--------------------------------------------|
+| **Backend**          | Quarkus `2.16.6`, Java `17`, Gradle `7.5.1` |
+| **API Layer**        | Java EE REST (JAX-RS), JSON-B, OpenAPI      |
+| **Frontend**         | React `18.2.0`, Node.js `18.12.1`           |
+| **Persistence**      | PostgreSQL, Hibernate ORM                   |
+| **Containerization** | Docker                                      |
 
 ---
-## ⚠️ Development Status
+## ⚙️ Key Features
 
-- Backend & frontend fully functional for core features
-- Advanced features like Secret Santa assignment and exclusions are in progress
-- Migrating legacy Java EE code to Jakarta EE
-- Email notifications and other enhancements planned
+- **Identity Management:** Account creation and secure session handling.
+- **Event Orchestration:** Create, manage, and invite users to Secret Santa events.
+- **Constraint Engine:** Logic to define "no-gift" pairs (e.g., family exclusion rules).
+- **Assignment Algorithm:** Core logic for automated Secret Santa pairings.
 
 ---
-### 📸 Screenshots
 
-#### 1. Eventverwaltung
+## 🚀 Development Status & Roadmap
+
+* **Authentication & User Management:** Fully operational (Account creation, Login/Logout, Session management).
+* **Event Management:** Core infrastructure for event creation and user invitation management is complete.
+* **Strategic Pivot:** I have intentionally paused further feature development (specifically SMTP integration and the "Wichteln" algorithm) to prioritize a **migration from Java EE to Jakarta EE**.
+    * **Reasoning:** Aligning the codebase with modern Jakarta standards is a prerequisite for seamless integration of new services and ensuring long-term technical stability.
+* **Active Sprint:**
+    * **Refactoring:** Migrating legacy JAX-RS controllers and dependency injection patterns to Jakarta EE/Quarkus standards.
+    * **Upcoming:** Once the migration is stabilized, the SMTP service and the Secret Santa assignment algorithm will be refactored and re-integrated.
+
+---
+## 💡 Why this project?
+
+This project demonstrates my ability to:
+
+1. **Manage Tech-Debt:** Identifying where legacy code needs replacement rather than patching.
+2. **Enterprise Readiness:** Deep-diving into the Quarkus ecosystem (the industry standard for Kubernetes-native Java).
+3. **Full-Stack Thinking:** Bridging the gap between a robust REST backend and a reactive frontend.
+
+---
+
+### 📸 Project Insights
+
+#### 1. Event Management
 ![Eventverwaltung](assets/eventverwaltung.PNG)
 *Shows a table with all events (for testing purposes). In the release version, it will display all events the logged-in user has joined or created.*
 
-#### 2. Meine Events
+#### 2. Dashboard
 ![Meine Events 3](assets/meine_events3.PNG)
 *Demonstrates the development of **Meine Events**. The participant list now shows only email addresses and invitation statuses. The layout has been updated to provide space for a feature that restricts who can be assigned as a Secret Santa, e.g., preventing siblings or family members from giving gifts to each other.*
 
@@ -137,19 +141,7 @@ docker run --name postgres-quarkus \
 
 ---
 
-## ⚠️ Notes
-
-> 🔒 This project is for learning and demonstration purposes only.
-Cookie-based storage of user data is not suitable for production environments.
-
----
-
-## 🧑‍💻 Author & Contact
+## 🔗 Contact & Portfolio
 | Name                | Area                            | Contact                                                                                                                                                                |
 |:--------------------|:--------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Paul-Gerhard Siegel | Backend (User & Login)          | [GitHub](https://github.com/pgs3238) · [LinkedIn](https://www.linkedin.com/in/paul-gerhard-siegel-719a4512/) · [Xing](https://www.xing.com/profile/PaulGerhard_Siegel) |
-
-> ✨ This project is a continuation of the original [WichtelApp](https://github.com/pgs3238/WichtelApp),  
-> developed as part of the **IT-Projekt** university course.
-
-
