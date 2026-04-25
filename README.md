@@ -4,7 +4,7 @@
 [WichtelApp](https://github.com/pgs3238/WichtelApp). This version serves as a sandbox for exploring **modern 
 cloud-native Java development**, focusing on the migration from legacy Java EE patterns to **Quarkus** and **Jakarta EE**.
 
-**Status:** Active Refactoring (Nov 2025).
+**Status:** Active Frontend Migration & Refactoring (April 2026).
 
 ---
 ### Landing Screen
@@ -14,18 +14,18 @@ cloud-native Java development**, focusing on the migration from legacy Java EE p
 
 ## 🏗️ Architectural Vision
 
-This project is currently undergoing a structural transformation. My goal is to modernize the monolithic structure 
-into a more robust, maintainable architecture.
+This project has successfully completed its structural transition of the backend to modern standards. 
+The focus has now shifted toward modernizing the frontend to ensure a seamless end-to-end integration.
 
-- **RESTful API Evolution:** The application currently utilizes **Java EE REST (JAX-RS)** for its API layer. 
-I am actively refactoring these components to align with modern **Jakarta EE** standards and **Quarkus**-native 
-features.
+- **Jakarta EE & Quarkus Native:** The backend has been fully migrated from legacy `javax` patterns to **Jakarta EE**. 
+It now leverages **Quarkus-native** features for improved performance and development productivity.
+- **RESTful API:** Fully compliant with **Jakarta RESTful Web Services**, providing a clean and scalable API layer.
 - **API Documentation:** Integrated **SmallRye OpenAPI** to provide an interactive Swagger UI, ensuring the API 
 contract is fully documented and developer-friendly.
-- **Refactoring:** Moving away from legacy Java EE patterns towards a clean **Jakarta EE / Quarkus** ecosystem.
-- **Security:** Transitioning from frontend-hashed credentials to a production-grade authentication flow (planned).
-- **Frontend Evolution:** Evaluating a migration from standard React to TypeScript to ensure type safety 
+- **Frontend Evolution (Next Milestone):** Evaluating a migration from standard React to TypeScript to ensure type safety
 across the entire API contract.
+- **Security:** Transitioning from frontend-hashed credentials to a production-grade authentication flow (planned).
+
 
 ---
 
@@ -33,8 +33,8 @@ across the entire API contract.
 
 | Area                 | Technology / Version                       |
 |:---------------------|:-------------------------------------------|
-| **Backend**          | Quarkus `2.16.6`, Java `17`, Gradle `8.10` |
-| **API Layer**        | Java EE, REST (JAX-RS), JSON-B, OpenAPI    |
+| **Backend**          | Quarkus `3.33.1`, Java `17`, Gradle `8.10` |
+| **API Layer**        | Jakarta EE, REST (JAX-RS), JSON-B, OpenAPI |
 | **Frontend**         | React `18.2.0`, Node.js `20.16.0`          |
 | **Persistence**      | PostgreSQL, Hibernate ORM                  |
 | **Containerization** | Docker                                     |
@@ -53,11 +53,15 @@ across the entire API contract.
 
 * **Authentication & User Management:** Fully operational (Account creation, Login/Logout, Session management).
 * **Event Management:** Core infrastructure for event creation and user invitation management is complete.
-* **Strategic Pivot:** I have intentionally paused further feature development (specifically SMTP integration and the "Wichteln" algorithm) to prioritize a **migration from Java EE to Jakarta EE**.
-    * **Reasoning:** Aligning the codebase with modern Jakarta standards is a prerequisite for seamless integration of new services and ensuring long-term technical stability.
+* **Strategic Pivot:** I have intentionally paused further feature development (specifically SMTP integration and 
+    the "Wichteln" algorithm) to execute a two-stage modernization of the entire codebase.
+    * **Reasoning:** Modernizing the stack—first the backend (Jakarta EE) and then the frontend (TypeScript)—is a 
+    mandatory prerequisite for long-term stability and easier maintenance of complex features.
 * **Active Sprint:**
-    * **Refactoring:** Migrating legacy JAX-RS controllers and dependency injection patterns to Jakarta EE/Quarkus standards.
-    * **Upcoming:** Once the migration is stabilized, the SMTP service and the Secret Santa assignment algorithm will be refactored and re-integrated.
+    * **Frontend Modernization:** Transitioning the React codebase from JavaScript to **TypeScript** to ensure 
+    end-to-end type safety and alignment with the updated API.
+    * **Upcoming:** Once the migration is stabilized, the SMTP service and the Secret Santa assignment algorithm will 
+    be refactored, re-integrated and finalized.
 
 ---
 ## 💡 Why this project?
