@@ -1,7 +1,13 @@
+//plugins {
+//    id 'java'
+//    id 'io.quarkus'
+//    id "com.github.node-gradle.node" version "3.5.0"
+//}
+//new version for gradle 8.10
 plugins {
     id 'java'
     id 'io.quarkus'
-    id "com.github.node-gradle.node" version "3.5.0"
+    id "com.github.node-gradle.node" version "7.1.0"
 }
 
 repositories {
@@ -9,25 +15,39 @@ repositories {
     mavenLocal()
 }
 
+//node {
+//    // Version of node to use.
+//    version = '20.16.0'
+//
+//    // Base URL for fetching node distributions (change if you have a mirror).
+////    distBaseUrl = 'https://nodejs.org/dist'
+//
+//    // If true, it will download node using above parameters.
+//    // If false, it will try to use globally installed node.
+//    download = true
+//
+//    // Set the work directory for unpacking node
+//    workDir = file("${project.projectDir}/src/main/frontend/nodejs")
+//
+//    // Set the work directory for NPM
+//    npmWorkDir = file("${project.projectDir}/src/main/frontend/npm")
+//
+//    // Set the work directory where node_modules should be located
+//    nodeModulesDir = file("${project.projectDir}/src/main/frontend")
+//}
+
+//New version due to new plugin 7.1.0
 node {
     // Version of node to use.
     version = '20.16.0'
 
-    // Base URL for fetching node distributions (change if you have a mirror).
-//    distBaseUrl = 'https://nodejs.org/dist'
-
     // If true, it will download node using above parameters.
-    // If false, it will try to use globally installed node.
     download = true
 
-    // Set the work directory for unpacking node
-    workDir = file("${project.projectDir}/src/main/frontend/nodejs")
-
-    // Set the work directory for NPM
-    npmWorkDir = file("${project.projectDir}/src/main/frontend/npm")
-
-    // Set the work directory where node_modules should be located
-    nodeModulesDir = file("${project.projectDir}/src/main/frontend")
+    // Das Plugin arbeitet jetzt standardmäßig mit dem Projekt-Root.
+    // Falls deine package.json nicht im Root liegt, sondern unter src/main/frontend,
+    // kannst du das hier definieren:
+    nodeProjectDir = file("${project.projectDir}/src/main/frontend")
 }
 
 task npmInstallDependencies(type: NpmTask) {
@@ -89,9 +109,15 @@ dependencies {
 group 'com.example'
 version '1.0.0-SNAPSHOT'
 
+//java {
+//    sourceCompatibility = JavaVersion.VERSION_17
+//    targetCompatibility = JavaVersion.VERSION_17
+//}
+// new version for gradle 8.10
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 test {
