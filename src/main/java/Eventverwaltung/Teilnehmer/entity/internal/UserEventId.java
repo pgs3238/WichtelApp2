@@ -1,6 +1,6 @@
 package Eventverwaltung.Teilnehmer.entity.internal;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -50,3 +50,4 @@ public class UserEventId implements Serializable {
         return Objects.hash(userEmail, eventId);
     }
 }
+

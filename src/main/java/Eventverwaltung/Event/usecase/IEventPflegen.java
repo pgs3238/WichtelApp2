@@ -2,8 +2,8 @@ package Eventverwaltung.Event.usecase;
 
 import Eventverwaltung.Event.entity.EventTO;
 
-import javax.validation.Valid;
-import javax.ws.rs.core.Response;
+import jakarta.validation.Valid;
+import jakarta.ws.rs.core.Response;
 
 public interface IEventPflegen {
     public Response eventAnlegen(@Valid EventTO eventTO);
@@ -12,3 +12,4 @@ public interface IEventPflegen {
 
     public boolean eventLoeschen(int eventId);
 }
+

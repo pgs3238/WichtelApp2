@@ -3,10 +3,10 @@ package Eventverwaltung.Teilnehmer.dao;
 import Eventverwaltung.Event.entity.EventTO;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,3 +41,4 @@ public class UserDAO extends GenericDAO<User> {
 
 
 }
+

@@ -7,10 +7,10 @@ import Eventverwaltung.Teilnehmer.entity.UserEventTO;
 import Eventverwaltung.Teilnehmer.usecase.ITeilnehmerFuerEvent;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
 
-import javax.annotation.security.RolesAllowed;
-import javax.inject.Inject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -48,3 +48,4 @@ public class TeilnehmerFuerEvent implements ITeilnehmerFuerEvent {
                 .collect(Collectors.toList());
     }
 }
+

@@ -1,6 +1,6 @@
 package Eventverwaltung.Teilnehmer.usecase;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 public interface ITeilnehmerPflegen {
 
@@ -8,3 +8,4 @@ public interface ITeilnehmerPflegen {
 
     Response teilnehemerLoeschen(String email, int eventID);
 }
+

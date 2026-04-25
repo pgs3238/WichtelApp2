@@ -1,6 +1,6 @@
 package Eventverwaltung.Security;
 
-import javax.ws.rs.core.SecurityContext;
+import jakarta.ws.rs.core.SecurityContext;
 
 public class Permissions {
 
@@ -8,3 +8,4 @@ public class Permissions {
         return securityContext.isUserInRole("ADMIN") || securityContext.isUserInRole("Event" + eventId);
     }
 }
+

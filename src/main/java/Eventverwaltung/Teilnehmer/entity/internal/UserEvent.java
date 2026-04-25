@@ -2,7 +2,7 @@ package Eventverwaltung.Teilnehmer.entity.internal;
 
 import Eventverwaltung.Event.entity.internal.Event;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Set;
 import java.util.HashSet;
 

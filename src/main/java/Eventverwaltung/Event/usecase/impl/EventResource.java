@@ -3,16 +3,16 @@ package Eventverwaltung.Event.usecase.impl;
 import Eventverwaltung.Event.entity.EventTO;
 import Eventverwaltung.Event.entity.internal.Event;
 
-import javax.annotation.security.RolesAllowed;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.SecurityContext;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.SecurityContext;
 import java.util.List;
 
 @Path("/api/events")
@@ -45,3 +45,4 @@ public class EventResource {
         return events.stream().map(Event::toEventTO).toList();
     }
 }
+

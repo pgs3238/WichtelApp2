@@ -3,10 +3,10 @@ package Eventverwaltung.Teilnehmer.entity;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 //import jakarta.validation.constraints.Email;
 import java.io.Serializable;
 
@@ -84,3 +84,4 @@ public class UserTO implements Serializable {
 
     public void setPasswort(String passwort) { this.passwort = passwort; }
 }
+

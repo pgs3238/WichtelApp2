@@ -9,7 +9,7 @@ import io.quarkus.security.jpa.UserDefinition;
 import io.quarkus.security.jpa.Username;
 import org.hibernate.annotations.NamedQuery;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -144,3 +144,4 @@ public class User {
         return false;
     }
 }
+

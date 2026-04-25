@@ -6,13 +6,19 @@
 //new version for gradle 8.10
 plugins {
     id 'java'
-    id 'io.quarkus'
+    id 'io.quarkus' version '3.33.1'
     id "com.github.node-gradle.node" version "7.1.0"
+    id("org.openrewrite.rewrite") version "6.24.0"
 }
+
 
 repositories {
     mavenCentral()
     mavenLocal()
+}
+
+rewrite {
+    activeRecipe("org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta")
 }
 
 //node {
@@ -87,15 +93,19 @@ processResources {
 
 
 dependencies {
-    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    //implementation enforcedPlatform("io.quarkus.platform:quarkus-bom:3.33.0")
+    //enforcedPlatform("io.quarkus:quarkus-bom:3.33.0")
+    // implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    implementation platform('io.quarkus.platform:quarkus-bom:3.33.1')
+
     implementation 'io.quarkus:quarkus-hibernate-orm'
     //implementation 'io.quarkus:quarkus-hibernate-orm-panache'
     implementation 'io.quarkus:quarkus-hibernate-validator'
-    //implementation 'io.quarkus:quarkus-resteasy-jsonb'
-    implementation 'io.quarkus:quarkus-resteasy-reactive-jsonb'
+    implementation 'io.quarkus:quarkus-resteasy-jsonb'
+    //implementation 'io.quarkus:quarkus-resteasy-reactive-jsonb'
     implementation 'io.quarkus:quarkus-smallrye-openapi'
-    //implementation 'io.quarkus:quarkus-resteasy'
-    implementation 'io.quarkus:quarkus-resteasy-reactive'
+    implementation 'io.quarkus:quarkus-resteasy'
+    //implementation 'io.quarkus:quarkus-resteasy-reactive'
     //implementation 'io.quarkus:quarkus-resteasy-mutiny'
     implementation 'io.quarkus:quarkus-security-jpa'
     implementation 'io.quarkus:quarkus-jdbc-postgresql'
@@ -105,6 +115,8 @@ dependencies {
     testImplementation 'io.rest-assured:rest-assured'
 
 }
+
+
 
 group 'com.example'
 version '1.0.0-SNAPSHOT'
@@ -131,3 +143,5 @@ compileJava {
 compileTestJava {
     options.encoding = 'UTF-8'
 }
+
+

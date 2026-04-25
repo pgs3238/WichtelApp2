@@ -3,7 +3,7 @@ package Eventverwaltung.Event.entity.internal;
 import Eventverwaltung.Event.entity.SubgruppeTO;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -71,3 +71,4 @@ public class Subgruppe implements Serializable {
     }
 
 }
+

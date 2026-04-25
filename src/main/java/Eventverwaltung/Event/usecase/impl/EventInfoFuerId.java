@@ -5,8 +5,8 @@ import Eventverwaltung.Event.entity.EventTO;
 import Eventverwaltung.Event.entity.internal.Event;
 import Eventverwaltung.Event.usecase.IEventInfoFuerId;
 
-import javax.annotation.security.RolesAllowed;
-import javax.inject.Inject;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.inject.Inject;
 
 //@Transactional
 //@RequestScoped
@@ -22,3 +22,4 @@ public class EventInfoFuerId implements IEventInfoFuerId {
         return aEvent.toEventTO();
     }
 }
+

@@ -2,10 +2,10 @@ package Eventverwaltung.Teilnehmer.dao;
 
 
 import Eventverwaltung.Teilnehmer.entity.internal.UserEvent;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 @ApplicationScoped
@@ -23,3 +23,4 @@ public class UserEventDAO {
         return query.getResultList();
     }
 }
+

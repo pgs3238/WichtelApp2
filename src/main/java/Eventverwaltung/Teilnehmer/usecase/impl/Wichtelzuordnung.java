@@ -5,10 +5,10 @@ import Eventverwaltung.Event.entity.internal.Event;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
 import Eventverwaltung.Teilnehmer.usecase.IWichtelzuordnung;
 
-import javax.annotation.security.RolesAllowed;
-import javax.inject.Inject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -246,3 +246,4 @@ public class Wichtelzuordnung implements IWichtelzuordnung {
      return true;
     }
 }*/
+

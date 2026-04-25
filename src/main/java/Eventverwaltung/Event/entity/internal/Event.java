@@ -4,8 +4,8 @@ import Eventverwaltung.Event.entity.EventTO;
 import Eventverwaltung.Teilnehmer.entity.internal.User;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
-import javax.validation.constraints.Size;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -158,3 +158,4 @@ public class Event implements Serializable {
 
 
 }
+

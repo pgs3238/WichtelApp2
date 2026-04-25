@@ -5,9 +5,9 @@ import io.quarkus.mailer.reactive.ReactiveMailer;
 import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Uni;
 
-import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
 import static io.quarkus.mailer.Mail.*;
 
 //TODO currently there is no email connection this is currently the main project. Build Email Connection!
@@ -65,3 +65,4 @@ public class Mail {
 
 
 }
+

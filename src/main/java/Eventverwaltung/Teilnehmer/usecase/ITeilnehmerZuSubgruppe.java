@@ -1,6 +1,6 @@
 package Eventverwaltung.Teilnehmer.usecase;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 public interface ITeilnehmerZuSubgruppe {
 
@@ -8,3 +8,4 @@ public interface ITeilnehmerZuSubgruppe {
 
     boolean TeilnehmerAusSubgruppe(String email, int subgruppeId);
 }
+
