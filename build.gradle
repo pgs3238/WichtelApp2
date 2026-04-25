@@ -11,7 +11,7 @@ repositories {
 
 node {
     // Version of node to use.
-    version = '18.12.1'
+    version = '20.16.0'
 
     // Base URL for fetching node distributions (change if you have a mirror).
 //    distBaseUrl = 'https://nodejs.org/dist'
@@ -36,7 +36,10 @@ task npmInstallDependencies(type: NpmTask) {
         it.ignoreExitValue = true
         it.workingDir = 'src/main/frontend'
     }
-    args = ['install']
+    //args = ['install']
+    // "legacy-peer-deps" should be removed when frontend has been renewed
+    // - currently needed as Frontend was built with Node Version 18.12.1
+    args = ['install', '--legacy-peer-deps']
 }
 
 task npmBuild(type: NpmTask) {

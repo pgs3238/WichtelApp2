@@ -35,7 +35,7 @@ across the entire API contract.
 |:---------------------|:--------------------------------------------|
 | **Backend**          | Quarkus `2.16.6`, Java `17`, Gradle `7.5.1` |
 | **API Layer**        | Java EE, REST (JAX-RS), JSON-B, OpenAPI     |
-| **Frontend**         | React `18.2.0`, Node.js `18.12.1`           |
+| **Frontend**         | React `18.2.0`, Node.js `20.16.0`           |
 | **Persistence**      | PostgreSQL, Hibernate ORM                   |
 | **Containerization** | Docker                                      |
 
