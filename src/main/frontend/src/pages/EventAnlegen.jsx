@@ -30,16 +30,72 @@ function Layout() {
         setInputs(values => ({...values, [name]: value}))
     }
 
+    const handleDateTimeChange = (event) => {
+        const { name, value } = event.target;
+
+        setInputs(values => {
+            const newValues = { ...values, [name]: value };
+
+            // Sobald sich datePart oder timePart ändert, aktualisieren wir eventDate
+            if (name === "datePart" || name === "timePart") {
+                const date = newValues.datePart || "";
+                const time = newValues.timePart || "00:00";
+                // Wir setzen das Feld, das dein Backend erwartet:
+                newValues.eventDate = `${date}T${time}`;
+            }
+
+            if (name === "deadlineDatePart" || name === "deadlineTimePart") {
+                const date = newValues.deadlineDatePart || "";
+                const time = newValues.deadlineTimePart || "00:00";
+                newValues.eventDeadline = `${date}T${time}`;
+            }
+
+            return newValues;
+        });
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        let combinedRule = inputs.rule;
+        // 1. Validierung der Logik (Datum & Uhrzeit)
+        const jetzt = new Date();
+        const dateEvent = new Date(inputs.eventDate);
+        const dateDeadline = new Date(inputs.eventDeadline);
 
+        // Prüfen, ob beide Daten überhaupt gesetzt sind
+        if (!inputs.eventDate || !inputs.eventDeadline) {
+            alert("Bitte füllen Sie beide Datumsfelder (Event und Deadline) vollständig aus!");
+            return;
+        }
+
+        // TODO Update Backend to check for 24h difference!!
+        // Differenz in Millisekunden berechnen zwischen "Heute" und Wichteltermin
+        const diffJetztZuEvent = dateEvent - jetzt;
+        const mindestVorlaufInMs = 24 * 60 * 60 * 1000; // 24 Stunden
+
+        if (diffJetztZuEvent < mindestVorlaufInMs) {
+            alert("Das Event muss mindestens 24 Stunden in der Zukunft liegen!");
+            return;
+        }
+
+        // TODO Update Backend to check for 24h difference!!
+        // Differenz in Millisekunden berechnen zwischen Wichteltermin und Abgabetermin
+        const diffInMs = dateDeadline - dateEvent;
+        const oneDayInMs = 24 * 60 * 60 * 1000; // 24 Stunden
+
+        if (diffInMs < oneDayInMs) {
+            alert("Sicherheitscheck: Das Event-Datum muss mindestens 24 Stunden nach der Deadline liegen, damit genug Zeit für die Vorbereitung bleibt!");
+            return;
+        }
+
+        // 2. Regel-Check
+        let combinedRule = inputs.rule;
         if (!combinedRule) {
             alert("Bitte wählen Sie einen Wert oder geben Sie eine Regel ein!");
             return;
         }
 
+        // 3. Wenn alles okay ist: Fetch absenden...
         let query = await fetch("/events/create", {
             method: "POST",
             headers: {
@@ -89,9 +145,28 @@ function Layout() {
                     <input type="text" name="eventName" placeholder="Eventname" onChange={handleChange}/>
                 </div>
 
+                {/*<div className="form-row">*/}
+                {/*    <label>Wann soll gewichtelt werden?</label>*/}
+                {/*    <input type="datetime-local" name="eventDate" onChange={handleChange}/>*/}
+                {/*</div>*/}
+
                 <div className="form-row">
                     <label>Wann soll gewichtelt werden?</label>
-                    <input type="datetime-local" name="eventDate" onChange={handleChange}/>
+                    {/*<div style={{display: 'flex', gap: '10px'}}>*/}
+                    <div className="datetime-group">
+                        <input
+                            type="date"
+                            name="datePart"
+                            onChange={handleDateTimeChange}
+                            required
+                        />
+                        <input
+                            type="time"
+                            name="timePart"
+                            onChange={handleDateTimeChange}
+                            required
+                        />
+                    </div>
                 </div>
 
                 {/*<div className="form-row">*/}
@@ -136,9 +211,32 @@ function Layout() {
                     <input type="text" name="eventOrt" placeholder="Ort" onChange={handleChange}/>
                 </div>
 
+                {/*<div className="form-row">*/}
+                {/*    <label>Wann findet die Verteilung der Geschenke statt:</label>*/}
+                {/*    <input*/}
+                {/*        type="datetime-local"*/}
+                {/*        name="eventDeadline"*/}
+                {/*        onChange={handleChange}*/}
+                {/*    />*/}
+                {/*</div>*/}
+
                 <div className="form-row">
                     <label>Wann findet die Verteilung der Geschenke statt:</label>
-                    <input type="datetime-local" name="eventDeadline" onChange={handleChange}/>
+                    {/*<div style={{display: 'flex', gap: '10px'}}>*/}
+                    <div className="datetime-group">
+                        <input
+                            type="date"
+                            name="deadlineDatePart"
+                            onChange={handleDateTimeChange}
+                            required
+                        />
+                        <input
+                            type="time"
+                            name="deadlineTimePart"
+                            onChange={handleDateTimeChange}
+                            required
+                        />
+                    </div>
                 </div>
 
                 <div className="form-actions">
