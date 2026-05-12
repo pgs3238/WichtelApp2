@@ -10,8 +10,6 @@ function Layout() {
     const [showMessage, setShowMessage] = useState(false); // <-- modal flag
     const navigate = useNavigate();
     const location = useLocation();
-    //TODO URL-ID
-    // const id = 1;
 
     useEffect(() => {
         if (location.state && location.state.event) {
@@ -28,9 +26,9 @@ function Layout() {
             const eventParts = splitDateTime(ev.eventDate);
 
             setInputs({
-                eventid: ev.eventid || ev.eventId,
+                eventId: ev.eventid || ev.eventId,
                 eventName: ev.name,
-                area: ev.ort,
+                eventOrt: ev.ort,
                 rule: ev.regeln,
                 deadlineDatePart: deadlineParts.date,
                 deadlineTimePart: deadlineParts.time,
@@ -42,13 +40,13 @@ function Layout() {
         }
     }, [location.state]);
 
-    useEffect(() => {
-        if (location.state?.event) {
-            console.log("EXACT KEYS IN DATA:", Object.keys(location.state.event));
-            // Check if it says 'name' or maybe 'eventName'?
-            // Check if it says 'ort' or maybe 'location'?
-        }
-    }, [location.state]);
+    // useEffect(() => {
+    //     if (location.state?.event) {
+    //         console.log("EXACT KEYS IN DATA:", Object.keys(location.state.event));
+    //         // Check if it says 'name' or maybe 'eventName'?
+    //         // Check if it says 'ort' or maybe 'location'?
+    //     }
+    // }, [location.state]);
 
     const handleClick = () => {
         navigate("/eventVerwaltung/eventAnsehen")
@@ -84,9 +82,6 @@ function Layout() {
                 // Wir setzen das Feld, das dein Backend erwartet:
                 newValues.eventDate = `${date}T${time}`;
             }
-
-
-
             return newValues;
         });
     }
@@ -131,9 +126,6 @@ function Layout() {
             return;
         }
 
-
-
-        alert(JSON.stringify(inputs));
         let query = await fetch("/events/update", {
             method: "POST",
             headers: {
@@ -142,11 +134,11 @@ function Layout() {
             },
 
             body: JSON.stringify({
-                "id": inputs.id,
+                "eventId": inputs.eventId,
                 "name": inputs.eventName,
                 "regeln": combinedRule,
                 "deadline": inputs.eventDeadline,
-                "ort": inputs.area,
+                "ort": inputs.eventOrt,
                 "eventDate": inputs.eventDate
             })
         });
@@ -156,7 +148,6 @@ function Layout() {
             alert(JSON.stringify(json));
             return
         }
-        //alert("OK");
         setShowMessage(true);
     }
 
@@ -166,112 +157,118 @@ function Layout() {
     }
 
     return (
+        <>
 
-        <form onSubmit={handleSubmit} className={"form-container"}>
-            <h2 style={{textAlign: 'center' }}>Event Bearbeiten:</h2>
+            <form onSubmit={handleSubmit} className={"form-container"}>
+                <h2 style={{textAlign: 'center' }}>Event Bearbeiten:</h2>
 
-            {/*<input*/}
-            {/*    type="hidden"*/}
-            {/*    name="id"*/}
-            {/*    value={id}*/}
-            {/*/>*/}
-
-            <div className="form-row">
-                <label> Wie heißt das Event? </label>
-                <input
-                    type="text"
-                    name="eventName"
-                    placeholder="Eventname"
-                    value={inputs.eventName || ""}
-                    onChange={handleChange}
-                    // onChange={(e) => setInputs({...inputs, named: e.target.value})}
-                />
-            </div>
-            <div className="form-row">
-                <label>Wann wird gewichtelt? </label>
-                <div className="datetime-group">
-                    <input
-                        type="date"
-                        name="deadlineDatePart"
-                        onChange={handleDateTimeChange}
-                        required
-                    />
-                    <input
-                        type="time"
-                        name="deadlineTimePart"
-                        onChange={handleDateTimeChange}
-                        required
-                    />
-                </div>
-            </div>
-            <div className="form-row">
-                <label> Regeln:</label>
-                <div className="rules-wrapper">
-                    <div className="rules-radios">
-                        {["20€", "50€", "100€"].map((preset) => (
-                            <label key={preset}>
-                                <input
-                                    type="radio"
-                                    name="rulePreset"
-                                    value={preset}
-                                    checked={inputs.rule === preset}
-                                    onChange={() => setInputs({...inputs, rule: preset})}
-                                />
-                                {preset}
-                            </label>
-                        ))}
-                    </div>
-
+                <div className="form-row">
+                    <label> Wie heißt das Event? </label>
                     <input
                         type="text"
-                        name="ruleCustom"
-                        placeholder="z.B. 5€ + Keine Scherzgeschenke"
-                        value={
-                            !["20€", "50€", "100€"].includes(inputs.rule) ? inputs.rule || "" : ""
-                        }
-                        onChange={(e) => setInputs({...inputs, rule: e.target.value})}
+                        name="eventName"
+                        placeholder="Eventname"
+                        value={inputs.eventName || ""}
+                        onChange={handleChange}
+                        // onChange={(e) => setInputs({...inputs, named: e.target.value})}
                     />
                 </div>
-            </div>
-            <div className="form-row">
-                <label> Wann ist die Geschenkübergabe: </label>
-                <div className="datetime-group">
+                <div className="form-row">
+                    <label>Wann wird gewichtelt? </label>
+                    <div className="datetime-group">
+                        <input
+                            type="date"
+                            name="deadlineDatePart"
+                            value={inputs.deadlineDatePart || ""}
+                            onChange={handleDateTimeChange}
+                            required
+                        />
+                        <input
+                            type="time"
+                            name="deadlineTimePart"
+                            value={inputs.deadlineTimePart || ""}
+                            onChange={handleDateTimeChange}
+                            required
+                        />
+                    </div>
+                </div>
+                <div className="form-row">
+                    <label> Regeln:</label>
+                    <div className="rules-wrapper">
+                        <div className="rules-radios">
+                            {["20€", "50€", "100€"].map((preset) => (
+                                <label key={preset}>
+                                    <input
+                                        type="radio"
+                                        name="rulePreset"
+                                        value={preset}
+                                        checked={inputs.rule === preset}
+                                        onChange={() => setInputs({...inputs, rule: preset})}
+                                    />
+                                    {preset}
+                                </label>
+                            ))}
+                        </div>
+                        <input
+                            type="text"
+                            name="ruleCustom"
+                            placeholder="z.B. 5€ + Keine Scherzgeschenke"
+                            value={
+                                !["20€", "50€", "100€"].includes(inputs.rule) ? inputs.rule || "" : ""
+                            }
+                            onChange={(e) => setInputs({...inputs, rule: e.target.value})}
+                        />
+                    </div>
+                </div>
+                <div className="form-row">
+                    <label> Wann ist die Geschenkübergabe: </label>
+                    <div className="datetime-group">
+                        <input
+                            type="date"
+                            name="datePart"
+                            value={inputs.datePart || ""}
+                            onChange={handleDateTimeChange}
+                            required
+                        />
+                        <input
+                            type="time"
+                            name="timePart"
+                            value={inputs.timePart || ""}
+                            onChange={handleDateTimeChange}
+                            required
+                        />
+                    </div>
+                </div>
+                <div className="form-row">
+                    <label> Wo ist die Geschenkübergabe: </label>
                     <input
-                        type="date"
-                        name="datePart"
-                        onChange={handleDateTimeChange}
-                        required
-                    />
-                    <input
-                        type="time"
-                        name="timePart"
-                        onChange={handleDateTimeChange}
-                        required
+                        type="text"
+                        name="eventOrt"
+                        placeholder="Ort"
+                        value={inputs.eventOrt || ""}
+                        onChange={handleChange}
+                        // onChange={(e) => setInputs({...inputs, area: e.target.value})}
                     />
                 </div>
-            </div>
-            <div className="form-row">
-                <label> Wo ist die Geschenkübergabe: </label>
-                <input
-                    type="text"
-                    name="eventOrt"
-                    placeholder="Ort"
-                    value={inputs.area || ""}
-                    onChange={handleChange}
-                    // onChange={(e) => setInputs({...inputs, area: e.target.value})}
-                />
-            </div>
+                <div className="form-actions">
+                    <input type="submit" value="Event speichern"/>
+                    <input type="button" value="Abbrechen" onClick={handleClick}/>
+                </div>
+                <div className="logout">
+                    <input type="button" value="Logout" onClick={ausloggen}/>
+                </div>
+            </form>
 
-            <div className="form-actions">
-                <input type="submit" value="Event speichern"/>
-                <input type="button" value="Abbrechen" onClick={handleClick}/>
-            </div>
-
-            <div className="logout">
-                <input type="button" value="Logout" onClick={ausloggen}/>
-            </div>
-        </form>
-
+            {/* Success Modal */}
+            {showMessage && (
+                <div className="modal-overlay">
+                    <div className="modal-box">
+                        <p>Event aktualisiert!</p>
+                        <button onClick={handleOk}>OK</button>
+                    </div>
+                </div>
+            )}
+        </>
     );
 }
 
