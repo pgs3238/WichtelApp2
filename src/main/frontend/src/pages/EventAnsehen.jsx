@@ -5,8 +5,7 @@ import './EventAnsehen.css';
 import {useNavigate} from "react-router-dom";
 import cookies from "js-cookie";
 
-//TODO Event Bearbeiten - noch nicht richtig eingebaut ggf. entfernen??
-// Button Wichtelzuordnung starten ist für Testzwecke und sollte später
+//TODO Button Wichtelzuordnung starten ist für Testzwecke und sollte später
 // automatisch bei Zuordnungsdatum stattfinden, daher dann button entfernen;
 
 
@@ -664,8 +663,9 @@ function Layout() {
                 <input
                     type="button"
                     id="adduser"
-                    value="Bearbeiten"
+                    value="Event Bearbeiten"
                     onClick={zuBearbeiten}
+                    disabled={!selectedEventId}
                 />
                 <input
                     type="button"

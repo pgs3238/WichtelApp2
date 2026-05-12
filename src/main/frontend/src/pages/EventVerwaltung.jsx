@@ -1,24 +1,28 @@
 import React, {useEffect, useState} from "react";
 import './EventVerwaltung.css'
+import './Modals.css'
 import {useNavigate} from "react-router-dom";
 import cookies from "js-cookie";
+import EventAnlegen from "./EventAnlegen1";
 
 // TODO BUG FIX - WichtelDatum muss nach aktuellem Datum sein! GeschenkTag muss nach WichtelDatum sein.
 // TODO - Add function to Buttons - An Event Teilnehmen, E-Mail an Eventverwalter (do i want this button)
 
 
-//New Table
-const Row = ({ eventId, deadline, eventDate, name, owner, regeln, ort }) => (
-    <tr>
-        <td>{eventId}</td>
-        <td>{deadline}</td>
-        <td>{eventDate}</td>
-        <td>{name}</td>
-        <td>{owner}</td>
-        <td>{regeln}</td>
-        <td>{ort}</td>
-    </tr>
-);
+
+//
+// //New Table
+// const Row = ({ eventId, deadline, eventDate, name, owner, regeln, ort }) => (
+//     <tr>
+//         <td>{eventId}</td>
+//         <td>{deadline}</td>
+//         <td>{eventDate}</td>
+//         <td>{name}</td>
+//         <td>{owner}</td>
+//         <td>{regeln}</td>
+//         <td>{ort}</td>
+//     </tr>
+// );
 
 const TableWindow = ({ data =[] }) => { // default empty array
     const minVisibleRows = 5;
@@ -45,7 +49,7 @@ const TableWindow = ({ data =[] }) => { // default empty array
 
 
     return (
-        <div className="table-window">
+        <div className="table-window" style={{zIndex: 5}}>
             <table>
                 <thead>
                 <tr>
@@ -87,9 +91,33 @@ const TableWindow = ({ data =[] }) => { // default empty array
 function Layout() {
 
     const [inputs, setInputs] = useState({});
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
     const navigate = useNavigate();
     //const [rows, setRows] = useState(events);
     const [rows, setRows] = useState([]);
+
+
+
+    const fetchData = () => {
+        fetch("/api/events", {
+            headers: {
+                "Authorization": "Bearer " + cookies.get("quarkus-credential")
+            }
+        })
+            .then(res => res.json())
+            .then(data => setRows(data))
+            .catch(err => console.error("Fetch error:", err));
+    };
+
+    // 2. Call fetchData on initial load
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+
+
+
+
 
     //Neuer Code für neue Backend Tabelle??
     useEffect(() => {
@@ -134,9 +162,9 @@ function Layout() {
     return (
         <form onSubmit={handleSubmit}>
 
-            <h2 className="eventv-form-title">Eventverwaltung</h2>
+            <h2 className="eventv-form-title" style={{zIndex: 5}}>Eventverwaltung</h2>
             <TableWindow data={rows} title="Eventverwaltung" />
-            <div className="button-group">
+            <div className="button-group" style={{zIndex: 5}}>
                 <div className="eventansehen">
                     <input
                         type="submit"
@@ -159,15 +187,34 @@ function Layout() {
                     />
                     <input
                         type="button"
+                        id="eventanlegen"
+                        value="Event Anlegen"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setIsPopupOpen(true);
+                        }}
+                    />
+                    <input
+                        type="button"
                         id="eventansehen"
                         value="Eigene Events anzeigen"
                         onClick={eventAnsehen}
                     />
                 </div>
             </div>
-            <div className="logout">
+            <div className="logout" style={{zIndex: 5}}>
                 <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
             </div>
+            {isPopupOpen && (
+                <div className="popup-overlay">
+                    <div className="popup-content">
+                        <EventAnlegen
+                            onClose={() => setIsPopupOpen(false)}
+                            onSuccess={fetchData} // Refresh table after saving
+                        />
+                    </div>
+                </div>
+            )}
         </form>
     );
 }

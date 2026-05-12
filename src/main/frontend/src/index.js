@@ -105,7 +105,7 @@ export default function Apps() {
                     height: '100vh',
                     top: 0,
                     left: 0,
-                    zIndex: 1,
+                    zIndex: -1,
                     pointerEvents:'none',
                 }}
             />

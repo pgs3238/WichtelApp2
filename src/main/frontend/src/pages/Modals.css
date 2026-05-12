@@ -1,0 +1,22 @@
+/* The dark background covering the whole screen */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Dim the background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top of the table */
+}
+
+/* Ensure the form doesn't scroll with the page, but stays centered */
+.popup-content {
+    background: white;
+    padding: 0; /* Let .form-container handle padding */
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
