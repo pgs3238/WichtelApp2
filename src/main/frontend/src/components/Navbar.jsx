@@ -1,59 +1,56 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons'
-import * as AiIcons from "react-icons/ai";
 import * as FaIcons from "react-icons/fa";
 import * as GiIcons from "react-icons/gi";
-import * as BsIcons from "react-icons/bs";
 import './Navbar.css';
 
 
 function Navbar() {
+    const [dropdown, setDropdown] = useState(false);
+    const menuRef = useRef();
 
-    const [sidebar, setSidebar] = useState(false)
+    const toggleDropdown = () => setDropdown(!dropdown);
 
-    const showSidebar = () => setSidebar(!sidebar)
+    // Close menu when clicking outside
+    useEffect(() => {
+        const handler = (e) => {
+            if (menuRef.current && !menuRef.current.contains(e.target)) {
+                setDropdown(false);
+            }
+        };
+        document.addEventListener("mousedown", handler);
+        return () => document.removeEventListener("mousedown", handler);
+    }, []);
 
     return (
-        <>
-            <IconContext.Provider value={{color: '#fff'}}>
-                <div className="navbar">
+        <IconContext.Provider value={{ color: '#fff' }}>
+            <div className="navbar" ref={menuRef}>
+                <Link to="#" className='menu-bars' onClick={toggleDropdown}>
+                    <FaIcons.FaBars />
+                </Link>
 
-                    <Link to="#" className='menu-bars'>
-                        <FaIcons.FaBars onClick={showSidebar}/>
-                    </Link>
+                <a className="brandName">
+                    Secret <GiIcons.GiPresent size='20px' /> Santa
+                </a>
 
-                    <a className="brandName">
-                        Secret <GiIcons.GiPresent size='20px'/> Santa
-                    </a>
-
-                </div>
-
-                <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-                    <ul className='nav-menu-items' onClick={showSidebar}>
-                        <li className="navbar-toggle">
-                            <Link to="#" className='menu-bars'>
-                                <AiIcons.AiOutlineClose/>
-                            </Link>
-                        </li>
-                        {SidebarData.map((item, index) => {
-                            return (
-                                <li key={index} className={item.cName}>
-                                    <Link to={item.path}>
-                                        {item.icon}
-                                        <span>{item.title}</span>
-                                    </Link>
-                                </li>
-                            )
-                        })}
+                {/* Dropdown Menu instead of Sidebar */}
+                <nav className={dropdown ? 'nav-menu active' : 'nav-menu'}>
+                    <ul className='nav-menu-items' onClick={() => setDropdown(false)}>
+                        {SidebarData.map((item, index) => (
+                            <li key={index} className="nav-text">
+                                <Link to={item.path}>
+                                    {item.icon}
+                                    <span>{item.title}</span>
+                                </Link>
+                            </li>
+                        ))}
                     </ul>
                 </nav>
-            </IconContext.Provider>
-
-        </>
+            </div>
+        </IconContext.Provider>
     );
 }
-
 
 export default Navbar;

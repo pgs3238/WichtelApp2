@@ -1,28 +1,13 @@
 import React from "react";
 import * as AiIcons from "react-icons/ai";
-import * as FaIcons from "react-icons/fa";
+import * as BsIcons from "react-icons/bs";
 import * as MdIcons from "react-icons/md";
-import * as HiIcons from "react-icons/hi";
 
 export const SidebarData = [
     {
         title: 'Home',
         path: '/',
         icon: <AiIcons.AiFillHome/>,
-        cName: 'nav-text'
-    },
-
-    {
-        title: 'Anmelden',
-        path: '/anmelden',
-        icon: <FaIcons.FaSignInAlt/>,
-        cName: 'nav-text'
-    },
-
-    {
-        title: 'Registrieren',
-        path: '/registrierung',
-        icon: <FaIcons.FaRegRegistered/>,
         cName: 'nav-text'
     },
 
@@ -34,18 +19,10 @@ export const SidebarData = [
     },
 
     {
-      title: 'Message Service',
-      path: '/messageService',
-      icon: <AiIcons.AiOutlineMessage/>,
-      cName: 'nav-text'
-    },
-
-    {
-        title: 'Subgruppen Service',
-        path: '/subgruppenService',
-        icon: <HiIcons.HiOutlineUserGroup/>,
+        title: 'Meine Events',
+        path: '/eventVerwaltung/eventAnsehen',
+        icon: <BsIcons.BsCalendar2DateFill/>,
         cName: 'nav-text'
     },
-
 
 ]

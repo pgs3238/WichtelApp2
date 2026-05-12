@@ -31,7 +31,7 @@ across the entire API contract.
 
 ## 🛠️ Technologie-Stack
 
-| Area                 | Technology / Version                       |
+| Area                | Technology / Version                       |
 |:---------------------|:-------------------------------------------|
 | **Backend**          | Quarkus `3.33.1`, Java `17`, Gradle `8.10` |
 | **API Layer**        | Jakarta EE, REST (JAX-RS), JSON-B, OpenAPI |
