@@ -2,9 +2,8 @@ package Eventverwaltung.Event.entity;
 
 import Eventverwaltung.Event.entity.internal.Event;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -19,12 +18,14 @@ public class EventTO implements Serializable {
     @Size(min = 2, max = 256, message = "Regeln muss zwischen 5 und 256 Zeichen lang sein.")
     private String regeln;
     @NotNull(message = "Wichteldatum muss gesetzt sein.")
+    @Future(message = "Das Wichteldatum muss in der Zukunft liegen.")
     private LocalDateTime deadline;
     @NotNull(message = "Ort muss zwischen 5 und 256 Zeichen lang sein.")
     @NotBlank(message = "Ort muss zwischen 5 und 256 Zeichen lang sein.")
     @Size(min = 5, max = 256, message = "Ort muss zwischen 5 und 256 Zeichen lang sein.")
     private String ort;
     @NotNull(message = "Geschenkdatum muss gesetzt sein.")
+    @Future
     private LocalDateTime eventDate;
 
     //@NotNull(message = "Cookie Error")
@@ -33,6 +34,17 @@ public class EventTO implements Serializable {
     public Event toEvent(){
         Event event = new Event(this.eventId, this.name,this.regeln,this.deadline,this.ort, this.eventDate, this.owner);
         return event;
+    }
+
+    @AssertTrue(message = "Das Wichteldatum muss mindestens 24 Stunden in der Zukunft liegen.")
+    public boolean isDeadlineValid(){
+        return deadline == null || deadline.isAfter(LocalDateTime.now().plusHours(24));
+    }
+
+    @AssertTrue(message = "Das Geschenkdatum muss mindestens 24 Stunden nach dem Wichteldatum liegen.")
+    public boolean isEventDateValid(){
+        if (eventDate == null || deadline == null) return true;
+        return eventDate.isAfter(deadline.plusHours(24));
     }
 
     public int getEventId() {

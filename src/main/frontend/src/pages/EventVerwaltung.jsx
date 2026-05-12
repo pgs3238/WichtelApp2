@@ -64,8 +64,8 @@ const TableWindow = ({ data =[] }) => { // default empty array
                         <tr key={row.eventId}>
                             <td>{row.eventId}</td>
                             <td>{row.name}</td>
-                            <td>{formatDate(row.eventDate)}</td>
                             <td>{formatDate(row.deadline)}</td>
+                            <td>{formatDate(row.eventDate)}</td>
                             <td>{row.owner}</td>
                             <td>{row.regeln}</td>
                             <td>{row.ort}</td>

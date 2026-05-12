@@ -36,6 +36,11 @@ function Layout() {
         setInputs(values => {
             const newValues = { ...values, [name]: value };
 
+            if (name === "deadlineDatePart" || name === "deadlineTimePart") {
+                const date = newValues.deadlineDatePart || "";
+                const time = newValues.deadlineTimePart || "00:00";
+                newValues.eventDeadline = `${date}T${time}`;
+            }
             // Sobald sich datePart oder timePart ändert, aktualisieren wir eventDate
             if (name === "datePart" || name === "timePart") {
                 const date = newValues.datePart || "";
@@ -44,11 +49,7 @@ function Layout() {
                 newValues.eventDate = `${date}T${time}`;
             }
 
-            if (name === "deadlineDatePart" || name === "deadlineTimePart") {
-                const date = newValues.deadlineDatePart || "";
-                const time = newValues.deadlineTimePart || "00:00";
-                newValues.eventDeadline = `${date}T${time}`;
-            }
+
 
             return newValues;
         });
@@ -59,8 +60,9 @@ function Layout() {
 
         // 1. Validierung der Logik (Datum & Uhrzeit)
         const jetzt = new Date();
-        const dateEvent = new Date(inputs.eventDate);
         const dateDeadline = new Date(inputs.eventDeadline);
+        const dateEvent = new Date(inputs.eventDate);
+
 
         // Prüfen, ob beide Daten überhaupt gesetzt sind
         if (!inputs.eventDate || !inputs.eventDeadline) {
@@ -70,7 +72,7 @@ function Layout() {
 
         // TODO Update Backend to check for 24h difference!!
         // Differenz in Millisekunden berechnen zwischen "Heute" und Wichteltermin
-        const diffJetztZuEvent = dateEvent - jetzt;
+        const diffJetztZuEvent = dateDeadline - jetzt;
         const mindestVorlaufInMs = 24 * 60 * 60 * 1000; // 24 Stunden
 
         if (diffJetztZuEvent < mindestVorlaufInMs) {
@@ -80,7 +82,7 @@ function Layout() {
 
         // TODO Update Backend to check for 24h difference!!
         // Differenz in Millisekunden berechnen zwischen Wichteltermin und Abgabetermin
-        const diffInMs = dateDeadline - dateEvent;
+        const diffInMs = dateEvent - dateDeadline;
         const oneDayInMs = 24 * 60 * 60 * 1000; // 24 Stunden
 
         if (diffInMs < oneDayInMs) {
@@ -145,34 +147,24 @@ function Layout() {
                     <input type="text" name="eventName" placeholder="Eventname" onChange={handleChange}/>
                 </div>
 
-                {/*<div className="form-row">*/}
-                {/*    <label>Wann soll gewichtelt werden?</label>*/}
-                {/*    <input type="datetime-local" name="eventDate" onChange={handleChange}/>*/}
-                {/*</div>*/}
-
                 <div className="form-row">
                     <label>Wann soll gewichtelt werden?</label>
                     {/*<div style={{display: 'flex', gap: '10px'}}>*/}
                     <div className="datetime-group">
                         <input
                             type="date"
-                            name="datePart"
+                            name="deadlineDatePart"
                             onChange={handleDateTimeChange}
                             required
                         />
                         <input
                             type="time"
-                            name="timePart"
+                            name="deadlineTimePart"
                             onChange={handleDateTimeChange}
                             required
                         />
                     </div>
                 </div>
-
-                {/*<div className="form-row">*/}
-                {/*    <label>Welche Regeln liegen für das Event vor?</label>*/}
-                {/*    <input type="text" name="eventRegeln" placeholder="Eventregeln" onChange={handleChange} />*/}
-                {/*</div>*/}
 
                 <div className="form-row">
                     <label>Regeln:</label>
@@ -211,28 +203,19 @@ function Layout() {
                     <input type="text" name="eventOrt" placeholder="Ort" onChange={handleChange}/>
                 </div>
 
-                {/*<div className="form-row">*/}
-                {/*    <label>Wann findet die Verteilung der Geschenke statt:</label>*/}
-                {/*    <input*/}
-                {/*        type="datetime-local"*/}
-                {/*        name="eventDeadline"*/}
-                {/*        onChange={handleChange}*/}
-                {/*    />*/}
-                {/*</div>*/}
-
                 <div className="form-row">
                     <label>Wann findet die Verteilung der Geschenke statt:</label>
                     {/*<div style={{display: 'flex', gap: '10px'}}>*/}
                     <div className="datetime-group">
                         <input
                             type="date"
-                            name="deadlineDatePart"
+                            name="datePart"
                             onChange={handleDateTimeChange}
                             required
                         />
                         <input
                             type="time"
-                            name="deadlineTimePart"
+                            name="timePart"
                             onChange={handleDateTimeChange}
                             required
                         />

@@ -57,34 +57,7 @@
     width: 100%;
 }
 
-.rules-wrapper {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    max-width: 300px; /* Von 320px auf 300px ändern, passend zu .form-row input */
-    gap: 8px;
-    box-sizing: border-box; /* WICHTIG: Padding wird in die Breite eingerechnet */
-}
 
-/* Die Radio-Zeile */
-.rules-radios {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-    align-items: center;
-    /* Hier kein festes Padding, damit es links bündig bleibt */
-}
-
-/* Das Textfeld innerhalb der Regeln */
-.rules-wrapper input[type="text"] {
-    padding: 8px;
-    font-size: 14px;
-    width: 100%;       /* Nutzt die vollen 300px des Wrappers */
-    max-width: 300px;  /* Explizit begrenzen */
-    box-sizing: border-box; /* Damit 100% + Padding nicht überlappt */
-    border: 1px solid #ccc; /* Gleicher Rahmen wie Standard-Inputs */
-    border-radius: 4px;
-}
 
 
 /* Buttons aligned */

@@ -33,8 +33,8 @@ const Row = ({ eventid, deadline, eventdate, name, owner, regeln, ort, isSelecte
         >
             <td style={{...cellStyle(0), backgroundColor}}>{eventid}</td>
             <td style={{...cellStyle(1), backgroundColor}}>{name}</td>
-            <td style={{...cellStyle(2), backgroundColor}}>{eventdate}</td>
-            <td style={{...cellStyle(3), backgroundColor}}>{deadline}</td>
+            <td style={{...cellStyle(2), backgroundColor}}>{deadline}</td>
+            <td style={{...cellStyle(3), backgroundColor}}>{eventdate}</td>
             <td style={{...cellStyle(4), backgroundColor}}>{owner}</td>
             <td style={{...cellStyle(5), backgroundColor}}>{regeln}</td>
             <td style={{...cellStyle(6), backgroundColor}}>{ort}</td>
@@ -199,8 +199,8 @@ const Table = ({ data, selectedId, onSelect }) => {
                                 key={id}
                                 eventid={id}
                                 name={row.name}
-                                eventdate={formatDate(row.eventDate)}
                                 deadline={formatDate(row.deadline)}
+                                eventdate={formatDate(row.eventDate)}
                                 owner={row.owner}
                                 regeln={row.regeln}
                                 ort={row.ort}
