@@ -281,7 +281,19 @@ function Layout() {
             });
         }
     };
-    const zuBearbeiten = () => navigate("/eventVerwaltung/eventAnsehen/eventBearbeiten");
+    const zuBearbeiten = () => {
+        if (!selectedEventId) {
+            alert("Bitte wählen Sie zuerest ein Event aus.");
+            return;
+        }
+
+        const selectedEvent = rows.find(r => (r.eventId ?? r.eventid) === selectedEventId);
+
+        navigate("/eventVerwaltung/eventAnsehen/eventBearbeiten", {
+            state: { event: selectedEvent}
+        });
+    };
+
     const wichtelzuOrdnung = () => {};
     const ausloggen = () => {
         cookies.remove("quarkus-credential");

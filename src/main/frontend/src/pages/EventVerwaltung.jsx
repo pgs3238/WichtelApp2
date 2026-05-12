@@ -118,7 +118,7 @@ function Layout() {
     }
 
     const email = () => {
-        navigate("/fehlt");
+        navigate("/messageService/mitteilungAnOrganisator");
     }
 
     const handleChange = (event) => {

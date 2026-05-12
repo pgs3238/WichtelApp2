@@ -70,7 +70,6 @@ function Layout() {
             return;
         }
 
-        // TODO Update Backend to check for 24h difference!!
         // Differenz in Millisekunden berechnen zwischen "Heute" und Wichteltermin
         const diffJetztZuEvent = dateDeadline - jetzt;
         const mindestVorlaufInMs = 24 * 60 * 60 * 1000; // 24 Stunden
@@ -80,7 +79,6 @@ function Layout() {
             return;
         }
 
-        // TODO Update Backend to check for 24h difference!!
         // Differenz in Millisekunden berechnen zwischen Wichteltermin und Abgabetermin
         const diffInMs = dateEvent - dateDeadline;
         const oneDayInMs = 24 * 60 * 60 * 1000; // 24 Stunden
@@ -114,7 +112,6 @@ function Layout() {
                 "deadline": inputs.eventDeadline,
                 "ort": inputs.eventOrt,
                 "eventDate": inputs.eventDate
-
             })
         });
 
@@ -140,7 +137,7 @@ function Layout() {
     return (
         <>
             <form onSubmit={handleSubmit} className={"form-container"}>
-                <h2>Erstellen Sie ein neues Event:</h2>
+                <h2 style={{textAlign: 'center' }}>Erstellen Sie ein neues Event:</h2>
 
                 <div className="form-row">
                     <label>Wie soll das Event heißen?</label>
