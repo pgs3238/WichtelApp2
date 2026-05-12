@@ -503,7 +503,7 @@ function Layout() {
                 {/*</div>*/}
                 <div style={{width: "650px", backgroundColor: "white", paddingLeft: "10px"}}>
                     <div>
-                        <h3 style={{marginBottom: "10px"}}>Teilnehmer bearbeiten</h3>
+                        <h3 style={{marginBottom: "10px"}}>Teilnehmer hinzufügen / bearbeiten</h3>
                         <div style={{display: "flex", alignItems: "flex-end", gap: "10px", marginBottom: "15px"}}>
                             {/* Event ID */}
                             <div>
