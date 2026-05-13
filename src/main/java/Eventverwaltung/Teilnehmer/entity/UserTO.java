@@ -1,18 +1,9 @@
 package Eventverwaltung.Teilnehmer.entity;
 
 import Eventverwaltung.Teilnehmer.entity.internal.User;
+import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
-
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-//import jakarta.validation.constraints.Email;
 import java.io.Serializable;
-
-//TODO clean up unused getters and setters - constraint email needs to be modified with a regex
-// new jakarta constraint does not work with quarkus 2.x
-// create branch, test what happens if upgrading project to quarkus 3.x
 
 /*
 TO for User
@@ -20,23 +11,32 @@ Note: TO=Transfer Object
  */
 public class UserTO implements Serializable {
 
-    //Integer userID;
-    @NotNull(message = "Der Name muss zwischen 5 und 256 Zeichen lang sein.")
-    @NotBlank(message = "Der Name muss zwischen 5 und 256 Zeichen lang sein.")
-    @Length(min = 2, max = 60, message = "Der Name muss mindestens 2  Zeichen lang sein.")
+    public interface OnCreate {}
+    public interface OnPartCreate{}
+
+    @NotBlank(groups = OnCreate.class, message = "Der Name muss zwischen 2 und 60 Zeichen lang sein.")
+    @Length(groups = OnCreate.class, min = 2, max = 60, message = "Der Name muss mindestens 2 Zeichen lang sein.")
     String name;
-    @NotNull(message = "Der Vorname muss zwischen 5 und 256 Zeichen lang sein.")
-    @NotBlank(message = "Der Vorname muss zwischen 5 und 256 Zeichen lang sein.")
-    @Length(min = 2, max = 50, message = "Der Vorname muss mindestens 2 Zeichen lang sein. ")
+    @NotBlank(groups = OnCreate.class, message = "Der Vorname muss zwischen 2 und 60 Zeichen lang sein.")
+    @Length(groups = OnCreate.class, min = 2, max = 60, message = "Der Vorname muss mindestens 2 Zeichen lang sein. ")
     String vorname;
-    @NotNull(message = "E-Mail-Adresse muss zwischen 5 und 256 Zeichen lang sein.")
-    @NotBlank(message = "E-Mail-Adresse muss zwischen 5 und 256 Zeichen lang sein.")
-    @Email(message = "Bitte geben Sie eine gültige E-Mail-Adresse ein.")
-    @Size(min = 5, max = 256, message = "E-Mail-Adresse muss zwischen 5 und 256 Zeichen lang sein.")
+    @NotBlank(
+            groups = {OnCreate.class, OnPartCreate.class},
+            message = "E-Mail-Adresse muss zwischen 5 und 256 Zeichen lang sein.")
+    @Email(
+            groups = {OnCreate.class, OnPartCreate.class},
+            message = "Bitte geben Sie eine gültige E-Mail-Adresse ein.")
+    @Pattern(
+            groups = {OnCreate.class, OnPartCreate.class},
+            regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
+            message = "Bitte eine Email wie bsp: @domaine.com eingeben"
+    )
+    @Size(
+            groups = {OnCreate.class, OnPartCreate.class},
+            min = 5, max = 256, message = "E-Mail-Adresse muss zwischen 5 und 256 Zeichen lang sein.")
     String email;
-    @NotNull(message = "Das Passwort muss mindestens 5 Zeichen lang sein.")
-    @NotBlank(message = "Das Passwort muss mindestens 5 Zeichen lang sein.")
-    @Length(min = 5, max = 128, message = "Das Passwort muss mindestens 5 Zeichen lang sein.")
+    @NotBlank(groups = OnCreate.class, message = "Das Passwort muss mindestens 5 Zeichen lang sein.")
+    @Length(groups = OnCreate.class, min = 5, max = 128, message = "Das Passwort muss mindestens 5 Zeichen lang sein.")
     String passwort;
 
     public UserTO() {}
@@ -52,9 +52,6 @@ public class UserTO implements Serializable {
         this.passwort = passwort;
     }
 
-
-
-
     public User toUser() {
         User user = new User();
         user.setName(name);
@@ -63,10 +60,6 @@ public class UserTO implements Serializable {
         user.setPassword(passwort);
         return user;
     }
-
-   /* public int getUserID() { return userID; }
-
-    public void setUserID(int userID) { this.userID = userID; }*/
 
     public String getName() { return  name; }
 

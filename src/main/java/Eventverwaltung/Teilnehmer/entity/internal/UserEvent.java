@@ -27,8 +27,14 @@ public class UserEvent {
     @JoinColumn(name = "event_eventid")
     private Event event;
 
+    // Define your states clearly
+    public static final int STATUS_PENDING = 0;
+    public static final int STATUS_SENT = 1;
+    public static final int STATUS_ACCEPTED = 2;
+    public static final int STATUS_DECLINED = 3;
+
     @Column(name = "radio", nullable = false)
-    private int radio = 0; //default value 0
+    private int radio = STATUS_PENDING; //default value 0
 
     @ElementCollection
     @CollectionTable(
@@ -84,6 +90,10 @@ public class UserEvent {
 
     public void setRadio(int radio) {
         this.radio = radio;
+    }
+
+    public boolean isRegistered() {
+        return this.radio == STATUS_ACCEPTED;
     }
 
     public Set<String> getExcludedEmails() {

@@ -36,7 +36,7 @@ public class User {
     public static final String GET_TEILNEHMER_VON_EVENT = "User.findTeilnehmerVonEvent";
 
     @Password
-    @Column(unique = true)
+    @Column(nullable = true, unique = false)
     private String password;
 
     @Id
@@ -78,7 +78,12 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = BcryptUtil.bcryptHash(password);
+        if (password == null) {
+            this.password = null;
+        } else {
+            this.password = BcryptUtil.bcryptHash(password);
+        }
+
     }
 
     public String getEmail() { return email; }
@@ -104,10 +109,6 @@ public class User {
     public List<String> getRoles() { return roles; }
 
     public void setRoles(List<String> roles) { this.roles = roles; }
-
-
-
-
 
     public String getRole() {
         if (roles.contains("ADMIN")) {
