@@ -1,56 +1,11 @@
-// import React, {useState, useEffect, useMemo} from 'react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import Snowfall from "react-snowfall";
-//
-// // Asset Imports
-// import snowflake1 from './assets/snowflake1.png';
-// import snowflake2 from './assets/snowflake2.png';
-//
-// // Page Imports
-// import Layout from "./pages/Layout";
-// import Home from "./pages/Home";
-// import NoPage from "./pages/NoPage";
-// import EventAnlegen from "./pages/EventAnlegen";
-// import EventAnsehen from "./pages/EventAnsehen";
-// import EventAuswahl from "./pages/EventAuswahl";
-// import EventBearbeiten from "./pages/EventBearbeiten";
-// import GastEinladen from "./pages/GastEinladen";
-// import GastEntfernenPopup from "./pages/GastEntfernenPopup";
-// import MitteilungAnOrganisator from "./pages/MitteilungAnOrganisator";
-// import Registrierung from "./pages/Registrierung";
-// import SubgruppenHinzufuegen from "./pages/SubgruppenHinzufuegen";
-// import TeilnehmerListeEinsehen from "./pages/TeilnehmerListeEinsehen";
-// import UserZuSubgruppeHinzufuegen from "./pages/UserZuSubgruppeHinzufuegen";
-// import WichtelzuordnungPopup from "./pages/WichtelzuordnungPopup";
-// // import * as PropTypes from "prop-types";
-// // import Events from "./pages/EventVerwaltung";
-// import EventVerwaltung from "./pages/EventVerwaltung";
-// import MessageService from "./pages/MessageService";
-// import SubgruppenService from "./pages/SubgruppenService";
-
-// TODO (2025) - find out what the plan was and or clean up!!
-
-//alter code - darunter neuer code
-/*function Welcome(props) {
-    return <h1> Hello, {props.name}, {props.nachname}</h1>
-}
-const element = <Welcome name="Sara" nachname="Simpson" />;
-ReactDOM.render(
-    element,
-    document.getElementById('root')
-);
-ReactDOM.render(<Apps />, document.getElementById('root'));*/
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-
-
 root.render(
  // <React.StrictMode>
- //      <Apps />
     <App />
  // </React.StrictMode>
 );
@@ -60,89 +15,3 @@ root.render(
  or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals */
 //TODO not implemented yet (???) so deactivated currently 31.12.2022
 // reportWebVitals();
-
-// //Create Routes (Seiten verknüpfen aus pages)
-// export default function Apps() {
-//     const [token, setToken] = useState();
-//     const [snowflakes, setSnowflakes] = useState(
-//         //make snowfall density responsive
-//         Math.max(60, Math.min(window.innerWidth / 10, 150))
-//     )
-//
-//     const snowflakeImages = useMemo(() => {
-//         const img1 = document.createElement('img');
-//         img1.src = snowflake1;
-//         const img2 = document.createElement('img');
-//         img2.src = snowflake2;
-//         return [img1, img2];
-//     }, []);
-//
-//     useEffect(() => {
-//         const handleResize = () => {
-//             setSnowflakes(Math.max(60, Math.min(window.innerWidth / 10, 150)));
-//         };
-//
-//         window.addEventListener("resize", handleResize);
-//         return () => window.removeEventListener("resize", handleResize);
-//     }, []);
-//
-//
-//     return (
-//         <BrowserRouter>
-//             <Snowfall
-//                 snowflakeCount={snowflakes}
-//                 color="#B3E5FC"
-//                 images={snowflakeImages}
-//                 radius={[15.0, 30.0]}
-//                 style={{
-//                     position:'fixed',
-//                     width: '100vw',
-//                     height: '100vh',
-//                     top: 0,
-//                     left: 0,
-//                     zIndex: -1,
-//                     pointerEvents:'none',
-//                 }}
-//             />
-//             <Routes>
-//                 <Route path="/" element={<Layout />}>
-//                     <Route index element={<Home />} />
-//                     <Route path="home/registrierung" element={<Registrierung/>} />
-//                     <Route path="home" element={<Home/>} />
-//                     <Route path="registrierung" element={<Registrierung />} />
-//                     <Route path="eventVerwaltung" element={<EventVerwaltung />} />
-//                     <Route path="eventVerwaltung/eventAnlegen" element={<EventAnlegen />} />
-//                     <Route path="eventVerwaltung/eventAnsehen" element={<EventAnsehen />} />
-//                     <Route path="eventVerwaltung/eventAnsehen/eventBearbeiten" element={<EventBearbeiten />} />
-//                     <Route path="messageService/mitteilungAnOrganisator" element={<MitteilungAnOrganisator/>} />
-//                     <Route path="*" element={<NoPage />} />
-//
-//
-//
-//                     {/*TODO to be removed*/}
-//                     <Route path="eventAuswahl" element={<EventAuswahl />} />
-//                     <Route path="gastEntfernenPopup" element={<GastEntfernenPopup />} />
-//                     <Route path="wichtelZuordnungPopup" element={<WichtelzuordnungPopup />} />
-//                     <Route path="messageService" element={<MessageService />} />
-//                     <Route path="eventVerwaltung/eventAnsehen/teliEinsehen/gastEinladen" element={<GastEinladen />} />
-//                     <Route path="mitteilungAnOrganisator" element={<MitteilungAnOrganisator />} />
-//                     <Route path="eventVerwaltung/eventAnsehen/teliEinsehen/subgruHinz" element={<SubgruppenHinzufuegen />} />
-//                     <Route path="eventVerwaltung/eventAnsehen/teliEinsehen" element={<TeilnehmerListeEinsehen />} />
-//                     <Route path="eventVerwaltung/eventAnsehen/teliEinsehen/uZuSub" element={<UserZuSubgruppeHinzufuegen />} />
-//                     <Route path="messageService/gastEinladen" element={<GastEinladen/>} />
-//                     <Route path="subgruppenService" element={<SubgruppenService/>} />
-//                     <Route path="subgruppenService/subgruppenHinzufuegen" element={<SubgruppenHinzufuegen/>} />
-//                     <Route path="subgruppenService/userZuSubgruppeHinzufuegen" element={<UserZuSubgruppeHinzufuegen/>} />
-//
-//                 </Route>
-//             </Routes>
-//         </BrowserRouter>
-//     );
-// }
-
-
-
-// Problem - ähnliche (alte Anweisung) wie Zeile 40-45. Zeile muss abgeändert werden zum Format von 40-45 um fehler zu beheben.
-// ReactDOM.render(<Apps />, document.getElementById("root"));
-
-// TODO FUTURE: https://reactrouter.com/en/main/routers/router-provider

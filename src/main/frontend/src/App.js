@@ -53,6 +53,9 @@ export default function App() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    // TODO FUTURE: https://reactrouter.com/en/main/routers/router-provider
+    // -> Stellt das Routing auf den modernen 'RouterProvider' um, damit Daten (z.B. Event- & Teilnehmerlisten)
+    // via Loader direkt vor dem Seiten-Render aus dem Quarkus-Backend geladen werden können.
 
     return (
         <BrowserRouter>
