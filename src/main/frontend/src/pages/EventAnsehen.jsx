@@ -246,6 +246,28 @@ function Layout() {
         fetchMyEvents();
     }, []);
 
+
+    const fetchData = async  () => {
+        const res = await fetch('/api/events/mine', {
+            method: "GET",
+            credentials: "include"
+        });
+        if (res.ok) {
+            const data = await res.json();
+            setRows(data);
+        } else {
+            alert("Fehler beim Laden der Events");
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+
+
+
+
     // Fetch participants for the selected event
     useEffect(() => {
         if (selectedEventId == null) return;
@@ -601,16 +623,17 @@ function Layout() {
                             event={rows.find(r => (r.eventId ?? r.eventid) === selectedEventId)}
                             onClose={() => setIsPopupOpen(false)}
                             //TODO
-                            onSuccess={async () => {
-                                const res = await fetch('api/events/mine', {
-                                    method: "Get",
-                                    credentials: "include"
-                                });
-                                if (res.ok) {
-                                    const data = await res.json()
-                                    setRows(data);
-                                }
-                            }}
+                            onSuccess={fetchData}
+                            // onSuccess={async () => {
+                            //     const res = await fetch('api/events/mine', {
+                            //         method: "GET",
+                            //         credentials: "include"
+                            //     });
+                            //     if (res.ok) {
+                            //         const data = await res.json()
+                            //         setRows(data);
+                            //     }
+                            // }}
                         />
                     </div>
                 </div>
