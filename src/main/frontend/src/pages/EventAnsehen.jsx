@@ -4,6 +4,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import './EventAnsehen.css';
 import {useNavigate} from "react-router-dom";
 import cookies from "js-cookie";
+import EventBearbeiten from "./EventBearbeiten1";
 
 //TODO Button Wichtelzuordnung starten ist für Testzwecke und sollte später
 // automatisch bei Zuordnungsdatum stattfinden, daher dann button entfernen;
@@ -218,6 +219,7 @@ const Table = ({ data, selectedId, onSelect }) => {
 
 function Layout() {
     const [inputs, setInputs] = useState({});
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
     const navigate = useNavigate();
     const [rows, setRows] = useState([]); // events
     const [selectedEventId, setSelectedEventId] = useState(null);
@@ -312,22 +314,6 @@ function Layout() {
         backgroundColor: "#f2f2f2", // same as header background
     };
 
-    //New participants table components
-    // const ParticipantsRow = ({ userEmail, eventId, radio }) => {
-    //     const renderStatus = () => {
-    //         if (radio === 0) return '☐';           // empty box
-    //         if (radio === 1) return '✅';           // tick/swish
-    //         return '';                              // fallback
-    //     };
-    //
-    //     return (
-    //         <tr>
-    //             {/* <td>{eventId}</td> */}
-    //             <td>{userEmail}</td>
-    //             <td style={{ textAlign: "center", fontSize: "18px" }}>{renderStatus()}</td>
-    //         </tr>
-    //     );
-    // };
     const ParticipantsRow = ({ userEmail, eventId, radio, isSelected, onSelect }) => {
         const [isHovered, setIsHovered] = useState(false);
 
@@ -420,87 +406,6 @@ function Layout() {
                         </table>
                     </div>
                 </div>
-                {/*Right side: 650px reserved */}
-                {/*<div*/}
-                {/*    style={{*/}
-                {/*        width: "650px",*/}
-                {/*        backgroundColor: "white",*/}
-                {/*    }}*/}
-                {/*>*/}
-                {/*    <h3 style={{marginBottom: "10px"}}>Teilnehmer bearbeiten</h3>*/}
-
-                {/*    /!* Event ID (readonly) *!/*/}
-                {/*    <div style={{marginBottom: "15px"}}>*/}
-                {/*        <label*/}
-                {/*            htmlFor="eventId"*/}
-                {/*            style={{*/}
-                {/*                display: "block",*/}
-                {/*                fontWeight: "bold",*/}
-                {/*                marginBottom: "5px",*/}
-                {/*            }}*/}
-                {/*        >*/}
-                {/*            Event ID:*/}
-                {/*        </label>*/}
-                {/*        <input*/}
-                {/*            type="text"*/}
-                {/*            id="eventId"*/}
-                {/*            value={selectedEventId || ""}*/}
-                {/*            readOnly*/}
-                {/*            style={{*/}
-                {/*                width: "75px",*/}
-                {/*                padding: "8px",*/}
-                {/*                border: "1px solid #ccc",*/}
-                {/*                borderRadius: "4px",*/}
-                {/*                backgroundColor: "#f5f5f5",*/}
-                {/*                color: "#555",*/}
-                {/*            }}*/}
-                {/*        />*/}
-                {/*    </div>*/}
-
-                {/*    /!* Email address input *!/*/}
-                {/*    <div style={{marginBottom: "15px"}}>*/}
-                {/*        <label*/}
-                {/*            htmlFor="participantEmail"*/}
-                {/*            style={{*/}
-                {/*                display: "block",*/}
-                {/*                fontWeight: "bold",*/}
-                {/*                marginBottom: "5px",*/}
-                {/*            }}*/}
-                {/*        >*/}
-                {/*            Teilnehmer Emailadresse:*/}
-                {/*        </label>*/}
-                {/*        <input*/}
-                {/*            type="email"*/}
-                {/*            id="participantEmail"*/}
-                {/*            placeholder="name@example.com"*/}
-                {/*            style={{*/}
-                {/*                width: "250px",*/}
-                {/*                padding: "8px",*/}
-                {/*                border: "1px solid #ccc",*/}
-                {/*                borderRadius: "4px",*/}
-                {/*            }}*/}
-                {/*        />*/}
-                {/*    </div>*/}
-
-                {/*    /!* Add/Remove button *!/*/}
-                {/*    <div>*/}
-                {/*        <button*/}
-                {/*            type="button"*/}
-                {/*            style={{*/}
-                {/*                padding: "10px 20px",*/}
-                {/*                backgroundColor: "#007bff",*/}
-                {/*                color: "white",*/}
-                {/*                border: "none",*/}
-                {/*                borderRadius: "4px",*/}
-                {/*                cursor: "pointer",*/}
-                {/*            }}*/}
-                {/*        >*/}
-                {/*            Hinzufügen / Entfernen*/}
-                {/*        </button>*/}
-                {/*    </div>*/}
-
-
-                {/*</div>*/}
                 <div style={{width: "650px", backgroundColor: "white", paddingLeft: "10px"}}>
                     <div>
                         <h3 style={{marginBottom: "10px"}}>Teilnehmer hinzufügen / bearbeiten</h3>
@@ -526,7 +431,6 @@ function Layout() {
                                     }}
                                 />
                             </div>
-
                             {/* Email input */}
                             <div>
                                 <label htmlFor="participantEmail"
@@ -545,7 +449,6 @@ function Layout() {
                                     }}
                                 />
                             </div>
-
                             {/* Add/Remove button */}
                             <div>
                                 <button
@@ -565,8 +468,6 @@ function Layout() {
                             </div>
                         </div>
                     </div>
-
-
                     <div style={{marginTop: "20px", paddingTop: "10px", borderTop: "1px solid #ccc"}}>
                         <h4 style={{marginBottom: "10px"}}>Einschränkungen: Wer darf an wen keine Geschenke überreichen?</h4>
 
@@ -600,7 +501,6 @@ function Layout() {
                                         </label>
                                     ))
                                 }
-
                                 <button
                                     type="button"
                                     style={{
@@ -624,20 +524,14 @@ function Layout() {
                             <p>Bitte zuerst einen Teilnehmer auswählen</p>
                         )}
                     </div>
-
-
                 </div>
-
-
             </div>
         );
     };
-
     // --- JSX Layout ---
     return (
         <form onSubmit={handleSubmit}>
             <h2 className="eventa-form-title">Meine Events</h2>
-
             {/* Events Table */}
             <Table
                 data={rows}
@@ -646,7 +540,6 @@ function Layout() {
                     setSelectedEventId(id);
                 }}
             />
-
             {/* Participants Table */}
             <div>
                 {loadingParticipants ? (
@@ -657,14 +550,23 @@ function Layout() {
                     <ParticipantsTable data={participants} selectedEventId={selectedEventId}/>
                 )}
             </div>
-
             {/* Buttons below */}
             <div className="eventedit">
                 <input
                     type="button"
-                    id="adduser"
+                    id="eventbearbeiten"
                     value="Event Bearbeiten"
                     onClick={zuBearbeiten}
+                    disabled={!selectedEventId}
+                />
+                <input
+                    type="button"
+                    id="eventbearbeiten"
+                    value="Event Bearbeiten (pop)"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        setIsPopupOpen(true);
+                    }}
                     disabled={!selectedEventId}
                 />
                 <input
@@ -675,7 +577,6 @@ function Layout() {
                     disabled={!selectedEventId}
                 />
             </div>
-
             <div className="zuordnungcancel">
                 <input
                     type="button"
@@ -690,10 +591,30 @@ function Layout() {
                     onClick={abbrechenClick}
                 />
             </div>
-
             <div className="logout">
                 <input type="button" id="abbrechen" value="Logout" onClick={ausloggen}/>
             </div>
+            {isPopupOpen && (
+                <div className="popup-overlay">
+                    <div className="popup-content">
+                        <EventBearbeiten
+                            event={rows.find(r => (r.eventId ?? r.eventid) === selectedEventId)}
+                            onClose={() => setIsPopupOpen(false)}
+                            //TODO
+                            onSuccess={async () => {
+                                const res = await fetch('api/events/mine', {
+                                    method: "Get",
+                                    credentials: "include"
+                                });
+                                if (res.ok) {
+                                    const data = await res.json()
+                                    setRows(data);
+                                }
+                            }}
+                        />
+                    </div>
+                </div>
+            )}
         </form>
     );
 }
