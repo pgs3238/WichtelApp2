@@ -8,22 +8,6 @@ import EventAnlegen from "./EventAnlegen1";
 // TODO BUG FIX - WichtelDatum muss nach aktuellem Datum sein! GeschenkTag muss nach WichtelDatum sein.
 // TODO - Add function to Buttons - An Event Teilnehmen, E-Mail an Eventverwalter (do i want this button)
 
-
-
-//
-// //New Table
-// const Row = ({ eventId, deadline, eventDate, name, owner, regeln, ort }) => (
-//     <tr>
-//         <td>{eventId}</td>
-//         <td>{deadline}</td>
-//         <td>{eventDate}</td>
-//         <td>{name}</td>
-//         <td>{owner}</td>
-//         <td>{regeln}</td>
-//         <td>{ort}</td>
-//     </tr>
-// );
-
 const TableWindow = ({ data =[] }) => { // default empty array
     const minVisibleRows = 5;
     const maxVisibleRows = 10;
@@ -115,10 +99,6 @@ function Layout() {
     }, []);
 
 
-
-
-
-
     //Neuer Code für neue Backend Tabelle??
     useEffect(() => {
         fetch("/api/events", {
@@ -188,7 +168,7 @@ function Layout() {
                     <input
                         type="button"
                         id="eventanlegen"
-                        value="Event Anlegen"
+                        value="Event Anlegen (pop)"
                         onClick={(e) => {
                             e.preventDefault();
                             setIsPopupOpen(true);

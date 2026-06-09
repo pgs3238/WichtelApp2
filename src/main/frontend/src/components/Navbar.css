@@ -1,11 +1,12 @@
 .navbar {
-    background-color: #060b26;
-    height: 80px;
+    background-color: #1A2B4C;/*#060b26*/
+    height: 56px;
     display: flex;
     justify-content: start;
     align-items: center;
     position: relative;
     z-index: 1000;
+    box-sizing: border-box;
 }
 
 .brandName {
@@ -21,17 +22,23 @@
 
 .menu-bars {
     margin-left: 2rem;
-    font-size: 2rem;
+    font-size: 1.35rem;
+    display: flex;
+    align-items: center;
     cursor: pointer;
+}
+
+.menu-bars:hover svg {
+    color: #82C3D9 !important;
 }
 
 /* The Dropdown Logic */
 .nav-menu {
-    background-color: #060b26;
+    background-color: #1A2B4C;
     width: 250px;
     height: auto; /* Shrink to fit the 3 links */
     position: absolute;
-    top: 80px; /* Directly below the navbar */
+    top: 56px; /* Directly below the navbar */
     left: 0;
     opacity: 0;
     visibility: hidden;
@@ -59,12 +66,19 @@
     font-size: 18px;
     display: flex;
     align-items: center;
-    padding: 15px 25px;
-    transition: 0.2s;
+    padding: 12px 20px;
+    margin: 4px 10px;
+    border-radius: 6px;
+    transition: 0.2s ease-in-out;
 }
 
 .nav-text a:hover {
-    background-color: #1a83ff;
+    background-color: rgba(130, 195, 217, 0.15);
+    color: #82C3D9;
+}
+
+.nav-text a:hover svg {
+    color: #82C3D9 !important;
 }
 
 span {

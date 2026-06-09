@@ -54,10 +54,11 @@ const Table = ({ data, selectedId, onSelect }) => {
     ];
 
     const maxTableWidth = 1200;
-    const rowHeight = 41;
-    const minVisibleRows = 4;
+    const rowHeight = 36;
+    // const minVisibleRows = 5;
     const maxVisibleRows = 5;
-    const bodyHeight = Math.max(minVisibleRows, Math.min(data.length, maxVisibleRows)) * rowHeight;
+    // const bodyHeight = Math.max(minVisibleRows, Math.min(data.length, maxVisibleRows)) * rowHeight;
+    const totalTableHeight = (maxVisibleRows + 1) * rowHeight;
 
     const tableRef = useRef(null);
     const [colWidths, setColWidths] = useState([]);
@@ -115,6 +116,7 @@ const Table = ({ data, selectedId, onSelect }) => {
         backgroundColor: isHeader ? "#f2f2f2" : "white",
         fontWeight: isHeader ? "bold" : "normal",
         width: colWidths[i] ? `${colWidths[i]}px` : undefined,
+        height: `${rowHeight}px`, //TODO newest change!!!
         wordBreak: "break-word",
         whiteSpace: "normal",
         boxSizing: "border-box",
@@ -135,7 +137,8 @@ const Table = ({ data, selectedId, onSelect }) => {
     // Scroll container: this is what scrolls. The <table> inside will keep thead visible (sticky).
     const scrollContainerStyle = {
         overflowY: "auto",
-        maxHeight: `${bodyHeight}px`,
+        // maxHeight: `${bodyHeight}px`,//TODO check renew!!
+        height: `${totalTableHeight}px`,
         width: "100%",
         position: "relative",
     };
@@ -210,6 +213,27 @@ const Table = ({ data, selectedId, onSelect }) => {
                             />
                         );
                     })}
+
+                    {/* Generate and render empty placeholder rows if data is less than maxVisibleRows */}
+                    {Array.from({ length: Math.max(0, maxVisibleRows - data.length) }).map((_, index) => (
+                        // <tr key={`empty-${index}`} style={{ height: `${rowHeight}px` }}>
+                        <tr key={`empty-${index}`}>
+                            {columns.map((_, colIndex) => (
+                                <td
+                                    key={colIndex}
+                                    style={{
+                                        ...cellStyle(colIndex, false),
+                                        backgroundColor: "white",
+                                        cursor: "default"
+                                    }}
+                                >
+                                    {/* Non-breaking space keeps the cell height matching perfectly */}
+                                    {/*&nbsp;*/}
+                                </td>
+                            ))}
+                        </tr>
+                    ))}
+
                     </tbody>
                 </table>
             </div>
