@@ -10,7 +10,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import static io.quarkus.mailer.Mail.*;
 
-//TODO currently there is no email connection this is currently the main project. Build Email Connection!
+//TODO Build Email Connection!
 
 @Path("/mail")
 public class Mail {

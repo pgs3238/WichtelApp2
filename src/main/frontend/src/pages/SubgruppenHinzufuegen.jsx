@@ -4,8 +4,8 @@ import cookies from "js-cookie";
 import './SubgruppenHinzufuegen.css'
 import {useNavigate} from "react-router-dom";
 
-
-
+// TODO: Legacy page retained during frontend migration.
+// Will be removed once replacement implementation is fully integrated.
 
 let events = [
     {subgruppeid:"1", eventid: "1", subgruppename: "duck"},

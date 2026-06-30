@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import './MessageService.css';
 
+// TODO: Legacy page retained during frontend migration.
+// Will be removed once replacement implementation is fully integrated.
 
 function Layout (){
 

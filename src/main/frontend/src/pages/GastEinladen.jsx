@@ -3,7 +3,8 @@ import cookies from "js-cookie";
 import './GastEinladen.css'
 import {useNavigate} from "react-router-dom";
 
-//TODO - Not connected to Backend
+// TODO: Legacy page retained during frontend migration.
+// Will be removed once replacement implementation is fully integrated.
 
 let events = [
     {user_email:"doduck@entenhausen.de", event_eventid: "1"},

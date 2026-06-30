@@ -12,18 +12,13 @@ import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";
 import EventAnlegen from "./pages/EventAnlegen";
 import EventAnsehen from "./pages/EventAnsehen";
-import EventAuswahl from "./pages/EventAuswahl";
 import EventBearbeiten from "./pages/EventBearbeiten";
 import GastEinladen from "./pages/GastEinladen";
-import GastEntfernenPopup from "./pages/GastEntfernenPopup";
 import MitteilungAnOrganisator from "./pages/MitteilungAnOrganisator";
 import Registrierung from "./pages/Registrierung";
 import SubgruppenHinzufuegen from "./pages/SubgruppenHinzufuegen";
 import TeilnehmerListeEinsehen from "./pages/TeilnehmerListeEinsehen";
 import UserZuSubgruppeHinzufuegen from "./pages/UserZuSubgruppeHinzufuegen";
-import WichtelzuordnungPopup from "./pages/WichtelzuordnungPopup";
-// import * as PropTypes from "prop-types";
-// import Events from "./pages/EventVerwaltung";
 import EventVerwaltung from "./pages/EventVerwaltung";
 import MessageService from "./pages/MessageService";
 import SubgruppenService from "./pages/SubgruppenService";
@@ -90,12 +85,8 @@ export default function App() {
 
 
                     {/*TODO to be removed*/}
-                    <Route path="eventAuswahl" element={<EventAuswahl />} />
-                    <Route path="gastEntfernenPopup" element={<GastEntfernenPopup />} />
-                    <Route path="wichtelZuordnungPopup" element={<WichtelzuordnungPopup />} />
                     <Route path="messageService" element={<MessageService />} />
                     <Route path="eventVerwaltung/eventAnsehen/teliEinsehen/gastEinladen" element={<GastEinladen />} />
-                    <Route path="mitteilungAnOrganisator" element={<MitteilungAnOrganisator />} />
                     <Route path="eventVerwaltung/eventAnsehen/teliEinsehen/subgruHinz" element={<SubgruppenHinzufuegen />} />
                     <Route path="eventVerwaltung/eventAnsehen/teliEinsehen" element={<TeilnehmerListeEinsehen />} />
                     <Route path="eventVerwaltung/eventAnsehen/teliEinsehen/uZuSub" element={<UserZuSubgruppeHinzufuegen />} />

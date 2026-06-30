@@ -96,6 +96,8 @@ function EventBearbeiten({ event: initialEvent, onClose, onSuccess }) {
             return;
         }
 
+
+
         let query = await fetch("/events/update", {
             method: "POST",
             headers: {
@@ -130,10 +132,10 @@ function EventBearbeiten({ event: initialEvent, onClose, onSuccess }) {
     return (
         /* 3. Converted outer template layout structure to match EventAnlegen design */
         <div className="form-container">
-            <h2 style={{ textAlign: 'center' }}>Event Bearbeiten:</h2>
+            <h2 style={{textAlign: 'center'}}>Event Bearbeiten:</h2>
 
             <div className="form-row">
-                <label>Wie heißt das Event?</label>
+                <label>Eventname:</label>
                 <input
                     type="text"
                     name="eventName"
@@ -145,7 +147,7 @@ function EventBearbeiten({ event: initialEvent, onClose, onSuccess }) {
             </div>
 
             <div className="form-row">
-                <label>Wann wird gewichtelt?</label>
+                <label>Partner Auslosungstag</label>
                 <div className="datetime-group">
                     <input
                         type="date"
@@ -165,33 +167,7 @@ function EventBearbeiten({ event: initialEvent, onClose, onSuccess }) {
             </div>
 
             <div className="form-row">
-                <label>Regeln:</label>
-                <div className="rules-wrapper">
-                    <div className="rules-radios">
-                        {["20€", "50€", "100€"].map((preset) => (
-                            <label key={preset}>
-                                <input
-                                    type="radio"
-                                    name="rulePreset"
-                                    value={preset}
-                                    checked={inputs.rule === preset}
-                                    onChange={() => setInputs({ ...inputs, rule: preset })}
-                                /> {preset}
-                            </label>
-                        ))}
-                    </div>
-                    <input
-                        type="text"
-                        name="ruleCustom"
-                        placeholder="z.B. 5€ + Keine Scherzgeschenke"
-                        value={!["20€", "50€", "100€"].includes(inputs.rule) ? inputs.rule || "" : ""}
-                        onChange={(e) => setInputs({ ...inputs, rule: e.target.value })}
-                    />
-                </div>
-            </div>
-
-            <div className="form-row">
-                <label>Wann ist die Geschenkübergabe:</label>
+                <label>Geschenkübergabetag:</label>
                 <div className="datetime-group">
                     <input
                         type="date"
@@ -211,7 +187,7 @@ function EventBearbeiten({ event: initialEvent, onClose, onSuccess }) {
             </div>
 
             <div className="form-row">
-                <label>Wo ist die Geschenkübergabe:</label>
+                <label>Ort der Geschenkübergabe:</label>
                 <input
                     type="text"
                     name="eventOrt"
@@ -221,12 +197,38 @@ function EventBearbeiten({ event: initialEvent, onClose, onSuccess }) {
                 />
             </div>
 
+            <div className="form-row">
+                <label>Regeln & Budget:</label>
+                <div className="rules-wrapper">
+                    <div className="rules-radios">
+                        {["20€", "50€", "100€"].map((preset) => (
+                            <label key={preset}>
+                                <input
+                                    type="radio"
+                                    name="rulePreset"
+                                    value={preset}
+                                    checked={inputs.rule === preset}
+                                    onChange={() => setInputs({...inputs, rule: preset})}
+                                /> {preset}
+                            </label>
+                        ))}
+                    </div>
+                    <input
+                        type="text"
+                        name="ruleCustom"
+                        placeholder="z.B. 5€ + Keine Scherzgeschenke"
+                        value={!["20€", "50€", "100€"].includes(inputs.rule) ? inputs.rule || "" : ""}
+                        onChange={(e) => setInputs({...inputs, rule: e.target.value})}
+                    />
+                </div>
+            </div>
+
             {/* 4. Streamlined Actions without page layout dependencies like Logout */}
             <div className="form-actions">
                 <button type="button" onClick={handleSubmit}>
                     Event speichern
                 </button>
-                <input type="button" value="Abbrechen" onClick={onClose} />
+                <input type="button" value="Abbrechen" onClick={onClose}/>
             </div>
 
             {/* Success Notification Popup */}

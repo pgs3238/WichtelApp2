@@ -1,16 +1,13 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState, useCallback} from 'react';
 //TODO remove following import css
 // import styles from'./EventAnsehen.module.css';
 import './EventAnsehen.css';
 import {useNavigate} from "react-router-dom";
 import cookies from "js-cookie";
-import EventBearbeiten from "./EventBearbeiten1";
+import EventBearbeiten from "./EventBearbeitenModal";
 
-//TODO Button Wichtelzuordnung starten ist für Testzwecke und sollte später
-// automatisch bei Zuordnungsdatum stattfinden, daher dann button entfernen;
-
-
-//TODO überflüssigen Code entfernen nach thorough test!
+//TODO Wichtelzuordnung Button ist für Testzwecke
+// Überflüssigen Code nach Tests entfernen
 
 const Row = ({ eventid, deadline, eventdate, name, owner, regeln, ort, isSelected, onSelect, cellStyle }) => {
     const [isHovered, setIsHovered] = React.useState(false);
@@ -26,31 +23,32 @@ const Row = ({ eventid, deadline, eventdate, name, owner, regeln, ort, isSelecte
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             style={{
-                    backgroundColor,
-                    cursor: "pointer",
-                    transition: "background-color 0.15s ease-in-out",
-                }}
+                backgroundColor,
+                cursor: "pointer",
+                transition: "background-color 0.15s ease-in-out",
+            }}
         >
             <td style={{...cellStyle(0), backgroundColor}}>{eventid}</td>
             <td style={{...cellStyle(1), backgroundColor}}>{name}</td>
+            <td style={{...cellStyle(4), backgroundColor}}>{owner}</td>
             <td style={{...cellStyle(2), backgroundColor}}>{deadline}</td>
             <td style={{...cellStyle(3), backgroundColor}}>{eventdate}</td>
-            <td style={{...cellStyle(4), backgroundColor}}>{owner}</td>
-            <td style={{...cellStyle(5), backgroundColor}}>{regeln}</td>
             <td style={{...cellStyle(6), backgroundColor}}>{ort}</td>
+            <td style={{...cellStyle(5), backgroundColor}}>{regeln}</td>
         </tr>
     );
 };
 
-const Table = ({ data, selectedId, onSelect }) => {
+const Table = ({data, selectedId, onSelect}) => {
     const columns = [
         "Event ID",
-        "Event Name",
-        "Wichtel Datum",
-        "Geschenk Tag",
-        "Owner",
-        "Regeln",
-        "Location",
+        "Eventname",
+        "Ersteller",
+        "Auslosungstag",
+        "Bescherung",
+        "Übergabeort",
+        "Regeln & Budget",
+
     ];
 
     const maxTableWidth = 1200;
@@ -253,25 +251,46 @@ function Layout() {
     const [restrictions, setRestrictions] = useState({}); // { userEmail: [restrictedEmails] }
     const [selectedParticipantEmail, setSelectedParticipantEmail] = useState(null);
 
-    // Fetch events owned by current user
-    useEffect(() => {
-        const fetchMyEvents = async () => {
-            const res = await fetch('/api/events/mine', {
-                method: "GET",
-                credentials: "include"
-            });
-            if (res.ok) {
-                const data = await res.json();
-                setRows(data);
-            } else {
-                alert("Fehler beim Laden der Events");
-            }
-        };
-        fetchMyEvents();
-    }, []);
+    // // Todo - we have this twice in two ways, can I remove one without breaking?!
+    // // Todo - this version fires upon page loading, does not work with modal
+    // // Fetch events owned by current user
+    // useEffect(() => {
+    //     const fetchMyEvents = async () => {
+    //         const res = await fetch('/api/events/mine', {
+    //             method: "GET",
+    //             credentials: "include"
+    //         });
+    //         if (res.ok) {
+    //             const data = await res.json();
+    //             setRows(data);
+    //         } else {
+    //             alert("Fehler beim Laden der Events");
+    //         }
+    //     };
+    //     fetchMyEvents();
+    // }, []);
+    //
+    // // Todo - this one works with modal after updating with modal
+    // const fetchData = async  () => {
+    //     const res = await fetch('/api/events/mine', {
+    //         method: "GET",
+    //         credentials: "include"
+    //     });
+    //     if (res.ok) {
+    //         const data = await res.json();
+    //         setRows(data);
+    //     } else {
+    //         alert("Fehler beim Laden der Events");
+    //     }
+    // };
+    //
+    // useEffect(() => {
+    //     fetchData();
+    // }, []);
 
 
-    const fetchData = async  () => {
+    // 1. Single source of truth for fetching. Wrapped in useCallback.
+    const fetchData = useCallback(async () => {
         const res = await fetch('/api/events/mine', {
             method: "GET",
             credentials: "include"
@@ -282,15 +301,12 @@ function Layout() {
         } else {
             alert("Fehler beim Laden der Events");
         }
-    };
+    }, []); // Stable definition
 
+    // 2. Fires exactly ONCE when the entire page first loads
     useEffect(() => {
         fetchData();
-    }, []);
-
-
-
-
+    }, [fetchData]);
 
     // Fetch participants for the selected event
     useEffect(() => {
@@ -577,7 +593,7 @@ function Layout() {
     // --- JSX Layout ---
     return (
         <form onSubmit={handleSubmit}>
-            <h2 className="eventa-form-title">Meine Events</h2>
+            <h2 className="eventa-form-title">Eigene Events verwalten</h2>
             {/* Events Table */}
             <Table
                 data={rows}

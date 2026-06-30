@@ -3,7 +3,8 @@ import React, {useState} from 'react';
 import './Registrierung.css'
 import {useNavigate} from "react-router-dom";
 
-//TODO Handle Error missing Data
+//TODO
+// Handle Error missing Data <- Check if not fixed!
 
 function Layout() {
     const [inputs, setInputs] = useState({});

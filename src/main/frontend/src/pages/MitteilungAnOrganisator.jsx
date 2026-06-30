@@ -4,6 +4,9 @@ import cookies from "js-cookie";
 import './MitteilungAnOrganisator.css'
 import {useNavigate} from "react-router-dom";
 
+// TODO: Legacy page
+// Will be modified and upgraded for futur use
+
 
 function Layout() {
     const [formState, setFormState] = useState({});

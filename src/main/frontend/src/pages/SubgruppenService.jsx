@@ -3,6 +3,9 @@ import {useNavigate} from "react-router-dom";
 import './SubgruppenService.css';
 import cookies from "js-cookie";
 
+// TODO: Legacy page retained during frontend migration.
+// Will be removed once replacement implementation is fully integrated.
+
 function Layout (){
 
     const [inputs, setInputs] = useState({});

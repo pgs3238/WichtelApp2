@@ -96,15 +96,15 @@ function EventAnlegen({ onClose, onSuccess }) {
            The 'Logout' button is removed as it doesn't belong in a popup. */
         // <form onSubmit={handleSubmit} className="form-container">
         <div className="form-container">
-            <h2 style={{textAlign: 'center' }}>Neues Event:</h2>
+            <h2 style={{textAlign: 'center'}}>Neues Event:</h2>
 
             <div className="form-row">
                 <label>Eventname:</label>
-                <input type="text" name="eventName" onChange={handleChange} required/>
+                <input type="text" name="eventName" placeholder="Eventname" onChange={handleChange} required/>
             </div>
 
             <div className="form-row">
-                <label>Wichtel-Deadline:</label>
+                <label>Partner Auslosungstag:</label>
                 <div className="datetime-group">
                     <input type="date" name="deadlineDatePart" onChange={handleDateTimeChange} required/>
                     <input type="time" name="deadlineTimePart" onChange={handleDateTimeChange} required/>
@@ -112,7 +112,20 @@ function EventAnlegen({ onClose, onSuccess }) {
             </div>
 
             <div className="form-row">
-                <label>Regeln:</label>
+                <label>Geschenkübergabetag:</label>
+                <div className="datetime-group">
+                    <input type="date" name="datePart" onChange={handleDateTimeChange} required/>
+                    <input type="time" name="timePart" onChange={handleDateTimeChange} required/>
+                </div>
+            </div>
+
+            <div className="form-row">
+                <label>Ort der Geschenkübergabe:</label>
+                <input type="text" name="eventOrt" placeholder="Ort" onChange={handleChange}/>
+            </div>
+
+            <div className="form-row">
+                <label>Regeln & Budget:</label>
                 <div className="rules-wrapper">
                     <div className="rules-radios">
                         {["20€", "50€", "100€"].map((preset) => (
@@ -136,19 +149,6 @@ function EventAnlegen({ onClose, onSuccess }) {
                 </div>
             </div>
 
-            <div className="form-row">
-                <label>Ort:</label>
-                <input type="text" name="eventOrt" placeholder="Ort" onChange={handleChange}/>
-            </div>
-
-            <div className="form-row">
-                <label>Geschenk-Verteilung:</label>
-                <div className="datetime-group">
-                    <input type="date" name="datePart" onChange={handleDateTimeChange} required/>
-                    <input type="time" name="timePart" onChange={handleDateTimeChange} required/>
-                </div>
-            </div>
-
             <div className="form-actions">
                 {/*<input type="submit" value="Event speichern"/>*/}
                 <button type="button" onClick={handleSubmit}>
@@ -167,7 +167,7 @@ function EventAnlegen({ onClose, onSuccess }) {
                     </div>
                 </div>
             )}
-        {/*</form>*/}
+            {/*</form>*/}
         </div>
     );
 }
